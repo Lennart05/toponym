@@ -4,7 +4,7 @@
 \alias{get.data}
 \title{Get toponym data from \href{https://www.geonames.org/}{GeoNames}}
 \usage{
-get.data(countries, save = FALSE)
+get.data(countries, save = TRUE)
 }
 \arguments{
 \item{countries}{character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries).}
@@ -19,7 +19,7 @@ The function downloads and saves toponym data  from the \href{https://download.g
 }
 \examples{
 \dontrun{
-get.data(countries = c("DK", "DE"))
+get.data(countries = c("DK", "DE"), save = FALSE)
 ## downloads and extracts data for DK and DE to the temporary folder
 
 get.data(countries = c("DK", "DE", "PL"), save = TRUE)

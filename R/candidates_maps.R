@@ -1,4 +1,4 @@
-#' @title Generates and saves all maps returned by \code{top.candidates()}
+#' @title Generates and saves all maps based on the output of \code{top.candidates()}
 #' @description
 #' The function applies the list of endings returned by \code{top.candidates()} to \code{top()}. A series of maps showing the ending, ratio in percentage and numbers will be generated and locally saved.
 #'
@@ -24,7 +24,8 @@
 #' \dontrun{
 #' candidates.maps()
 #' }
-#' ## generates and saves the data frames & maps of the top ten three-character-long endings in Germany if more than 50% of the places lie in the default polygon.
+#' ## generates and saves the data frames & maps of the top ten three-character-long endings in Germany
+#' ## if more than 50% of the places lie in the default polygon.
 #'
 candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv = TRUE, rat = .5, lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
   {

@@ -43,17 +43,23 @@ The function calls the \code{simple.map()} function to generate a map plotting a
 get.data("DE", save = TRUE)
 # saves data for DE in package directory
 top("itz$")
-## generates and prints a map with all populated places in Germany (default country) ending with "itz" and saves the locations in a data frame in the global environment.
+# generates and prints a map with all populated places
+# in Germany (default country) ending with "itz"
+# and saves the locations in a data frame in the global environment.
 
 
 top("^By", "DK", color = "green", df = FALSE, csv = TRUE, plot = TRUE)
-## first downloads data for DK and extracts it to the temporary directory
-## generates plot with all populated places colored in green in Denmark starting with "By" (case sensitive) and saves it as .png together with the location data as .csv in the working directory.
+# first downloads data for DK and extracts it to the temporary directory
+# generates plot with all populated places colored in green
+# in Denmark starting with "By" (case sensitive)
+# and saves it as .png together with the location data as .csv in the working directory.
 
 
 get.data(c("DE", "PL"), save = TRUE)
 # saves for DE and PL in package directory if it's not already there
 top(c("itz$", "ice$"), c("DE", "PL"))
-# generates plot with all populated places in Germany colored in red and Poland colored in cyan ending with either "itz" or "ice" and saves the locations in a data frame in the global environment.
+# generates plot with all populated places in Germany colored in red and Poland colored in cyan
+# ending with either "itz" or "ice"
+# and saves the locations in a data frame in the global environment.
 }
 }

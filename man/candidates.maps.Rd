@@ -2,7 +2,7 @@
 % Please edit documentation in R/candidates_maps.R
 \name{candidates.maps}
 \alias{candidates.maps}
-\title{Generates and saves all maps returned by \code{top.candidates()}}
+\title{Generates and saves all maps based on the output of \code{top.candidates()}}
 \usage{
 candidates.maps(
   countries = "DE",
@@ -47,6 +47,7 @@ For example, an ending may only occur five times in total, thus the distribution
 \dontrun{
 candidates.maps()
 }
-## generates and saves the data frames & maps of the top ten three-character-long endings in Germany if more than 50\% of the places lie in the default polygon.
+## generates and saves the data frames & maps of the top ten three-character-long endings in Germany
+## if more than 50\% of the places lie in the default polygon.
 
 }

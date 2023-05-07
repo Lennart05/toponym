@@ -4,7 +4,7 @@
 #' @param save logical. If \code{TRUE} then the data sets will be extracted to the package folder. It will be otherwise saved in the temporary folder.
 #' @examples
 #' \dontrun{
-#' get.data(countries = c("DK", "DE"))
+#' get.data(countries = c("DK", "DE"), save = FALSE)
 #' ## downloads and extracts data for DK and DE to the temporary folder
 #'
 #' get.data(countries = c("DK", "DE", "PL"), save = TRUE)
@@ -15,7 +15,7 @@
 #' @importFrom utils download.file
 #' @importFrom utils unzip
 #' @export
-get.data <- function(countries, save = FALSE) {
+get.data <- function(countries, save = TRUE) {
 
 
   url <- paste0("https://download.geonames.org/export/dump/", countries, ".zip?raw=TRUE")

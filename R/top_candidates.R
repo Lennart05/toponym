@@ -16,14 +16,16 @@
 #' @examples
 #' \dontrun{
 #' top.candidates()
-#' # prints and saves a data frame of the top ten three-character-long endings in Germany if more than 50% of the places lie in the default polygon.
+#' ## prints and saves a data frame of the top ten three-character-long endings in Germany
+#' ## if more than 50% of the places lie in the default polygon.
 #'
 #'
 #' top.candidates("DK", count = 100, len = 4, rat = .9,
 #'  lons = toponym::jylland_polygon$lons,
 #'  lats = toponym::jylland_polygon$lats,
 #'  )
-#' # prints and saves a data frame of the top 100 four-character-long endings in Denmark if more than 90% of the places lie in the newly defined polygon.
+#' ## prints and saves a data frame of the top 100 four-character-long endings in Denmark
+#' ## if more than 90% of the places lie in the newly defined polygon.
 #'}
 #'
 top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
@@ -74,7 +76,7 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
       dat[[i]] <- cbind(endings_o[i], paste0(round(ratio[[i]], 4)*100, "%"),
                         paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))
 
-
+      }}
 
   dat <- as.data.frame(cbind(unlist(dat)[c(TRUE, FALSE, FALSE)], unlist(dat)[c(FALSE, TRUE, FALSE)], unlist(dat)[c(FALSE, FALSE, TRUE)]))
   colnames(dat) <- c("ending", "ratio", "frequency")
@@ -85,8 +87,6 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
 
   invisible(return(dat))
 
-  } else if (all(ratio<rat)){
-    cat("\nNo ending surpasses the ratio.")
-  }
-  }
+
+
   }
