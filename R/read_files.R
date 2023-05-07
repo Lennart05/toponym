@@ -1,5 +1,5 @@
-#' @title Reads toponym data from temporary or package folder
-#' @description The function accesses the data saved by \code{get.data()} and returns it as data frame, only with populated locations, in the global environment, which is used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
+#' @title Reads toponym data from the temporary or package folder
+#' @description The function accesses the data saved by \code{get.data()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
 #' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for a list of available countries). Data needs to be saved by \code{get.data()} before.
 #' @importFrom utils read.table
 #' @return Data frames of the specified countries.

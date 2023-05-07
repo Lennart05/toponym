@@ -42,7 +42,6 @@ The following code is a simple example of this:
 ``` r
 library(toponym)
 top("itz$") 
-#> [1] "DE.txt saved in package directory"
 #> 
 #> Dataframe data_itz saved in global environment.
 ```
@@ -88,23 +87,6 @@ own, there is another function doing this automatically.
 
 ``` r
 candidates.maps(countries = "DE", count = 75, len = 3, rat = .8)
-#> 
-#> Dataframe data_top_75 saved in global environment.
-#> 
-#> Dataframe data_itz saved as csv in dataframes folder of the working directory.
-#> Saving 7 x 5 in image
-#> 
-#> Plot plot_itz.png saved in plots folder of the working directory.
-#> 
-#> Dataframe data_kow saved as csv in dataframes folder of the working directory.
-#> Saving 7 x 5 in image
-#> 
-#> Plot plot_kow.png saved in plots folder of the working directory.
-#> 
-#> Dataframe data_n saved as csv in dataframes folder of the working directory.
-#> Saving 7 x 5 in image
-#> 
-#> Plot plot_n.png saved in plots folder of the working directory.
 ```
 
 Running this with the same settings leaves us with a map of every ending

@@ -58,7 +58,7 @@ Instead of applying this data frame with interesting candidates on your own, the
 
 ## Creating multiple maps at once
 
-```{r multiple maps}
+```{r multiple maps, eval = FALSE}
 candidates.maps(countries = "DE", count = 75, len = 3, rat = .8)
 ```
 
