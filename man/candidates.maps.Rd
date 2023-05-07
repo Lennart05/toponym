@@ -11,14 +11,8 @@ candidates.maps(
   df = FALSE,
   csv = TRUE,
   rat = 0.5,
-  lons = c(10.144314, 10.0399439, 10.5178491, 11.3143579, 11.8746607, 11.8087427,
-    11.6274683, 11.5450708, 11.7757837, 11.6659204, 10.2140419, 9.917411, 9.8075477,
-    10.6919471, 12.8617469, 14.9821083, 15.5204383, 14.6964637, 13.8834755, 12.9496376,
-    11.6202919, 11.1039344, 10.144314),
-  lats = c(54.3227499, 53.5107333, 53.324126, 53.0476312, 52.8755735, 52.5928491,
-    52.2377021, 52.0826909, 51.9389938, 51.764248, 51.0454903, 50.8031092, 50.2724411,
-    49.8067462, 49.7499912, 50.2408327, 51.6459284, 53.9825363, 54.6235699, 54.7378977,
-    54.4323074, 54.5790222, 54.3227499)
+  lons = toponym::slav_polygon$lons,
+  lats = toponym::slav_polygon$lats
 )
 }
 \arguments{
@@ -50,7 +44,9 @@ As a meaningful ratio is not determinable if we take the different areas (i.e. t
 For example, an ending may only occur five times in total, thus the distribution on a percentage basis is a less conclusive indicator for potential candidates.
 }
 \examples{
-candidates.map()
+\dontrun{
+candidates.maps()
+}
 ## generates and saves the data frames & maps of the top ten three-character-long endings in Germany if more than 50\% of the places lie in the default polygon.
 
 }
