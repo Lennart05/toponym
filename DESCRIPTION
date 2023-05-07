@@ -1,12 +1,12 @@
 Package: toponym
-Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9000
+Title: Generates Maps Of Specific Or Frequent Toponyms
+Version: 0.9.0
 Authors@R: 
     person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
 Description: What the package does (one paragraph).
 Depends: R (>= 4.1.2)
-License: GPL (>= 2)
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
@@ -20,3 +20,10 @@ Suggests:
     knitr,
     rmarkdown
 VignetteBuilder: knitr
+LazyData: true
+Imports: 
+    dplyr (>= 1.0.8),
+    ggplot2 (>= 3.4.0),
+    grDevices (>= 4.1.2),
+    rnaturalearth (>= 0.3.2),
+    sp (>= 1.4.6)

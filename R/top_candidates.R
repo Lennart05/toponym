@@ -16,20 +16,22 @@
 #' @examples
 #' \dontrun{
 #' top.candidates()
-#' # prints and saves a data frame of the top ten three-character-long endings in Germany if more than 50% of them lie in the default polygon.
+#' # prints and saves a data frame of the top ten three-character-long endings in Germany if more than 50% of the places lie in the default polygon.
 #'
 #'
 #' top.candidates("DK", count = 100, len = 4, rat = .9,
-#'  lons = c(9.788425, 10.216892, 10.019138, 9.744480, 9.832370, 10.205905, 10.722263, 10.832126, 11.128757, 10.898044, 11.271579, 11.172702, 10.766208, 9.030368, 8.184421, 7.821872, 7.744968, 8.019626, 8.316257, 8.546970, 8.601902, 9.392917, 9.788425),
-#'  lats = c(54.83623, 54.85521, 55.05078, 55.27671, 55.59458, 55.71235, 55.71235, 55.93453, 56.42372, 56.92469, 57.20542, 57.57251, 57.90093, 57.48404, 57.05038, 56.30200, 55.61320, 54.96888, 55.08224, 55.02560, 54.90577, 54.77291, 54.83623)
+#'  lons = toponym::jylland_polygon$lons,
+#'  lats = toponym::jylland_polygon$lats,
 #'  )
-#' # prints and saves a data frame of the top 100 four-character-long endings in Denmark if more than 90% of them lie in the newly defined polygon.
+#' # prints and saves a data frame of the top 100 four-character-long endings in Denmark if more than 90% of the places lie in the newly defined polygon.
 #'}
 #'
 top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
-  lons = c(10.144314,10.0399439 ,10.5178491 ,11.3143579 ,11.8746607 ,11.8087427 ,11.6274683 ,11.5450708 ,11.7757837 ,11.6659204 ,10.2140419 ,9.917411 ,9.8075477 ,10.6919471 ,12.8617469 ,14.9821083 ,15.5204383 ,14.6964637 ,13.8834755 ,12.9496376 ,11.6202919 ,11.1039344 ,10.144314),
-  lats = c(54.3227499 ,53.5107333 ,53.324126 ,53.0476312 ,52.8755735 ,52.5928491 ,52.2377021 ,52.0826909 ,51.9389938 ,51.764248 ,51.0454903 ,50.8031092 ,50.2724411 ,49.8067462 ,49.7499912 ,50.2408327 ,51.6459284 ,53.9825363 ,54.6235699 ,54.7378977 ,54.4323074 ,54.5790222, 54.3227499)
-  ) {
+                           lons = toponym::slav_polygon$lons,
+                           lats = toponym::slav_polygon$lats
+                           )
+  {
+  get.data(countries)
   gn <- read.files(countries)
 
   # query all endings from the dataset
