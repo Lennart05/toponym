@@ -8,10 +8,10 @@
 #' @return A list with the coordinates (longitude and latitude) and country codes.
 get.coordinates <- function(gn, strings, df, csv) {
 
-  w_strings <- unique(grep(paste(strings,collapse="|"), gn$name))
-  lat_strings <- gn$rlatitude[w_strings]
-  lon_strings <- gn$rlongitude[w_strings]
-  country <- gn$rcountry_code[w_strings]
+  w_strings <- unique(grep(paste(strings,collapse="|"), gn$name)) # gets all indexes of matches
+  lat_strings <- gn$rlatitude[w_strings] # gets respective lat coordinates
+  lon_strings <- gn$rlongitude[w_strings] # gets respective lon coordinates
+  country <- gn$rcountry_code[w_strings] # gets respective cc
 
   # saves data as df and/or csv
   if(df == TRUE || csv == TRUE) {

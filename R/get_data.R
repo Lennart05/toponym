@@ -18,7 +18,7 @@
 get.data <- function(countries, save = TRUE) {
 
 
-  url <- paste0("https://download.geonames.org/export/dump/", countries, ".zip?raw=TRUE")
+  url <- paste0("https://download.geonames.org/export/dump/", countries, ".zip?raw=TRUE") # download address on GeoNames
   filename <- paste0(countries, ".txt")
   zipfile <- paste0(countries, ".zip")
   tmpdir <- tempdir()

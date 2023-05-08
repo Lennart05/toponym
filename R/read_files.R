@@ -17,10 +17,10 @@ read.files <- function(countries) {
   L <- list()
   for (i in 1:length(countries)) {
     if (tolower(countries[i]) %in% ls(envir = .GlobalEnv) == FALSE ) {
-      geonames_content <- utils::read.table(file = filename[[i]],
+      geonames_content <- utils::read.table(file = filename[[i]],   # reads country data of parameter "countries"
                                      head=FALSE, sep="\t", quote="", na.strings="",
                                      comment.char="", encoding="utf8")
-      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = .GlobalEnv)
+      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = .GlobalEnv) # saves in GlobalEnv for later use
     } else {
       L[[i]] <- get(tolower(countries[i]))
     }

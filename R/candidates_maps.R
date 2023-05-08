@@ -29,8 +29,15 @@
 #'
 candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv = TRUE, rat = .5, lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
   {
-  dat <- top.candidates(countries, count, len, rat, lons, lats)
+  dat <- top.candidates(countries, count, len, rat, lons, lats) # gets df with candidates for top() function
   for(i in 1:length(dat$ending)) {
-    top(dat$ending[i], countries, color=rainbow(length(countries)), df, csv, plot = TRUE, ratio_string = dat$ratio[i], fq = dat$frequency[i])
+    top(dat$ending[i],
+        countries,
+        color=rainbow(length(countries)),
+        df,
+        csv,
+        plot = TRUE,
+        ratio_string = dat$ratio[i], # ratio in % from dat
+        fq = dat$frequency[i]) # fq as number from dat
   }
 }

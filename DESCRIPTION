@@ -1,5 +1,5 @@
 Package: toponym
-Title: Generates Maps Of Specific Or Frequent Toponyms
+Title: Generates Maps Of Toponyms
 Version: 0.9.0
 Authors@R: c(
     person("Lennart", "Chevallier", email = "mail@lchevallier.de", role = c("aut", "cre")),

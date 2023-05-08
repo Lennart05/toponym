@@ -77,8 +77,11 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
                         paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))
 
       }}
+    # transforms list into a df for printout
+  dat <- as.data.frame(cbind(unlist(dat)[c(TRUE, FALSE, FALSE)],
+                             unlist(dat)[c(FALSE, TRUE, FALSE)],
+                             unlist(dat)[c(FALSE, FALSE, TRUE)]))
 
-  dat <- as.data.frame(cbind(unlist(dat)[c(TRUE, FALSE, FALSE)], unlist(dat)[c(FALSE, TRUE, FALSE)], unlist(dat)[c(FALSE, FALSE, TRUE)]))
   colnames(dat) <- c("ending", "ratio", "frequency")
 
   dat_name <- paste0("data_top_", count)

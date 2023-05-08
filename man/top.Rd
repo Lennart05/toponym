@@ -10,7 +10,7 @@ top(
   color = rainbow(length(countries)),
   df = TRUE,
   csv = FALSE,
-  plot = FALSE,
+  plot = TRUE,
   ratio_string = "",
   fq = ""
 )
