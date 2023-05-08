@@ -20,7 +20,7 @@ knitr::opts_chunk$set(
 
 The initial goal of the `toponym` package is having a tool to easily visualize the distribution of toponyms. When a regular expression is given, a map is generated displaying all populated locations matching it. If needed, the plot can be saved locally as .png file. A list of locations in form of a data frame can be temporary saved in the session environment or to the working directory as .csv file as well.
 
-For questions, which toponyms are specified to a region, the `toponym` package searches for the most frequent toponym endings, checks how often they appear in said region, and generates maps of those toponyms which significantly frequently appear there. This way, you will quickly have a large number of maps helping you finding toponyms which show distributions that are fruitful to be examined further.
+For questions about which toponyms are prevalent in a region, the `toponym` package searches for the most frequent toponym endings, checks how often they appear in said region, and generates maps of those toponyms which significantly frequently appear there. This way, you will quickly have a large number of maps helping you finding toponyms which show distributions that are fruitful to be examined further.
 
 ## Installation
 In order to install this package, you will need `devtools`. You can download and load the current development version of `toponym` from [GitHub](https://github.com/Lennart05/toponym) with:
@@ -36,7 +36,7 @@ devtools::install_github("Lennart05/toponym")
 The function `top()`, meaning "toponym", creates maps of places matching the regular expression. By default, it only looks at places in Germany, as the script was initially created to find slavic toponyms in Germany. The following code is a simple example of this:
 
 ```{r example}
-library(toponym)
+library(toponym) # load package
 top("itz$") 
 
 ```
