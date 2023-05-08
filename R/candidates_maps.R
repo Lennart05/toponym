@@ -36,7 +36,7 @@ candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv
         color=rainbow(length(countries)),
         df,
         csv,
-        plot = TRUE,
+        plot = FALSE,
         ratio_string = dat$ratio[i], # ratio in % from dat
         fq = dat$frequency[i]) # fq as number from dat
   }
