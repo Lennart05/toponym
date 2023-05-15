@@ -9,6 +9,7 @@ top.candidates(
   count = 10,
   len = 3,
   rat = 0.5,
+  type = "$",
   lons = toponym::slav_polygon$lons,
   lats = toponym::slav_polygon$lats
 )

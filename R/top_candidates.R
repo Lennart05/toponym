@@ -28,7 +28,7 @@
 #' ## if more than 90% of the places lie in the newly defined polygon.
 #'}
 #'
-top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
+top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type = "$",
                            lons = toponym::slav_polygon$lons,
                            lats = toponym::slav_polygon$lats
                            )
@@ -37,9 +37,10 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5,
   gn <- read.files(countries)
 
   # query all endings from the dataset
-  endings <- paste(
+  endings <- paste(if(type == "^"){"^"},
     # creates a reg expr looking for endings of length "len"
-    regmatches(gn$name,regexpr(paste0(paste(replicate(len,"."), collapse = ""), "$"),gn$name)), "$", sep = "")
+    regmatches(gn$name,regexpr(paste0(if(type == "^"){"^"},
+      paste(replicate(len,"."), collapse = ""), if(type == "$"){"$"}),gn$name)), if(type == "$"){"$"}, sep = "")
   # order them by frequency
   endings_o <- names(table(endings)[order(table(endings), decreasing = TRUE)])
 

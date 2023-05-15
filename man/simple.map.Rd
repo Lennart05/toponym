@@ -17,7 +17,7 @@ simple.map(x, y, cc, color, strings, plot, ratio_string, fq)
 
 \item{strings}{Character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
 
-\item{plot}{logical. If \code{TRUE} then the plot will not be printed but saved as .png in the current working directory.}
+\item{plot}{logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.}
 
 \item{ratio_string}{character string. Ratio of occurrences in each polygon returned by \code{top.candidates()}.}
 

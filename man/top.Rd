@@ -26,7 +26,7 @@ top(
 
 \item{csv}{logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.}
 
-\item{plot}{logical. If \code{TRUE} then the plot will not be printed but saved as .png in the current working directory.}
+\item{plot}{logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.}
 
 \item{ratio_string}{character string. Ratio of occurrences in each polygon returned by \code{top.candidates()}. This should not be specified manually.}
 

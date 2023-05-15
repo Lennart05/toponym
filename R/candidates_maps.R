@@ -27,9 +27,9 @@
 #' ## generates and saves the data frames & maps of the top ten three-character-long endings in Germany
 #' ## if more than 50% of the places lie in the default polygon.
 #'
-candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv = TRUE, rat = .5, lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
+candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv = TRUE, rat = .5, type = "$", lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
   {
-  dat <- top.candidates(countries, count, len, rat, lons, lats) # gets df with candidates for top() function
+  dat <- top.candidates(countries, count, len, rat, type, lons, lats) # gets df with candidates for top() function
   for(i in 1:length(dat$ending)) {
     top(dat$ending[i],
         countries,
