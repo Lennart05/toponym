@@ -64,7 +64,7 @@ candidates.maps(countries = "DE", count = 75, len = 3, rat = .8)
 
 Running this with the same settings leaves us with a map of every ending from before saved in the working directory in a separate folder called "plots" as well as the respective data frames in another folder called "data frames". At this point, you can skim through or closely examine the maps at a later date.
 
-## Examplary usage
+## Exemplary usage
 To illustrate `toponym`, we make a quick step by step rundown. Let's look at Belgium: The two main regions, Flanders and Wallonia, have each one dominant standard language, alongside dialectal variations. Dutch is dominant in the northern region, Flanders, and French is dominant in the southern region, Wallonia, except small German communities near the German border. Is this division also reflected by toponyms? 
 First, we need at least a polygon of one region. As part of the package, the coordinates for both regions are provided as `toponym::flanders_polygon` and `toponym::wallonia_polygon`. Thus, we could run this:
 ```{r}

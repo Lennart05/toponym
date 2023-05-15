@@ -96,7 +96,7 @@ from before saved in the working directory in a separate folder called
 “data frames”. At this point, you can skim through or closely examine
 the maps at a later date.
 
-## Examplary usage
+## Exemplary usage
 
 To illustrate `toponym`, we make a quick step by step rundown. Let’s
 look at Belgium: The two main regions, Flanders and Wallonia, have each
