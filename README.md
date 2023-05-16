@@ -1,8 +1,8 @@
+toponym
+================
+Lennart Chevallier & Søren Wichmann
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
-
-## toponym
-
 <!-- badges: start -->
 <!-- badges: end -->
 
@@ -39,7 +39,7 @@ devtools::install_github("Lennart05/toponym")
 
 The function `top()`, meaning “toponym”, creates maps of places matching
 the regular expression. By default, it only looks at places in Germany,
-as the script was initially created to find slavic toponyms in Germany.
+as the script was initially created to find Slavic toponyms in Germany.
 The following code is a simple example of this:
 
 ``` r
@@ -53,7 +53,7 @@ top("itz$")
 
 The plot shows all locations, which end with “-itz” in Germany, their
 total frequency (2182), and stores the data in the global environment.
-As you can see, most occurrences are located in the former slavic
+As you can see, most occurrences are located in the former Slavic
 settlement zone, indicating that the ending may be of Slavic origin. In
 this case, we know that already.
 
@@ -75,13 +75,13 @@ top.candidates(countries = "DE", count = 75, len = 3, rat = .8)
 The output is a data frame giving us information about the ratio and
 frequency of each ending. This means essentially that 95.78% of the
 places ending with “-itz” are in the polygon roughly covering the former
-slavic settlement zone. Even though the ending is less common in total,
+Slavic settlement zone. Even though the ending is less common in total,
 “-kow” may be of interest too as all occurrences are found in the
 polygon. To be clear what happened: Other common suffixes in Germany
 such as “-orf”, most of which coming from “-dorf”, are filtered out
 since they did not match our fairly high threshold of 80% `rat = .8`.
-`count = 75` and `len = 3` means that we filtered the 75 most frequent
-suffixes with a length of three-characters.
+The parameters `count = 75` and `len = 3` mean that we filtered the 75
+most frequent suffixes with a length of three-characters.
 
 Instead of applying this data frame with interesting candidates on your
 own, there is another function doing this automatically.
@@ -129,7 +129,7 @@ head(top.candidates(countries = "BE", count = 100, len = 3, rat = 0.8,
 As the data frame shows, there are many suffixes almost only appearing
 in Flanders but the limitation to three characters could cut the actual
 suffixes off. For example, let’s take a closer look at “-aat” which is
-the second most frequent in total:
+the second most frequent ending in total:
 
 ``` r
 top("aat$", "BE")
@@ -146,7 +146,7 @@ environment), it’s notable that the ending is in fact “-straat” meaning
 as much as “-street”. From here on, a closer examination could start, e.
 g., asking which conditions led to the frequency in the middle region.
 And in addition, we could again use the `candidates.maps()` function
-with the same parameters and check each map:
+with the same parameters and check multiple maps:
 
 ``` r
 candidates.maps(countries = "BE", count = 100, len = 3, rat = 0.8, 
@@ -156,8 +156,8 @@ candidates.maps(countries = "BE", count = 100, len = 3, rat = 0.8,
 ## Finding prefixes
 
 As one last example we look at dominant prefixes in the other region
-Wallonia. For that the parameter `type` needs to be set to “^” as the
-default option searches for suffixes (“\$”):
+Wallonia. For that, the parameter `type` needs to be set to “^” as the
+default option searches for suffixes “\$”:
 
 ``` r
 head(top.candidates("BE", 100, 4, 0.8, type = "^", 
@@ -174,8 +174,8 @@ head(top.candidates("BE", 100, 4, 0.8, type = "^",
 ```
 
 Next, we could look at one of them to see their distribution and form.
-We suspect that it is of French origin and include France and
-Luxembourg:
+We suspect that it is of French origin and include France and Luxembourg
+in our query:
 
 ``` r
 top("^Gran", c("BE", "FR", "LU"))
@@ -185,14 +185,14 @@ top("^Gran", c("BE", "FR", "LU"))
 #> Dataframe data_Gran saved in global environment.
 ```
 
-<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" /> Most
-cases seem to be at the border and some, but very few, appear in
-Flanders too. The great majority stems from “Grand” or “Grande” – an
-exception is for example “Grange”. As we might have expected, “Gran-”
-occurs also throughout France but curiously not in Luxembourg. In order
-to eliminate candidates such as “Grange”, the length parameter `len`
-must be increased and the function needs to be run multiple times with
-different lengths.
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" /> In
+Belgium most cases seem to be at the border and some, but very few,
+appear in Flanders too. The great majority stems from “Grand” or
+“Grande” –an exception is for example “Grange”. As we might have
+expected, “Gran-” occurs also throughout France but curiously not in
+Luxembourg. In order to eliminate candidates such as “Grange”, the
+length parameter `len` must be increased and the function needs to be
+run multiple times with different lengths.
 
 ## The functions
 
