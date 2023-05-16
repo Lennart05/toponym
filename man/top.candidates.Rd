@@ -2,7 +2,7 @@
 % Please edit documentation in R/top_candidates.R
 \name{top.candidates}
 \alias{top.candidates}
-\title{Retrieves the most frequent toponym endings in a given polygon}
+\title{Retrieves the most frequent toponyms in a given polygon}
 \usage{
 top.candidates(
   countries = "DE",
@@ -21,17 +21,19 @@ top.candidates(
 
 \item{len}{numeric. The character length of the endings, e.g. by default three-character-long endings.}
 
-\item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one ending need to be in the polygon.}
+\item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.}
+
+\item{type}{character string. Either "$" (suffixes) or "^" (prefixes)}
 
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
 
 \item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
 }
 \value{
-A data frame printed out and saved in the global environment. It shows the ending surpassing the ratio, at what percentage and the frequency.
+A data frame printed out and saved in the global environment. It shows the toponyms surpassing the ratio, at what percentage and the frequency.
 }
 \description{
-The function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon, printing out a data frame with those endings which match the ratio criteria and are potential candidates for further examination. The coordinates form the polygon, which roughly resembles the Slavic settlement zone in Germany. It is generated with \href{https://www.google.com/maps/about/mymaps/}{Google My Maps}.
+The function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates form the polygon, which roughly resembles the Slavic settlement zone in Germany. It is generated with \href{https://www.google.com/maps/about/mymaps/}{Google My Maps}.
 }
 \examples{
 \dontrun{
@@ -40,12 +42,24 @@ top.candidates()
 ## if more than 50\% of the places lie in the default polygon.
 
 
-top.candidates("DK", count = 100, len = 4, rat = .9,
- lons = toponym::jylland_polygon$lons,
- lats = toponym::jylland_polygon$lats,
+top.candidates("GB", count = 100, len = 4, rat = .9,
+ lons = toponym::danelaw_polygon$lons,
+ lats = toponym::danelaw_polygon$lats,
  )
-## prints and saves a data frame of the top 100 four-character-long endings in Denmark
-## if more than 90\% of the places lie in the newly defined polygon.
+## prints and saves a data frame of the top 100 four-character-long endings in Great Britian
+## if more than 90\% of the places lie in the newly defined polygon
+## which frames the Danelaw
+
+
+top.candidates(c("BE", "NL") rat = .8,
+ lons = toponym::flanders_polygon$lons,
+ lats = toponym::flanders_polygon$lats)
+
+## prints and saves a data frame of the top 10 three-character-long endings in Belgium
+## and Netherlands viewed as a unit if more than 80\% of the places lie
+## in the newly defined polygon which frames Flanders.
+
+.
 }
 
 }

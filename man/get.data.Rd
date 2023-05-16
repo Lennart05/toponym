@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_data.R
 \name{get.data}
 \alias{get.data}
-\title{Get toponym data from \href{https://www.geonames.org/}{GeoNames}}
+\title{Get toponym data from GeoNames}
 \usage{
 get.data(countries, save = TRUE)
 }
@@ -15,7 +15,7 @@ get.data(countries, save = TRUE)
 The data as .txt in the temporary or package folder.
 }
 \description{
-The function downloads and saves toponym data  from the \href{https://download.geonames.org/export/dump/}{GeoNames download server}, which is later used by \code{read.files()}.
+The function downloads and saves toponym data from the \href{https://download.geonames.org/export/dump/}{GeoNames download server}, which is later used by \code{read.files()}.
 }
 \examples{
 \dontrun{

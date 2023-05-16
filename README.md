@@ -52,10 +52,10 @@ top("itz$")
 <img src="man/figures/README-example-1.png" width="100%" />
 
 The plot shows all locations, which end with “-itz” in Germany, their
-total frequency, and stores the data in the global environment. As you
-can see, most occurrences are located in the former slavic settlement
-zone, indicating that the ending may be of Slavic origin. In this case,
-we know that already.
+total frequency (2182), and stores the data in the global environment.
+As you can see, most occurrences are located in the former slavic
+settlement zone, indicating that the ending may be of Slavic origin. In
+this case, we know that already.
 
 ## List suffixes specific to a region
 
@@ -156,7 +156,7 @@ candidates.maps(countries = "BE", count = 100, len = 3, rat = 0.8,
 ## Finding prefixes
 
 As one last example we look at dominant prefixes in the other region
-Wallonia. For that the parameter “type” needs to be set to “^” as the
+Wallonia. For that the parameter `type` needs to be set to “^” as the
 default option searches for suffixes (“\$”):
 
 ``` r
@@ -212,9 +212,7 @@ For help type `?function`
 It should be clear that this tool merely helps one find frequent
 toponyms. Less frequent ones, ones with different spelling yet of the
 same origin or others which are of multiple origins but have the same
-form (e.g. “-au” in Germany) can only be found by in depth examination.
-
-## 
+form (e.g. “-au” in Germany) require in depth examination.
 
 ## Regular expression
 
@@ -239,9 +237,9 @@ The polygons were created with [Google My
 Maps](https://www.google.com/maps/about/mymaps/). The functions allow
 you to provide your own polygon if you want to test other regions. This
 is a provisional solution and is planned to be replaced by a service
-within R. First, this requires users to have a Google account and
-second, the polygon creation and export is not adapted in such a way
-that it’s easily and quickly possible.
+within R because, first, this requires users to have a Google account
+and, second, the polygon creation and export is not adapted in such a
+way that it’s easily and quickly possible.
 
 ## Future work
 

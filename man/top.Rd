@@ -2,7 +2,7 @@
 % Please edit documentation in R/top.R
 \name{top}
 \alias{top}
-\title{Plots locations with specified toponyms on a map}
+\title{Generates a map with all locations matching the regular expression}
 \usage{
 top(
   strings,
@@ -28,7 +28,7 @@ top(
 
 \item{plot}{logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.}
 
-\item{ratio_string}{character string. Ratio of occurrences in each polygon returned by \code{top.candidates()}. This should not be specified manually.}
+\item{ratio_string}{character string. Ratio of occurrences in the polygon from \code{top.candidates()}. This should not be specified manually.}
 
 \item{fq}{character string. Number of occurrences in the designated polygon and in total returned by \code{top.candidates()}. This should not be specified manually.}
 }

@@ -3,7 +3,7 @@
 \docType{data}
 \name{danelaw_polygon}
 \alias{danelaw_polygon}
-\title{Coordinates of Danelaw}
+\title{Coordinates of the Danelaw}
 \format{
 An object of class \code{data.frame} with 11 rows and 2 columns.
 }
@@ -11,7 +11,7 @@ An object of class \code{data.frame} with 11 rows and 2 columns.
 danelaw_polygon
 }
 \description{
-A small data frame containing coordinates for the polygon framing Danelaw.
+A small data frame containing coordinates for the polygon framing the Danelaw.
 There is one column for the longitudes ('lons') and one for the latitudes ('lats').
 The coordinates were retrieved from a personal polygon created with \href{https://www.google.com/maps/about/mymaps/}{Google My Maps}.
 }

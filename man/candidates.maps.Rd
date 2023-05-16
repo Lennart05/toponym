@@ -2,7 +2,7 @@
 % Please edit documentation in R/candidates_maps.R
 \name{candidates.maps}
 \alias{candidates.maps}
-\title{Generates and saves all maps based on the output of \code{top.candidates()}}
+\title{Saves all maps and data frames based on the output of \code{top.candidates()}}
 \usage{
 candidates.maps(
   countries = "DE",
@@ -11,6 +11,7 @@ candidates.maps(
   df = FALSE,
   csv = TRUE,
   rat = 0.5,
+  type = "$",
   lons = toponym::slav_polygon$lons,
   lats = toponym::slav_polygon$lats
 )
@@ -28,26 +29,28 @@ candidates.maps(
 
 \item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one ending need to be in the polygon}
 
+\item{type}{character string. Either "$" (suffixes) or "^" (prefixes)}
+
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
 
 \item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
 }
 \value{
-A number of data frames and plots saved in a sub folder (called "data frames" and "plots") in the working directory. It also stores the ratio surpassing endings in a data frame in the global environment.
+A number of data frames and plots saved in a sub folder (called "data frames" and "plots") in the working directory. It also stores the ratio surpassing toponyms in a data frame in the global environment.
 }
 \description{
-The function applies the list of endings returned by \code{top.candidates()} to \code{top()}. A series of maps showing the ending, ratio in percentage and numbers will be generated and locally saved.
+The function applies the list of toponyms returned by \code{top.candidates()} to \code{top()}. A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
 }
 \details{
-The goal is to find and generate maps of toponym endings which are potentially worthwhile to be further examined by hand or other means.
-As a meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific endings into account.
+The goal is to find and generate maps of toponyms which are potentially worthwhile to be further examined by hand or other means.
+As a meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
 For example, an ending may only occur five times in total, thus the distribution on a percentage basis is a less conclusive indicator for potential candidates.
 }
 \examples{
 \dontrun{
 candidates.maps()
-}
-## generates and saves the data frames & maps of the top ten three-character-long endings in Germany
-## if more than 50\% of the places lie in the default polygon.
 
+## generates and saves the data frames & maps of the top ten three-character-long endings
+## in Germany if more than 50\% of the places lie in the default polygon.
+}
 }

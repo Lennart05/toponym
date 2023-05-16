@@ -1,16 +1,17 @@
-#' @title Retrieves the most frequent toponym endings in a given polygon
+#' @title Retrieves the most frequent toponyms in a given polygon
 #' @description
-#' The function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon, printing out a data frame with those endings which match the ratio criteria and are potential candidates for further examination. The coordinates form the polygon, which roughly resembles the Slavic settlement zone in Germany. It is generated with [Google My Maps](https://www.google.com/maps/about/mymaps/).
+#' The function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates form the polygon, which roughly resembles the Slavic settlement zone in Germany. It is generated with [Google My Maps](https://www.google.com/maps/about/mymaps/).
 #' @param countries Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
 #' @param count numeric. The number of the most frequent endings which will be tested, e.g. by default the top ten most frequent endings in Germany.
 #' @param len numeric. The character length of the endings, e.g. by default three-character-long endings.
-#' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one ending need to be in the polygon.
+#' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.
+#' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
 #' @importFrom sp point.in.polygon
 #' @importFrom grDevices chull
 #'
-#' @return A data frame printed out and saved in the global environment. It shows the ending surpassing the ratio, at what percentage and the frequency.
+#' @return A data frame printed out and saved in the global environment. It shows the toponyms surpassing the ratio, at what percentage and the frequency.
 #' @export
 #'
 #' @examples
@@ -20,12 +21,24 @@
 #' ## if more than 50% of the places lie in the default polygon.
 #'
 #'
-#' top.candidates("DK", count = 100, len = 4, rat = .9,
-#'  lons = toponym::jylland_polygon$lons,
-#'  lats = toponym::jylland_polygon$lats,
+#' top.candidates("GB", count = 100, len = 4, rat = .9,
+#'  lons = toponym::danelaw_polygon$lons,
+#'  lats = toponym::danelaw_polygon$lats,
 #'  )
-#' ## prints and saves a data frame of the top 100 four-character-long endings in Denmark
-#' ## if more than 90% of the places lie in the newly defined polygon.
+#' ## prints and saves a data frame of the top 100 four-character-long endings in Great Britian
+#' ## if more than 90% of the places lie in the newly defined polygon
+#' ## which frames the Danelaw
+#'
+#'
+#' top.candidates(c("BE", "NL") rat = .8,
+#'  lons = toponym::flanders_polygon$lons,
+#'  lats = toponym::flanders_polygon$lats)
+#'
+#' ## prints and saves a data frame of the top 10 three-character-long endings in Belgium
+#' ## and Netherlands viewed as a unit if more than 80% of the places lie
+#' ## in the newly defined polygon which frames Flanders.
+#'
+#' .
 #'}
 #'
 top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type = "$",

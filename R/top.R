@@ -1,4 +1,4 @@
-#' @title Plots locations with specified toponyms on a map
+#' @title Generates a map with all locations matching the regular expression
 #' @description The function calls the \code{simple.map()} function to generate a map plotting all locations, filtered by \code{get.coordinates()}. The plot also displays additional information if used by \code{candidates.maps()}. The data used is downloaded by \code{get.data()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #' @param strings Character strings in form of regular expression that filter the data frames. The first string is shown on the plot.
 #' @param countries Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
@@ -6,7 +6,7 @@
 #' @param df logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.
 #' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
 #' @param plot logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
-#' @param ratio_string character string. Ratio of occurrences in each polygon returned by \code{top.candidates()}. This should not be specified manually.
+#' @param ratio_string character string. Ratio of occurrences in the polygon from \code{top.candidates()}. This should not be specified manually.
 #' @param fq character string. Number of occurrences in the designated polygon and in total returned by \code{top.candidates()}. This should not be specified manually.
 #' @importFrom grDevices rainbow
 #' @examples

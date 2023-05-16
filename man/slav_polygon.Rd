@@ -11,7 +11,7 @@ An object of class \code{data.frame} with 23 rows and 2 columns.
 slav_polygon
 }
 \description{
-A small data frame containing coordinates for the polygon framing the estimated slavic settlement zone.
+A small data frame containing coordinates for the polygon framing an estimated Slavic settlement zone.
 There is one column for the longitudes ('lons') and one for the latitudes ('lats').
 The coordinates were retrieved from a personal polygon created with \href{https://www.google.com/maps/about/mymaps/}{Google My Maps}.
 }

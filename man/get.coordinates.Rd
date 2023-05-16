@@ -2,7 +2,7 @@
 % Please edit documentation in R/get_coordinates.R
 \name{get.coordinates}
 \alias{get.coordinates}
-\title{Filters locations by given regular expression}
+\title{Filters locations by a given regular expression}
 \usage{
 get.coordinates(gn, strings, df, csv)
 }
