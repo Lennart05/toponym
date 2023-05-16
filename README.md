@@ -212,7 +212,8 @@ For help type `?function`
 It should be clear that this tool merely helps one find frequent
 toponyms. Less frequent ones, ones with different spelling yet of the
 same origin or others which are of multiple origins but have the same
-form (e.g. “-au” in Germany) require in depth examination.
+form (e.g. “-au” in Germany) require in depth examination. The data may
+be non-exhaustive and could contain errors.
 
 ## Regular expression
 
