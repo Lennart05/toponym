@@ -19,7 +19,7 @@ well.
 For questions about which toponyms are prevalent in a region, the
 `toponym` package searches for the most frequent toponym prefixes or
 suffixes, checks how often they appear in said region, and generates
-maps of those toponyms with signifant frequency. This way, you will
+maps of those toponyms with significant frequency. This way, you will
 quickly have a large number of maps helping you finding toponyms which
 show distributions that are fruitful to be examined further.
 
