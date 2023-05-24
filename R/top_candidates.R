@@ -52,8 +52,10 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type =
   # query all endings from the dataset
   endings <- paste(if(type == "^"){"^"},
     # creates a reg expr looking for endings of length "len"
-    regmatches(gn$name,regexpr(paste0(if(type == "^"){"^"},
-      paste(replicate(len,"."), collapse = ""), if(type == "$"){"$"}),gn$name)), if(type == "$"){"$"}, sep = "")
+    regmatches(gn$name,
+               regexpr(paste0(if(type == "^"){"^"},
+      paste(replicate(len,"."), collapse = ""), if(type == "$"){"$"}),gn$name)
+      ), if(type == "$"){"$"}, sep = "")
   # order them by frequency
   endings_o <- names(table(endings)[order(table(endings), decreasing = TRUE)])
 

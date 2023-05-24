@@ -41,5 +41,5 @@ top <- function(strings, countries="DE", color=rainbow(length(countries)), df = 
   get.data(countries) # gets data
   gn <- read.files(countries)  # stands for GeoNames
   coors <- get.coordinates(gn, strings, df, csv) # coordinates of matches
-  simple.map(coors[[1]], coors[[2]], coors[[3]], color, strings, plot, ratio_string, fq) # inserts coordinates and generates map
+  simple.map(coors[[1]], coors[[2]], coors[[3]], coors[[4]], color, strings, plot, ratio_string, fq) # inserts coordinates and generates map
 }

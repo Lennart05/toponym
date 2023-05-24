@@ -12,6 +12,7 @@ get.coordinates <- function(gn, strings, df, csv) {
   lat_strings <- gn$rlatitude[w_strings] # gets respective lat coordinates
   lon_strings <- gn$rlongitude[w_strings] # gets respective lon coordinates
   country <- gn$rcountry_code[w_strings] # gets respective cc
+  m_strings <- regmatches(gn$name,regexpr(paste(strings,collapse="|"), gn$name)) # gets matches
 
   # saves data as df and/or csv
   if(df == TRUE || csv == TRUE) {
@@ -29,5 +30,5 @@ get.coordinates <- function(gn, strings, df, csv) {
     }
   }
 
-  return(list(lat_strings, lon_strings, country))
+  return(list(lat_strings, lon_strings, country, m_strings))
 }
