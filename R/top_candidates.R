@@ -8,6 +8,7 @@
 #' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @param p logical. If \code{FALSE} then the accessed data frame contains all but populated locations.
 #' @importFrom sp point.in.polygon
 #' @importFrom grDevices chull
 #'
@@ -43,11 +44,12 @@
 #'
 top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type = "$",
                            lons = toponym::slav_polygon$lons,
-                           lats = toponym::slav_polygon$lats
+                           lats = toponym::slav_polygon$lats,
+                           p = TRUE
                            )
   {
   get.data(countries)
-  gn <- read.files(countries)
+  gn <- read.files(countries, p)
 
   # query all endings from the dataset
   endings <- paste(if(type == "^"){"^"},
@@ -105,7 +107,5 @@ top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type =
   cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
 
   invisible(return(dat))
-
-
 
   }

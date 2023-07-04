@@ -1,9 +1,10 @@
 #' @title Reads toponym data from the temporary or package folder
 #' @description The function accesses the data saved by \code{get.data()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
 #' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for a list of available countries). Data needs to be saved by \code{get.data()} before.
+#' @param p logical. If \code{FALSE} then the accessed data frame contains all but populated locations.
 #' @importFrom utils read.table
 #' @return Data frames of the specified countries.
-read.files <- function(countries) {
+read.files <- function(countries, p = TRUE) {
   filename <- list()
   for(i in 1:length(countries)){ # locates filename downloaded by get.data()
   if(file.exists(paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt"))[i]){ # if it is in the package directory
@@ -40,8 +41,12 @@ read.files <- function(countries) {
                     "radmin4_code", "rpopulation", "relevation", "rdem", "rtimezone",
                     "rmodification date")
 
+  if(p == TRUE){
   # select only the populated places
   gn <- gn[which(gn$"rfeature class"=="P"),]
 
-  return(gn)
+  } else{
+  # select all but populated places
+  gn <- gn[which(gn$"rfeature class"!="P"),]
+  }
 }

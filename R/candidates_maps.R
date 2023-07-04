@@ -12,6 +12,7 @@
 #' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @param p logical. If \code{FALSE} then the accessed data frame contains all but populated locations.
 #' @details
 #' The goal is to find and generate maps of toponyms which are potentially worthwhile to be further examined by hand or other means.
 #' As a meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
@@ -28,9 +29,13 @@
 #' ## generates and saves the data frames & maps of the top ten three-character-long endings
 #' ## in Germany if more than 50% of the places lie in the default polygon.
 #' }
-candidates.maps <- function(countries="DE", count = 10, len = 3, df = FALSE, csv = TRUE, rat = .5, type = "$", lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
+candidates.maps <- function(countries="DE", count = 10, len = 3,
+                            df = FALSE, csv = TRUE, rat = .5, type = "$",
+                            lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats,
+                            p = TRUE
+                            )
   {
-  dat <- top.candidates(countries, count, len, rat, type, lons, lats) # gets df with candidates for top() function
+  dat <- top.candidates(countries, count, len, rat, type, lons, lats, p) # gets df with candidates for top() function
   for(i in 1:length(dat$ending)) {
     top(dat$ending[i],
         countries,
