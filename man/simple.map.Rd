@@ -4,7 +4,7 @@
 \alias{simple.map}
 \title{Plots locations on a map}
 \usage{
-simple.map(x, y, cc, color, strings, plot, ratio_string, fq)
+simple.map(x, y, cc, matches, color, strings, plot, ratio_string, fq)
 }
 \arguments{
 \item{x}{numeric. Latitude of locations filtered by \code{get.coordinates()}}
@@ -12,6 +12,8 @@ simple.map(x, y, cc, color, strings, plot, ratio_string, fq)
 \item{y}{numeric. Longitude of locations filtered by \code{get.coordinates()}}
 
 \item{cc}{character string. Country code of locations filtered by \code{get.coordinates()}}
+
+\item{matches}{character string. string of each entry filtered by \code{get.coordinates()}}
 
 \item{color}{character string indicating, which color is assigned to each country code in order.}
 
