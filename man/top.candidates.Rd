@@ -11,7 +11,8 @@ top.candidates(
   rat = 0.5,
   type = "$",
   lons = toponym::slav_polygon$lons,
-  lats = toponym::slav_polygon$lats
+  lats = toponym::slav_polygon$lats,
+  feat.class = "P"
 )
 }
 \arguments{
@@ -28,6 +29,8 @@ top.candidates(
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
 
 \item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
+
+\item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.}
 }
 \value{
 A data frame printed out and saved in the global environment. It shows the toponyms surpassing the ratio, at what percentage and the frequency.

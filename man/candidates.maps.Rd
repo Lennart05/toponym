@@ -13,7 +13,8 @@ candidates.maps(
   rat = 0.5,
   type = "$",
   lons = toponym::slav_polygon$lons,
-  lats = toponym::slav_polygon$lats
+  lats = toponym::slav_polygon$lats,
+  feat.class = "P"
 )
 }
 \arguments{
@@ -34,6 +35,8 @@ candidates.maps(
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
 
 \item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
+
+\item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.}
 }
 \value{
 A number of data frames and plots saved in a sub folder (called "data frames" and "plots") in the working directory. It also stores the ratio surpassing toponyms in a data frame in the global environment.

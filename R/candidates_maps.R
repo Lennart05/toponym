@@ -12,7 +12,7 @@
 #' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
-#' @param p logical. If \code{FALSE} then the accessed data frame contains all but populated locations.
+#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
 #' @details
 #' The goal is to find and generate maps of toponyms which are potentially worthwhile to be further examined by hand or other means.
 #' As a meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
@@ -32,18 +32,19 @@
 candidates.maps <- function(countries="DE", count = 10, len = 3,
                             df = FALSE, csv = TRUE, rat = .5, type = "$",
                             lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats,
-                            p = TRUE
+                            feat.class = "P"
                             )
   {
-  dat <- top.candidates(countries, count, len, rat, type, lons, lats, p) # gets df with candidates for top() function
+  dat <- top.candidates(countries, count, len, rat, type, lons, lats, feat.class) # gets df with candidates for top() function
   for(i in 1:length(dat$ending)) {
     top(dat$ending[i],
         countries,
-        color=rainbow(length(countries)),
+        color="red",
         df,
         csv,
         plot = FALSE,
         ratio_string = dat$ratio[i], # ratio in % from dat
         fq = dat$frequency[i]) # fq as number from dat
+        feat.class
   }
 }

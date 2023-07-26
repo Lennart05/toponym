@@ -8,7 +8,7 @@
 #' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
-#' @param p logical. If \code{FALSE} then the accessed data frame contains all but populated locations.
+#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
 #' @importFrom sp point.in.polygon
 #' @importFrom grDevices chull
 #'
@@ -45,11 +45,11 @@
 top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type = "$",
                            lons = toponym::slav_polygon$lons,
                            lats = toponym::slav_polygon$lats,
-                           p = TRUE
+                           feat.class = "P"
                            )
   {
   get.data(countries)
-  gn <- read.files(countries, p)
+  gn <- read.files(countries, feat.class)
 
   # query all endings from the dataset
   endings <- paste(if(type == "^"){"^"},
