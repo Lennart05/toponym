@@ -15,5 +15,12 @@ create.polygon(continents, countries)
 A list with the coordinates of the polygon.
 }
 \description{
-The function generate a map on which the user creates a polygon by point-and-click.
+The function generates a map on which the user creates a polygon by point-and-click.
+}
+\details{
+This function uses the function \code{clickpoly} provided by the \code{spatstat.geom} package. The maps are retrieved by the package \code{rnaturalearth}.
+
+It is meant as simple and quick tool to create polygons which can later be used by the functions \code{top.candidates} and \code{candidates.maps}.
+
+For further details on the point-and-click mechanic refer to the help page for \code{clickpoly}.
 }
