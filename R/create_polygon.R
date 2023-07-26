@@ -5,6 +5,7 @@
 #' @importFrom rnaturalearth ne_countries
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
+#' @export
 #' @return A list with the coordinates of the polygon.
 create.polygon <- function(continents, countries) {
 
