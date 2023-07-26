@@ -53,7 +53,7 @@ simple.map <- function(x, y, cc, matches, color, strings, plot, ratio_string, fq
     coord_sf(xlim=c(min(lng_range), max(lng_range)),
              ylim=c(min(lat_range), max(lat_range))) +
     scale_color_manual(values = color) +
-    labs(x = "longitude", y = "latitude", color = "country", shape = "string", title = paste(strings, lengths, collapse = "| ")) +   # legend only with string & frequency
+    labs(x = "longitude", y = "latitude", color = "string", shape = "country", title = paste(strings, lengths, collapse = "| ")) +   # legend only with string & frequency
     {if(nchar(ratio_string) > 0 && nchar(fq) > 0)labs(title = paste(strings, ratio_string, fq, collapse = " "))} # extended legend if created with candidates.maps()
 
 
