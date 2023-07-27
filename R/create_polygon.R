@@ -5,6 +5,7 @@
 #' @importFrom rnaturalearth ne_countries
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
+#' @export
 #' @details
 #' This function uses the function \code{clickpoly} provided by the \code{spatstat.geom} package. The maps are retrieved by the package \code{rnaturalearth}.
 #'
