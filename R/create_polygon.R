@@ -6,7 +6,6 @@
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
 #' @export
-<<<<<<< HEAD
 #' @details
 #' This function uses the function \code{clickpoly} provided by the \code{spatstat.geom} package. The maps are retrieved by the package \code{rnaturalearth}.
 #'
@@ -14,8 +13,6 @@
 #'
 #' For further details on the point-and-click mechanic refer to the help page for \code{clickpoly}.
 #'
-=======
->>>>>>> dc5da28ed35db0743ec4f5cd2cd64bc36b5a0f89
 #' @return A list with the coordinates of the polygon.
 create.polygon <- function(continents, countries) {
 
