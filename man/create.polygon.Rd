@@ -9,7 +9,7 @@ create.polygon(continents, countries)
 \arguments{
 \item{continents}{Character string. Specify a continent for the map}
 
-\item{strings}{Character string. Specify a country for the map}
+\item{countries}{Character string. Specify a country for the map}
 }
 \value{
 A list with the coordinates of the polygon.

@@ -1,7 +1,7 @@
 #' @title Creates a polygon
 #' @description The function generates a map on which the user creates a polygon by point-and-click.
 #' @param continents Character string. Specify a continent for the map
-#' @param strings Character string. Specify a country for the map
+#' @param countries Character string. Specify a country for the map
 #' @importFrom rnaturalearth ne_countries
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
