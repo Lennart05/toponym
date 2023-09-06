@@ -5,13 +5,13 @@
 \title{Retrieves the most frequent toponyms in a given polygon}
 \usage{
 top.candidates(
-  countries = "DE",
-  count = 10,
-  len = 3,
-  rat = 0.5,
+  countries,
+  count,
+  len,
+  rat,
   type = "$",
-  lons = toponym::slav_polygon$lons,
-  lats = toponym::slav_polygon$lats,
+  lons,
+  lats,
   feat.class = "P"
 )
 }

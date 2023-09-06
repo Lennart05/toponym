@@ -42,11 +42,7 @@
 #' .
 #'}
 #'
-top.candidates <- function(countries="DE", count = 10, len = 3, rat = .5, type = "$",
-                           lons = toponym::slav_polygon$lons,
-                           lats = toponym::slav_polygon$lats,
-                           feat.class = "P"
-                           )
+top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, feat.class = "P")
   {
   get.data(countries)
   gn <- read.files(countries, feat.class)

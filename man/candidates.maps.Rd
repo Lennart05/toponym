@@ -5,15 +5,15 @@
 \title{Saves all maps and data frames based on the output of \code{top.candidates()}}
 \usage{
 candidates.maps(
-  countries = "DE",
-  count = 10,
-  len = 3,
+  countries,
+  count,
+  len,
   df = FALSE,
   csv = TRUE,
-  rat = 0.5,
+  rat,
   type = "$",
-  lons = toponym::slav_polygon$lons,
-  lats = toponym::slav_polygon$lats,
+  lons,
+  lats,
   feat.class = "P"
 )
 }
