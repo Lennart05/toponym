@@ -4,7 +4,18 @@
 \alias{simple.map}
 \title{Plots locations on a map}
 \usage{
-simple.map(x, y, cc, matches, color, strings, plot, ratio_string, fq)
+simple.map(
+  x,
+  y,
+  cc,
+  matches,
+  color,
+  strings,
+  regions = FALSE,
+  plot,
+  ratio_string,
+  fq
+)
 }
 \arguments{
 \item{x}{numeric. Latitude of locations filtered by \code{get.coordinates()}}
@@ -18,6 +29,8 @@ simple.map(x, y, cc, matches, color, strings, plot, ratio_string, fq)
 \item{color}{character string indicating, which color is assigned to each country code in order.}
 
 \item{strings}{Character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
+
+\item{regions}{logical. If \code{TRUE} domestic state boundaries are displayed}
 
 \item{plot}{logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.}
 

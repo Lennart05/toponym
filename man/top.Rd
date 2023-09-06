@@ -6,8 +6,9 @@
 \usage{
 top(
   strings,
-  countries = "DE",
+  countries,
   color = rainbow(length(strings)),
+  regions = FALSE,
   df = TRUE,
   csv = FALSE,
   plot = TRUE,
@@ -22,6 +23,8 @@ top(
 \item{countries}{Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
 
 \item{color}{character string indicating, which color is assigned to each string.}
+
+\item{regions}{logical. If \code{TRUE} domestic state boundaries are displayed}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
 

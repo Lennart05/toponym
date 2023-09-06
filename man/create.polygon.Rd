@@ -4,12 +4,14 @@
 \alias{create.polygon}
 \title{Creates a polygon}
 \usage{
-create.polygon(continents, countries)
+create.polygon(countries, continents, regions = FALSE)
 }
 \arguments{
+\item{countries}{Character string. Specify a country for the map}
+
 \item{continents}{Character string. Specify a continent for the map}
 
-\item{countries}{Character string. Specify a country for the map}
+\item{regions}{logical. If \code{TRUE} domestic state boundaries are displayed}
 }
 \value{
 A list with the coordinates of the polygon.
@@ -18,9 +20,9 @@ A list with the coordinates of the polygon.
 The function generates a map on which the user creates a polygon by point-and-click.
 }
 \details{
-This function uses the function \code{clickpoly} provided by the \code{spatstat.geom} package. The maps are retrieved by the package \code{rnaturalearth}.
+This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the package rnaturalearth.
 
-It is meant as simple and quick tool to create polygons which can later be used by the functions \code{top.candidates} and \code{candidates.maps}.
+It is meant as simple and quick tool to create polygons which can later be used by the functions top.candidates and candidates.maps.
 
-For further details on the point-and-click mechanic refer to the help page for \code{clickpoly}.
+For further details on the point-and-click mechanic refer to the help page for clickpoly.
 }
