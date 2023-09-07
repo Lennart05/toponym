@@ -3,7 +3,7 @@
 #' @param continents Character string. Specify a continent for the map
 #' @param countries Character string. Specify a country for the map
 #' @param regions logical. If \code{TRUE} domestic state boundaries are displayed
-#' @importFrom rnaturalearth ne_countries
+#' @importFrom rnaturalearth ne_countries ne_states
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
 #' @export
