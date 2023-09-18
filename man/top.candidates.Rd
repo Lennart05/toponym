@@ -2,7 +2,7 @@
 % Please edit documentation in R/top_candidates.R
 \name{top.candidates}
 \alias{top.candidates}
-\title{Retrieves the most frequent toponyms in a given polygon}
+\title{Retrieves the most frequent toponyms in a given polygon relative to the countries}
 \usage{
 top.candidates(
   countries,
@@ -16,11 +16,11 @@ top.candidates(
 )
 }
 \arguments{
-\item{countries}{Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
+\item{countries}{character string. Country code abbreviations or names (use \code{country.data()} for a list of available countries) specifying the toponyms of which countries are checked.}
 
-\item{count}{numeric. The number of the most frequent endings which will be tested, e.g. by default the top ten most frequent endings in Germany.}
+\item{count}{numeric. The number of the most frequent endings which will be tested.}
 
-\item{len}{numeric. The character length of the endings, e.g. by default three-character-long endings.}
+\item{len}{numeric. The character length of the endings.}
 
 \item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.}
 
@@ -47,7 +47,7 @@ top.candidates()
 
 top.candidates("GB", count = 100, len = 4, rat = .9,
  lons = toponym::danelaw_polygon$lons,
- lats = toponym::danelaw_polygon$lats,
+ lats = toponym::danelaw_polygon$lats
  )
 ## prints and saves a data frame of the top 100 four-character-long endings in Great Britian
 ## if more than 90\% of the places lie in the newly defined polygon

@@ -1,9 +1,9 @@
-#' @title Retrieves the most frequent toponyms in a given polygon
+#' @title Retrieves the most frequent toponyms in a given polygon relative to the countries
 #' @description
 #' The function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates form the polygon, which roughly resembles the Slavic settlement zone in Germany. It is generated with [Google My Maps](https://www.google.com/maps/about/mymaps/).
-#' @param countries Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
-#' @param count numeric. The number of the most frequent endings which will be tested, e.g. by default the top ten most frequent endings in Germany.
-#' @param len numeric. The character length of the endings, e.g. by default three-character-long endings.
+#' @param countries character string. Country code abbreviations or names (use \code{country.data()} for a list of available countries) specifying the toponyms of which countries are checked.
+#' @param count numeric. The number of the most frequent endings which will be tested.
+#' @param len numeric. The character length of the endings.
 #' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.
 #' @param type character string. Either "$" (suffixes) or "^" (prefixes)
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
@@ -24,7 +24,7 @@
 #'
 #' top.candidates("GB", count = 100, len = 4, rat = .9,
 #'  lons = toponym::danelaw_polygon$lons,
-#'  lats = toponym::danelaw_polygon$lats,
+#'  lats = toponym::danelaw_polygon$lats
 #'  )
 #' ## prints and saves a data frame of the top 100 four-character-long endings in Great Britian
 #' ## if more than 90% of the places lie in the newly defined polygon
@@ -44,18 +44,8 @@
 #'
 top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, feat.class = "P")
   {
-  get.data(countries)
   gn <- read.files(countries, feat.class)
-
-  # query all endings from the dataset
-  endings <- paste(if(type == "^"){"^"},
-    # creates a reg expr looking for endings of length "len"
-    regmatches(gn$name,
-               regexpr(paste0(if(type == "^"){"^"},
-      paste(replicate(len,"."), collapse = ""), if(type == "$"){"$"}),gn$name)
-      ), if(type == "$"){"$"}, sep = "")
-  # order them by frequency
-  endings_o <- names(table(endings)[order(table(endings), decreasing = TRUE)])
+  endings_o <- top.freq(countries, len, feat.class, type)
 
   endings_ID_o <- list()
   lat_strings <- list()
@@ -86,12 +76,13 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
     ratio[[i]] <- sum(loc_log[[i]])/length(loc_log[[i]])
 
     # select only endings which surpass parameter rat
-    if (ratio[[i]]>rat) {
+    if(ratio[[i]]>rat) {
       dat[[i]] <- cbind(endings_o[i], paste0(round(ratio[[i]], 4)*100, "%"),
-                        paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))
+                        paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))}
 
-      }}
-    # transforms list into a df for printout
+  }
+
+  # transforms list into a df for printout
   dat <- as.data.frame(cbind(unlist(dat)[c(TRUE, FALSE, FALSE)],
                              unlist(dat)[c(FALSE, TRUE, FALSE)],
                              unlist(dat)[c(FALSE, FALSE, TRUE)]))
@@ -102,6 +93,5 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
   assign(dat_name, dat, envir = .GlobalEnv)
   cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
 
-  invisible(return(dat))
-
+  return(dat)
   }
