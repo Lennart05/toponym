@@ -54,9 +54,8 @@ country.data <- function(query = NULL, regions = FALSE){
 
       map_path <- paste0(system.file(package = "geodata"),"/extdata")
       output <- gadm(country = query, path = map_path)$NAME_1
-
+      Encoding(output) <- "UTF-8" #corrects encoding
     }
-    Encoding(output) <- "UTF-8" #correct encoding
     return(output)
 
   }
