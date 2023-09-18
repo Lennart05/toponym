@@ -10,6 +10,8 @@
 #' @param ratio_string character string. Ratio of occurrences in the polygon from \code{top.candidates()}. This should not be specified manually.
 #' @param fq character string. Number of occurrences in the designated polygon and in total returned by \code{top.candidates()}. This should not be specified manually.
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
+#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
+#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
 #' @importFrom grDevices rainbow
 #' @examples
 #' \dontrun{
@@ -40,7 +42,8 @@
 top <- function(strings, countries,
                 color=rainbow(length(strings)), regions = 0,
                 df = TRUE, csv = FALSE, plot = TRUE,
-                ratio_string = "", fq = "", feat.class = "P")
+                ratio_string = "", fq = "", feat.class = "P",
+                lons, lats)
   {
   for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
   countries <- countries[!is.na(countries)] # removes incorrect country names
@@ -49,5 +52,5 @@ top <- function(strings, countries,
   get.data(countries) # gets data
   gn <- read.files(countries, feat.class)  # stands for GeoNames
   coors <- get.coordinates(gn, strings, df, csv) # coordinates of matches
-  simple.map(coors[[1]], coors[[2]], coors[[3]], coors[[4]], color, strings, regions, plot, ratio_string, fq) # inserts coordinates and generates map
+  simple.map(coors[[1]], coors[[2]], coors[[3]], coors[[4]], color, strings, regions, plot, ratio_string, fq, lons, lats) # inserts coordinates and generates map
 }
