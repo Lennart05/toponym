@@ -8,7 +8,7 @@ top(
   strings,
   countries,
   color = rainbow(length(strings)),
-  regions = FALSE,
+  regions = 0,
   df = TRUE,
   csv = FALSE,
   plot = TRUE,
@@ -18,9 +18,9 @@ top(
 )
 }
 \arguments{
-\item{strings}{Character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
+\item{strings}{character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
 
-\item{countries}{Character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
+\item{countries}{character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
 
 \item{color}{character string indicating, which color is assigned to each string.}
 
@@ -48,9 +48,9 @@ The function calls the \code{simple.map()} function to generate a map plotting a
 \dontrun{
 get.data("DE", save = TRUE)
 # saves data for DE in package directory
-top("itz$")
+top("itz$", "DE")
 # generates and prints a map with all populated places
-# in Germany (default country) ending with "itz"
+# in Germany ending with "itz"
 # and saves the locations in a data frame in the global environment.
 
 
