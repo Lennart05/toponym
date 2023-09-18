@@ -11,7 +11,7 @@ simple.map(
   matches,
   color,
   strings,
-  regions = FALSE,
+  regions = 0,
   plot,
   ratio_string,
   fq
@@ -26,11 +26,11 @@ simple.map(
 
 \item{matches}{character string. string of each entry filtered by \code{get.coordinates()}}
 
-\item{color}{character string indicating, which color is assigned to each country code in order.}
+\item{color}{character string. indicating, which color is assigned to each country code in order.}
 
-\item{strings}{Character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
+\item{strings}{character string. In form of regular expression that filter the data frames. The first string is shown on the plot.}
 
-\item{regions}{logical. If \code{TRUE} domestic state boundaries are displayed}
+\item{regions}{numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.}
 
 \item{plot}{logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.}
 
