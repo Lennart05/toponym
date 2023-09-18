@@ -12,8 +12,7 @@ License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
-Import: 
-    rnaturalearth,
+Import:
     sp,
     dplyr,
     ggplot2,
@@ -25,9 +24,10 @@ VignetteBuilder: knitr
 LazyData: true
 Imports: 
     dplyr (>= 1.0.8),
+    geodata (>= 0.5.8),
     ggplot2 (>= 3.4.0),
     grDevices (>= 4.1.2),
-    rnaturalearth (>= 0.3.2),
+    sf (>= 1.0.14),
     sp (>= 1.4.6),
     spatstat.geom (>= 3.0.3)
 URL: https://github.com/Lennart05/toponym
