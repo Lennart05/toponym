@@ -1,55 +1,37 @@
 #' @title Creates a polygon
 #' @description The function generates a map on which the user creates a polygon by point-and-click.
-#' @param continents Character string. Specify a continent for the map
-#' @param countries Character string. Specify a country for the map
-#' @param regions logical. If \code{TRUE} domestic state boundaries are displayed
-#' @importFrom rnaturalearth ne_countries ne_states
+#' @param countries character string. Specify a country for the map
+#' @param regions numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.
+#' @param region_name character string. Specify region names of a country requested by \code{countries}. Only the regions will be displayed for mapping.
+#' @importFrom geodata gadm world
 #' @importFrom spatstat.geom clickpoly
 #' @importFrom sp plot
 #' @export
 #' @details
-#' This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the package rnaturalearth.
+#' This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the geodata package.
 #'
-#' It is meant as simple and quick tool to create polygons which can later be used by the functions top.candidates and candidates.maps.
+#' It is meant as simple and quick tool to create polygons which can later be used by the functions such as top.candidates and candidates.maps.
 #'
 #' For further details on the point-and-click mechanic refer to the help page for clickpoly.
 #'
 #' @return A list with the coordinates of the polygon.
-create.polygon <- function(countries, continents, regions = FALSE) {
+create.polygon <- function(countries, regions = 0, region_name = NULL) {
 
-if(!missing(countries)){ # converts country codes into country names required by ne_countries
-country_names <- country.names(country_code = countries)
-}
+map_path <- paste0(system.file(package = "geodata"),"/extdata")
 
-
-
-if(regions == FALSE){ # if state borders are not asked for (default)
-
-if(missing(countries) && missing(continents)) {
-map <- ne_countries(scale = 50) # gets a map from pkg "rnaturalearth"
-
-}else if(missing(countries)){ # only continent provided by user
-  map <- ne_countries(continent = continents, scale = 50)
-
-}else if(missing(continents)){ # only country provided by user
-  map <- ne_countries(country = country_names, scale = 50)
-}
+if(countries == "world"){
+  map <- world(path = map_path) # world map
 
 
-  ### if state borders are asked for
-}else if(!missing(continents)) { # continent requests can't be fulfilled with state borders
- print("Continents cannot be specified with the domestic state boundary parameter active. Please enter at least one country code.")
+  }else if(missing(region_name)){ # if no region provided
+  map <- gadm(country = countries, level = regions, path = map_path) # country map
 
-}else if(missing(countries)){ # nothing provided
-  print("No country specified. Please enter at least one country code.")
-
-}else{ # countries provided by user
-    map <- ne_states(country = country_names)
-}
-
-
-
-
+  }
+  else{ # if region name is provided
+  if(regions == 0){regions = 1} # admin level = regions needs to be at least 1 if specific regions are to be displayed
+  map <- gadm(country = countries, level = regions, path = map_path)
+  map <- map[map$NAME_1 %in% region_name,]
+  }
 
 sp::plot(map) # plots the map
 polygon <- clickpoly(add=TRUE) # lets the user draw a polygon on the plotted map
