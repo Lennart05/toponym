@@ -45,7 +45,7 @@
 top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, feat.class = "P")
   {
   gn <- read.files(countries, feat.class)
-  endings_o <- top.freq(countries, len, feat.class, type)
+  toponyms_o <- top.freq(countries, len, feat.class, type)
 
   endings_ID_o <- list()
   lat_strings <- list()
@@ -64,7 +64,7 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
 
   for (i in 1:count) {
     # stores indices of all ordered endings
-    endings_ID_o[[i]] <- unique(grep(endings_o[i], gn$name))
+    endings_ID_o[[i]] <- unique(grep(toponyms_o[i], gn$name))
 
     lat_strings[[i]] <- gn$rlatitude[endings_ID_o[[i]]]
     lon_strings[[i]] <- gn$rlongitude[endings_ID_o[[i]]]
@@ -77,7 +77,7 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
 
     # select only endings which surpass parameter rat
     if(ratio[[i]]>rat) {
-      dat[[i]] <- cbind(endings_o[i], paste0(round(ratio[[i]], 4)*100, "%"),
+      dat[[i]] <- cbind(toponyms_o[i], paste0(round(ratio[[i]], 4)*100, "%"),
                         paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))}
 
   }
@@ -87,7 +87,7 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
                              unlist(dat)[c(FALSE, TRUE, FALSE)],
                              unlist(dat)[c(FALSE, FALSE, TRUE)]))
 
-  colnames(dat) <- c("ending", "ratio", "frequency")
+  colnames(dat) <- c("toponym", "ratio", "frequency")
 
   dat_name <- paste0("data_top_", count)
   assign(dat_name, dat, envir = .GlobalEnv)

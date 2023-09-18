@@ -44,8 +44,8 @@ top.freq <- function(countries, len, feat.class = "P", type = "$", count, lons, 
   }
 
 
-  # query all endings from the dataset
-  endings <- paste(if(type == "^"){"^"},
+  # query all toponyms from the dataset
+  toponyms <- paste(if(type == "^"){"^"},
                    # creates a reg expr looking for endings of length "len"
                    regmatches(gn$name,
                               regexpr(paste0(if(type == "^"){"^"},
@@ -54,9 +54,9 @@ top.freq <- function(countries, len, feat.class = "P", type = "$", count, lons, 
 
   # order them by frequency
   if(missing(count)){
-  endings_o <- names(table(endings)[order(table(endings), decreasing = TRUE)]) #only strings left
+  toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) #only strings left
   }else{
-  freq_top <- table(endings)[order(table(endings), decreasing = TRUE)][1:count] #only a selection of the most frequent toponyms
+  freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:count] #only a selection of the most frequent toponyms
   return(freq_top)
   }
 

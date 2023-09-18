@@ -33,8 +33,8 @@
 candidates.maps <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P")
   {
   dat <- top.candidates(countries, count, len, rat, type, lons, lats, feat.class) # gets df with candidates for top() function
-  for(i in 1:length(dat$ending)) {
-    top(dat$ending[i],
+  for(i in 1:length(dat$toponym)) {
+    top(dat$toponym[i],
         countries,
         color="red",
         df,
