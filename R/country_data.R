@@ -49,14 +49,14 @@ country.data <- function(query = NULL, regions = FALSE){
     output <- countryInfo[match(query, countryInfo[,3]),] #then outputs respective row
     }
     if(is.na(output[1])){print("The query contains incorrect country names")} #check for NAs
-    return(output)
 
     }else{ # if regions is TRUE
 
       map_path <- paste0(system.file(package = "geodata"),"/extdata")
-      gadm(country = query, path = map_path)$NAME_1
+      output <- gadm(country = query, path = map_path)$NAME_1
 
     }
-
+    Encoding(output) <- "UTF-8" #correct encoding
+    return(output)
 
   }
