@@ -1,7 +1,7 @@
 toponym
 ================
 Lennart Chevallier & Søren Wichmann
-September 7, 2023
+September 19, 2023
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -48,6 +48,14 @@ The following code is a simple example of this:
 
 ``` r
 library(toponym) # load package
+#> The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
+#> which was just loaded, will retire in October 2023.
+#> Please refer to R-spatial evolution reports for details, especially
+#> https://r-spatial.org/r/2023/05/15/evolution4.html.
+#> It may be desirable to make the sf package available;
+#> package maintainers should consider adding sf to Suggests:.
+#> The sp package is now running under evolution status 2
+#>      (status 2 uses the sf package in place of rgdal)
 top("itz$", "DE") 
 #> 
 #> Dataframe data_itz saved in global environment.
@@ -57,39 +65,86 @@ top("itz$", "DE")
 
 The plot shows all locations, which end with “-itz” in Germany, their
 total frequency (2182), and stores the data in the global environment.
-As you can see, most occurrences are located in the former slavic
+As you can see, most occurrences are located in the former Slavic
 settlement zone, indicating that the ending may be of Slavic origin. In
 this case, we know that already.
+
+## Country names and codes
+
+The data is supposed to cover maps and toponyms of the world. The
+`country.data()` lets you access the table with all countries available
+as well as regional names of specified countries.
+
+``` r
+head(country.data(query = "country table"))
+#>   ISO2 ISO3       Country
+#> 1   AW  ABW         Aruba
+#> 2   AF  AFG   Afghanistan
+#> 3   AO  AGO        Angola
+#> 4   AI  AIA      Anguilla
+#> 5   AX  ALA Aland Islands
+#> 6   AL  ALB       Albania
+```
+
+If you want to access the row of one specific country, you can either
+provide the ISO2 code, ISO3 code or the country name:
+
+``` r
+country.data(query = "Argentina")
+#>   ISO2 ISO3   Country
+#> 9   AR  ARG Argentina
+#returns the respective row for Argentina
+
+country.data(query = "ARG")
+#>   ISO2 ISO3   Country
+#> 9   AR  ARG Argentina
+#returns the same row
+```
+
+When `regions` is set to `TRUE`, the function returns all region names:
+
+``` r
+country.data(query = "AR", regions = TRUE)
+#>  [1] "Buenos Aires"           "Catamarca"              "Chaco"                 
+#>  [4] "Chubut"                 "Ciudad de Buenos Aires" "Córdoba"               
+#>  [7] "Corrientes"             "Entre Ríos"             "Formosa"               
+#> [10] "Jujuy"                  "La Pampa"               "La Rioja"              
+#> [13] "Mendoza"                "Misiones"               "Neuquén"               
+#> [16] "Río Negro"              "Salta"                  "San Juan"              
+#> [19] "San Luis"               "Santa Cruz"             "Santa Fe"              
+#> [22] "Santiago del Estero"    "Tierra del Fuego"       "Tucumán"
+#returns all regional names of Argentina in the data set
+```
 
 ## List suffixes specific to a region
 
 If we want to find out which toponyms appear frequently in one region
 compared to the rest of the given countries, we need to specify a
 polygon. The function requires two vectors, one with the longitudes and
-another with latitudes. A few polygons are part of the package.
-Estimated coordinates for the Slavic settlement zone are
-`toponym::slav_polygon`. For example, we can run this:
+another with latitudes. A few polygons are part of the package. Later,
+the built-in function to create polygons with is described. A polygon
+covering an area of the Danelaw is in `toponym::danelaw_polygon`. For
+example, we can run this:
 
 ``` r
-top.candidates(countries = "DE", count = 75, len = 3, rat = .8, lons = toponym::slav_polygon$lons, lats = toponym::slav_polygon$lats)
+top.candidates(countries = "GB", count = 75, len = 3, rat = .8, lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
 #> 
 #> Dataframe data_top_75 saved in global environment.
 #>   ending  ratio frequency
-#> 1   itz$ 95.78% 2090/2182
-#> 2   kow$   100%   229/229
-#> 3   Ã¼n$ 89.13%   164/184
+#> 1   rpe$ 94.86%   166/175
+#> 2   sby$ 83.13%     69/83
+#> 3   rby$ 81.67%     49/60
 ```
 
 The output is a data frame giving us information about the ratio and
-frequency of each ending. This means essentially that 95.78% of the
-German places ending with “-itz” are in the polygon roughly covering the
-former Slavic settlement zone. Even though the ending is less common in
-total, “-kow” may be of interest too as all occurrences are found in the
-polygon. To be clear what happened: Other common suffixes in Germany
-such as “-orf”, most of which coming from “-dorf”, are filtered out
-since they did not match our fairly high threshold of 80% `rat = .8`.
-`count = 75` and `len = 3` means that we filtered the 75 most frequent
-suffixes with a length of three-characters.
+frequency of each ending. This means essentially that 94.86% of the
+German places ending with “-rpe” are in the polygon. Even though the
+endings are less common in total, “-sb” and “-rby” may be of interest
+too as most occurrences are found in the polygon. To be clear what
+happened: Other common suffixes in Great Britian such as “-ton” are
+filtered out since they did not match our fairly high threshold of 80%
+`rat = .8`. `count = 75` and `len = 3` means that we filtered the 75
+most frequent suffixes with a length of three-characters.
 
 Instead of applying this data frame with interesting candidates on your
 own, there is another function doing this automatically.
@@ -97,7 +152,7 @@ own, there is another function doing this automatically.
 ## Creating multiple maps at once
 
 ``` r
-candidates.maps(countries = "DE", count = 75, len = 3, rat = .8)
+candidates.maps(countries = "GB", count = 75, len = 3, rat = .8, lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
 ```
 
 Running this with the same settings leaves us with a map of every ending
@@ -112,16 +167,18 @@ You can either provide the coordinates of any polygon you have or create
 one with the built-in function `create.polygon()`.
 
 ``` r
-argentina_polygon <- create.polygon(countries = "AR", regions = TRUE)
+argentina_polygon <- create.polygon(countries = "AR", regions = 1)
 ```
 
 In this example, a map of Argentina `AR` with state boundaries
-`regions = TRUE` appears as plot. Now, a polygon can be defined by
-clicking on the map and pressing `ESC` or the middle mouse button to
-exit. The last point should not repeat the first point. Once finished,
-the newly defined polygon is stored as a data frame called
-`argentina_polygon`. If you do not store the output, the function will
-only print out the data frame.
+`regions = 1` appears as plot. Now, a polygon can be defined by clicking
+on the map and pressing `ESC` or the middle mouse button to exit. The
+last point should not repeat the first point. Once finished, the newly
+defined polygon is stored as a data frame called `argentina_polygon`. If
+you do not store the output, the function will only print out the data
+frame with the coordinates. It’s also possible to specify names of
+regions in the given countries. Check the `country.data()` section above
+for more information.
 
 ## Exemplary usage
 
@@ -132,9 +189,8 @@ variations. Dutch is dominant in the northern region, Flanders, and
 French is dominant in the southern region, Wallonia, except small German
 communities near the German border. Is this division also reflected by
 toponyms? First, we need at least one polygon of a region. As part of
-the package, the coordinates for both regions are provided as
-`toponym::flanders_polygon` and `toponym::wallonia_polygon`. Thus, we
-could run this:
+the package, the coordinates for Flanders is provided as
+`toponym::flanders_polygon`. Thus, we could run this:
 
 ``` r
 ### find suffixes typical in Flanders
@@ -162,7 +218,7 @@ top("aat$", "BE")
 #> Dataframe data_aat saved in global environment.
 ```
 
-<img src="man/figures/README-unnamed-chunk-4-1.png" width="100%" /> The
+<img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" /> The
 high density of places ending with “-aat” in the central region stands
 out and as we knew from the data frame earlier almost all (99.71%)
 appear in our polygon. Looking at the full names (after generating this
@@ -180,42 +236,88 @@ candidates.maps(countries = "BE", count = 100, len = 3, rat = 0.8,
 
 ## Finding prefixes
 
-As one last example we look at dominant prefixes in the other region
-Wallonia. For that the parameter `type` needs to be set to “^” as the
-default option searches for suffixes (“\$”):
+As one last example we look at dominant prefixes in the same region. For
+that the parameter `type` needs to be set to “^” as the default option
+searches for suffixes (“\$”):
 
 ``` r
 head(top.candidates("BE", 100, 4, 0.8, type = "^", 
-  toponym::wallonia_polygon$lons, toponym::wallonia_polygon$lats))
+  toponym::flanders_polygon$lons, toponym::flanders_polygon$lats))
 #> 
 #> Dataframe data_top_100 saved in global environment.
 #>   ending  ratio frequency
-#> 1  ^Les  99.53%   212/213
-#> 2  ^Gran 97.62%     82/84
-#> 3  ^Sain 96.25%     77/80
-#> 4  ^Peti 95.89%     70/73
-#> 5  ^Mont 94.03%     63/67
-#> 6  ^Haut 98.15%     53/54
+#> 1  ^Sint 98.32%   117/119
+#> 2  ^Klei   100%     86/86
+#> 3  ^Mole   100%     83/83
+#> 4  ^Drie 98.67%     74/75
+#> 5  ^Den    100%     60/60
+#> 6  ^Hoog 98.15%     53/54
 ```
 
 Next, we could look at one of them to see their distribution and form.
-We suspect that it is of French origin and include France and
-Luxembourg:
+We suspect that it is of Germanic origin and include Netherlands and
+France for testing:
 
 ``` r
 
-top("^Gran", c("BE", "FR", "LU"))
+top("^Hoog", c("BE", "NL", "FR"))
 #> 
-#> Dataframe data_Gran saved in global environment.
+#> Dataframe data_Hoog saved in global environment.
 ```
 
-<img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" /> Most
-cases seem to be at the border and some, but very few, appear in
-Flanders too. The great majority stems from “Grand” or “Grande” – an
-exception is for example “Grange”. As we might have expected, “Gran-”
-occurs also throughout France. In order to eliminate candidates such as
-“Grange”, the length parameter `len` must be increased and the function
-needs to be run multiple times with different lengths.
+<img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" /> Most
+cases seem to be in the western and only few in the central region near
+the border. As we might have expected, “Hoog-” occurs also throughout
+the Netherlands but not in France. It is advised that the users adjust
+length parameter `len` and run the function multiple times to skim
+through possible toponyms.
+
+## Frequent toponyms
+
+Lastly, `top.freq()` lets users find the most frequent toponyms in the
+given countries or a polygon within the countries. A simple example
+would be:
+
+``` r
+top.freq("Philippines", len = 3, count = 10)
+#> endings
+#> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
+#> 1750 1247 1128  764  693  608  598  548  545  504
+```
+
+You need to specify the number of frequent toponyms you want (here
+`count = 10`) and the length of the endings or beginning (here
+`len = 3`). It’s also possible to restrict it to one polygon. In
+comparison to the previous functions, this only outputs what is most
+frequent in the region or country, while `top.candidates()` calculates,
+which toponyms are most frequent in the country and then checks which of
+them meet the threshold specified by `rat`, indicating that they are
+common to the polygon. Running this function and the previous one we
+used for the Danelaw again:
+
+``` r
+top.freq("GB",
+         lons = toponym::danelaw_polygon$lons,
+         lats = toponym::danelaw_polygon$lats, len = 3, count = 10)
+#> endings
+#> ton$ ham$ ley$ een$ ord$ rth$ ill$ rpe$ eld$ all$ 
+#> 1391  453  371  221  198  174  172  166  158  156
+```
+
+``` r
+top.candidates(countries = "GB", count = 75, len = 3, rat = .8,
+               lons = toponym::danelaw_polygon$lons,
+               lats = toponym::danelaw_polygon$lats)
+#> 
+#> Dataframe data_top_75 saved in global environment.
+#>   ending  ratio frequency
+#> 1   rpe$ 94.86%   166/175
+#> 2   sby$ 83.13%     69/83
+#> 3   rby$ 81.67%     49/60
+```
+
+We see that “-rpe” is among the top ten most common endings but “-ton”
+is more frequent in total. It may be common across the entire country.
 
 ## The functions
 
@@ -223,13 +325,16 @@ The core functions are again as follows:
 
 - `top()` generates one map with all locations matching the regular
   expression
+- `country.data()` returns information on country references used by the
+  package
 - `create.polygon()` lets the user define a polygon by clicking on a map
 - `top.candidates()` generates a list of prefixes or suffixes frequent
   in one given region (as polygon)
 - `candidates.maps()` generates maps and lists on your computer out of
   these frequent prefixes and suffixes
+- `top.freq()` generates a list of the most frequent toponyms
 
-For help type `?function`
+For help type `?function` or `?toponym`
 
 ## Limitations
 
