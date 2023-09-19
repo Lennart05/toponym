@@ -44,7 +44,7 @@ devtools::install_github("Lennart05/toponym")
 The function `top()`, meaning "toponym", creates maps of places matching a regular expression. First, a string is given, then a country is gi. The following code is a simple example of this:
 
 ```{r example}
-library(toponym) # load package
+library(toponym)
 top("itz$", "DE") 
 
 ```
@@ -142,7 +142,7 @@ Next, we could look at one of them to see their distribution and form. We suspec
 top("^Hoog", c("BE", "NL", "FR"))
 
 ```
-Most cases seem to be in the western and only few in the central region near the border. As we might have expected, "Hoog-" occurs also throughout the Netherlands but not in France. It is advised that the users adjust length parameter `len` and run the function multiple times to skim through possible toponyms. 
+Most cases seem to be in the western and only few in the central region near the border. As we might have expected, "Hoog-" occurs also throughout the Netherlands but not in France. It is advised that the user adjusts the length parameter `len` and runs the function multiple times to skim through possible toponyms. 
 
 
 ## Frequent toponyms

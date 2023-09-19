@@ -47,15 +47,8 @@ a regular expression. First, a string is given, then a country is gi.
 The following code is a simple example of this:
 
 ``` r
-library(toponym) # load package
-#> The legacy packages maptools, rgdal, and rgeos, underpinning the sp package,
-#> which was just loaded, will retire in October 2023.
-#> Please refer to R-spatial evolution reports for details, especially
-#> https://r-spatial.org/r/2023/05/15/evolution4.html.
-#> It may be desirable to make the sf package available;
-#> package maintainers should consider adding sf to Suggests:.
-#> The sp package is now running under evolution status 2
-#>      (status 2 uses the sf package in place of rgdal)
+library(toponym) #load package
+
 top("itz$", "DE") 
 #> 
 #> Dataframe data_itz saved in global environment.
@@ -268,8 +261,8 @@ top("^Hoog", c("BE", "NL", "FR"))
 <img src="man/figures/README-unnamed-chunk-9-1.png" width="100%" /> Most
 cases seem to be in the western and only few in the central region near
 the border. As we might have expected, “Hoog-” occurs also throughout
-the Netherlands but not in France. It is advised that the users adjust
-length parameter `len` and run the function multiple times to skim
+the Netherlands but not in France. It is advised that the user adjusts
+the length parameter `len` and runs the function multiple times to skim
 through possible toponyms.
 
 ## Frequent toponyms
