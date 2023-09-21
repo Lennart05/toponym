@@ -43,12 +43,11 @@ devtools::install_github("Lennart05/toponym")
 ## Create a simple map
 
 The function `top()`, meaning “toponym”, creates maps of places matching
-a regular expression. First, a string is given, then a country is gi.
-The following code is a simple example of this:
+a regular expression. First, a string, then a country is given. The
+following code is a simple example of this:
 
 ``` r
-library(toponym) #load package
-
+library(toponym)
 top("itz$", "DE") 
 #> 
 #> Dataframe data_itz saved in global environment.
@@ -123,10 +122,10 @@ example, we can run this:
 top.candidates(countries = "GB", count = 75, len = 3, rat = .8, lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
 #> 
 #> Dataframe data_top_75 saved in global environment.
-#>   ending  ratio frequency
-#> 1   rpe$ 94.86%   166/175
-#> 2   sby$ 83.13%     69/83
-#> 3   rby$ 81.67%     49/60
+#>   toponym  ratio frequency
+#> 1    rpe$ 94.86%   166/175
+#> 2    sby$ 83.13%     69/83
+#> 3    rby$ 81.67%     49/60
 ```
 
 The output is a data frame giving us information about the ratio and
@@ -191,13 +190,13 @@ head(top.candidates(countries = "BE", count = 100, len = 3, rat = 0.8,
  lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats))
 #> 
 #> Dataframe data_top_100 saved in global environment.
-#>   ending  ratio frequency
-#> 1   oek$ 99.84%   635/636
-#> 2   aat$ 99.71%   348/349
-#> 3   erg$ 94.63%   317/335
-#> 4   ide$ 95.52%   213/223
-#> 5   ken$ 96.43%   189/196
-#> 6   gem$   100%   186/186
+#>   toponym  ratio frequency
+#> 1    oek$ 99.84%   635/636
+#> 2    aat$ 99.71%   348/349
+#> 3    erg$ 94.63%   317/335
+#> 4    ide$ 95.52%   213/223
+#> 5    ken$ 96.43%   189/196
+#> 6    gem$   100%   186/186
 ```
 
 As the data frame shows, there are many suffixes almost only appearing
@@ -238,13 +237,13 @@ head(top.candidates("BE", 100, 4, 0.8, type = "^",
   toponym::flanders_polygon$lons, toponym::flanders_polygon$lats))
 #> 
 #> Dataframe data_top_100 saved in global environment.
-#>   ending  ratio frequency
-#> 1  ^Sint 98.32%   117/119
-#> 2  ^Klei   100%     86/86
-#> 3  ^Mole   100%     83/83
-#> 4  ^Drie 98.67%     74/75
-#> 5  ^Den    100%     60/60
-#> 6  ^Hoog 98.15%     53/54
+#>   toponym  ratio frequency
+#> 1   ^Sint 98.32%   117/119
+#> 2   ^Klei   100%     86/86
+#> 3   ^Mole   100%     83/83
+#> 4   ^Drie 98.67%     74/75
+#> 5   ^Den    100%     60/60
+#> 6   ^Hoog 98.15%     53/54
 ```
 
 Next, we could look at one of them to see their distribution and form.
@@ -254,6 +253,7 @@ France for testing:
 ``` r
 
 top("^Hoog", c("BE", "NL", "FR"))
+#> [1] "FR.txt saved in package directory"
 #> 
 #> Dataframe data_Hoog saved in global environment.
 ```
@@ -273,7 +273,7 @@ would be:
 
 ``` r
 top.freq("Philippines", len = 3, count = 10)
-#> endings
+#> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
 #> 1750 1247 1128  764  693  608  598  548  545  504
 ```
@@ -292,7 +292,7 @@ used for the Danelaw again:
 top.freq("GB",
          lons = toponym::danelaw_polygon$lons,
          lats = toponym::danelaw_polygon$lats, len = 3, count = 10)
-#> endings
+#> toponyms
 #> ton$ ham$ ley$ een$ ord$ rth$ ill$ rpe$ eld$ all$ 
 #> 1391  453  371  221  198  174  172  166  158  156
 ```
@@ -303,10 +303,10 @@ top.candidates(countries = "GB", count = 75, len = 3, rat = .8,
                lats = toponym::danelaw_polygon$lats)
 #> 
 #> Dataframe data_top_75 saved in global environment.
-#>   ending  ratio frequency
-#> 1   rpe$ 94.86%   166/175
-#> 2   sby$ 83.13%     69/83
-#> 3   rby$ 81.67%     49/60
+#>   toponym  ratio frequency
+#> 1    rpe$ 94.86%   166/175
+#> 2    sby$ 83.13%     69/83
+#> 3    rby$ 81.67%     49/60
 ```
 
 We see that “-rpe” is among the top ten most common endings but “-ton”

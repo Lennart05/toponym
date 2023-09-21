@@ -41,7 +41,7 @@ devtools::install_github("Lennart05/toponym")
 
 ## Create a simple map
 
-The function `top()`, meaning "toponym", creates maps of places matching a regular expression. First, a string is given, then a country is gi. The following code is a simple example of this:
+The function `top()`, meaning "toponym", creates maps of places matching a regular expression. First, a string, then a country is given. The following code is a simple example of this:
 
 ```{r example}
 library(toponym)
