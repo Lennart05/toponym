@@ -21,5 +21,5 @@ z.test(strings, countries, feat.class = "P", lons, lats)
 Result of \code{prop.test}
 }
 \description{
-The functions lets users to apply a z-test (two proportion test). It compares the occurrences of a given string in the polygon with the rest of the country.
+The functions lets users apply a z-test (two proportion test), comparing the frequency of a given string in an area (polygon) to the frequency in the rest of the country.
 }

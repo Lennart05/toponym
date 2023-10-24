@@ -1,5 +1,5 @@
 #' @title ztest
-#' @description The functions lets users to apply a z-test (two proportion test). It compares the occurrences of a given string in the polygon with the rest of the country.
+#' @description The functions lets users apply a z-test (two proportion test), comparing the frequency of a given string in an area (polygon) to the frequency in the rest of the country.
 #' @param strings character strings in form of regular expression that filter the data frames.
 #' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries).
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
