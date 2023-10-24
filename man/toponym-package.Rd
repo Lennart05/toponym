@@ -11,9 +11,9 @@ A simple package for visualizing toponym distributions. You either provide a reg
 The main functions are the following:
 \itemize{
 \item\code{\link{top}} generates one map with all locations matching the regular expression
-\item\code{\link{country.data}} returns information on country references used by the package
+\item\code{\link{country.data}} helps in navigating references to countries (ISO-codes) and regions
 \item\code{\link{create.polygon}} lets users define a polygon by clicking on a map
-\item\code{\link{top.candidates}} generates a list of prefixes or suffixes frequent in one given region (as polygon)
+\item\code{\link{top.candidates}} generates a list of prefixes or suffixes frequent in a given region
 \item\code{\link{candidates.maps}} generates maps and lists on your computer out of these frequent prefixes and suffixes
 \item\code{\link{top.freq}} generates a list of the most frequent toponyms
 \item\code{\link{z.test}} lets users apply a z-test
