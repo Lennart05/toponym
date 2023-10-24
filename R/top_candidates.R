@@ -40,6 +40,7 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
   for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
   countries <- countries[!is.na(countries)] # removes incorrect country names
 
+  get.data(countries) # gets data
   gn <- read.files(countries, feat.class)
   toponyms_o <- top.freq(countries, len, feat.class, type)
 
