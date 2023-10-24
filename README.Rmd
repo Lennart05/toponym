@@ -172,11 +172,12 @@ We see that "-rpe" is among the top ten most common endings but "-ton" is more f
 The core functions are again as follows:
 
 * `top()` generates one map with all locations matching the regular expression
-* `country.data()` returns information on country references used by the package
+* `country.data()` helps in navigating references to countries (ISO-codes) and regions
 * `create.polygon()` lets the user define a polygon by clicking on a map
-* `top.candidates()` generates a list of prefixes or suffixes frequent in one given region (as polygon)
+* `top.candidates()` generates a list of prefixes or suffixes frequent in a given region
 * `candidates.maps()` generates maps and lists on your computer out of these frequent prefixes and suffixes
 * `top.freq()` generates a list of the most frequent toponyms
+* `z.test()` lets users apply a z-test
 
 For help type `?function` or `?toponym`
 

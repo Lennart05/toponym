@@ -253,7 +253,6 @@ France for testing:
 ``` r
 
 top("^Hoog", c("BE", "NL", "FR"))
-#> [1] "FR.txt saved in package directory"
 #> 
 #> Dataframe data_Hoog saved in global environment.
 ```
@@ -273,6 +272,7 @@ would be:
 
 ``` r
 top.freq("Philippines", len = 3, count = 10)
+#> [1] "PH.txt saved in package directory"
 #> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
 #> 1750 1247 1128  764  693  608  598  548  545  504
@@ -318,11 +318,11 @@ The core functions are again as follows:
 
 - `top()` generates one map with all locations matching the regular
   expression
-- `country.data()` returns information on country references used by the
-  package
-- `create.polygon()` lets users define a polygon by clicking on a map
+- `country.data()` helps in navigating references to countries
+  (ISO-codes) and regions
+- `create.polygon()` lets the user define a polygon by clicking on a map
 - `top.candidates()` generates a list of prefixes or suffixes frequent
-  in one given region (as polygon)
+  in a given region
 - `candidates.maps()` generates maps and lists on your computer out of
   these frequent prefixes and suffixes
 - `top.freq()` generates a list of the most frequent toponyms
