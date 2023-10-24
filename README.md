@@ -1,7 +1,7 @@
 toponym
 ================
 Lennart Chevallier & Søren Wichmann
-September 19, 2023
+October 24, 2023
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
