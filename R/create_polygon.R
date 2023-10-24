@@ -30,8 +30,11 @@ if(countries == "world"){
   map <- map[map$NAME_1 %in% region_name,]
   }
 
+print("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
+
 sp::plot(map) # plots the map
 polygon <- clickpoly(add=TRUE) # lets users draw a polygon on the plotted map
+
 
 polygon <- data.frame(polygon[[4]][[1]][[1]], polygon[[4]][[1]][[2]]) ## saves only lons and lats
 names(polygon) <- c("lons", "lats")
