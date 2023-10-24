@@ -8,8 +8,6 @@
 #' @param count numeric. The number of the most frequent endings.
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
-#' @importFrom sp point.in.polygon
-#' @importFrom grDevices chull
 #'
 #' @return Returns a table with toponym names and their frequency
 #' @export
@@ -17,11 +15,13 @@
 #' @examples
 #' \dontrun{
 #' top.freq(countries = "Namibia", len = 3, count = 10)
-#' ## returns the top ten most frequent toponym endings in Namibia
+#' ## returns the top ten most frequent toponym endings
+#' ## of three-character length in Namibia
 #'
 #' top.freq(countries = "GB", len = 3, count = 10,
 #' lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
-#' ## returns the top ten most frequent toponym endings in the polygon which is inside the United Kingdom.
+#' ## returns the top ten most frequent toponym endings
+#' ## in the polygon which is inside the United Kingdom.
 #' }
 top.freq <- function(countries, len, feat.class = "P", type = "$", count, lons, lats)
 {
@@ -32,11 +32,8 @@ top.freq <- function(countries, len, feat.class = "P", type = "$", count, lons, 
   gn <- read.files(countries, feat.class)
 
   if(!missing(lons) && !missing(lats)){
-  # store coordinates of the polygon in a df
-  pol  <- data.frame(X = lons, Y = lats)
-  # chull function from package grDevices
-  pos <- chull(pol)
-  con.hull <- rbind(pol[pos,],pol[pos[1],])   # convex hull
+
+  con.hull <- poly(lons = lons, lats = lats)
 
   poly_log <- as.logical(point.in.polygon(gn$rlongitude, gn$rlatitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
 

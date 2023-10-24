@@ -4,19 +4,18 @@
 #' @param strings Character strings in form of regular expression that filter the data frames.
 #' @param df logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.
 #' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
-#' @importFrom utils write.csv
 #' @return A list with the coordinates (longitude and latitude) and country codes.
 get.coordinates <- function(gn, strings, df, csv) {
 
-  w_strings <- unique(grep(paste(strings,collapse="|"), gn$name)) # gets all indexes of matches
+  w_strings <- unique(grep(paste(strings,collapse="|"), gn$name, perl = TRUE)) # gets all indexes of matches
   lat_strings <- gn$rlatitude[w_strings] # gets respective lat coordinates
   lon_strings <- gn$rlongitude[w_strings] # gets respective lon coordinates
   country <- gn$rcountry_code[w_strings] # gets respective cc
-  m_strings <- regmatches(gn$name,regexpr(paste(strings,collapse="|"), gn$name)) # gets matches
+  m_strings <- regmatches(gn$name,regexpr(paste(strings,collapse="|"), gn$name, perl = TRUE)) # gets matches
 
   # saves data as df and/or csv
   if(df == TRUE || csv == TRUE) {
-    dat_name <- paste0("data_", paste(regmatches(strings, regexpr("[a-zA-Z]+", strings)), collapse = "_"), collapse="_")
+    dat_name <- paste0("data_", paste(regmatches(strings, regexpr("[a-zA-Z]+", strings, perl = TRUE)), collapse = "_"), collapse="_")
     if(df == TRUE) {
       dat <- assign(dat_name, gn[w_strings,], envir = .GlobalEnv)
       cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))

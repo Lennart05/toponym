@@ -12,8 +12,6 @@
 #' ## from the zip files downloaded before to the package folder if used in the same session
 #' }
 #' @return The data as .txt in the temporary or package folder.
-#' @importFrom utils download.file
-#' @importFrom utils unzip
 #' @export
 get.data <- function(countries, save = TRUE) {
 

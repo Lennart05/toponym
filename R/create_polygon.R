@@ -1,11 +1,8 @@
 #' @title Creates a polygon
-#' @description The function generates a map on which the user creates a polygon by point-and-click.
+#' @description The function generates a map on which users create a polygon by point-and-click.
 #' @param countries character string. Specify a country for the map
 #' @param regions numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.
 #' @param region_name character string. Specify region names of a country requested by \code{countries}. Only the regions will be displayed for mapping.
-#' @importFrom geodata gadm world
-#' @importFrom spatstat.geom clickpoly
-#' @importFrom sp plot
 #' @export
 #' @details
 #' This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the geodata package.
@@ -34,7 +31,7 @@ if(countries == "world"){
   }
 
 sp::plot(map) # plots the map
-polygon <- clickpoly(add=TRUE) # lets the user draw a polygon on the plotted map
+polygon <- clickpoly(add=TRUE) # lets users draw a polygon on the plotted map
 
 polygon <- data.frame(polygon[[4]][[1]][[1]], polygon[[4]][[1]][[2]]) ## saves only lons and lats
 names(polygon) <- c("lons", "lats")

@@ -6,7 +6,6 @@
 #' @param regions logical. If \code{TRUE}, outputs the region names of the respective country.
 #' @details If you enter "ISO2" or "ISO3", you receive a list of all ISO-codes of the respective length. If you enter "names", you receive a list of all country names.
 #' If you refer to an individual country, you receive the remaining forms of reference.
-#' @importFrom geodata gadm
 #' @return Returns a data frame or vector with the country data.
 #' @export
 #'

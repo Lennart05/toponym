@@ -1,8 +1,7 @@
 #' @title Reads toponym data from the temporary or package folder
 #' @description The function accesses the data saved by \code{get.data()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
-#' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data needs to be saved by \code{get.data()} before.
+#' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data will be saved by \code{get.data()} before.
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
-#' @importFrom utils read.table
 #' @return Data frames of the specified countries.
 read.files <- function(countries, feat.class) {
 
@@ -24,6 +23,7 @@ read.files <- function(countries, feat.class) {
                                      head=FALSE, sep="\t", quote="", na.strings="",
                                      comment.char="", encoding="utf8")
       Encoding(geonames_content[,2]) <- "UTF-8" # set encoding to UTF-8 in case the local encoding of the OS reads it wrong
+      Encoding(geonames_content[,4]) <- "UTF-8" # set encoding to UTF-8 in case the local encoding of the OS reads it wrong
       L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = .GlobalEnv) # saves in GlobalEnv for later use
     } else {
       L[[i]] <- get(tolower(countries[i]))

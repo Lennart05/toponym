@@ -1,6 +1,6 @@
 #' @title Generates a map with all locations matching the regular expression
 #' @description The function calls the \code{simple.map()} function to generate a map plotting all locations, filtered by \code{get.coordinates()}. The plot also displays additional information if used by \code{candidates.maps()}. The data used is downloaded by \code{get.data()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
-#' @param strings character strings in form of regular expression that filter the data frames. The first string is shown on the plot.
+#' @param strings character strings in form of regular expression that filter the data frames.
 #' @param countries character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
 #' @param color character string indicating, which color is assigned to each string.
 #' @param regions logical. If \code{TRUE} domestic state boundaries are displayed
@@ -12,7 +12,6 @@
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
-#' @importFrom grDevices rainbow
 #' @examples
 #' \dontrun{
 #' get.data("DE", save = TRUE)
