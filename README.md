@@ -320,12 +320,13 @@ The core functions are again as follows:
   expression
 - `country.data()` returns information on country references used by the
   package
-- `create.polygon()` lets the user define a polygon by clicking on a map
+- `create.polygon()` lets users define a polygon by clicking on a map
 - `top.candidates()` generates a list of prefixes or suffixes frequent
   in one given region (as polygon)
 - `candidates.maps()` generates maps and lists on your computer out of
   these frequent prefixes and suffixes
 - `top.freq()` generates a list of the most frequent toponyms
+- `z.test()` lets users apply a z-test
 
 For help type `?function` or `?toponym`
 
