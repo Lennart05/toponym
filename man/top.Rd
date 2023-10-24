@@ -20,7 +20,7 @@ top(
 )
 }
 \arguments{
-\item{strings}{character strings in form of regular expression that filter the data frames. The first string is shown on the plot.}
+\item{strings}{character strings in form of regular expression that filter the data frames.}
 
 \item{countries}{character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
 

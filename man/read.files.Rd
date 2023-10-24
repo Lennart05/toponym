@@ -7,7 +7,7 @@
 read.files(countries, feat.class)
 }
 \arguments{
-\item{countries}{character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data needs to be saved by \code{get.data()} before.}
+\item{countries}{character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data will be saved by \code{get.data()} before.}
 
 \item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.}
 }

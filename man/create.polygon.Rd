@@ -17,7 +17,7 @@ create.polygon(countries, regions = 0, region_name = NULL)
 A list with the coordinates of the polygon.
 }
 \description{
-The function generates a map on which the user creates a polygon by point-and-click.
+The function generates a map on which users create a polygon by point-and-click.
 }
 \details{
 This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the geodata package.

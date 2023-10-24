@@ -18,9 +18,9 @@ top.candidates(
 \arguments{
 \item{countries}{character string. Country code abbreviations or names (use \code{country.data()} for a list of available countries) specifying the toponyms of which countries are checked.}
 
-\item{count}{numeric. The number of the most frequent endings which will be tested.}
+\item{count}{numeric. The number of the most frequent toponyms which will be tested.}
 
-\item{len}{numeric. The character length of the endings.}
+\item{len}{numeric. The character length of the toponyms}
 
 \item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.}
 
@@ -40,11 +40,6 @@ The function sorts the toponyms in the given countries by frequency. It then tes
 }
 \examples{
 \dontrun{
-top.candidates()
-## prints and saves a data frame of the top ten three-character-long endings in Germany
-## if more than 50\% of the places lie in the default polygon.
-
-
 top.candidates("GB", count = 100, len = 4, rat = .9,
  lons = toponym::danelaw_polygon$lons,
  lats = toponym::danelaw_polygon$lats
