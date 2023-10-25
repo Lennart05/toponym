@@ -129,8 +129,7 @@ top.candidates(countries = "GB", count = 75, len = 3, rat = .8, lons = toponym::
 ```
 
 The output is a data frame giving us information about the ratio and
-frequency of each ending. This means essentially that 94.86% of the
-German places ending with “-rpe” are in the polygon. Even though the
+frequency of each ending. This means essentially that 94.86% of the places ending with “-rpe” are in the polygon. Even though the
 endings are less common in total, “-sb” and “-rby” may be of interest
 too as most occurrences are found in the polygon. To be clear what
 happened: Other common suffixes in Great Britian such as “-ton” are
@@ -169,8 +168,7 @@ last point should not repeat the first point. Once finished, the newly
 defined polygon is stored as a data frame called `argentina_polygon`. If
 you do not store the output, the function will only print out the data
 frame with the coordinates. It’s also possible to specify names of
-regions in the given countries. Check the `country.data()` section above
-for more information.
+regions in the given countries. Check the section about `country.data()` above for more information.
 
 ## Exemplary usage
 
