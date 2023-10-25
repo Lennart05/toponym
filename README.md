@@ -63,7 +63,7 @@ this case, we know that already.
 
 ## Country names and codes
 
-The data is supposed to cover maps and toponyms of the world. The
+The data is supposed to cover maps and toponyms of the world. The function
 `country.data()` lets you access the table with all countries available
 as well as regional names of specified countries.
 
