@@ -80,11 +80,16 @@ top.candidates <- function(countries, count, len, rat, type = "$", lons, lats, f
                              unlist(dat)[c(FALSE, TRUE, FALSE)],
                              unlist(dat)[c(FALSE, FALSE, TRUE)]))
 
-  colnames(dat) <- c("toponym", "ratio", "frequency")
+  if(length(dat)==0) {
+    print("No toponyms satisfy the criteria")
 
+  }else{
+
+  colnames(dat) <- c("toponym", "ratio", "frequency")
   dat_name <- paste0("data_top_", count)
   assign(dat_name, dat, envir = .GlobalEnv)
   cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
 
   return(dat)
+  }
   }
