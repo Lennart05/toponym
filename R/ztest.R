@@ -22,7 +22,7 @@ z.test <- function(strings, countries, feat.class = "P", lons, lats) {
 
   poly_log <- as.vector(table(poly_log))
 
-  top_in_cc <- poly_log[1]   # total number of *places* in the country
+  top_in_cc <- poly_log[1]   # total number of *places* in the country (but not in the polygon)
   top_in_poly <- poly_log[2] # total number of *places* in the polygon
 
 

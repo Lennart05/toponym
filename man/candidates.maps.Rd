@@ -14,7 +14,8 @@ candidates.maps(
   type = "$",
   lons,
   lats,
-  feat.class = "P"
+  feat.class = "P",
+  freq.type
 )
 }
 \arguments{
@@ -37,6 +38,8 @@ candidates.maps(
 \item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
 
 \item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.}
+
+\item{freq.type}{character string. If set to "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If set to "rel", ratios of relative frequencies inside the area and outside the area will be computed.}
 }
 \value{
 A number of data frames and plots saved in a sub folder (called "data frames" and "plots") in the working directory. If wanted, it stores the ratio surpassing toponyms in a data frame in the global environment.

@@ -13,6 +13,7 @@
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
+#' @param freq.type character string. If set to "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If set to "rel", ratios of relative frequencies inside the area and outside the area will be computed.
 #' @details
 #' The goal is to find and generate maps of toponyms which are potentially worthwhile to be further examined by hand or other means.
 #' A general and meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
@@ -30,9 +31,9 @@
 #' ## generates and saves the data frames & maps of the top hundred three-character-long endings
 #' ## in Belgium if more than 50% of the places lie in the polygon for Flanders.
 #' }
-candidates.maps <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P")
+candidates.maps <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type)
   {
-  dat <- top.candidates(countries, count, len, rat, type, lons, lats, feat.class) # gets df with candidates for top() function
+  dat <- top.candidates(countries, count, len, rat, type, lons, lats, feat.class, freq.type) # gets df with candidates for top() function
   for(i in 1:length(dat$toponym)) {
     top(dat$toponym[i],
         countries,
