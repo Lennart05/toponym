@@ -118,7 +118,7 @@ top.candidates <- function(countries, count = 0, len, rat, type = "$", lons, lat
     }
     if(freq.type=="rel") {
       colnames(dat) <- c("toponym", "ratio", "frequency")
-      dat <- dat[order(dat$ratio, decreasing=TRUE),]
+      dat <- dat[order(as.numeric(dat$ratio), decreasing=TRUE),]
     }
     dat_name <- paste0("data_top_", count)
     assign(dat_name, dat, envir = .GlobalEnv)
