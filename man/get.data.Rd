@@ -4,12 +4,14 @@
 \alias{get.data}
 \title{Get toponym data from GeoNames}
 \usage{
-get.data(countries, save = TRUE)
+get.data(countries, save = TRUE, overwrite = FALSE)
 }
 \arguments{
-\item{countries}{character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries).}
+\item{countries}{character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries). Type "all" for all currently stored data sets in the package directory.}
 
 \item{save}{logical. If \code{TRUE} then the data sets will be extracted to the package folder. It will be otherwise saved in the temporary folder.}
+
+\item{overwrite}{logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.}
 }
 \value{
 The data as .txt in the temporary or package folder.
