@@ -8,7 +8,7 @@
 get.coordinates <- function(gn, strings, df, csv) {
 
   if(IS(strings) == "non.latinate"){ ## if strings contain non.latinates
-  NApc <- paste0(round(sum(is.na(gn$alternatenames))/nrow(gn)*100), "% values") ## % of NA in alternatenames col
+  NApc <- paste0(round(sum(is.na(gn$alternatenames))/nrow(gn)*100), "%") ## % of NA in alternatenames col
   cat(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
   alt_l <- alt.names(gn, strings)
