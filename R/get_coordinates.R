@@ -7,15 +7,25 @@
 #' @return A list with the coordinates (longitude and latitude) and country codes.
 get.coordinates <- function(gn, strings, df, csv) {
 
+  if(IS(strings) == "non.latinate"){ ## if strings contain non.latinates
+  NApc <- paste0(round(sum(is.na(gn$alternatenames))/nrow(gn)*100), "% values") ## % of NA in alternatenames col
+  cat(paste(NApc, "of all entries in the alternate names column are empty."))
+    ### if no names in alternatenames
+  alt_l <- alt.names(gn, strings)
+  w_strings <- alt_l[[1]]
+  m_strings <- alt_l[[2]]
+  }else{
   w_strings <- unique(grep(paste(strings,collapse="|"), gn$name, perl = TRUE)) # gets all indexes of matches
+  m_strings <- regmatches(gn$name,regexpr(paste(strings,collapse="|"), gn$name, perl = TRUE)) # gets matches
+  }
   lat_strings <- gn$rlatitude[w_strings] # gets respective lat coordinates
   lon_strings <- gn$rlongitude[w_strings] # gets respective lon coordinates
   country <- gn$rcountry_code[w_strings] # gets respective cc
-  m_strings <- regmatches(gn$name,regexpr(paste(strings,collapse="|"), gn$name, perl = TRUE)) # gets matches
 
   # saves data as df and/or csv
   if(df == TRUE || csv == TRUE) {
-    dat_name <- paste0("data_", paste(regmatches(strings, regexpr("[a-zA-Z]+", strings, perl = TRUE)), collapse = "_"), collapse="_")
+    strings_raw <-gsub("[[:punct:]]", "", strings)
+    dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse="_")
     if(df == TRUE) {
       dat <- assign(dat_name, gn[w_strings,], envir = .GlobalEnv)
       cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
