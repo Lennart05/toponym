@@ -68,11 +68,20 @@ simple.map <- function(x, y, cc, matches, color, strings, regions = 0, plot, rat
 
   map <- sf::st_as_sf(map) # converts map into simple features map
 
-
-
   lengths <- as.data.frame(table(md[,4])) # frequencies of each string in the same order
+  if(length(strings) == nrow(lengths)){ # if multiple toponyms (i.e. endings etc.) result from one string
   lengths <- lengths[match(gsub("[[:punct:]]", "", strings), lengths$Var1),][,2]
+  }else if(length(strings) == 1){
+  lengths <-  sum(lengths$Freq)
+  }else{ # if multiple strings are used, and one or more results in multiple toponyms
+  lengths = NULL
+  }
 
+  if(is.null(color)){
+  color <- rainbow(length(unique(md[,4])))
+  }else if(length(color) != length(unique(md[,4]))){
+    cat("The number of colors does not match the number of toponyms for mapping. Try again with the default color palette.")
+  }
 
   # creates plot
   p <- ggplot() +
@@ -87,12 +96,11 @@ simple.map <- function(x, y, cc, matches, color, strings, regions = 0, plot, rat
 
 
   # saves or prints plot
-  if (plot == FALSE) {
+  if (plot == FALSE){
     plot_name <- paste0("plot_", paste(regmatches(strings, regexpr("[a-zA-Z]+", strings)), collapse = "_"),".png", collapse="_")
     ggsave(plot_name, path = file.path(getwd(), "plots"))
     cat(paste("\nPlot",plot_name ,"saved in plots folder of the working directory.\n"))
-  }
-  else {
+  }else{
     print(p)
   }
 }
