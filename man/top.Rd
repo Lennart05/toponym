@@ -7,7 +7,7 @@
 top(
   strings,
   countries,
-  color = rainbow(length(strings)),
+  color = NULL,
   regions = 0,
   df = TRUE,
   csv = FALSE,
