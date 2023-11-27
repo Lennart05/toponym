@@ -7,7 +7,11 @@
 #' @return A list with the coordinates (longitude and latitude) and country codes.
 get.coordinates <- function(gn, strings, df, csv) {
 
-  if(IS(strings) == "non.latinate"){ ## if strings contain non.latinates
+  results <- list()
+  for(i in 1:length(strings)){
+    results[[i]] <- IS(strings[[i]])
+  }
+  if(sum(results == "non.latinate") > 0){ ## if strings contain non.latinates
   NApc <- paste0(round(sum(is.na(gn$alternatenames))/nrow(gn)*100), "%") ## % of NA in alternatenames col
   cat(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
@@ -24,7 +28,7 @@ get.coordinates <- function(gn, strings, df, csv) {
 
   # saves data as df and/or csv
   if(df == TRUE || csv == TRUE) {
-    strings_raw <-gsub("[[:punct:]]", "", strings)
+    strings_raw <- gsub("[[:punct:]]", "", strings)
     dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse="_")
     if(df == TRUE) {
       dat <- assign(dat_name, gn[w_strings,], envir = .GlobalEnv)
