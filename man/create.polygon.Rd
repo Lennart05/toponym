@@ -4,7 +4,7 @@
 \alias{create.polygon}
 \title{Creates a polygon}
 \usage{
-create.polygon(countries, regions = 0, region_name = NULL)
+create.polygon(countries, regions = 0, region_name = NULL, retrieve = FALSE)
 }
 \arguments{
 \item{countries}{character string. Specify a country for the map}
@@ -12,6 +12,8 @@ create.polygon(countries, regions = 0, region_name = NULL)
 \item{regions}{numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.}
 
 \item{region_name}{character string. Specify region names of a country requested by \code{countries}. Only the regions will be displayed for mapping.}
+
+\item{retrieve}{logical. If set to \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.}
 }
 \value{
 A list with the coordinates of the polygon.
