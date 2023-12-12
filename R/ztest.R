@@ -5,6 +5,7 @@
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @export
 #' @return Result of \code{prop.test}
 z.test <- function(strings, countries, feat.class = "P", lons, lats) {
 
