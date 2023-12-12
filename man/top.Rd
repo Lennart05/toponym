@@ -26,7 +26,7 @@ top(
 
 \item{color}{character string indicating, which color is assigned to each string.}
 
-\item{regions}{logical. If \code{TRUE} domestic state boundaries are displayed}
+\item{regions}{numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
 

@@ -3,7 +3,7 @@
 #' @param strings character strings in form of regular expression that filter the data frames.
 #' @param countries character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
 #' @param color character string indicating, which color is assigned to each string.
-#' @param regions logical. If \code{TRUE} domestic state boundaries are displayed
+#' @param regions numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.
 #' @param df logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.
 #' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
 #' @param plot logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
