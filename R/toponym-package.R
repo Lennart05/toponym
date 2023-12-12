@@ -23,6 +23,7 @@
 #' @importFrom utils read.table
 #' @importFrom geodata world
 #' @importFrom geodata gadm
+#' @importFrom terra crds
 #' @importFrom grDevices chull
 #' @importFrom grDevices rainbow
 #' @importFrom dplyr %>%
