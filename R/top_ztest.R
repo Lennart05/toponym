@@ -7,19 +7,19 @@
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
 #' @export
 #' @return Result of \code{prop.test}
-z.test <- function(strings, countries, feat.class = "P", lons, lats) {
+topZtest <- function(strings, countries, feat.class = "P", lons, lats) {
 
-  for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
+  for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
   countries <- countries[!is.na(countries)] # removes incorrect country names
 
 
-  get.data(countries) # gets data
-  gn <- read.files(countries, feat.class)  # stands for GeoNames
+  getData(countries) # gets data
+  gn <- readFiles(countries, feat.class)  # stands for GeoNames
 
 
   con.hull <- poly(lons = lons, lats = lats)
 
-  poly_log <- as.logical(point.in.polygon(gn$rlongitude, gn$rlatitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
+  poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
 
   poly_log <- as.vector(table(poly_log))
 
@@ -28,8 +28,8 @@ z.test <- function(strings, countries, feat.class = "P", lons, lats) {
 
 
   strings_ID  <- unique(grep(strings, gn$name))
-  lat_strings <- gn$rlatitude[strings_ID]
-  lon_strings <- gn$rlongitude[strings_ID]
+  lat_strings <- gn$latitude[strings_ID]
+  lon_strings <- gn$longitude[strings_ID]
   # logical vectors storing if each place is within the given area
   loc_log <- as.logical(point.in.polygon(lon_strings, lat_strings, con.hull$X, con.hull$Y))
 

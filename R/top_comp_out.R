@@ -1,6 +1,6 @@
-#' @title Saves all maps and data frames based on the output of \code{top.candidates()}
+#' @title Saves all maps and data frames based on the output of \code{topComp()}
 #' @description
-#' The function applies the list of toponyms returned by \code{top.candidates()} to \code{top()}. A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
+#' The function applies the list of toponyms returned by \code{topComp()} to \code{top()}. A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
 #'
 #'
 #' @param countries character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
@@ -25,15 +25,15 @@
 #'
 #' @examples
 #' \dontrun{
-#' candidates.maps(countries = "BE", count = 100, len = 3, rat = .5,
+#' topCompOut(countries = "BE", count = 100, len = 3, rat = .5,
 #' lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats)
 #'
 #' ## generates and saves the data frames & maps of the top hundred three-character-long endings
 #' ## in Belgium if more than 50% of the places lie in the polygon for Flanders.
 #' }
-candidates.maps <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type)
+topCompOut <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type)
   {
-  dat <- top.candidates(countries, count, len, rat, type, lons, lats, feat.class, freq.type) # gets df with candidates for top() function
+  dat <- topComp(countries, count, len, rat, type, lons, lats, feat.class, freq.type) # gets df with candidates for top() function
   for(i in 1:length(dat$toponym)) {
     top(dat$toponym[i],
         countries,

@@ -11,26 +11,26 @@
 #'
 #' @examples
 #' \dontrun{
-#' country.data(query = "ISO3")
+#' country(query = "ISO3")
 #' ## returns list of all ISO3 codes
 #'
-#' country.data(query = "Thailand")
+#' country(query = "Thailand")
 #' ## returns a data frame with the ISO2, ISO3 code and the full name
 #'
-#' country.data(query = "Thailand", regions = TRUE)
+#' country(query = "Thailand", regions = TRUE)
 #' ## returns all region names
 #'
 #' }
-country.data <- function(query = NULL, regions = FALSE){
+country <- function(query = NULL, regions = FALSE){
 
 
     countryInfo <- toponym::countryInfo
 
-    if(length(query) >1){
-      print("Please enter only one request at a time.")
-    }
+    if(length(query) > 1){
+    stop("Multiple requests in a query are not allowed.")
+	  }
 
-    else if(regions == FALSE){
+    if(regions == FALSE){
 
     if(query == "country table"){
     return(countryInfo)
@@ -47,7 +47,9 @@ country.data <- function(query = NULL, regions = FALSE){
     } else if(nchar(query) >= 4){ #country name as input
     output <- countryInfo[match(query, countryInfo[,3]),] #then outputs respective row
     }
-    if(is.na(output[1])){print("The query contains incorrect country names")} #check for NAs
+    if(is.na(output[1])){
+	  stop("The query contains no valid country reference")
+	  } #check for NAs
 
     }else{ # if regions is TRUE
 

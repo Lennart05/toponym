@@ -1,7 +1,7 @@
 #' @title Retrieves the most frequent toponyms in a given polygon relative to the countries
 #' @description
-#' The function sorts the toponyms in the given countries by frequency. It then tests which  ones lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates can be defined using create.polygon.
-#' @param countries character string. Country code abbreviations or names (use \code{country.data()} for a list of available countries) specifying the countries of which toponyms are checked.
+#' The function sorts the toponyms in the given countries by frequency. It then tests which  ones lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates can be defined using createPolygon().
+#' @param countries character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the countries of which toponyms are checked.
 #' @param count numeric. The number of the most frequent toponyms which are included. If unspecified all toponyms satisfying the search criteria are included.
 #' @param len numeric. The character length of the toponyms
 #' @param rat numeric. The ratio of how many occurrences of one toponym need to be in the polygon. If freq.type is "abs" the ratio is between 0 and 1, if freq.type is "rel" it is between 0 and indefinite.
@@ -16,7 +16,7 @@
 #'
 #' @examples
 #' \dontrun{
-#' top.candidates("GB", count = 100, len = 4, rat = .9,
+#' topComp("GB", count = 100, len = 4, rat = .9,
 #'  lons = toponym::danelaw_polygon$lons,
 #'  lats = toponym::danelaw_polygon$lats)
 #' ## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
@@ -24,7 +24,7 @@
 #' ## which frames the Danelaw
 #'
 #'
-#' top.candidates("GB", len = 3, rat = 1,
+#' topComp("GB", len = 3, rat = 1,
 #'  lons = toponym::danelaw_polygon$lons,
 #'  lats = toponym::danelaw_polygon$lats,
 #'  freq.type="rel")
@@ -32,7 +32,7 @@
 #' ## if they have greater relative frequencies within Danelaw than outside of Danelaw
 #'
 #'
-#' top.candidates(c("BE", "NL"), rat = .8,
+#' topComp(c("BE", "NL"), rat = .8,
 #'  lons = toponym::flanders_polygon$lons,
 #'  lats = toponym::flanders_polygon$lats)
 #'
@@ -43,14 +43,14 @@
 #' .
 #'}
 #'
-top.candidates <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat.class = "P", freq.type = "abs")
+topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat.class = "P", freq.type = "abs")
   {
-  for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
+  for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
   countries <- countries[!is.na(countries)] # removes incorrect country names
 
-  get.data(countries) # gets data
-  gn <- read.files(countries, feat.class)
-  toponyms_o <- top.freq(countries, len, feat.class, type)
+  getData(countries) # gets data
+  gn <- readFiles(countries, feat.class)
+  toponyms_o <- topFreq(countries, len, feat.class, type)
   if(count==0) {count <- length(toponyms_o)}
 
   toponyms_ID_o <- list()
@@ -67,7 +67,7 @@ top.candidates <- function(countries, count = 0, len, rat, type = "$", lons, lat
     n.tops <- nrow(gn)  # number of all toponyms anywhere
     in.poly <- rep(NA, n.tops)
     for (i in 1:n.tops) {
-      in.poly[i] <- as.logical(point.in.polygon(gn$rlongitude[i], gn$rlatitude[i], con.hull$X, con.hull$Y))
+      in.poly[i] <- as.logical(point.in.polygon(gn$longitude[i], gn$latitude[i], con.hull$X, con.hull$Y))
     }
     n.tops.in.poly <- sum(in.poly)  # number of all toponyms in polygon
     n.tops.out.poly <- n.tops - n.tops.in.poly  # number of all toponyms outside polygon
@@ -77,8 +77,8 @@ top.candidates <- function(countries, count = 0, len, rat, type = "$", lons, lat
     # stores indices of all ordered toponyms
     toponyms_ID_o[[i]] <- unique(grep(toponyms_o[i], gn$name))
 
-    lat_strings[[i]] <- gn$rlatitude[toponyms_ID_o[[i]]]
-    lon_strings[[i]] <- gn$rlongitude[toponyms_ID_o[[i]]]
+    lat_strings[[i]] <- gn$latitude[toponyms_ID_o[[i]]]
+    lon_strings[[i]] <- gn$longitude[toponyms_ID_o[[i]]]
 
     # logical vectors storing if each place is within the given area
     loc_log[[i]] <- as.logical(point.in.polygon(lon_strings[[i]], lat_strings[[i]], con.hull$X, con.hull$Y))
@@ -127,6 +127,6 @@ top.candidates <- function(countries, count = 0, len, rat, type = "$", lons, lat
     return(dat)
   }
   else {
-   print("No toponyms satisfy the criteria")
+   message("No toponyms satisfy the criteria")
   }
 }

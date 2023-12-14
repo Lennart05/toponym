@@ -1,26 +1,26 @@
 #' @title Get toponym data from GeoNames
-#' @description The function downloads and saves toponym data from the [GeoNames download server](https://download.geonames.org/export/dump/), which is later used by \code{read.files()}.
+#' @description The function downloads and saves toponym data from the [GeoNames download server](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
 #' @param countries character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries). Type "all" for all currently stored data sets in the package directory.
 #' @param save logical. If \code{TRUE} then the data sets will be extracted to the package folder. It will be otherwise saved in the temporary folder.
 #' @param overwrite logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.
 #' @examples
 #' \dontrun{
-#' get.data(countries = c("DK", "DE"), save = FALSE)
+#' getData(countries = c("DK", "DE"), save = FALSE)
 #' ## downloads and extracts data for DK and DE to the temporary folder
 #'
-#' get.data(countries = c("DK", "DE", "PL"), save = TRUE)
+#' getData(countries = c("DK", "DE", "PL"), save = TRUE)
 #' ## downloads and extracts data for PL but only extracts data for DK and DE
 #' ## from the zip files downloaded before to the package folder if used in the same session
 #' }
 #' @return The data as .txt in the temporary or package folder.
 #' @export
-get.data <- function(countries, save = TRUE, overwrite = FALSE) {
+getData <- function(countries, save = TRUE, overwrite = FALSE) {
 
   packdir <- system.file("extdata", package = "toponym")
   if(countries == "all"){
     countries <- substring(list.files(packdir), 1, 2)
   }else{
-    for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
+    for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
     countries <- countries[!is.na(countries)] # removes incorrect country names
   }
 

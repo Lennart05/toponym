@@ -8,12 +8,12 @@
 #' @details
 #' This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the geodata package.
 #'
-#' It is meant as simple and quick tool to create polygons which can later be used by the functions such as top.candidates and candidates.maps.
+#' It is meant as simple and quick tool to create polygons which can later be used by the functions such as topComp and topCompOut().
 #'
 #' For further details on the point-and-click mechanic refer to the help page for clickpoly.
 #'
 #' @return A list with the coordinates of the polygon.
-create.polygon <- function(countries, regions = 0, region_name = NULL, retrieve = FALSE) {
+createPolygon <- function(countries, regions = 0, region_name = NULL, retrieve = FALSE) {
 
 map_path <- paste0(system.file(package = "geodata"),"/extdata")
 
@@ -40,7 +40,7 @@ if(retrieve == TRUE){ # if polygon data is to be extracted
 }
   polygon <- as.data.frame(crds(map)) #retrieves coordinates of subset or country from map data
 }else{ # lets users draw on subset or country
-print("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
+message("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
 
 sp::plot(map) # plots the map
 polygon <- clickpoly(add=TRUE) # lets users draw a polygon on the plotted map

@@ -5,7 +5,7 @@
 #'
 #' @return logical vector
 #'
-alt.names <- function(gn, strings) {
+altNames <- function(gn, strings) {
   alt_names <- strsplit(gn$alternatenames, ",")  #separate names in altnam col
   alt_names <- do.call(rbind, unname(lapply(alt_names, `length<-`, max(lengths(alt_names))))) #as matrix
   alt_l <- list()

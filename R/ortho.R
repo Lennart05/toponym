@@ -11,16 +11,16 @@
 #' symbols(countries = "ID")
 #' # outputs a table with frequencie all symbols in the "alternatenames" column for the Indonesia data set
 #' }
-symbols <- function(countries, column="alternatenames") {
+ortho <- function(countries, column="alternatenames") {
   # convert input into ISO2 codes and remove incorrect country names
-  for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]}
+  for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]}
   countries <- countries[!is.na(countries)]
 
   # download data if not already on the computer
-  get.data(countries)
+  getData(countries)
 
   # read relevant country files, gn stands for GeoNames
-  gn <- read.files(countries, feat.class=c("P","S","H","T","A","L","R","V","U"))
+  gn <- readFiles(countries, feat.class=c("P","S","H","T","A","L","R","V","U"))
 
   # identify and extract target column
   w_col <- which(names(gn)==column)

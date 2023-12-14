@@ -1,7 +1,7 @@
 #' @title Retrieves the most frequent toponyms in an area
 #' @description
 #' The function sorts the toponyms found by frequency. Either a polygon within a country or countries can be provided as input.
-#' @param countries character string. Country code abbreviations or names (use \code{country.data()} for a list of available countries) specifying the toponyms of which countries are checked.
+#' @param countries character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the toponyms of which countries are checked.
 #' @param len numeric. The character length of the endings.
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
 #' @param type character string. Either by default "$" (ending) or "^" (beginning)
@@ -14,28 +14,28 @@
 #'
 #' @examples
 #' \dontrun{
-#' top.freq(countries = "Namibia", len = 3, count = 10)
+#' topFreq(countries = "Namibia", len = 3, count = 10)
 #' ## returns the top ten most frequent toponym endings
 #' ## of three-character length in Namibia
 #'
-#' top.freq(countries = "GB", len = 3, count = 10,
+#' topFreq(countries = "GB", len = 3, count = 10,
 #' lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
 #' ## returns the top ten most frequent toponym endings
 #' ## in the polygon which is inside the United Kingdom.
 #' }
-top.freq <- function(countries, len, feat.class = "P", type = "$", count, lons, lats)
+topFreq <- function(countries, len, feat.class = "P", type = "$", count, lons, lats)
 {
-  for(i in 1:length(countries)){countries[i] <- country.data(query = countries[i])[,1]} #converts input into ISO2 codes
+  for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
   countries <- countries[!is.na(countries)]
 
-  get.data(countries)
-  gn <- read.files(countries, feat.class)
+  getData(countries)
+  gn <- readFiles(countries, feat.class)
 
   if(!missing(lons) && !missing(lats)){
 
   con.hull <- poly(lons = lons, lats = lats)
 
-  poly_log <- as.logical(point.in.polygon(gn$rlongitude, gn$rlatitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
+  poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
 
   gn <- gn[poly_log,] #only those in the polygon left
   }
