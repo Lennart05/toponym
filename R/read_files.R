@@ -15,21 +15,28 @@ readFiles <- function(countries, feat.class) {
   }
 }
 
-  if(!exists("package_env")){
-    package_env <- new.env()
-    }
+
 
   L <- list()
   for (i in 1:length(countries)) {
-    if (tolower(countries[i]) %in% ls(envir = package_env) == FALSE ) {
+    if (tolower(countries[i]) %in% ls(top_env) == FALSE ) {
       geonames_content <- utils::read.table(file = filename[[i]],   # reads country data of parameter "countries"
                                      head=FALSE, sep="\t", quote="", na.strings="",
                                      comment.char="", encoding="utf8")
       Encoding(geonames_content[,2]) <- "UTF-8" # set encoding to UTF-8 in case the local encoding of the OS reads it wrong
       Encoding(geonames_content[,4]) <- "UTF-8" # set encoding to UTF-8 in case the local encoding of the OS reads it wrong
-      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = package_env) # saves in GlobalEnv for later use
+
+      # add column names, which were received from the geonames readme file
+      colnames(geonames_content) <- c("geonameid", "name", "asciiname", "alternatenames",
+                                      "latitude", "longitude", "feature class", "feature code",
+                                      "country code", "cc2", "admin1 code", "admin2 code", "admin3 code",
+                                      "admin4 code", "population", "elevation", "dem", "timezone",
+                                      "modification date")
+
+
+      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = top_env) # saves in pkg env for later use
     } else {
-      L[[i]] <- get(tolower(countries[i]), envir = package_env)
+      L[[i]] <- top_env[[tolower(countries[i])]]
     }
   }
   if ( length(L) > 1 ) {
@@ -40,15 +47,9 @@ readFiles <- function(countries, feat.class) {
   } else {
     gn <- L[[1]]
   }
-  # add column names, which were received from the geonames readme file
-  colnames(gn) <- c("geonameid", "name", "asciiname", "alternatenames",
-                    "latitude", "longitude", "feature class", "feature code",
-                    "country code", "cc2", "admin1 code", "admin2 code", "admin3 code",
-                    "admin4 code", "population", "elevation", "dem", "timezone",
-                    "modification date")
 
   # select only specified features
-  gn <- gn[which(gn$"feature class" %in% feat.class),]
+  gn <- gn[which(gn$'feature class' %in% feat.class),]
 
 
 }
