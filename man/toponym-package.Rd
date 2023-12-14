@@ -16,7 +16,7 @@ The main functions are the following:
 \item\code{\link{topComp}} generates a list of prefixes or suffixes frequent in a given region
 \item\code{\link{topCompOut}} generates maps and lists on your computer out of these frequent prefixes and suffixes
 \item\code{\link{topFreq}} generates a list of the most frequent toponyms
-\item\code{\link{z.test}} lets users apply a z-test
+\item\code{\link{topZtest}} lets users apply a z-test
 }
 For more detailed descriptions read the respective documentation.
 }
