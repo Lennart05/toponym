@@ -31,6 +31,5 @@ country(query = "Thailand")
 
 country(query = "Thailand", regions = TRUE)
 ## returns all region names
-
 }
 }

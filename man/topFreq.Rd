@@ -33,8 +33,10 @@ topFreq(countries = "Namibia", len = 3, count = 10)
 ## returns the top ten most frequent toponym endings
 ## of three-character length in Namibia
 
-topFreq(countries = "GB", len = 3, count = 10,
-lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats)
+topFreq(
+  countries = "GB", len = 3, count = 10,
+  lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats
+)
 ## returns the top ten most frequent toponym endings
 ## in the polygon which is inside the United Kingdom.
 }

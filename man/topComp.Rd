@@ -43,25 +43,31 @@ The function sorts the toponyms in the given countries by frequency. It then tes
 }
 \examples{
 \dontrun{
-topComp("GB", count = 100, len = 4, rat = .9,
- lons = toponym::danelaw_polygon$lons,
- lats = toponym::danelaw_polygon$lats)
+topComp("GB",
+  count = 100, len = 4, rat = .9,
+  lons = toponym::danelaw_polygon$lons,
+  lats = toponym::danelaw_polygon$lats
+)
 ## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
 ## if more than 90\% of the places lie in the newly defined polygon
 ## which frames the Danelaw
 
 
-topComp("GB", len = 3, rat = 1,
- lons = toponym::danelaw_polygon$lons,
- lats = toponym::danelaw_polygon$lats,
- freq.type="rel")
+topComp("GB",
+  len = 3, rat = 1,
+  lons = toponym::danelaw_polygon$lons,
+  lats = toponym::danelaw_polygon$lats,
+  freq.type = "rel"
+)
 ## prints and saves a data frame of all three-character-long endings in Great Britain
 ## if they have greater relative frequencies within Danelaw than outside of Danelaw
 
 
-topComp(c("BE", "NL"), rat = .8,
- lons = toponym::flanders_polygon$lons,
- lats = toponym::flanders_polygon$lats)
+topComp(c("BE", "NL"),
+  rat = .8,
+  lons = toponym::flanders_polygon$lons,
+  lats = toponym::flanders_polygon$lats
+)
 
 ## prints and saves a data frame of the top 10 three-character-long endings in Belgium
 ## and Netherlands viewed as a unit if more than 80\% of the places lie

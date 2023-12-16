@@ -16,61 +16,70 @@
 #'
 #' @examples
 #' \dontrun{
-#' topComp("GB", count = 100, len = 4, rat = .9,
-#'  lons = toponym::danelaw_polygon$lons,
-#'  lats = toponym::danelaw_polygon$lats)
+#' topComp("GB",
+#'   count = 100, len = 4, rat = .9,
+#'   lons = toponym::danelaw_polygon$lons,
+#'   lats = toponym::danelaw_polygon$lats
+#' )
 #' ## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
 #' ## if more than 90% of the places lie in the newly defined polygon
 #' ## which frames the Danelaw
 #'
 #'
-#' topComp("GB", len = 3, rat = 1,
-#'  lons = toponym::danelaw_polygon$lons,
-#'  lats = toponym::danelaw_polygon$lats,
-#'  freq.type="rel")
+#' topComp("GB",
+#'   len = 3, rat = 1,
+#'   lons = toponym::danelaw_polygon$lons,
+#'   lats = toponym::danelaw_polygon$lats,
+#'   freq.type = "rel"
+#' )
 #' ## prints and saves a data frame of all three-character-long endings in Great Britain
 #' ## if they have greater relative frequencies within Danelaw than outside of Danelaw
 #'
 #'
-#' topComp(c("BE", "NL"), rat = .8,
-#'  lons = toponym::flanders_polygon$lons,
-#'  lats = toponym::flanders_polygon$lats)
+#' topComp(c("BE", "NL"),
+#'   rat = .8,
+#'   lons = toponym::flanders_polygon$lons,
+#'   lats = toponym::flanders_polygon$lats
+#' )
 #'
 #' ## prints and saves a data frame of the top 10 three-character-long endings in Belgium
 #' ## and Netherlands viewed as a unit if more than 80% of the places lie
 #' ## in the newly defined polygon which frames Flanders.
 #'
 #' .
-#'}
+#' }
 #'
-topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat.class = "P", freq.type = "abs")
-  {
-  for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
+topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat.class = "P", freq.type = "abs") {
+  for (i in 1:length(countries)) {
+    countries[i] <- country(query = countries[i])[, 1]
+  } # converts input into ISO2 codes
   countries <- countries[!is.na(countries)] # removes incorrect country names
 
   getData(countries) # gets data
   gn <- readFiles(countries, feat.class)
   toponyms_o <- topFreq(countries, len, feat.class, type)
-  if(count==0) {count <- length(toponyms_o)}
+  if (count == 0) {
+    count <- length(toponyms_o)
+  }
 
   toponyms_ID_o <- list()
   lat_strings <- list()
   lon_strings <- list()
   loc_log <- list()
-  ratio <- list()  # ratio between absolute or relative frequencies, depending on freq.type
+  ratio <- list() # ratio between absolute or relative frequencies, depending on freq.type
   dat <- list()
 
   con.hull <- poly(lons = lons, lats = lats)
 
   # for relative frequencies the number of toponyms within the area is needed
-  if(freq.type=="rel") {
-    n.tops <- nrow(gn)  # number of all toponyms anywhere
+  if (freq.type == "rel") {
+    n.tops <- nrow(gn) # number of all toponyms anywhere
     in.poly <- rep(NA, n.tops)
     for (i in 1:n.tops) {
       in.poly[i] <- as.logical(point.in.polygon(gn$longitude[i], gn$latitude[i], con.hull$X, con.hull$Y))
     }
-    n.tops.in.poly <- sum(in.poly)  # number of all toponyms in polygon
-    n.tops.out.poly <- n.tops - n.tops.in.poly  # number of all toponyms outside polygon
+    n.tops.in.poly <- sum(in.poly) # number of all toponyms in polygon
+    n.tops.out.poly <- n.tops - n.tops.in.poly # number of all toponyms outside polygon
   }
 
   for (i in 1:count) {
@@ -82,51 +91,56 @@ topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat
 
     # logical vectors storing if each place is within the given area
     loc_log[[i]] <- as.logical(point.in.polygon(lon_strings[[i]], lat_strings[[i]], con.hull$X, con.hull$Y))
-    n.top.in.poly <- sum(loc_log[[i]])  # number of target toponym in polygon
-    n.top <- length(loc_log[[i]])  # number of target toponym anywhere
+    n.top.in.poly <- sum(loc_log[[i]]) # number of target toponym in polygon
+    n.top <- length(loc_log[[i]]) # number of target toponym anywhere
     n.top.out.poly <- n.top - n.top.in.poly
 
-    if(freq.type=="abs"){
-      ratio[[i]] <- n.top.in.poly/n.top
+    if (freq.type == "abs") {
+      ratio[[i]] <- n.top.in.poly / n.top
     }
 
-    if(freq.type=="rel"){
-      ratio[[i]] <- (n.top.in.poly/n.tops.in.poly) / (n.top.out.poly/n.tops.out.poly)
+    if (freq.type == "rel") {
+      ratio[[i]] <- (n.top.in.poly / n.tops.in.poly) / (n.top.out.poly / n.tops.out.poly)
     }
 
     # select only toponyms which surpass parameter rat
-    if(ratio[[i]]>rat) {
-      if(freq.type=="abs") {
-        dat[[i]] <- cbind(toponyms_o[i], round(ratio[[i]], 4)*100,
-                        paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))
+    if (ratio[[i]] > rat) {
+      if (freq.type == "abs") {
+        dat[[i]] <- cbind(
+          toponyms_o[i], round(ratio[[i]], 4) * 100,
+          paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
+        )
       }
-      if(freq.type=="rel") {
-        dat[[i]] <- cbind(toponyms_o[i], round(ratio[[i]], 4),
-                          paste0(sum(loc_log[[i]]),"/", length(loc_log[[i]])))
+      if (freq.type == "rel") {
+        dat[[i]] <- cbind(
+          toponyms_o[i], round(ratio[[i]], 4),
+          paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
+        )
       }
     }
   }
 
   # transforms list into a df for printout
-  if(length(dat)>0) {
-    dat <- as.data.frame(cbind(unlist(dat)[c(TRUE, FALSE, FALSE)],
-                               unlist(dat)[c(FALSE, TRUE, FALSE)],
-                               unlist(dat)[c(FALSE, FALSE, TRUE)]))
-    if(freq.type=="abs") {
+  if (length(dat) > 0) {
+    dat <- as.data.frame(cbind(
+      unlist(dat)[c(TRUE, FALSE, FALSE)],
+      unlist(dat)[c(FALSE, TRUE, FALSE)],
+      unlist(dat)[c(FALSE, FALSE, TRUE)]
+    ))
+    if (freq.type == "abs") {
       colnames(dat) <- c("toponym", "ratio_perc", "frequency")
-      dat <- dat[order(as.numeric(dat$ratio_perc), decreasing=TRUE),]
+      dat <- dat[order(as.numeric(dat$ratio_perc), decreasing = TRUE), ]
     }
-    if(freq.type=="rel") {
+    if (freq.type == "rel") {
       colnames(dat) <- c("toponym", "ratio", "frequency")
-      dat <- dat[order(as.numeric(dat$ratio), decreasing=TRUE),]
+      dat <- dat[order(as.numeric(dat$ratio), decreasing = TRUE), ]
     }
     dat_name <- paste0("data_top_", count)
     assign(dat_name, dat, envir = .GlobalEnv)
-    message(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
+    message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
 
     return(dat)
-  }
-  else {
-   message("No toponyms satisfy the criteria")
+  } else {
+    message("No toponyms satisfy the criteria")
   }
 }

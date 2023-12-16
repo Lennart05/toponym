@@ -19,44 +19,38 @@
 #'
 #' country(query = "Thailand", regions = TRUE)
 #' ## returns all region names
-#'
 #' }
-country <- function(query = NULL, regions = FALSE){
+country <- function(query = NULL, regions = FALSE) {
+  countryInfo <- toponym::countryInfo
 
-
-    countryInfo <- toponym::countryInfo
-
-    if(length(query) > 1){
+  if (length(query) > 1) {
     stop("Multiple requests in a query are not allowed.")
-	  }
-
-    if(regions == FALSE){
-
-    if(query == "country table"){
-    return(countryInfo)
-    } else if(query == "ISO2"){ #outputs all ISO2 codes
-    return(countryInfo[,1])
-    } else if(query == "ISO3"){ #outputs all ISO3 codes
-    return(countryInfo[,2])
-    } else if(query == "names"){ #outputs all country names
-    return(countryInfo[,3])
-    } else if(nchar(query) == 2){ #ISO2 code as input
-    output <- countryInfo[match(query, countryInfo[,1]),] #then outputs respective row
-    } else if(nchar(query) == 3){ #ISO3 code as input
-    output <- countryInfo[match(query, countryInfo[,2]),] #then outputs respective row
-    } else if(nchar(query) >= 4){ #country name as input
-    output <- countryInfo[match(query, countryInfo[,3]),] #then outputs respective row
-    }
-    if(is.na(output[1])){
-	  stop("The query contains no valid country reference")
-	  } #check for NAs
-
-    }else{ # if regions is TRUE
-
-      map_path <- paste0(system.file(package = "geodata"),"/extdata")
-      output <- gadm(country = query, path = map_path)$NAME_1
-      Encoding(output) <- "UTF-8" #corrects encoding
-    }
-    return(output)
-
   }
+
+  if (regions == FALSE) {
+    if (query == "country table") {
+      return(countryInfo)
+    } else if (query == "ISO2") { # outputs all ISO2 codes
+      return(countryInfo[, 1])
+    } else if (query == "ISO3") { # outputs all ISO3 codes
+      return(countryInfo[, 2])
+    } else if (query == "names") { # outputs all country names
+      return(countryInfo[, 3])
+    } else if (nchar(query) == 2) { # ISO2 code as input
+      output <- countryInfo[match(query, countryInfo[, 1]), ] # then outputs respective row
+    } else if (nchar(query) == 3) { # ISO3 code as input
+      output <- countryInfo[match(query, countryInfo[, 2]), ] # then outputs respective row
+    } else if (nchar(query) >= 4) { # country name as input
+      output <- countryInfo[match(query, countryInfo[, 3]), ] # then outputs respective row
+    }
+    if (is.na(output[1])) {
+      stop("The query contains no valid country reference")
+    } # check for NAs
+  } else { # if regions is TRUE
+
+    map_path <- paste0(system.file(package = "geodata"), "/extdata")
+    output <- gadm(country = query, path = map_path)$NAME_1
+    Encoding(output) <- "UTF-8" # corrects encoding
+  }
+  return(output)
+}

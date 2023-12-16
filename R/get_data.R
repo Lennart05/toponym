@@ -16,12 +16,13 @@
 #' @return The data as .txt in the temporary or package folder.
 #' @export
 getData <- function(countries, save = TRUE, overwrite = FALSE) {
-
   packdir <- system.file("extdata", package = "toponym")
-  if(countries == "all"){
+  if (countries == "all") {
     countries <- substring(list.files(packdir), 1, 2)
-  }else{
-    for(i in 1:length(countries)){countries[i] <- country(query = countries[i])[,1]} #converts input into ISO2 codes
+  } else {
+    for (i in 1:length(countries)) {
+      countries[i] <- country(query = countries[i])[, 1]
+    } # converts input into ISO2 codes
     countries <- countries[!is.na(countries)] # removes incorrect country names
   }
 
@@ -35,23 +36,28 @@ getData <- function(countries, save = TRUE, overwrite = FALSE) {
 
 
   for (i in 1:length(countries)) {
-    if(save == TRUE){
-    if(overwrite == FALSE){
-        if(!file.exists(paste0(packdir, "/", filename[i]))){ # checks if txt exists
-          if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
+    if (save == TRUE) {
+      if (overwrite == FALSE) {
+        if (!file.exists(paste0(packdir, "/", filename[i]))) { # checks if txt exists
+          if (!file.exists(tmpfile[i])) {
+            utils::download.file(url[i], tmpfile[i], mode = "wb")
+          } # downloads zip if missing
           utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = packdir, overwrite = FALSE) # unzips txt to package directory
           message(paste(filename[i], "saved in package directory"))
         }
-        }else{ # if overwrite is set to TRUE
-        if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
+      } else { # if overwrite is set to TRUE
+        if (!file.exists(tmpfile[i])) {
+          utils::download.file(url[i], tmpfile[i], mode = "wb")
+        } # downloads zip if missing
         utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = packdir, overwrite = TRUE) # unzips txt to package directory
         message(paste(filename[i], "overwritten in package directory"))
-        }
-        }else if(!file.exists(tmptxt[i])){ # checks if txt exists in tempdir
-        if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
-        utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = tmpdir, overwrite = FALSE) # unzip txt to tempdir
-        message(paste(filename[i], "saved in temporary directory"))
       }
-
-      }
- }
+    } else if (!file.exists(tmptxt[i])) { # checks if txt exists in tempdir
+      if (!file.exists(tmpfile[i])) {
+        utils::download.file(url[i], tmpfile[i], mode = "wb")
+      } # downloads zip if missing
+      utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = tmpdir, overwrite = FALSE) # unzip txt to tempdir
+      message(paste(filename[i], "saved in temporary directory"))
+    }
+  }
+}

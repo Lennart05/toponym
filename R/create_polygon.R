@@ -14,41 +14,36 @@
 #'
 #' @return A list with the coordinates of the polygon.
 createPolygon <- function(countries, regions = 0, region_name = NULL, retrieve = FALSE) {
+  map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
-map_path <- paste0(system.file(package = "geodata"),"/extdata")
-
-if(any(countries == "world")){
-  countries <- "world"
-  map <- world(path = map_path) # world map
-
-
-  }else if(missing(region_name)){ # if no region provided
-  map <- gadm(country = countries, level = regions, path = map_path) # country map
-
-  }
-  else{ # if region name is provided
-  if(regions == 0){regions = 1} # admin level = regions needs to be at least 1 if specific regions are to be displayed
-  map <- gadm(country = countries, level = regions, path = map_path)
-  map <- map[map$NAME_1 %in% region_name,]
+  if (any(countries == "world")) {
+    countries <- "world"
+    map <- world(path = map_path) # world map
+  } else if (missing(region_name)) { # if no region provided
+    map <- gadm(country = countries, level = regions, path = map_path) # country map
+  } else { # if region name is provided
+    if (regions == 0) {
+      regions <- 1
+    } # admin level = regions needs to be at least 1 if specific regions are to be displayed
+    map <- gadm(country = countries, level = regions, path = map_path)
+    map <- map[map$NAME_1 %in% region_name, ]
   }
 
-if(retrieve == TRUE){ # if polygon data is to be extracted
-  if(length(countries) > 1){ #only one country at the same is allowed
-  stop("The number of countries for polygon retrival may not exceed 1.")
-}else if(any(countries == "world")){ #world shouldn't be extracted
-  stop("'world' is not a valid query for polygon retrival.")
-}
-  polygon <- as.data.frame(crds(map)) #retrieves coordinates of subset or country from map data
-}else{ # lets users draw on subset or country
-message("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
+  if (retrieve == TRUE) { # if polygon data is to be extracted
+    if (length(countries) > 1) { # only one country at the same is allowed
+      stop("The number of countries for polygon retrival may not exceed 1.")
+    } else if (any(countries == "world")) { # world shouldn't be extracted
+      stop("'world' is not a valid query for polygon retrival.")
+    }
+    polygon <- as.data.frame(crds(map)) # retrieves coordinates of subset or country from map data
+  } else { # lets users draw on subset or country
+    message("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
 
-sp::plot(map) # plots the map
-polygon <- clickpoly(add=TRUE) # lets users draw a polygon on the plotted map
-polygon <- data.frame(polygon[[4]][[1]][[1]], polygon[[4]][[1]][[2]]) ## saves only lons and lats
-}
+    sp::plot(map) # plots the map
+    polygon <- clickpoly(add = TRUE) # lets users draw a polygon on the plotted map
+    polygon <- data.frame(polygon[[4]][[1]][[1]], polygon[[4]][[1]][[2]]) ## saves only lons and lats
+  }
 
-names(polygon) <- c("lons", "lats")
-return(polygon)
-
-
+  names(polygon) <- c("lons", "lats")
+  return(polygon)
 }

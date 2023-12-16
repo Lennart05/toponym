@@ -54,8 +54,10 @@ For example, an ending may only occur five times in total, thus the distribution
 }
 \examples{
 \dontrun{
-topCompOut(countries = "BE", count = 100, len = 3, rat = .5,
-lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats)
+topCompOut(
+  countries = "BE", count = 100, len = 3, rat = .5,
+  lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats
+)
 
 ## generates and saves the data frames & maps of the top hundred three-character-long endings
 ## in Belgium if more than 50\% of the places lie in the polygon for Flanders.

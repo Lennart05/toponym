@@ -25,24 +25,26 @@
 #'
 #' @examples
 #' \dontrun{
-#' topCompOut(countries = "BE", count = 100, len = 3, rat = .5,
-#' lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats)
+#' topCompOut(
+#'   countries = "BE", count = 100, len = 3, rat = .5,
+#'   lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats
+#' )
 #'
 #' ## generates and saves the data frames & maps of the top hundred three-character-long endings
 #' ## in Belgium if more than 50% of the places lie in the polygon for Flanders.
 #' }
-topCompOut <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type)
-  {
+topCompOut <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type) {
   dat <- topComp(countries, count, len, rat, type, lons, lats, feat.class, freq.type) # gets df with candidates for top() function
-  for(i in 1:length(dat$toponym)) {
+  for (i in 1:length(dat$toponym)) {
     top(dat$toponym[i],
-        countries,
-        color="red",
-        df,
-        csv,
-        plot = FALSE,
-        ratio_string = dat$ratio[i], # ratio in % from dat
-        fq = dat$frequency[i]) # fq as number from dat
-        feat.class
+      countries,
+      color = "red",
+      df,
+      csv,
+      plot = FALSE,
+      ratio_string = dat$ratio[i], # ratio in % from dat
+      fq = dat$frequency[i]
+    ) # fq as number from dat
+    feat.class
   }
 }
