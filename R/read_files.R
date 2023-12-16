@@ -2,6 +2,7 @@
 #' @description The function accesses the data saved by \code{getData()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
 #' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data will be saved by \code{getData()} before.
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' @keywords internal
 #' @return Data frames of the specified countries.
 readFiles <- function(countries, feat.class) {
 

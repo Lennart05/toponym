@@ -18,7 +18,7 @@ createPolygon <- function(countries, regions = 0, region_name = NULL, retrieve =
 map_path <- paste0(system.file(package = "geodata"),"/extdata")
 
 if(any(countries == "world")){
-  countries = "world"
+  countries <- "world"
   map <- world(path = map_path) # world map
 
 

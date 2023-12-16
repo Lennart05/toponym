@@ -122,7 +122,7 @@ topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat
     }
     dat_name <- paste0("data_top_", count)
     assign(dat_name, dat, envir = .GlobalEnv)
-    cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
+    message(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
 
     return(dat)
   }

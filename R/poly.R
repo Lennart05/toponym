@@ -2,6 +2,7 @@
 #'
 #' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @keywords internal
 #'
 #' @return a convex hull
 #'

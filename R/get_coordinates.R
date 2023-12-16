@@ -4,6 +4,7 @@
 #' @param strings Character strings in form of regular expression that filter the data frames.
 #' @param df logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.
 #' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
+#' @keywords internal
 #' @return A list with the coordinates (longitude and latitude) and country codes.
 getCoordinates <- function(gn, strings, df, csv) {
 
@@ -13,7 +14,7 @@ getCoordinates <- function(gn, strings, df, csv) {
   }
   if(sum(results == "non.latinate") > 0){ ## if strings contain non.latinates
   NApc <- paste0(round(sum(is.na(gn$alternatenames))/nrow(gn)*100), "%") ## % of NA in alternatenames col
-  cat(paste(NApc, "of all entries in the alternate names column are empty."))
+  message(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
   alt_l <- altNames(gn, strings)
   w_strings <- alt_l[[1]]
@@ -32,14 +33,14 @@ getCoordinates <- function(gn, strings, df, csv) {
     dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse="_")
     if(df == TRUE) {
       dat <- assign(dat_name, gn[w_strings,], envir = .GlobalEnv)
-      cat(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
+      message(paste("\nDataframe",dat_name ,"saved in global environment.\n"))
     }
     if(csv == TRUE) {
-      csv_dir = file.path(getwd(),"data frames")
-      csv_name = paste(file.path(csv_dir, dat_name), ".csv", sep ="")
+      csv_dir <- file.path(getwd(),"data frames")
+      csv_name <- paste(file.path(csv_dir, dat_name), ".csv", sep ="")
       if (!dir.exists(csv_dir)) dir.create(csv_dir)
       utils::write.csv(gn[w_strings,], csv_name)
-      cat(paste("\nDataframe",dat_name ,"saved as csv in dataframes folder of the working directory.\n"))
+      message(paste("\nDataframe",dat_name ,"saved as csv in dataframes folder of the working directory.\n"))
     }
   }
 

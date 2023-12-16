@@ -1,6 +1,7 @@
 #' @title checks if string is one of the common non-Latinate scripts
 #'
 #' @param input the search string that the user provided
+#' @keywords internal
 #'
 #' @return character string indicating if it's a latinate or not
 #'
@@ -73,7 +74,7 @@ IS <- function(input) {  # stands for Identify Script
   for (i in 1:length(non.latin)) {
     find.non.latin <- grepl(non.latin[i], input)
     if (find.non.latin[1]==TRUE) {
-      cat("You entered one or more", script.names[i],
+      message("You entered one or more", script.names[i],
             "characters, so the alternate names column of geonames will be used.\n")
       result <- "non.latinate"
       return(result)
@@ -84,7 +85,7 @@ IS <- function(input) {  # stands for Identify Script
   if (result=="likely.latin") {
     int.values <- utf8ToInt(input)
     if (sum(int.values %in% CJK.range) > 0) {
-      cat("You entered one or more Chinese characters, so the alternate names column of geonames will be used.\n")
+      message("You entered one or more Chinese characters, so the alternate names column of geonames will be used.\n")
       result <- "non.latinate"
     }
   }

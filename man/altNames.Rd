@@ -17,3 +17,4 @@ logical vector
 \description{
 Check for matches in alt names column
 }
+\keyword{internal}

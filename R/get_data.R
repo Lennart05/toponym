@@ -1,8 +1,9 @@
 #' @title Get toponym data from GeoNames
-#' @description The function downloads and saves toponym data from the [GeoNames download server](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
+#' @description The function downloads and saves toponym data from the [GeoNames download page](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
 #' @param countries character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries). Type "all" for all currently stored data sets in the package directory.
 #' @param save logical. If \code{TRUE} then the data sets will be extracted to the package folder. It will be otherwise saved in the temporary folder.
 #' @param overwrite logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.
+#' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
 #' @examples
 #' \dontrun{
 #' getData(countries = c("DK", "DE"), save = FALSE)
@@ -39,17 +40,17 @@ getData <- function(countries, save = TRUE, overwrite = FALSE) {
         if(!file.exists(paste0(packdir, "/", filename[i]))){ # checks if txt exists
           if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
           utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = packdir, overwrite = FALSE) # unzips txt to package directory
-          print(paste(filename[i], "saved in package directory"))
+          message(paste(filename[i], "saved in package directory"))
         }
         }else{ # if overwrite is set to TRUE
         if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
         utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = packdir, overwrite = TRUE) # unzips txt to package directory
-        print(paste(filename[i], "overwritten in package directory"))
+        message(paste(filename[i], "overwritten in package directory"))
         }
         }else if(!file.exists(tmptxt[i])){ # checks if txt exists in tempdir
         if(!file.exists(tmpfile[i])){utils::download.file(url[i],tmpfile[i], mode = "wb")} # downloads zip if missing
         utils::unzip(zipfile = tmpfile[i], files = filename[i], exdir = tmpdir, overwrite = FALSE) # unzip txt to tempdir
-        print(paste(filename[i], "saved in temporary directory"))
+        message(paste(filename[i], "saved in temporary directory"))
       }
 
       }

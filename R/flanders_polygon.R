@@ -1,5 +1,5 @@
 #' @title Coordinates of a Flanders
-#'
+#' @keywords internal
 #' @description
 #' A small data frame containing coordinates for the polygon framing Flanders.
 #' There is one column for the longitudes ('lons') and one for the latitudes ('lats').

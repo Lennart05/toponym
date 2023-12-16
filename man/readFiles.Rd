@@ -17,3 +17,4 @@ Data frames of the specified countries.
 \description{
 The function accesses the data saved by \code{getData()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View \href{http://download.geonames.org/export/dump/readme.txt}{this} for further information on the used column names, including the population tag.
 }
+\keyword{internal}

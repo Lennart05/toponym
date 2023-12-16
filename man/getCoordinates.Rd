@@ -21,3 +21,4 @@ A list with the coordinates (longitude and latitude) and country codes.
 \description{
 The function retrieves the coordinates (longitude and latitude) and country codes of all locations, which match the regular expression, given in \code{string}. The return is used by \code{simple_map()}.
 }
+\keyword{internal}

@@ -15,3 +15,4 @@ character string indicating if it's a latinate or not
 \description{
 checks if string is one of the common non-Latinate scripts
 }
+\keyword{internal}

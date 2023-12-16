@@ -1,5 +1,5 @@
 #' @title Coordinates of the Danelaw
-#'
+#' @keywords internal
 #' @description
 #' A small data frame containing coordinates for the polygon framing the Danelaw.
 #' There is one column for the longitudes ('lons') and one for the latitudes ('lats').

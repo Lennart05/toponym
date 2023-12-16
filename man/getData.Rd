@@ -17,7 +17,7 @@ getData(countries, save = TRUE, overwrite = FALSE)
 The data as .txt in the temporary or package folder.
 }
 \description{
-The function downloads and saves toponym data from the \href{https://download.geonames.org/export/dump/}{GeoNames download server}, which is later used by \code{readFiles()}.
+The function downloads and saves toponym data from the \href{https://download.geonames.org/export/dump/}{GeoNames download page}, which is later used by \code{readFiles()}.
 }
 \examples{
 \dontrun{
@@ -28,4 +28,7 @@ getData(countries = c("DK", "DE", "PL"), save = TRUE)
 ## downloads and extracts data for PL but only extracts data for DK and DE
 ## from the zip files downloaded before to the package folder if used in the same session
 }
+}
+\seealso{
+\href{https://download.geonames.org/export/dump/}{GeoNames download page}
 }

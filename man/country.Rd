@@ -29,7 +29,7 @@ country(query = "ISO3")
 country(query = "Thailand")
 ## returns a data frame with the ISO2, ISO3 code and the full name
 
-countryquery = "Thailand", regions = TRUE)
+country(query = "Thailand", regions = TRUE)
 ## returns all region names
 
 }

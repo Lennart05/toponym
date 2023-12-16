@@ -17,3 +17,4 @@ a convex hull
 \description{
 Transforms coordinates into a convex hull
 }
+\keyword{internal}

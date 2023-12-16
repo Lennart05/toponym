@@ -2,6 +2,7 @@
 #'
 #' @param gn The data frame(s), which will be accessed.
 #' @param strings Character strings in form of regular expression that filter the data frames.
+#' @keywords internal
 #'
 #' @return logical vector
 #'
@@ -11,7 +12,7 @@ altNames <- function(gn, strings) {
   alt_l <- list()
 
   for(i in 1:nrow(alt_names)){
-    alt_l[[i]] <- grepl(paste(strings,collapse="|"), alt_names[i,], perl = TRUE) #check all alt names for reg ex match
+    alt_l[[i]] <- grepl(paste(strings,collapse = "|"), alt_names[i,], perl = TRUE) #check all alt names for reg ex match
     alt_l[[i]] <- sum(alt_l[[i]])
     if(alt_l[[i]]>0)
     {alt_l[[i]] <- 1}

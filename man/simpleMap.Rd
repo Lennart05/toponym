@@ -5,10 +5,7 @@
 \title{Plots locations on a map}
 \usage{
 simpleMap(
-  x,
-  y,
-  cc,
-  matches,
+  coordinates,
   color,
   strings,
   regions = 0,
@@ -20,13 +17,7 @@ simpleMap(
 )
 }
 \arguments{
-\item{x}{numeric. Latitude of locations filtered by \code{getCoordinates()}}
-
-\item{y}{numeric. Longitude of locations filtered by \code{get.coordinates()}}
-
-\item{cc}{character string. Country code of locations filtered by \code{getCoordinates()}}
-
-\item{matches}{character string. string of each entry filtered by \code{getCoordinates()}}
+\item{coordinates}{coordinates with country codes and matched strings filtered by \code{getCoordinates()}}
 
 \item{color}{character string. indicating, which color is assigned to each country code in order.}
 
@@ -50,3 +41,4 @@ A plot in the current R session or as .png in the working directory. If directly
 \description{
 The function generates a map plotting all locations, filtered by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}
 }
+\keyword{internal}
