@@ -17,13 +17,14 @@
 #' @export
 getData <- function(countries, save = TRUE, overwrite = FALSE) {
   packdir <- system.file("extdata", package = "toponym")
-  if (countries == "all") {
+  if (any(countries == "all")) {
     countries <- substring(list.files(packdir), 1, 2)
   } else {
-    for (i in 1:length(countries)) {
-      countries[i] <- country(query = countries[i])[, 1]
-    } # converts input into ISO2 codes
-    countries <- countries[!is.na(countries)] # removes incorrect country names
+      countries <- country(query = countries)
+  for (i in 1:length(countries)) {
+    countries[i] <- countries[[i]][, 1]
+  } # converts input into ISO2 codes
+  countries <- unlist(countries)
   }
 
   filename <- paste0(countries, ".txt")
