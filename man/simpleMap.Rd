@@ -5,23 +5,22 @@
 \title{Plots locations on a map}
 \usage{
 simpleMap(
+  strings,
   coordinates,
   color,
-  strings,
-  regions = 0,
+  regions,
   plot,
+  polygon,
   ratio_string,
-  fq,
-  lons,
-  lats
+  fq
 )
 }
 \arguments{
+\item{strings}{character string. In form of regular expression that filter the data frames. The first string is shown on the plot.}
+
 \item{coordinates}{coordinates with country codes and matched strings filtered by \code{getCoordinates()}}
 
 \item{color}{character string. indicating, which color is assigned to each country code in order.}
-
-\item{strings}{character string. In form of regular expression that filter the data frames. The first string is shown on the plot.}
 
 \item{regions}{numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.}
 
