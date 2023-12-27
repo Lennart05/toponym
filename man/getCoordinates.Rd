@@ -4,12 +4,12 @@
 \alias{getCoordinates}
 \title{Filters locations by a given regular expression}
 \usage{
-getCoordinates(gn, strings, df, csv)
+getCoordinates(strings, gn, df, csv)
 }
 \arguments{
-\item{gn}{The data frame(s), which will be accessed.}
-
 \item{strings}{Character strings in form of regular expression that filter the data frames.}
+
+\item{gn}{The data frame(s), which will be accessed.}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
 

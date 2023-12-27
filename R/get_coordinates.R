@@ -6,7 +6,7 @@
 #' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude) and country codes.
-getCoordinates <- function(gn, strings, df, csv) {
+getCoordinates <- function(strings, gn, df, csv) {
   results <- list()
   for (i in 1:length(strings)) {
     results[[i]] <- IS(strings[[i]])
