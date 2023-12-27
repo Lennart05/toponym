@@ -4,18 +4,18 @@
 \alias{topFreq}
 \title{Retrieves the most frequent toponyms in an area}
 \usage{
-topFreq(countries, len, feat.class = "P", type = "$", count, lons, lats)
+topFreq(countries, len, count, ...)
 }
 \arguments{
 \item{countries}{character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the toponyms of which countries are checked.}
 
 \item{len}{numeric. The character length of the endings.}
 
+\item{count}{numeric. The number of the most frequent endings.}
+
 \item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.}
 
 \item{type}{character string. Either by default "$" (ending) or "^" (beginning)}
-
-\item{count}{numeric. The number of the most frequent endings.}
 
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
 

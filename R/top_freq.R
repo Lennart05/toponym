@@ -25,17 +25,27 @@
 #' ## returns the top ten most frequent toponym endings
 #' ## in the polygon which is inside the United Kingdom.
 #' }
-topFreq <- function(countries, len, feat.class = "P", type = "$", count, lons, lats) {
+topFreq <- function(countries, len, count, ...) {
+
+  countries <- country(query = countries)
   for (i in 1:length(countries)) {
-    countries[i] <- country(query = countries[i])[, 1]
+    countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
-  countries <- countries[!is.na(countries)]
+  countries <- unlist(countries)
+
+  if(missing(len)) stop("Argument 'len' must be defined.")
+  if(missing(count) && count != "fnc") stop("Argument 'count' must be defined.")
+
+
+  opt <- list(...)
+  if(is.null(opt$feat.class)) opt$feat.class <- "P"
+  if(is.null(opt$type)) opt$type <- "$"
 
   getData(countries)
-  gn <- readFiles(countries, feat.class)
+  gn <- readFiles(countries, opt$feat.class)
 
-  if (!missing(lons) && !missing(lats)) {
-    con.hull <- poly(lons = lons, lats = lats)
+  if (!is.null(opt$polygon)) {
+    con.hull <- poly(opt$polygon)
 
     poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
 
@@ -45,28 +55,28 @@ topFreq <- function(countries, len, feat.class = "P", type = "$", count, lons, l
 
   # query all toponyms from the dataset
   toponyms <- paste(
-    if (type == "^") {
+    if (opt$type == "^") {
       "^"
     },
     # creates a reg expr looking for endings of length "len"
     regmatches(
       gn$name,
       regexpr(paste0(
-        if (type == "^") {
+        if (opt$type == "^") {
           "^"
         },
-        paste(replicate(len, "."), collapse = ""), if (type == "$") {
+        paste(replicate(len, "."), collapse = ""), if (opt$type == "$") {
           "$"
         }
       ), gn$name)
-    ), if (type == "$") {
+    ), if (opt$type == "$") {
       "$"
     },
     sep = ""
   )
 
   # order them by frequency
-  if (missing(count)) {
+  if (count == "fnc") {
     toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) # only strings left
   } else {
     freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:count] # only a selection of the most frequent toponyms
