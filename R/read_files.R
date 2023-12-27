@@ -4,7 +4,7 @@
 #' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
 #' @keywords internal
 #' @return Data frames of the specified countries.
-readFiles <- function(countries, feat.class) {
+readFiles <- function(countries, feat.class = "P") {
   filename <- list()
   for (i in 1:length(countries)) { # locates filename downloaded by getData()
     if (file.exists(paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt"))[i]) { # if it is in the package directory
@@ -13,8 +13,6 @@ readFiles <- function(countries, feat.class) {
       filename[[i]] <- paste0(tempdir(), "\\", countries, ".txt")[i]
     }
   }
-
-
 
   L <- list()
   for (i in 1:length(countries)) {

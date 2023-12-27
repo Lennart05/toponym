@@ -4,7 +4,7 @@
 \alias{readFiles}
 \title{Reads toponym data from the temporary or package folder}
 \usage{
-readFiles(countries, feat.class)
+readFiles(countries, feat.class = "P")
 }
 \arguments{
 \item{countries}{character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data will be saved by \code{getData()} before.}
