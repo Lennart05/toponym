@@ -13,11 +13,12 @@
 #' }
 ortho <- function(countries, column = "alternatenames") {
   # convert input into ISO2 codes and remove incorrect country names
+    countries <- country(query = countries)
   for (i in 1:length(countries)) {
-    countries[i] <- country(query = countries[i])[, 1]
-  }
-  countries <- countries[!is.na(countries)]
-
+    countries[i] <- countries[[i]][, 1]
+  } # converts input into ISO2 codes
+  countries <- unlist(countries)
+  
   # download data if not already on the computer
   getData(countries)
 
