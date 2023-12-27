@@ -8,11 +8,11 @@
 #' @export
 #' @return Result of \code{prop.test}
 topZtest <- function(strings, countries, feat.class = "P", lons, lats) {
+    countries <- country(query = countries)
   for (i in 1:length(countries)) {
-    countries[i] <- country(query = countries[i])[, 1]
+    countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
-  countries <- countries[!is.na(countries)] # removes incorrect country names
-
+  countries <- unlist(countries)
 
   getData(countries) # gets data
   gn <- readFiles(countries, feat.class) # stands for GeoNames
