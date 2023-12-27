@@ -79,7 +79,7 @@ country <- function(query = NULL, regions = FALSE) {
     warning(paste0("The queries '", paste(warn, collapse = ", "), "' are invalid country references."))
   }
   if(n_warn == length(query))
-    stop("There were no correct inputs. No data returned.")
+    stop("There were no correct country references. No data returned.")
   output <- output[!sapply(output, function(x) all(is.na(x)))]
   return(output)
 }
