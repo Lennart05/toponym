@@ -4,7 +4,7 @@
 \alias{createPolygon}
 \title{Creates a polygon}
 \usage{
-createPolygon(countries, regions = 0, region_name = NULL, retrieve = FALSE)
+createPolygon(countries, ...)
 }
 \arguments{
 \item{countries}{character string. Specify a country for the map}
@@ -27,4 +27,6 @@ This function uses the function clickpoly provided by the spatstat.geom package.
 It is meant as simple and quick tool to create polygons which can later be used by the functions such as topComp and topCompOut().
 
 For further details on the point-and-click mechanic refer to the help page for clickpoly.
+
+WARNING: If you use RStudio and increased the zoom level, points will be shifted. Check.... global options and make sure it is set to 100\%
 }

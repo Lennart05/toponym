@@ -12,24 +12,30 @@
 #'
 #' For further details on the point-and-click mechanic refer to the help page for clickpoly.
 #'
+#' WARNING: If you use RStudio and increased the zoom level, points will be shifted. Check.... global options and make sure it is set to 100%
+#'
 #' @return A list with the coordinates of the polygon.
-createPolygon <- function(countries, regions = 0, region_name = NULL, retrieve = FALSE) {
+createPolygon <- function(countries, ...) {
   map_path <- paste0(system.file(package = "geodata"), "/extdata")
+
+  opt <- list(...)
+  if(is.null(opt$regions)) opt$regions <- 0
+  if(is.null(opt$retrieve)) opt$retrieve <- FALSE
 
   if (any(countries == "world")) {
     countries <- "world"
     map <- world(path = map_path) # world map
-  } else if (missing(region_name)) { # if no region provided
-    map <- gadm(country = countries, level = regions, path = map_path) # country map
+  } else if (is.null(opt$region_name)) { # if no region provided
+    map <- gadm(country = countries, level = opt$regions, path = map_path) # country map
   } else { # if region name is provided
-    if (regions == 0) {
-      regions <- 1
+    if (opt$regions == 0) {
+      opt$regions <- 1
     } # admin level = regions needs to be at least 1 if specific regions are to be displayed
-    map <- gadm(country = countries, level = regions, path = map_path)
-    map <- map[map$NAME_1 %in% region_name, ]
+    map <- gadm(country = countries, level = opt$regions, path = map_path)
+    map <- map[map$NAME_1 %in% opt$region_name, ]
   }
 
-  if (retrieve == TRUE) { # if polygon data is to be extracted
+  if (opt$retrieve == TRUE) { # if polygon data is to be extracted
     if (length(countries) > 1) { # only one country at the same is allowed
       stop("The number of countries for polygon retrival may not exceed 1.")
     } else if (any(countries == "world")) { # world shouldn't be extracted
@@ -40,8 +46,10 @@ createPolygon <- function(countries, regions = 0, region_name = NULL, retrieve =
     message("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
 
     sp::plot(map) # plots the map
-    polygon <- clickpoly(add = TRUE) # lets users draw a polygon on the plotted map
-    polygon <- data.frame(polygon[[4]][[1]][[1]], polygon[[4]][[1]][[2]]) ## saves only lons and lats
+    polygon <- spatstatLocator(type = "o") # lets users draw a polygon on the plotted map
+    if(length(polygon$x) == 0) stop("No points were clicked.")
+    segments(polygon$x[1], polygon$y[1], tail(polygon$x, n = 1), tail(polygon$y, n = 1))
+    polygon <- data.frame(polygon$x, polygon$y) ## saves only lons and lats
   }
 
   names(polygon) <- c("lons", "lats")
