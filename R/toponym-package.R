@@ -21,6 +21,7 @@
 #' @importFrom utils download.file
 #' @importFrom utils unzip
 #' @importFrom utils read.table
+#' @importFrom utils tail
 #' @importFrom geodata world
 #' @importFrom geodata gadm
 #' @importFrom terra crds
@@ -31,7 +32,7 @@
 #' @importFrom sf st_as_sf
 #' @importFrom sp point.in.polygon
 #' @importFrom sp plot
-#' @importFrom spatstat.geom clickpoly
+#' @importFrom spatstat.utils spatstatLocator
 #' @importFrom stats prop.test
 ## usethis namespace: end
 NULL
