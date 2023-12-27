@@ -49,16 +49,23 @@
 #' .
 #' }
 #'
-topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat.class = "P", freq.type = "abs") {
+topComp <- function(countries, len, rat, polygon, ...) {
+    countries <- country(query = countries)
   for (i in 1:length(countries)) {
-    countries[i] <- country(query = countries[i])[, 1]
+    countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
-  countries <- countries[!is.na(countries)] # removes incorrect country names
+  countries <- unlist(countries)
+
+
+  opt <- list(...)
+  if(is.null(opt$feat.class)) opt$feat.class <- "P"
+  if(is.null(opt$type)) opt$type <- "$"
+  if(is.null(opt$freq.type)) opt$freq.type <- "abs"
 
   getData(countries) # gets data
-  gn <- readFiles(countries, feat.class)
-  toponyms_o <- topFreq(countries, len, feat.class, type)
-  if (count == 0) {
+  gn <- readFiles(countries, opt$feat.class)
+  toponyms_o <- topFreq(countries, len, count = "fnc", feat.class = opt$feat.class, type = opt$type)
+  if (is.null(opt$count)) {
     count <- length(toponyms_o)
   }
 
@@ -69,7 +76,7 @@ topComp <- function(countries, count = 0, len, rat, type = "$", lons, lats, feat
   ratio <- list() # ratio between absolute or relative frequencies, depending on freq.type
   dat <- list()
 
-  con.hull <- poly(lons = lons, lats = lats)
+  con.hull <- poly(polygon)
 
   # for relative frequencies the number of toponyms within the area is needed
   if (freq.type == "rel") {

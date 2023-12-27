@@ -4,26 +4,16 @@
 \alias{topComp}
 \title{Retrieves the most frequent toponyms in a given polygon relative to the countries}
 \usage{
-topComp(
-  countries,
-  count = 0,
-  len,
-  rat,
-  type = "$",
-  lons,
-  lats,
-  feat.class = "P",
-  freq.type = "abs"
-)
+topComp(countries, len, rat, polygon, ...)
 }
 \arguments{
 \item{countries}{character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the countries of which toponyms are checked.}
 
-\item{count}{numeric. The number of the most frequent toponyms which are included. If unspecified all toponyms satisfying the search criteria are included.}
-
 \item{len}{numeric. The character length of the toponyms}
 
 \item{rat}{numeric. The ratio of how many occurrences of one toponym need to be in the polygon. If freq.type is "abs" the ratio is between 0 and 1, if freq.type is "rel" it is between 0 and indefinite.}
+
+\item{count}{numeric. The number of the most frequent toponyms which are included. If unspecified all toponyms satisfying the search criteria are included.}
 
 \item{type}{character string. Either "$" (suffixes) or "^" (prefixes)}
 
