@@ -4,20 +4,7 @@
 \alias{top}
 \title{Generates a map with all locations matching the regular expression}
 \usage{
-top(
-  strings,
-  countries,
-  color = NULL,
-  regions = 0,
-  df = TRUE,
-  csv = FALSE,
-  plot = TRUE,
-  ratio_string = "",
-  fq = "",
-  feat.class = "P",
-  lons,
-  lats
-)
+top(strings, countries, ...)
 }
 \arguments{
 \item{strings}{character strings in form of regular expression that filter the data frames.}
