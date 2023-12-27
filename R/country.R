@@ -21,6 +21,8 @@
 #' ## returns all region names
 #' }
 country <- function(query = NULL, regions = FALSE) {
+
+  if(!(is.character(query))) stop("The query must contain a character string.")
   countryInfo <- toponym::countryInfo
 
   output <- list()

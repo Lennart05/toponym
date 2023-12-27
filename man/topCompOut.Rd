@@ -4,32 +4,20 @@
 \alias{topCompOut}
 \title{Saves all maps and data frames based on the output of \code{topComp()}}
 \usage{
-topCompOut(
-  countries,
-  count,
-  len,
-  df = FALSE,
-  csv = TRUE,
-  rat,
-  type = "$",
-  lons,
-  lats,
-  feat.class = "P",
-  freq.type
-)
+topCompOut(countries, len, rat, polygon, ...)
 }
 \arguments{
 \item{countries}{character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.}
 
-\item{count}{numeric. The number of the most frequent endings which will be tested.}
-
 \item{len}{numeric. The character length of the endings.}
+
+\item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one ending need to be in the polygon}
+
+\item{count}{numeric. The number of the most frequent endings which will be tested.}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frames will be saved in the global environment.}
 
 \item{csv}{logical. If \code{TRUE} then the filtered data frames will be saved as .csv in the current working directory.}
-
-\item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one ending need to be in the polygon}
 
 \item{type}{character string. Either by default "$" (ending) or "^" (beginning)}
 

@@ -50,12 +50,11 @@
 #' }
 #'
 topComp <- function(countries, len, rat, polygon, ...) {
-    countries <- country(query = countries)
+  countries <- country(query = countries)
   for (i in 1:length(countries)) {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
-
 
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
@@ -64,9 +63,10 @@ topComp <- function(countries, len, rat, polygon, ...) {
 
   getData(countries) # gets data
   gn <- readFiles(countries, opt$feat.class)
-  toponyms_o <- topFreq(countries, len, count = "fnc", feat.class = opt$feat.class, type = opt$type)
+  toponyms_o <- topFreq(countries = countries, len = len, count = "fnc", feat.class = opt$feat.class, type = opt$type)
   if (is.null(opt$count)) {
-    count <- length(toponyms_o)
+    opt$count <- length(toponyms_o)
+    message("Count was not specified. All toponyms will be tested. This may take a while.")
   }
 
   toponyms_ID_o <- list()
@@ -79,7 +79,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
   con.hull <- poly(polygon)
 
   # for relative frequencies the number of toponyms within the area is needed
-  if (freq.type == "rel") {
+  if (opt$freq.type == "rel") {
     n.tops <- nrow(gn) # number of all toponyms anywhere
     in.poly <- rep(NA, n.tops)
     for (i in 1:n.tops) {
@@ -89,7 +89,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     n.tops.out.poly <- n.tops - n.tops.in.poly # number of all toponyms outside polygon
   }
 
-  for (i in 1:count) {
+  for (i in 1:opt$count) {
     # stores indices of all ordered toponyms
     toponyms_ID_o[[i]] <- unique(grep(toponyms_o[i], gn$name))
 
@@ -102,23 +102,23 @@ topComp <- function(countries, len, rat, polygon, ...) {
     n.top <- length(loc_log[[i]]) # number of target toponym anywhere
     n.top.out.poly <- n.top - n.top.in.poly
 
-    if (freq.type == "abs") {
+    if (opt$freq.type == "abs") {
       ratio[[i]] <- n.top.in.poly / n.top
     }
 
-    if (freq.type == "rel") {
+    if (opt$freq.type == "rel") {
       ratio[[i]] <- (n.top.in.poly / n.tops.in.poly) / (n.top.out.poly / n.tops.out.poly)
     }
 
     # select only toponyms which surpass parameter rat
     if (ratio[[i]] > rat) {
-      if (freq.type == "abs") {
+      if (opt$freq.type == "abs") {
         dat[[i]] <- cbind(
           toponyms_o[i], round(ratio[[i]], 4) * 100,
           paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
         )
       }
-      if (freq.type == "rel") {
+      if (opt$freq.type == "rel") {
         dat[[i]] <- cbind(
           toponyms_o[i], round(ratio[[i]], 4),
           paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
@@ -134,15 +134,15 @@ topComp <- function(countries, len, rat, polygon, ...) {
       unlist(dat)[c(FALSE, TRUE, FALSE)],
       unlist(dat)[c(FALSE, FALSE, TRUE)]
     ))
-    if (freq.type == "abs") {
+    if (opt$freq.type == "abs") {
       colnames(dat) <- c("toponym", "ratio_perc", "frequency")
       dat <- dat[order(as.numeric(dat$ratio_perc), decreasing = TRUE), ]
     }
-    if (freq.type == "rel") {
+    if (opt$freq.type == "rel") {
       colnames(dat) <- c("toponym", "ratio", "frequency")
       dat <- dat[order(as.numeric(dat$ratio), decreasing = TRUE), ]
     }
-    dat_name <- paste0("data_top_", count)
+    dat_name <- paste0("data_top_", opt$count)
     assign(dat_name, dat, envir = .GlobalEnv)
     message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
 

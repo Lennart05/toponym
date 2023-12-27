@@ -33,18 +33,25 @@
 #' ## generates and saves the data frames & maps of the top hundred three-character-long endings
 #' ## in Belgium if more than 50% of the places lie in the polygon for Flanders.
 #' }
-topCompOut <- function(countries, count, len, df = FALSE, csv = TRUE, rat, type = "$", lons, lats, feat.class = "P", freq.type) {
-  dat <- topComp(countries, count, len, rat, type, lons, lats, feat.class, freq.type) # gets df with candidates for top() function
+topCompOut <- function(countries, len, rat, polygon, ...) {
+  opt <- list(...)
+  if(is.null(opt$type)) opt$type <- "$"
+  if(is.null(opt$feat.class)) opt$feat.class <- "P"
+  if(is.null(opt$plot)) opt$plot <- FALSE
+
+  dat <- topComp(countries = countries, len = len, rat = rat, polygon = polygon, count = opt$count, type = opt$type, feat.class = opt$feat.class, opt$freq.type) # gets df with candidates for top() function
+  #topComp <- function(countries, len, rat, polygon, ...)
   for (i in 1:length(dat$toponym)) {
-    top(dat$toponym[i],
-      countries,
-      color = "red",
-      df,
-      csv,
-      plot = FALSE,
+    top(strings = dat$toponym[i],
+      countries = countries,
+      color = opt$color,
+      df = opt$df,
+      csv = opt$csv,
+      plot = opt$plot,
       ratio_string = dat$ratio[i], # ratio in % from dat
-      fq = dat$frequency[i]
+      fq = dat$frequency[i],
+      feat.class = opt$feat.class
+
     ) # fq as number from dat
-    feat.class
   }
 }
