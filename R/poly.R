@@ -6,11 +6,10 @@
 #'
 #' @return a convex hull
 #'
-poly <- function(lons, lats) {
-  # store coordinates of the polygon in a df
-  pol <- data.frame(X = lons, Y = lats)
+poly <- function(polygon) {
+  pol <- data.frame(X = polygon$lons, Y = polygon$lats)
   # chull function from package grDevices
-  pos <- chull(pol)
+  pos <- chull(polygon)
   con.hull <- rbind(pol[pos, ], pol[pos[1], ]) # convex hull
 
   return(con.hull)

@@ -4,7 +4,7 @@
 \alias{poly}
 \title{Transforms coordinates into a convex hull}
 \usage{
-poly(lons, lats)
+poly(polygon)
 }
 \arguments{
 \item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
