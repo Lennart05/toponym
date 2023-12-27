@@ -29,7 +29,8 @@ Imports:
     grDevices (>= 4.1.2),
     sf (>= 1.0.14),
     sp (>= 1.4.6),
-    spatstat.geom (>= 3.0.3),
-    terra (>= 1.7.23)
+    spatstat.utils (>= 3.0.3),
+    terra (>= 1.7.23),
+    utils (>= 4.1.2)
 URL: https://github.com/Lennart05/toponym
 BugReports: https://github.com/Lennart05/toponym/issues
