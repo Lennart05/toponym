@@ -16,6 +16,9 @@
 #'
 #' @return A list with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {
+
+  if(missing(countries)) stop("Argument 'countries' must be defined.")
+
   map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
   opt <- list(...)
