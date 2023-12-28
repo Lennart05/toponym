@@ -50,6 +50,7 @@
 #' }
 #'
 topComp <- function(countries, len, rat, polygon, ...) {
+
   countries <- country(query = countries)
   for (i in 1:length(countries)) {
     countries[i] <- countries[[i]][, 1]
@@ -63,12 +64,14 @@ topComp <- function(countries, len, rat, polygon, ...) {
 
   getData(countries) # gets data
   gn <- readFiles(countries, opt$feat.class)
-  toponyms_o <- topFreq(countries = countries, len = len, count = "fnc", feat.class = opt$feat.class, type = opt$type)
-  if (is.null(opt$count)) {
-    opt$count <- length(toponyms_o)
-    message("Count was not specified. All toponyms will be tested. This may take a while.")
+  if (is.null(opt$limit)) {
+    toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type)
+    opt$limit <- length(toponyms_o)
+    message("Limit was not specified. All toponyms will be tested. This may take a while.")
+  } else{
+    toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type)
+    toponyms_o <- names(toponyms_o)
   }
-
   toponyms_ID_o <- list()
   lat_strings <- list()
   lon_strings <- list()
@@ -89,7 +92,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     n.tops.out.poly <- n.tops - n.tops.in.poly # number of all toponyms outside polygon
   }
 
-  for (i in 1:opt$count) {
+  for (i in 1:opt$limit) {
     # stores indices of all ordered toponyms
     toponyms_ID_o[[i]] <- unique(grep(toponyms_o[i], gn$name))
 
@@ -142,7 +145,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
       colnames(dat) <- c("toponym", "ratio", "frequency")
       dat <- dat[order(as.numeric(dat$ratio), decreasing = TRUE), ]
     }
-    dat_name <- paste0("data_top_", opt$count)
+    dat_name <- paste0("data_top_", opt$limit)
     assign(dat_name, dat, envir = .GlobalEnv)
     message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
 

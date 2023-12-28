@@ -47,7 +47,6 @@ top <- function(strings, countries, ...) {
   } # converts input into ISO2 codes
   countries <- unlist(countries)
 
-
   opt <- list(...)
 
   if (is.null(opt$df)) opt$df <- TRUE
