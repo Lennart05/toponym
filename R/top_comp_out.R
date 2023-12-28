@@ -39,7 +39,7 @@ topCompOut <- function(countries, len, rat, polygon, ...) {
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$plot)) opt$plot <- FALSE
 
-  dat <- topComp(countries = countries, len = len, rat = rat, polygon = polygon, count = opt$count, type = opt$type, feat.class = opt$feat.class, opt$freq.type) # gets df with candidates for top() function
+  dat <- topComp(countries = countries, len = len, rat = rat, polygon = polygon, limit = opt$limit, type = opt$type, feat.class = opt$feat.class, opt$freq.type) # gets df with candidates for top() function
   #topComp <- function(countries, len, rat, polygon, ...)
   for (i in 1:length(dat$toponym)) {
     top(strings = dat$toponym[i],

@@ -25,7 +25,7 @@
 #' ## returns the top ten most frequent toponym endings
 #' ## in the polygon which is inside the United Kingdom.
 #' }
-topFreq <- function(countries, len, count, ...) {
+topFreq <- function(countries, len, limit, ...) {
 
   countries <- country(query = countries)
   for (i in 1:length(countries)) {
@@ -34,7 +34,7 @@ topFreq <- function(countries, len, count, ...) {
   countries <- unlist(countries)
 
   if(missing(len)) stop("Argument 'len' must be defined.")
-  if(missing(count) && count != "fnc") stop("Argument 'count' must be defined.")
+  if(missing(limit) && limit != "fnc") stop("Argument 'limit' must be defined.")
 
 
   opt <- list(...)
@@ -76,10 +76,10 @@ topFreq <- function(countries, len, count, ...) {
   )
 
   # order them by frequency
-  if (count == "fnc") {
+  if (limit == "fnc") {
     toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) # only strings left
   } else {
-    freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:count] # only a selection of the most frequent toponyms
+    freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
     return(freq_top)
   }
 }
