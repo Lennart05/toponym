@@ -4,7 +4,7 @@
 \alias{topZtest}
 \title{ztest}
 \usage{
-topZtest(strings, countries, feat.class = "P", lons, lats)
+topZtest(strings, countries, polygon, ...)
 }
 \arguments{
 \item{strings}{character strings in form of regular expression that filter the data frames.}

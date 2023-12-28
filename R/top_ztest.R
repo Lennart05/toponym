@@ -7,18 +7,21 @@
 #' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
 #' @export
 #' @return Result of \code{prop.test}
-topZtest <- function(strings, countries, feat.class = "P", lons, lats) {
+topZtest <- function(strings, countries, polygon, ...) {
     countries <- country(query = countries)
   for (i in 1:length(countries)) {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
 
+  opt <- list(...)
+  if(is.null(opt$feat.class)) opt$feat.class <- "P"
+
   getData(countries) # gets data
-  gn <- readFiles(countries, feat.class) # stands for GeoNames
+  gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
 
 
-  con.hull <- poly(lons = lons, lats = lats)
+  con.hull <- poly(polygon)
 
   poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
 

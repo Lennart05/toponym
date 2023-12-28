@@ -1,42 +1,44 @@
-#' @title Generates a map with all locations matching the regular expression
-#' @description The function calls the \code{simpleMap()} function to generate a map plotting all locations, filtered by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}. The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
-#' @param strings character strings in form of regular expression that filter the data frames.
-#' @param countries character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
-#' @param color character string indicating, which color is assigned to each string.
-#' @param regions numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.
-#' @param df logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.
-#' @param csv logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.
-#' @param plot logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
-#' @param ratio_string character string. Ratio of occurrences in the polygon from \code{topComp()}. This should not be specified manually.
-#' @param fq character string. Number of occurrences in the designated polygon and in total returned by \code{topComp()}. This should not be specified manually.
-#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
-#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
-#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @title Toponym Map
+#' @description This function plots selected toponyms on a map.
+#' @param strings character string with regular expression to filter data.
+#' @param countries character string with country reference (name or iso-code)
+#' @param ... additional parameters; see details
+#' @details
+#' This function is used to plot all locations matching the regular expression from \code{strings}.
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#'
+#' Allowed additional parameters are the following:
+#' \itemize{
+#' \item\code{color} character string indicating, which color is assigned to each string.
+#' \item\code{regions} numeric. specifies the level of administrative borders. By default \code{0} displaying only country borders.
+#' \item\code{df} logical. If \code{TRUE} then matches will be saved in the global environment.
+#' \item\code{csv} logical. If \code{TRUE} then matches will be saved as .csv in the current working directory.
+#' \item\code{plot} logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
+#' \item\code{feat.class} character string. specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' }
+#' This function calls the \code{simpleMap()} function to generate a map to plot all locations, passed down by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.
+#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
+#'
 #' @examples
 #' \dontrun{
-#' getData("DE", save = TRUE)
-#' # saves data for DE in package directory
 #' top("itz$", "DE")
-#' # generates and prints a map with all populated places
+#' # prints a plot with all populated places
 #' # in Germany ending with "itz"
 #' # and saves the locations in a data frame in the global environment.
 #'
 #'
-#' top("^By", "DK", color = "green", df = FALSE, csv = TRUE, plot = TRUE)
-#' # first downloads data for DK and extracts it to the temporary directory
-#' # generates plot with all populated places colored in green
+#' top("^By", "DK", color = "green", df = FALSE, csv = TRUE, plot = FALSE)
+#' # saves a plot with all populated places colored in green
 #' # in Denmark starting with "By" (case sensitive)
-#' # and saves it as .png together with the location data as .csv in the working directory.
+#' # and saves it as .png together with the matches as .csv in the working directory.
 #'
 #'
-#' getData(c("DE", "PL"), save = TRUE)
-#' # saves for DE and PL in package directory if it's not already there
 #' top(c("itz$", "ice$"), c("DE", "PL"))
-#' # generates plot with all populated places in Germany colored in red and Poland colored in cyan
+#' # prints a plot with all populated places in Germany colored in red and Poland colored in cyan
 #' # ending with either "itz" or "ice"
-#' # and saves the locations in a data frame in the global environment.
+#' # and saves matches in the global environment.
 #' }
-#' @return A plot in the current R session or as .png in the working directory. If directly generated by this function \code{top()}, it displays the first string and the total occurrences. If generated by \code{topCompOut()}, it displays the string, the ratio as a percentage and the number of occurrences in the designated polygon and in total.
+#' @return a plot of selected toponym(s) with the number of occurrences
 #' @export
 top <- function(strings, countries, ...) {
 
