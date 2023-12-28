@@ -64,6 +64,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, polygon, ratio
   } else {
     map <- gadm(country = unique(cc), level = regions, path = map_path) # gets map of specified countries with domestic borders from pkg "rnaturalearth"
     # if(!missing(region_name)){map <- map[map$NAME_1 %in% region_name,]}
+    if(is.null(map)) stop(paste("Map data could not be retrieved.", if(regions >= 1) "'regions' argument may be set too high"))
   }
 
 
