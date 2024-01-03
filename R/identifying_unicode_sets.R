@@ -1,9 +1,9 @@
-#' @title checks if string is one of the common non-Latinate scripts
-#'
-#' @param input the search string that the user provided
+#' @title Identifying Scripts
+#' @description This function detects if the script is a latinate or not.
+#' @param input character string
 #' @keywords internal
 #'
-#' @return character string indicating if it's a latinate or not
+#' @return A character string indicating if it's a latinate or not.
 #'
 IS <- function(input) {  # stands for Identify Script
 

@@ -1,10 +1,11 @@
-#' @title Check for matches in alt names column
+#' @title  Alternatenames Filter
+#' @description Checks alternatenames column
 #'
-#' @param gn The data frame(s), which will be accessed.
-#' @param strings Character strings in form of regular expression that filter the data frames.
+#' @param gn data frame(s), which will be accessed.
+#' @param strings character string with regular expression to filter data.
 #' @keywords internal
 #'
-#' @return logical vector
+#' @return A list of two vectors, logical values and matched strings.
 #'
 altNames <- function(gn, strings) {
   alt_names <- strsplit(gn$alternatenames, ",") # separate names in altnam col
@@ -13,10 +14,7 @@ altNames <- function(gn, strings) {
 
   for (i in 1:nrow(alt_names)) {
     alt_l[[i]] <- grepl(paste(strings, collapse = "|"), alt_names[i, ], perl = TRUE) # check all alt names for reg ex match
-    alt_l[[i]] <- sum(alt_l[[i]])
-    if (alt_l[[i]] > 0) {
-      alt_l[[i]] <- 1
-    }
+    alt_l[[i]] <- any(alt_l[[i]])
   }
 
   w_strings <- as.logical(unlist(alt_l))

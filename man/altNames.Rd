@@ -2,19 +2,19 @@
 % Please edit documentation in R/alt_names.R
 \name{altNames}
 \alias{altNames}
-\title{Check for matches in alt names column}
+\title{Alternatenames Filter}
 \usage{
 altNames(gn, strings)
 }
 \arguments{
-\item{gn}{The data frame(s), which will be accessed.}
+\item{gn}{data frame(s), which will be accessed.}
 
-\item{strings}{Character strings in form of regular expression that filter the data frames.}
+\item{strings}{character string with regular expression to filter data.}
 }
 \value{
-logical vector
+A list of two vectors, logical values and matched strings.
 }
 \description{
-Check for matches in alt names column
+Checks alternatenames column
 }
 \keyword{internal}

@@ -1,26 +1,30 @@
-#' @title Retrieves the most frequent toponyms in an area
+#' @title Retrieves the most frequent toponyms
 #' @description
-#' The function sorts the toponyms found by frequency. Either a polygon within a country or countries can be provided as input.
-#' @param countries character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the toponyms of which countries are checked.
-#' @param len numeric. The character length of the endings.
-#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{p}.
-#' @param type character string. Either by default "$" (ending) or "^" (beginning)
-#' @param count numeric. The number of the most frequent endings.
-#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
-#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' This function returns which toponyms are most frequent in countries or a polygon.
+#' @param countries character string with country reference (name or iso-code)
+#' @param len numeric. The character length of the toponyms.
+#' @param limit numeric. The number of the most frequent toponyms.
+
+#' @param ... Additional parameters:
+#' \itemize{
+#' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
+#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
+#' \item\code{polygon} data frame. selects toponyms only inside the polygon
+#' }
 #'
-#' @return Returns a table with toponym names and their frequency
+#' @return A table with toponym names and their frequency.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' topFreq(countries = "Namibia", len = 3, count = 10)
+#' topFreq(countries = "Namibia", len = 3, limit = 10)
 #' ## returns the top ten most frequent toponym endings
 #' ## of three-character length in Namibia
 #'
 #' topFreq(
-#'   countries = "GB", len = 3, count = 10,
-#'   lons = toponym::danelaw_polygon$lons, lats = toponym::danelaw_polygon$lats
+#'   countries = "GB", len = 3, limit = 10,
+#'   polygon = toponym::danelaw_polygon
 #' )
 #' ## returns the top ten most frequent toponym endings
 #' ## in the polygon which is inside the United Kingdom.

@@ -1,16 +1,19 @@
-#' @title Retrieves the most frequent toponyms in a given polygon relative to the countries
-#' @description
-#' The function sorts the toponyms in the given countries by frequency. It then tests which  ones lie in the given polygon, printing out a data frame with those toponyms that match the ratio criteria and are, thus, potential candidates for further examination. The coordinates can be defined using createPolygon().
-#' @param countries character string. Country code abbreviations or names (use \code{country()} for a list of available countries) specifying the countries of which toponyms are checked.
-#' @param count numeric. The number of the most frequent toponyms which are included. If unspecified all toponyms satisfying the search criteria are included.
-#' @param len numeric. The character length of the toponyms
-#' @param rat numeric. The ratio of how many occurrences of one toponym need to be in the polygon. If freq.type is "abs" the ratio is between 0 and 1, if freq.type is "rel" it is between 0 and indefinite.
-#' @param type character string. Either "$" (suffixes) or "^" (prefixes)
-#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
-#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
-#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
-#' @param freq.type character string. If set to "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If set to "rel", ratios of relative frequencies inside the area and outside the area will be computed.
+#' @title Compares toponyms of a polygon and countries
+#' @description This function retrieves the most frequent toponyms in a given polygon relative to the countries' frequency
+#' @details
+#' This function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon and prints out a data frame with those frequent toponyms that match the ratio criteria.
+#' @param countries character string with country reference (name or iso-code)
+#' @param len numeric. The character length of the toponyms.
+#' @param limit numeric. The number of the most frequent toponyms which will be tested.
+#' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.
 #'
+#' @param ... Additional parameters:
+#' \itemize{
+#' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
+#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
+#' \item\code{polygon} data frame. Polygon for comparison with the country.
+#' }
 #' @return A data frame printed out and saved in the global environment. It shows the toponyms surpassing the ratio, the ratio (expressed as percentage if freq.type is "abs") and the frequency.
 #' @export
 #'
@@ -18,28 +21,25 @@
 #' \dontrun{
 #' topComp("GB",
 #'   count = 100, len = 4, rat = .9,
-#'   lons = toponym::danelaw_polygon$lons,
-#'   lats = toponym::danelaw_polygon$lats
+#'   polygon = toponym::danelaw_polygon
 #' )
 #' ## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
 #' ## if more than 90% of the places lie in the newly defined polygon
-#' ## which frames the Danelaw
+#' ## which frames the Danelaw.
 #'
 #'
 #' topComp("GB",
 #'   len = 3, rat = 1,
-#'   lons = toponym::danelaw_polygon$lons,
-#'   lats = toponym::danelaw_polygon$lats,
+#'   polygon = toponym::danelaw_polygon
 #'   freq.type = "rel"
 #' )
 #' ## prints and saves a data frame of all three-character-long endings in Great Britain
-#' ## if they have greater relative frequencies within Danelaw than outside of Danelaw
+#' ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
 #'
 #'
 #' topComp(c("BE", "NL"),
 #'   rat = .8,
-#'   lons = toponym::flanders_polygon$lons,
-#'   lats = toponym::flanders_polygon$lats
+#'   polygon = toponym::flanders_polygon
 #' )
 #'
 #' ## prints and saves a data frame of the top 10 three-character-long endings in Belgium

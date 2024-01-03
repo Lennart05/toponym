@@ -1,20 +1,26 @@
 #' @title Creates a polygon
-#' @description The function generates a map on which users create a polygon by point-and-click.
-#' @param countries character string. Specify a country for the map
-#' @param regions numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.
-#' @param region_name character string. Specify region names of a country requested by \code{countries}. Only the regions will be displayed for mapping.
-#' @param retrieve  logical. If set to \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.
+#' @description This function lets users create a polygon by point-and-click or directly retrieve polygon data.
+#' @param countries character string with country reference (name or iso-code)
+#' @param ... Additional parameters:
+#' \itemize{
+#' \item\code{regions numeric} specifies the level of administrative borders. By default \code{0} displaying only country borders.
+#' \item\code{region_name} character string with region name
+#' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.
+#' }
 #' @export
 #' @details
-#' This function uses the function clickpoly provided by the spatstat.geom package. The maps are retrieved by the geodata package.
+#' This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[MASS:spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
+#' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
 #'
-#' It is meant as simple and quick tool to create polygons which can later be used by the functions such as topComp and topCompOut().
+#' For RStudio:
 #'
-#' For further details on the point-and-click mechanic refer to the help page for clickpoly.
+#' Tools -> Global Options -> Appearance -> Zoom
 #'
-#' WARNING: If you use RStudio and increased the zoom level, points will be shifted. Check.... global options and make sure it is set to 100%
 #'
-#' @return A list with the coordinates of the polygon.
+#' For further details on the point-and-click mechanic refer to the help page for spatstatLocator.
+#'
+#'
+#' @return A dataframe with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {
 
   if(missing(countries)) stop("Argument 'countries' must be defined.")

@@ -1,9 +1,10 @@
-#' @title Reads toponym data from the temporary or package folder
-#' @description The function accesses the data saved by \code{getData()}, reads it as data frame only with populated locations and stores it in the global environment, which is later used by \code{top()}. View [this](http://download.geonames.org/export/dump/readme.txt) for further information on the used column names, including the population tag.
-#' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries). Data will be saved by \code{getData()} before.
-#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' @title Reads GeoNames data
+#' @description This function reads toponym data for the package.
+#' @details This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
+#' @param countries character string with country reference (name or iso-code)
+#' @param feat.class character string. specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' @keywords internal
-#' @return Data frames of the specified countries.
+#' @return Data frame of the specified country.
 readFiles <- function(countries, feat.class = "P") {
   filename <- list()
   for (i in 1:length(countries)) { # locates filename downloaded by getData()

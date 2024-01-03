@@ -1,10 +1,9 @@
 #' @title Transforms coordinates into a convex hull
 #'
-#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
-#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @param polygon data frame, coordinates of the polygon
 #' @keywords internal
 #'
-#' @return a convex hull
+#' @return A convex hull.
 #'
 poly <- function(polygon) {
   pol <- data.frame(X = polygon$lons, Y = polygon$lats)

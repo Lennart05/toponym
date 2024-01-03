@@ -1,12 +1,12 @@
-#' @title Retrieves country names and codes
+#' @title Country References
 #' @description
-#' The function returns country codes, names and regional names used in the data set.
+#' This function returns country codes, names and regional names used by the \code{toponym} package.
 #'
 #' @param query character string. Enter query to access information on countries.
-#' @param regions logical. If \code{TRUE}, outputs the region names of the respective country.
-#' @details If you enter "ISO2" or "ISO3", you receive a list of all ISO-codes of the respective length. If you enter "names", you receive a list of all country names.
-#' If you refer to an individual country, you receive the remaining forms of reference.
-#' @return Returns a data frame or vector with the country data.
+#' @param regions logical. If \code{TRUE}, outputs the region names of the respective countries.
+#' @details If you refer to an individual country, you receive the remaining forms of reference.
+#' If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length. If you enter "names", you receive a vector of all country names. If you enter "country table", you receive the data frame with all country references.
+#' @return Returns a list of country references or (a column selection of) the full country table.
 #' @export
 #'
 #' @examples
@@ -24,18 +24,18 @@ country <- function(query = NULL, regions = FALSE) {
 
   if(!(is.character(query))) stop("The query must contain a character string.")
   countryInfo <- toponym::countryInfo
-
+  spec_col <- c("country table", "ISO2", "ISO3", "names")
   output <- list()
   warn <- list()
   for(i in 1:length(query)){
   if (regions == FALSE) {
-    if (any(query == "country table")) {
+    if (any(query == spec_col[1])) {
       return(countryInfo)
-    } else if (query[i] == "ISO2") { # outputs all ISO2 codes
+    } else if (query[i] == spec_col[2]) { # outputs all ISO2 codes
       return(countryInfo[, 1])
-    } else if (query[i] == "ISO3") { # outputs all ISO3 codes
+    } else if (query[i] == spec_col[3]) { # outputs all ISO3 codes
       return(countryInfo[, 2])
-    } else if (query[i] == "names") { # outputs all country names
+    } else if (query[i] == spec_col[4]) { # outputs all country names
       return(countryInfo[, 3])
     } else if (nchar(query[i]) == 2) { # ISO2 code as input
       query[i] <- toupper(query[i])
@@ -50,7 +50,7 @@ country <- function(query = NULL, regions = FALSE) {
       warn[[i]] <- query[i]
     } # check for NAs
   } else { # if regions is TRUE
-
+    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, a specific country reference must be given.")
     map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
     error <- paste0("The query '", query[i], "' is an invalid country reference")

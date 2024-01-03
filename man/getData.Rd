@@ -2,14 +2,14 @@
 % Please edit documentation in R/get_data.R
 \name{getData}
 \alias{getData}
-\title{Get toponym data from GeoNames}
+\title{Downloads GeoName data}
 \usage{
 getData(countries, save = TRUE, overwrite = FALSE)
 }
 \arguments{
 \item{countries}{character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries). Type "all" for all currently stored data sets in the package directory.}
 
-\item{save}{logical. If \code{TRUE} then the data sets will be extracted to the package folder. It will be otherwise saved in the temporary folder.}
+\item{save}{logical. If \code{TRUE} then the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.}
 
 \item{overwrite}{logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.}
 }
@@ -17,7 +17,10 @@ getData(countries, save = TRUE, overwrite = FALSE)
 The data as .txt in the temporary or package folder.
 }
 \description{
-The function downloads and saves toponym data from the \href{https://download.geonames.org/export/dump/}{GeoNames download page}, which is later used by \code{readFiles()}.
+This function downloads toponym data for the package.
+}
+\details{
+The data is downloaded from the \href{https://download.geonames.org/export/dump/}{GeoNames download page}, which is later used by \code{readFiles()}.
 }
 \examples{
 \dontrun{

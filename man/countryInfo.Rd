@@ -3,7 +3,7 @@
 \docType{data}
 \name{countryInfo}
 \alias{countryInfo}
-\title{country information}
+\title{Country Information}
 \format{
 An object of class \code{data.frame} with 249 rows and 3 columns.
 }

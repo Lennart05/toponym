@@ -1,4 +1,4 @@
-#' @title country information
+#' @title Country Information
 #' @keywords internal
 #' @description
 #' A data frame which lists all countries available in the \code{geodata} package and GeoNames data set.

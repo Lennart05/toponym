@@ -7,12 +7,10 @@
 poly(polygon)
 }
 \arguments{
-\item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
-
-\item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
+\item{polygon}{data frame, coordinates of the polygon}
 }
 \value{
-a convex hull
+A convex hull.
 }
 \description{
 Transforms coordinates into a convex hull

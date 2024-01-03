@@ -2,24 +2,24 @@
 % Please edit documentation in R/country.R
 \name{country}
 \alias{country}
-\title{Retrieves country names and codes}
+\title{Country References}
 \usage{
 country(query = NULL, regions = FALSE)
 }
 \arguments{
 \item{query}{character string. Enter query to access information on countries.}
 
-\item{regions}{logical. If \code{TRUE}, outputs the region names of the respective country.}
+\item{regions}{logical. If \code{TRUE}, outputs the region names of the respective countries.}
 }
 \value{
-Returns a data frame or vector with the country data.
+Returns a list of country references or (a column selection of) the full country table.
 }
 \description{
-The function returns country codes, names and regional names used in the data set.
+This function returns country codes, names and regional names used by the \code{toponym} package.
 }
 \details{
-If you enter "ISO2" or "ISO3", you receive a list of all ISO-codes of the respective length. If you enter "names", you receive a list of all country names.
 If you refer to an individual country, you receive the remaining forms of reference.
+If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length. If you enter "names", you receive a vector of all country names. If you enter "country table", you receive the data frame with all country references.
 }
 \examples{
 \dontrun{

@@ -2,17 +2,17 @@
 % Please edit documentation in R/identifying_unicode_sets.R
 \name{IS}
 \alias{IS}
-\title{checks if string is one of the common non-Latinate scripts}
+\title{Identifying Scripts}
 \usage{
 IS(input)
 }
 \arguments{
-\item{input}{the search string that the user provided}
+\item{input}{character string}
 }
 \value{
-character string indicating if it's a latinate or not
+A character string indicating if it's a latinate or not.
 }
 \description{
-checks if string is one of the common non-Latinate scripts
+This function detects if the script is a latinate or not.
 }
 \keyword{internal}

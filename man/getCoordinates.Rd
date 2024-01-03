@@ -2,23 +2,26 @@
 % Please edit documentation in R/get_coordinates.R
 \name{getCoordinates}
 \alias{getCoordinates}
-\title{Filters locations by a given regular expression}
+\title{Coordinates Selection}
 \usage{
 getCoordinates(strings, gn, df, csv)
 }
 \arguments{
-\item{strings}{Character strings in form of regular expression that filter the data frames.}
+\item{strings}{character string with regular expression to filter data.}
 
-\item{gn}{The data frame(s), which will be accessed.}
+\item{gn}{data frame(s) which will be accessed.}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
 
 \item{csv}{logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.}
 }
 \value{
-A list with the coordinates (longitude and latitude) and country codes.
+A list with the coordinates (longitude and latitude), country codes and matched strings.
 }
 \description{
-The function retrieves the coordinates (longitude and latitude) and country codes of all locations, which match the regular expression, given in \code{string}. The return is used by \code{simple_map()}.
+This function returns the coordinates of selected toponyms.
+}
+\details{
+This function returns coordinates (longitude and latitude) and country codes of all locations, which match the regular expression, given in \code{strings}. The return is used by \code{simple_map()}.
 }
 \keyword{internal}

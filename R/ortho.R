@@ -1,15 +1,19 @@
-#' @title symbols in data
-#' @description Outputs an ordered frequency list of all symbols used in a given column of the GeoNames data for one or more countries specified. Since this is mainly useful for looking into what is in the alternatenames column, that column is the default.
-#' @param countries character string with country code abbreviations (check \url{https://www.geonames.org/countries/} for a list of available countries) specifying, the toponyms of which countries are checked.
-#' @param column character string naming the column of interest. Default is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}
+#' @title Symbols Data
+#' @description This functions retrieves all symbols used in country data sets.
+#' @details
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Default of \code{column} is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}
+#' Outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
+#' @param countries character string with country reference (name or iso-code)
+#' @param column character string naming the column of interest.
 #'
-#' @return a table with frequencies of all symbols
+#' @return A table with frequencies of all symbols.
 #' @export
 #'
 #' @examples
 #' \dontrun{
-#' symbols(countries = "ID")
-#' # outputs a table with frequencie all symbols in the "alternatenames" column for the Indonesia data set
+#' ortho(countries = "ID")
+#' # outputs a table with frequencies all symbols in the "alternatenames" column for the Indonesia data set
 #' }
 ortho <- function(countries, column = "alternatenames") {
   # convert input into ISO2 codes and remove incorrect country names
@@ -18,7 +22,7 @@ ortho <- function(countries, column = "alternatenames") {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
-  
+
   # download data if not already on the computer
   getData(countries)
 
