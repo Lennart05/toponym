@@ -7,7 +7,7 @@
 poly(polygon)
 }
 \arguments{
-\item{polygon}{data frame, coordinates of the polygon}
+\item{polygon}{data frame, coordinates of the polygon.}
 }
 \value{
 A convex hull.

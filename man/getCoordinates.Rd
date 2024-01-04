@@ -9,7 +9,7 @@ getCoordinates(strings, gn, df, csv)
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
 
-\item{gn}{data frame(s) which will be accessed.}
+\item{gn}{data frame which will be accessed.}
 
 \item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
 

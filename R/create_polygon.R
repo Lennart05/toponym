@@ -1,15 +1,18 @@
 #' @title Creates a polygon
-#' @description This function lets users create a polygon by point-and-click or directly retrieve polygon data.
-#' @param countries character string with country reference (name or iso-code)
+#' @description
+#' This function lets users create a polygon by point-and-click or directly retrieve polygon data.
+#' @details
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' @param countries character string with country reference (name or iso-code).
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{regions numeric} specifies the level of administrative borders. By default \code{0} displaying only country borders.
-#' \item\code{region_name} character string with region name
+#' \item\code{regions numeric} Specifies the level of administrative borders. By default \code{0} displaying only country borders.
+#' \item\code{region_name} character string with region name.
 #' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.
 #' }
 #' @export
 #' @details
-#' This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[MASS:spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
+#' This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
 #' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
 #'
 #' For RStudio:
@@ -20,7 +23,7 @@
 #' For further details on the point-and-click mechanic refer to the help page for spatstatLocator.
 #'
 #'
-#' @return A dataframe with the coordinates of the polygon.
+#' @return A data frame with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {
 
   if(missing(countries)) stop("Argument 'countries' must be defined.")

@@ -9,17 +9,17 @@ top(strings, countries, ...)
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
 
-\item{countries}{character string with country reference (name or iso-code)}
+\item{countries}{character string with country reference (name or iso-code).}
 
 \item{...}{Additional parameters:
 \itemize{
 \item\code{color} character string indicating, which color is assigned to each string.
-\item\code{regions} numeric. specifies the level of administrative borders. By default \code{0} displaying only country borders.
+\item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} displaying only country borders.
 \item\code{df} logical. If \code{TRUE} then matches will be saved in the global environment.
 \item\code{csv} logical. If \code{TRUE} then matches will be saved as .csv in the current working directory.
 \item\code{plot} logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
-\item\code{feat.class} character string. specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
-\item\code{polygon} data frame. selects toponyms only inside the polygon
+\item\code{feat.class} character string. Specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{polygon} data frame. Selects toponyms only inside the polygon.
 }}
 }
 \value{
@@ -32,7 +32,6 @@ This function plots selected toponyms onto a map.
 This function is used to plot all locations matching the regular expression from \code{strings}.
 Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
-It
 
 This function calls the \code{simpleMap()} function to generate a map to plot all locations, passed through by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.
 The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.

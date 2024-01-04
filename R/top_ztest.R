@@ -1,12 +1,21 @@
-#' @title ztest
-#' @description The functions lets users apply a z-test (two proportion test), comparing the frequency of a given string in an area (polygon) to the frequency in the rest of the country.
-#' @param strings character strings in form of regular expression that filter the data frames.
-#' @param countries character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries).
-#' @param feat.class character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
-#' @param lons numeric. Vector of longitudinal coordinates defining the polygon.
-#' @param lats numeric. Vector of latitudinal coordinates defining the polygon.
+#' @title Applies Z-test
+#' @description
+#' This function applies a Z-test.
+#'
+#' @details
+#' This function lets users apply a z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
+#'
+#' @param strings character string with regular expression to filter data.
+#' @param countries character string with country reference (name or iso-code).
+#' @param polygon data frame. Polygon for comparison with the country.
+#' @param ... Additional parameter:
+#' \itemize{
+#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' }
 #' @export
-#' @return Result of \code{prop.test}
+#' @return An object of class \code{htest} containing the results.
 topZtest <- function(strings, countries, polygon, ...) {
     countries <- country(query = countries)
   for (i in 1:length(countries)) {

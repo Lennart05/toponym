@@ -1,14 +1,16 @@
 #' @title Saves multiple maps and toponym data
 #' @description
-#' The function applies the list of toponyms returned by \code{topComp()} to \code{top()}.
-#' @details A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
-#'
+#' This function applies the list of toponyms returned by \code{topComp()} to \code{top()}.
+#' @details
+#' A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #'
 #' @param countries character string with country reference (name or iso-code)
-#' @param count numeric. The number of the most frequent toponyms which will be tested.
 #' @param len numeric. The character length of the toponyms.
 #' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.
-#'
+#' @param polygon data frame. Polygon for comparison with the country.
+
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{df} logical. If \code{TRUE} then the filtered data frames will be saved in the global environment.
@@ -16,21 +18,22 @@
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
 #' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
 #' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
-#' \item\code{polygon} data frame. Polygon for comparison with the country.
+#' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
 #' @details
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' A general and meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
 #' For example, an ending may only occur five times in total, thus the distribution on a percentage basis is a less conclusive indicator for potential candidates.
 #'
 #'
-#' @return A number of data frames and plots saved in a sub folder (called "data frames" and "plots") in the working directory. If wanted, it stores the ratio surpassing toponyms in a data frame in the package environment.
+#' @return Data frames and plots saved in a sub folder (called 'data frames' and 'plots') in the working directory or package environment.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' topCompOut(
 #'   countries = "BE", count = 100, len = 3, rat = .5,
-#'   lons = toponym::flanders_polygon$lons, lats = toponym::flanders_polygon$lats
+#'   toponym::flanders_polygon
 #' )
 #'
 #' ## generates and saves the data frames & maps of the top hundred three-character-long endings

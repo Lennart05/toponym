@@ -7,7 +7,7 @@
 topFreq(countries, len, limit, ...)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code)}
+\item{countries}{character string with country reference (name or iso-code).}
 
 \item{len}{numeric. The character length of the toponyms.}
 
@@ -15,10 +15,10 @@ topFreq(countries, len, limit, ...)
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
+\item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
 \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
-\item\code{polygon} data frame. selects toponyms only inside the polygon
+\item\code{polygon} data frame. Selects toponyms only inside the polygon.
 }}
 }
 \value{
@@ -26,6 +26,9 @@ A table with toponym names and their frequency.
 }
 \description{
 This function returns which toponyms are most frequent in countries or a polygon.
+}
+\details{
+Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 }
 \examples{
 \dontrun{

@@ -1,7 +1,9 @@
 #' @title Downloads GeoName data
 #' @description This function downloads toponym data for the package.
-#' @details The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
-#' @param countries character string with country code abbreviations to download (check \url{https://www.geonames.org/countries/} for a list of available countries). Type "all" for all currently stored data sets in the package directory.
+#' @details
+#' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' @param countries character string with country reference (name or iso-code).
 #' @param save logical. If \code{TRUE} then the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.
 #' @param overwrite logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
@@ -14,7 +16,6 @@
 #' ## downloads and extracts data for PL but only extracts data for DK and DE
 #' ## from the zip files downloaded before to the package folder if used in the same session
 #' }
-#' @return The data as .txt in the temporary or package folder.
 #' @export
 getData <- function(countries, save = TRUE, overwrite = FALSE) {
   packdir <- system.file("extdata", package = "toponym")

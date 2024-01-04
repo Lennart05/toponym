@@ -7,30 +7,32 @@
 topComp(countries, len, rat, polygon, ...)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code)}
+\item{countries}{character string with country reference (name or iso-code).}
 
 \item{len}{numeric. The character length of the toponyms.}
 
 \item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.}
 
+\item{polygon}{data frame. Polygon for comparison with the country.}
+
 \item{...}{Additional parameters:
 \itemize{
-\item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
+\item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
 \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
-\item\code{polygon} data frame. Polygon for comparison with the country.
+\item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 }}
-
-\item{limit}{numeric. The number of the most frequent toponyms which will be tested.}
 }
 \value{
-A data frame printed out and saved in the global environment. It shows the toponyms surpassing the ratio, the ratio (expressed as percentage if freq.type is "abs") and the frequency.
+A data frame printed out and saved in the global environment. It shows toponyms surpassing the ratio, the ratio (expressed as percentage if freq.type is "abs") and the frequency.
 }
 \description{
 This function retrieves the most frequent toponyms in a given polygon relative to the countries' frequency
 }
 \details{
 This function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon and prints out a data frame with those frequent toponyms that match the ratio criteria.
+Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 }
 \examples{
 \dontrun{

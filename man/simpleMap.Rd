@@ -18,21 +18,19 @@ simpleMap(
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
 
-\item{coordinates}{coordinates with country codes and matched strings filtered by \code{getCoordinates()}}
+\item{coordinates}{coordinates with country codes and matched strings filtered by \code{getCoordinates()}.}
 
 \item{color}{character string. indicating, which color is assigned to each country code in order.}
 
-\item{regions}{numeric. Specify the level of regional borders. By default \code{0} displaying only country borders.}
+\item{regions}{numeric. Specifies the level of regional borders. By default \code{0} displaying only country borders.}
 
 \item{plot}{logical. If \code{FALSE}, then the plot will not be printed but saved as .png in the current working directory.}
+
+\item{polygon}{data frame. Selects toponyms only inside the polygon.}
 
 \item{ratio_string}{character string. Ratio of occurrences in the polygon from \code{topComp()}.}
 
 \item{fq}{character string. Number of occurrences in the designated polygon and in total.}
-
-\item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
-
-\item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
 }
 \value{
 A plot of all selected toponyms.

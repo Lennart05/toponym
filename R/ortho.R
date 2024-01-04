@@ -4,7 +4,7 @@
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' Default of \code{column} is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}
 #' Outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
-#' @param countries character string with country reference (name or iso-code)
+#' @param countries character string with country reference (name or iso-code).
 #' @param column character string naming the column of interest.
 #'
 #' @return A table with frequencies of all symbols.
@@ -13,7 +13,8 @@
 #' @examples
 #' \dontrun{
 #' ortho(countries = "ID")
-#' # outputs a table with frequencies all symbols in the "alternatenames" column for the Indonesia data set
+#' # outputs a table with frequencies all symbols
+#' # in the "alternatenames" column for the Indonesia data set
 #' }
 ortho <- function(countries, column = "alternatenames") {
   # convert input into ISO2 codes and remove incorrect country names

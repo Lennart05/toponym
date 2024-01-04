@@ -50,7 +50,7 @@ country <- function(query = NULL, regions = FALSE) {
       warn[[i]] <- query[i]
     } # check for NAs
   } else { # if regions is TRUE
-    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, a specific country reference must be given.")
+    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, the query must contain a country reference.")
     map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
     error <- paste0("The query '", query[i], "' is an invalid country reference")

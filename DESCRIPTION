@@ -1,12 +1,12 @@
 Package: toponym
-Title: Generates Maps Of Toponyms
-Version: 0.9.1
+Title: Toponym Analysis & Visualization Tool
+Version: 0.9.9
 Authors@R: c(
     person("Lennart", "Chevallier", email = "mail@lchevallier.de", role = c("aut", "cre")),
     person("Søren", "Wichmann", email = "wichmannsoeren@gmail.com", role = "aut"))
 Author: Lennart Chevallier [aut, cre],
         Søren Wichmann [aut]
-Description: A simple package for visualizing toponym distributions. You either provide a regular expression searching for places matching it or find the most frequent toponyms specific to one area.
+Description: A package to analyze and visualize toponym distributions. You can plot, find, compare, analyze toponyms.
 Depends: R (>= 4.1.0)
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8

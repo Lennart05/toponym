@@ -7,23 +7,25 @@
 createPolygon(countries, ...)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code)}
+\item{countries}{character string with country reference (name or iso-code).}
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{regions numeric} specifies the level of administrative borders. By default \code{0} displaying only country borders.
-\item\code{region_name} character string with region name
+\item\code{regions numeric} Specifies the level of administrative borders. By default \code{0} displaying only country borders.
+\item\code{region_name} character string with region name.
 \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.
 }}
 }
 \value{
-A dataframe with the coordinates of the polygon.
+A data frame with the coordinates of the polygon.
 }
 \description{
 This function lets users create a polygon by point-and-click or directly retrieve polygon data.
 }
 \details{
-This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[MASS:spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
+Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+
+This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
 Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100\%.
 
 For RStudio:

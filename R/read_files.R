@@ -1,10 +1,12 @@
 #' @title Reads GeoNames data
 #' @description This function reads toponym data for the package.
-#' @details This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
-#' @param countries character string with country reference (name or iso-code)
-#' @param feat.class character string. specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' @details
+#' This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' @param countries character string with country reference (name or iso-code).
+#' @param feat.class character string. Specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' @keywords internal
-#' @return Data frame of the specified country.
+#' @return A data frame with GeoNames data.
 readFiles <- function(countries, feat.class = "P") {
   filename <- list()
   for (i in 1:length(countries)) { # locates filename downloaded by getData()

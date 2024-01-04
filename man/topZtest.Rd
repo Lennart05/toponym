@@ -2,24 +2,30 @@
 % Please edit documentation in R/top_ztest.R
 \name{topZtest}
 \alias{topZtest}
-\title{ztest}
+\title{Applies Z-test}
 \usage{
 topZtest(strings, countries, polygon, ...)
 }
 \arguments{
-\item{strings}{character strings in form of regular expression that filter the data frames.}
+\item{strings}{character string with regular expression to filter data.}
 
-\item{countries}{character string with country code abbreviations to be read (check \url{https://www.geonames.org/countries/} for the list of available countries).}
+\item{countries}{character string with country reference (name or iso-code).}
 
-\item{feat.class}{character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.}
+\item{polygon}{data frame. Polygon for comparison with the country.}
 
-\item{lons}{numeric. Vector of longitudinal coordinates defining the polygon.}
-
-\item{lats}{numeric. Vector of latitudinal coordinates defining the polygon.}
+\item{...}{Additional parameter:
+\itemize{
+\item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+}}
 }
 \value{
-Result of \code{prop.test}
+An object of class \code{htest} containing the results.
 }
 \description{
-The functions lets users apply a z-test (two proportion test), comparing the frequency of a given string in an area (polygon) to the frequency in the rest of the country.
+This function applies a Z-test.
+}
+\details{
+This function lets users apply a z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
+Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 }

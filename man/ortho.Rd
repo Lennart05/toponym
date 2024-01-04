@@ -7,7 +7,7 @@
 ortho(countries, column = "alternatenames")
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code)}
+\item{countries}{character string with country reference (name or iso-code).}
 
 \item{column}{character string naming the column of interest.}
 }
@@ -25,6 +25,7 @@ Outputs an ordered frequency table of all symbols used in a given column of the 
 \examples{
 \dontrun{
 ortho(countries = "ID")
-# outputs a table with frequencies all symbols in the "alternatenames" column for the Indonesia data set
+# outputs a table with frequencies all symbols
+# in the "alternatenames" column for the Indonesia data set
 }
 }
