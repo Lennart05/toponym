@@ -35,10 +35,6 @@ This function applies the list of toponyms returned by \code{topComp()} to \code
 A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
 Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
-
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-A general and meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
-For example, an ending may only occur five times in total, thus the distribution on a percentage basis is a less conclusive indicator for potential candidates.
 }
 \examples{
 \dontrun{

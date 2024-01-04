@@ -6,7 +6,7 @@ Authors@R: c(
     person("Søren", "Wichmann", email = "wichmannsoeren@gmail.com", role = "aut"))
 Author: Lennart Chevallier [aut, cre],
         Søren Wichmann [aut]
-Description: A package to analyze and visualize toponym distributions. You can plot, find, compare, analyze toponyms.
+Description: A package to analyze and visualize toponym distributions. You can plot, find, compare & analyze toponyms.
 Depends: R (>= 4.1.0)
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8

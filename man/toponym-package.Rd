@@ -6,7 +6,7 @@
 \alias{toponym-package}
 \title{toponym: Toponym Analysis & Visualization Tool}
 \description{
-A package to analyze and visualize toponym distributions. You can plot, find, compare, analyze toponyms.
+A package to analyze and visualize toponym distributions. You can plot, find, compare & analyze toponyms.
 
 The main functions are the following:
 \itemize{
