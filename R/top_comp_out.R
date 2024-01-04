@@ -20,11 +20,6 @@
 #' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
-#' @details
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-#' A general and meaningful ratio is not determinable if we take the different areas (i.e. the possible polygons to be compared) and varying frequencies of specific toponyms into account.
-#' For example, an ending may only occur five times in total, thus the distribution on a percentage basis is a less conclusive indicator for potential candidates.
-#'
 #'
 #' @return Data frames and plots saved in a sub folder (called 'data frames' and 'plots') in the working directory or package environment.
 #' @export
