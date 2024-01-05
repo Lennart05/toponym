@@ -19,8 +19,8 @@ This functions retrieves all symbols used in country data sets.
 }
 \details{
 Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-Default of \code{column} is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}
-Outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
+The default column is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
+It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 }
 \examples{
 \dontrun{

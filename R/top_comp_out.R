@@ -13,11 +13,11 @@
 
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{df} logical. If \code{TRUE} then the filtered data frames will be saved in the global environment.
-#' \item\code{csv} logical. If \code{TRUE} then the filtered data frames will be saved as .csv in the current working directory.
+#' \item\code{df} logical. If \code{TRUE}, the filtered data frames will be saved in the global environment.
+#' \item\code{csv} logical. If \code{TRUE}, the filtered data frames will be saved as .csv in the current working directory.
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
-#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
-#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
+#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
 #'

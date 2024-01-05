@@ -12,7 +12,7 @@
 #' @param polygon data frame. Polygon for comparison with the country.
 #' @param ... Additional parameter:
 #' \itemize{
-#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' }
 #' @export
 #' @return An object of class \code{htest} containing the results.
@@ -43,7 +43,7 @@ topZtest <- function(strings, countries, polygon, ...) {
   strings_ID <- unique(grep(strings, gn$name))
   lat_strings <- gn$latitude[strings_ID]
   lon_strings <- gn$longitude[strings_ID]
-  # logical vectors storing if each place is within the given area
+  # logical vectors storing if each place is within the given polygon
   loc_log <- as.logical(point.in.polygon(lon_strings, lat_strings, con.hull$X, con.hull$Y))
 
   loc_log <- as.vector(table(loc_log))

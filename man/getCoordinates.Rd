@@ -11,9 +11,9 @@ getCoordinates(strings, gn, df, csv)
 
 \item{gn}{data frame which will be accessed.}
 
-\item{df}{logical. If \code{TRUE} then the filtered data frame will be saved in the global environment.}
+\item{df}{logical. If \code{TRUE}, matches will be saved in the global environment.}
 
-\item{csv}{logical. If \code{TRUE} then the filtered data frame will be saved as .csv in the current working directory.}
+\item{csv}{logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.}
 }
 \value{
 A list with the coordinates (longitude and latitude), country codes and matched strings.

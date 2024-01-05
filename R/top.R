@@ -7,10 +7,10 @@
 #' \itemize{
 #' \item\code{color} character string indicating, which color is assigned to each string.
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} displaying only country borders.
-#' \item\code{df} logical. If \code{TRUE} then matches will be saved in the global environment.
-#' \item\code{csv} logical. If \code{TRUE} then matches will be saved as .csv in the current working directory.
-#' \item\code{plot} logical. If \code{FALSE} then the plot will not be printed but saved as .png in the current working directory.
-#' \item\code{feat.class} character string. Specifies data with which feature classes is tested (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{df} logical. If \code{TRUE}, matches will be saved in the global environment.
+#' \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
+#' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
+#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #'

@@ -13,11 +13,11 @@
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
-#' \item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
-#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the area and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the area and outside the area will be computed.
+#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
-#' @return A data frame printed out and saved in the global environment. It shows toponyms surpassing the ratio, the ratio (expressed as percentage if freq.type is "abs") and the frequency.
+#' @return A data frame printed out and saved in the global environment. It shows toponyms surpassing the ratio, the ratio and the frequency.
 #' @export
 #'
 #' @examples
@@ -84,7 +84,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
 
   con.hull <- poly(polygon)
 
-  # for relative frequencies the number of toponyms within the area is needed
+  # for relative frequencies the number of toponyms within the polygon is needed
   if (opt$freq.type == "rel") {
     n.tops <- nrow(gn) # number of all toponyms anywhere
     in.poly <- rep(NA, n.tops)
@@ -102,7 +102,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     lat_strings[[i]] <- gn$latitude[toponyms_ID_o[[i]]]
     lon_strings[[i]] <- gn$longitude[toponyms_ID_o[[i]]]
 
-    # logical vectors storing if each place is within the given area
+    # logical vectors storing if each place is within the given polygon
     loc_log[[i]] <- as.logical(point.in.polygon(lon_strings[[i]], lat_strings[[i]], con.hull$X, con.hull$Y))
     n.top.in.poly <- sum(loc_log[[i]]) # number of target toponym in polygon
     n.top <- length(loc_log[[i]]) # number of target toponym anywhere

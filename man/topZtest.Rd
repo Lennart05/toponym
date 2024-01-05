@@ -15,7 +15,7 @@ topZtest(strings, countries, polygon, ...)
 
 \item{...}{Additional parameter:
 \itemize{
-\item\code{feat.class} character string with feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list and names of all feature classes in the data). By default, it is \code{P}.
+\item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 }}
 }
 \value{

@@ -9,9 +9,9 @@ getData(countries, save = TRUE, overwrite = FALSE)
 \arguments{
 \item{countries}{character string with country reference (name or iso-code).}
 
-\item{save}{logical. If \code{TRUE} then the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.}
+\item{save}{logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.}
 
-\item{overwrite}{logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.}
+\item{overwrite}{logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.}
 }
 \description{
 This function downloads toponym data for the package.

@@ -4,8 +4,8 @@
 #' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' @param countries character string with country reference (name or iso-code).
-#' @param save logical. If \code{TRUE} then the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.
-#' @param overwrite logical. If \code{TRUE} then the data sets (.txt files) in the package folder will be overwritten.
+#' @param save logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.
+#' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
 #' @examples
 #' \dontrun{

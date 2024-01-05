@@ -4,14 +4,15 @@
 #' @param countries character string with country reference (name or iso-code).
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{regions numeric} Specifies the level of administrative borders. By default \code{0} displaying only country borders.
+#' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} displaying only country borders.
 #' \item\code{region_name} character string with region name.
-#' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are output. No map will be drawn.
+#' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 #' }
 #' @export
 #' @details
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-#' This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
+#' Accordingly, \code{region_name} accepts region name references for the selected countries.
+#' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from geodata package.
 #' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
 #'
 #' For RStudio:
@@ -21,7 +22,19 @@
 #'
 #' For further details on the point-and-click mechanic refer to the help page for spatstatLocator.
 #'
+#' @examples
+#' \dontrun{
+#' createPolygon("NA", region_name = "Ohangwena")
 #'
+#' # a plot of the region Ohangwena in Namibia
+#' # by point-and-click a polygon can be created
+#'
+#' Ohangwena_polygon <- createPolygon(
+#' "NA", region_name = "Ohangwena", retrieve = TRUE
+#' )
+#' # no plot appears
+#' # the coordinates of the region are stored in the object
+#' }
 #' @return A data frame with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {
 
