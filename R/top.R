@@ -1,5 +1,5 @@
 #' @title Toponym Map
-#' @description 
+#' @description
 #' This function plots selected toponyms onto a map.
 #' @param strings character string with regular expression to filter data.
 #' @param countries character string with country reference (name or iso-code).
@@ -12,6 +12,7 @@
 #' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 #' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
+#' \item\code{mapdata} data frame. A user-specific data frame with toponym coordinates. Column names must match those of the GeoNames data. It is used instead of the GeoNames data.
 #' }
 #'
 #' @details
@@ -62,6 +63,11 @@ top <- function(strings, countries, ...) {
 
   try(getData(countries), silent = TRUE) # gets data
   gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
+  if(!is.null(opt$mapdata)){
+  if(!is.data.frame(opt$mapdata)) stop("'mapdata' must be a data frame.")
+  if(!all(c("name", "latitude", "longitude") %in% colnames(opt$mapdata))) stop("'mapdata' must have the following columns: 'name', 'latitude' & 'latitude'.")
+    gn <- opt$mapdata
+  }
   coordinates <- getCoordinates(strings, gn, opt$df, opt$csv) # coordinates of matches
   simpleMap(strings, coordinates, opt$color, opt$regions, opt$plot, opt$polygon, opt$ratio_string, opt$fq) # inserts coordinates and generates map
 }

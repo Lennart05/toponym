@@ -12,7 +12,7 @@
 #' @details
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' Accordingly, \code{region_name} accepts region name references for the selected countries.
-#' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from geodata package.
+#' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from the \code{geodata} package.
 #' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
 #'
 #' For RStudio:
