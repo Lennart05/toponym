@@ -24,12 +24,12 @@ If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the resp
 \examples{
 \dontrun{
 country(query = "ISO3")
-## returns list of all ISO3 codes
+## returns a list with a vector of all ISO3 codes
 
 country(query = "Thailand")
-## returns a data frame with the ISO2, ISO3 code and the full name
+## returns a list with a data frame with the ISO2, ISO3 code and the full name
 
 country(query = "Thailand", regions = TRUE)
-## returns all region names
+## returns a list with a vector with all region names
 }
 }

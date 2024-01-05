@@ -1,5 +1,6 @@
 #' @title Toponym Map
-#' @description This function plots selected toponyms onto a map.
+#' @description 
+#' This function plots selected toponyms onto a map.
 #' @param strings character string with regular expression to filter data.
 #' @param countries character string with country reference (name or iso-code).
 #' @param ... Additional parameters:

@@ -1,8 +1,6 @@
 #' @title Creates a polygon
 #' @description
 #' This function lets users create a polygon by point-and-click or directly retrieve polygon data.
-#' @details
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' @param countries character string with country reference (name or iso-code).
 #' @param ... Additional parameters:
 #' \itemize{
@@ -12,6 +10,7 @@
 #' }
 #' @export
 #' @details
+#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' This function uses the function \code{\link[spatstat.utils]{spatstatLocator}} provided by the \code{\link[spatstat.utils]{spatstat.utils}} package. The maps are retrieved from geodata package.
 #' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
 #'

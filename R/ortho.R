@@ -1,5 +1,6 @@
 #' @title Symbols Data
-#' @description This functions retrieves all symbols used in country data sets.
+#' @description 
+#' This functions retrieves all symbols used in country data sets.
 #' @details
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 #' Default of \code{column} is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}

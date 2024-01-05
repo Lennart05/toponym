@@ -1,5 +1,6 @@
 #' @title Identifying Scripts
-#' @description This function detects if the script is a latinate or not.
+#' @description
+#' This function detects if the script is a latinate or not.
 #' @param input character string
 #' @keywords internal
 #'

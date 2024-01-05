@@ -47,7 +47,7 @@ topComp("GB",
 
 topComp("GB",
   len = 3, rat = 1,
-  polygon = toponym::danelaw_polygon
+  polygon = toponym::danelaw_polygon,
   freq.type = "rel"
 )
 ## prints and saves a data frame of all three-character-long endings in Great Britain

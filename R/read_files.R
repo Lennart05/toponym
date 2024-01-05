@@ -1,5 +1,6 @@
 #' @title Reads GeoNames data
-#' @description This function reads toponym data for the package.
+#' @description 
+#' This function reads toponym data for the package.
 #' @details
 #' This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.

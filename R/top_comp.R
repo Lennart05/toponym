@@ -1,5 +1,6 @@
 #' @title Compares toponyms of a polygon and countries
-#' @description This function retrieves the most frequent toponyms in a given polygon relative to the countries' frequency
+#' @description
+#' This function retrieves the most frequent toponyms in a given polygon relative to the countries' frequency
 #' @details
 #' This function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon and prints out a data frame with those frequent toponyms that match the ratio criteria.
 #' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
@@ -32,7 +33,7 @@
 #'
 #' topComp("GB",
 #'   len = 3, rat = 1,
-#'   polygon = toponym::danelaw_polygon
+#'   polygon = toponym::danelaw_polygon,
 #'   freq.type = "rel"
 #' )
 #' ## prints and saves a data frame of all three-character-long endings in Great Britain
