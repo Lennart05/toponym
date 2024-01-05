@@ -65,7 +65,7 @@ top <- function(strings, countries, ...) {
   gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
   if(!is.null(opt$mapdata)){
   if(!is.data.frame(opt$mapdata)) stop("'mapdata' must be a data frame.")
-  if(!all(c("name", "latitude", "longitude") %in% colnames(opt$mapdata))) stop("'mapdata' must have the following columns: 'name', 'latitude' & 'latitude'.")
+  if(!all(c("name", "latitude", "longitude") %in% colnames(opt$mapdata))) stop("'mapdata' must have the following columns: 'name', 'latitude' & 'longitude'.")
     gn <- opt$mapdata
   }
   coordinates <- getCoordinates(strings, gn, opt$df, opt$csv) # coordinates of matches
