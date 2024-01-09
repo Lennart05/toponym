@@ -68,6 +68,6 @@ top <- function(strings, countries, ...) {
   if(!all(c("name", "latitude", "longitude") %in% colnames(opt$mapdata))) stop("'mapdata' must have the following columns: 'name', 'latitude' & 'longitude'.")
     gn <- opt$mapdata
   }
-  coordinates <- getCoordinates(strings, gn, opt$df, opt$csv) # coordinates of matches
-  simpleMap(strings, coordinates, opt$color, opt$regions, opt$plot, opt$polygon, opt$ratio_string, opt$fq) # inserts coordinates and generates map
+  coordinates <- getCoordinates(strings, gn, opt$df, opt$csv, polygon = opt$polygon) # coordinates of matches
+  simpleMap(strings, coordinates, opt$color, opt$regions, opt$plot, opt$ratio_string, opt$fq) # inserts coordinates and generates map
 }
