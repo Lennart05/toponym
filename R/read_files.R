@@ -20,7 +20,7 @@ readFiles <- function(countries, feat.class = "P") {
 
   L <- list()
   for (i in 1:length(countries)) {
-    if (tolower(countries[i]) %in% ls(top_env) == FALSE) {
+    if (tolower(countries[i]) %in% ls(.top_env) == FALSE) {
       geonames_content <- utils::read.table(
         file = filename[[i]], # reads country data of parameter "countries"
         head = FALSE, sep = "\t", quote = "", na.strings = "",
@@ -39,9 +39,9 @@ readFiles <- function(countries, feat.class = "P") {
       )
 
 
-      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = top_env) # saves in pkg env for later use
+      L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = .top_env) # saves in pkg env for later use
     } else {
-      L[[i]] <- top_env[[tolower(countries[i])]]
+      L[[i]] <- .top_env[[tolower(countries[i])]]
     }
   }
   if (length(L) > 1) {
