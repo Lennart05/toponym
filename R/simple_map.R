@@ -14,12 +14,12 @@
 #' @return A plot of all selected toponyms.
 simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, fq) {
 
-  f <- any(grepl("mapper", sys.calls())) #if used by mapper
+  x <- coordinates$latitude
+  y <- coordinates$longitude
+  cc <- coordinates$`country code`
+  matches <- coordinates$`matches`
+  mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains colors
 
-  x <- coordinates[[1]] # latitude
-  y <- coordinates[[2]] # longitude
-  cc <- coordinates[[3]] # country code
-  matches <- coordinates[[4]] # matched string
 
   nas <- unique(which(is.na(x)), which(is.na(y))) # checks for NAs
   if (length(nas) > 0) {
@@ -61,6 +61,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, 
 
   map <- sf::st_as_sf(map) # converts map into simple features map
 
+
   lengths <- as.data.frame(table(md[, 4])) # frequencies of each string in the same order
   if (length(strings) == nrow(lengths)) { # if multiple toponyms (i.e. endings etc.) result from one string
     lengths <- lengths[match(gsub("[[:punct:]]", "", strings), lengths$Var1), ][, 2]
@@ -69,25 +70,45 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, 
   } else { # if multiple strings are used, and one or more results in multiple toponyms
     lengths <- NULL
   }
+
+
+  ########### colors
+  if(mapper_color){ #if no color column exists in mapper data
   if (is.null(color)) color <- rainbow(length(unique(md[, 4])))
 
-  if (length(color) != length(unique(md[, 4])) && !f) stop("The number of colors does not match the number of toponyms for mapping.")
-
+  if (length(color) != length(unique(md[, 4]))) stop("The number of colors does not match the number of toponyms for mapping.")
+  }
 
   # creates plot
+  if(mapper_color){ # no mapper color column
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = if(f){color} else{md[, 4]})) +
+    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = md[, 4])) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
     ) +
-    if (!f) scale_color_manual(values = color, limits = unique(md$matches)) +
+    scale_color_manual(values = color, limits = unique(md$matches)) +
     labs(x = "longitude", y = "latitude", color = "string", title = paste(strings, lengths, collapse = "| ")) + # legend only with string & frequency
     {
       if (!is.null(ratio_string) && !is.null(fq)) labs(title = paste(strings, ratio_string, fq, collapse = " "))
     } # extended legend if created with topCompOut()
+
+  } else{ #mapper color column
+  p <- ggplot() +
+    geom_sf(data = map) +
+    theme_classic() +
+    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = coordinates$`color`)) +
+    coord_sf(
+      xlim = c(min(lng_range), max(lng_range)),
+      ylim = c(min(lat_range), max(lat_range))
+    ) +
+    labs(x = "longitude", y = "latitude", color = "color", title = strings) # legend only with string & frequency
+  }
+
+
+
 
 
   # saves or prints plot

@@ -10,13 +10,12 @@ if(!all(c("name", "latitude", "longitude") %in% colnames(mapdata))) stop("'mapda
 #sum(is.na(mapdata$`country code`))
 
 
-coordinates <- list(mapdata$`latitude`, mapdata$`longitude`, mapdata$`country code`, mapdata$`matches`)
+coordinates <- list(latitude = mapdata$`latitude`, longitude = mapdata$`longitude`, "country code" = mapdata$`country code`, matches = mapdata$`matches`, color = mapdata$`color`)
 
 opt <- list(...)
 if (is.null(opt$regions)) opt$regions <- 0
 if (is.null(opt$plot)) opt$plot <- TRUE
 
-if(!is.null(mapdata$`color`)) opt$color <- mapdata$`color` #color column overrides color parameter
 
 simpleMap(opt$label, #optional labels
           coordinates, opt$color, opt$regions, opt$plot, opt$polygon)

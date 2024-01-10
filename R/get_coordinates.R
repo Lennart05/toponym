@@ -70,5 +70,5 @@ getCoordinates <- function(strings, gn, df, csv, ...) {
     }
   }
 
-  return(list(lat_strings, lon_strings, country, m_strings))
+  return(list(latitude = lat_strings, longitude = lon_strings, "country code" = country, "matches" = m_strings))
 }
