@@ -3,6 +3,7 @@
 export(country)
 export(createPolygon)
 export(getData)
+export(mapper)
 export(ortho)
 export(top)
 export(topComp)
