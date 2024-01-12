@@ -9,9 +9,9 @@ topZtest(strings, countries, polygon, ...)
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
 
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
-\item{polygon}{data frame. Polygon for comparison with the country.}
+\item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
 \item{...}{Additional parameter:
 \itemize{
@@ -26,6 +26,6 @@ This function applies a Z-test.
 }
 \details{
 This function lets users apply a z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 }

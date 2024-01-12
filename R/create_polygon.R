@@ -1,26 +1,27 @@
 #' @title Creates a polygon
 #' @description
 #' This function lets users create a polygon by point-and-click or directly retrieve polygon data.
-#' @param countries character string with country reference (name or iso-code).
+#' @param countries character string with country designation (name or ISO-code).
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} displaying only country borders.
+#' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 #' \item\code{region_name} character string with region name.
 #' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 #' }
 #' @export
 #' @details
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-#' Accordingly, \code{region_name} accepts region name references for the selected countries.
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#' \code{region_name} accepts region names for the selected countries, which can also be retrieved by \code{country()}.
 #' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from the \code{geodata} package.
-#' Users of RStudio whose points are shifted away, are advised to set their zoom settings of RStudio and of their device to 100%.
+#' In RGui, users either have to middle-click or right-click and then press stop.
 #'
-#' For RStudio:
+#' In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot.
+#' Users whose points are shifted away, are advised to set the zoom settings of RStudio and of their device to 100%:
 #'
 #' Tools -> Global Options -> Appearance -> Zoom
 #'
 #'
-#' For further details on the point-and-click mechanic refer to the help page for spatstatLocator.
+#' For further details on the point-and-click mechanisms refer to the help page for spatstatLocator.
 #'
 #' @examples
 #' \dontrun{

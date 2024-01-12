@@ -1,21 +1,23 @@
-#' @title Country References
+#' @title Country Designations
 #' @description
 #' This function returns country codes, names and regional names used by the \code{toponym} package.
 #'
 #' @param query character string. Enter query to access information on countries.
 #' @param regions logical. If \code{TRUE}, outputs the region names of the respective countries.
-#' @details If you refer to an individual country, you receive the remaining forms of reference.
-#' If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length. If you enter "names", you receive a vector of all country names. If you enter "country table", you receive the data frame with all country references.
-#' @return Returns a list of country references or (a column selection of) the full country table.
+#' @details If you enter to an individual country designation, you receive the three different designations (IS02, ISO3, name).
+#' If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length.
+#' If you enter "names", you receive a vector of all country names.
+#' If you enter "country table", you receive a data frame with all three designations for every country.
+#' @return Returns designations selected from a data frame containing designations for every country.
 #' @export
 #'
 #' @examples
 #' \dontrun{
 #' country(query = "ISO3")
-#' ## returns a list with a vector of all ISO3 codes
+#' ## returns a vector of all ISO3 codes
 #'
 #' country(query = "Thailand")
-#' ## returns a list with a data frame with the ISO2, ISO3 code and the full name
+#' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name
 #'
 #' country(query = "Thailand", regions = TRUE)
 #' ## returns a list with a vector with all region names

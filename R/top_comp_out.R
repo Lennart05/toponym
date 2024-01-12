@@ -1,15 +1,16 @@
 #' @title Saves multiple maps and toponym data
 #' @description
-#' This function applies the list of toponyms returned by \code{topComp()} to \code{top()}.
+#' This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies. It generates maps of them and saves them along with the corresponding data frames.
 #' @details
+#' This function applies the list of toponyms returned by \code{topComp()} to \code{top()}.
 #' A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #'
-#' @param countries character string with country reference (name or iso-code)
-#' @param len numeric. The character length of the toponyms.
-#' @param rat numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.
-#' @param polygon data frame. Polygon for comparison with the country.
+#' @param countries character string with country designation (name or ISO-code)
+#' @param len numeric. The length of the substring within toponyms.
+#' @param rat numeric. The cut-off ratio (a number between 0.0 and 1) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).
+#' @param polygon data frame. Defines the polygon for comparison with the remainder of a country (or countries).
 
 #' @param ... Additional parameters:
 #' \itemize{
@@ -27,7 +28,7 @@
 #' @examples
 #' \dontrun{
 #' topCompOut(
-#'   countries = "BE", count = 100, len = 3, rat = .5,
+#'   countries = "BE", limit = 100, len = 3, rat = .5,
 #'   toponym::flanders_polygon
 #' )
 #'

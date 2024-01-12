@@ -7,7 +7,7 @@
 topFreq(countries, len, limit, ...)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
 \item{len}{numeric. The character length of the toponyms.}
 
@@ -22,13 +22,13 @@ topFreq(countries, len, limit, ...)
 }}
 }
 \value{
-A table with toponym names and their frequency.
+A table with toponym substrings and their frequency.
 }
 \description{
-This function returns which toponyms are most frequent in countries or a polygon.
+This function returns the most frequent toponyms in countries or a polygon.
 }
 \details{
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 }
 \examples{
 \dontrun{

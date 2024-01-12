@@ -1,10 +1,10 @@
 #' @title Retrieves the most frequent toponyms
 #' @description
-#' This function returns which toponyms are most frequent in countries or a polygon.
+#' This function returns the most frequent toponyms in countries or a polygon.
 #' @details
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #'
-#' @param countries character string with country reference (name or iso-code).
+#' @param countries character string with country designation (name or ISO-code).
 #' @param len numeric. The character length of the toponyms.
 #' @param limit numeric. The number of the most frequent toponyms.
 
@@ -16,7 +16,7 @@
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #'
-#' @return A table with toponym names and their frequency.
+#' @return A table with toponym substrings and their frequency.
 #' @export
 #'
 #' @examples

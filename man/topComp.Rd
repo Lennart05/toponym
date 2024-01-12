@@ -2,18 +2,18 @@
 % Please edit documentation in R/top_comp.R
 \name{topComp}
 \alias{topComp}
-\title{Compares toponyms of a polygon and countries}
+\title{Compares toponyms in a polygon and the remainder of countries}
 \usage{
 topComp(countries, len, rat, polygon, ...)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
-\item{len}{numeric. The character length of the toponyms.}
+\item{len}{numeric. The length of the substring within toponyms.}
 
-\item{rat}{numeric. The ratio (a number between 0.0 and 1) of how many occurrences of one toponym need to be in the polygon.}
+\item{rat}{numeric. The cut-off ratio (a number between 0.0 and 1) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).}
 
-\item{polygon}{data frame. Polygon for comparison with the country.}
+\item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
 \item{...}{Additional parameters:
 \itemize{
@@ -24,25 +24,25 @@ topComp(countries, len, rat, polygon, ...)
 }}
 }
 \value{
-A data frame printed out and saved in the global environment. It shows toponyms surpassing the ratio, the ratio and the frequency.
+A data frame printed out and saved in the global environment. It shows toponym substrings surpassing the ratio, the ratio and the frequency.
 }
 \description{
-This function retrieves the most frequent toponyms in a given polygon relative to the countries' frequency
+This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies.
 }
 \details{
-This function sorts the toponyms in the given countries by frequency. It then tests which lie in the given polygon and prints out a data frame with those frequent toponyms that match the ratio criteria.
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those toponyms that match the ratio criterion.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 }
 \examples{
 \dontrun{
 topComp("GB",
-  count = 100, len = 4, rat = .9,
+  limit = 100, len = 4, rat = .9,
   polygon = toponym::danelaw_polygon
 )
 ## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
-## if more than 90\% of the places lie in the newly defined polygon
-## which frames the Danelaw.
+## if more than 90\% of them belong to the polygon
+## corresponding to the Danelaw area.
 
 
 topComp("GB",
@@ -56,12 +56,14 @@ topComp("GB",
 
 topComp(c("BE", "NL"),
   rat = .8,
+  len = 3,
+  limit = 50,
   polygon = toponym::flanders_polygon
 )
 
-## prints and saves a data frame of the top 10 three-character-long endings in Belgium
-## and Netherlands viewed as a unit if more than 80\% of the places lie
-## in the newly defined polygon which frames Flanders.
+## prints and saves a data frame of the top 50 three-character-long endings
+## in Belgium and Netherlands viewed as a unit if more than 80\% of them belong to the polygon
+## corresponding to Flanders.
 
 .
 }

@@ -1,10 +1,10 @@
-#' @title Downloads GeoName data
+#' @title Downloads GeoNames data
 #' @description This function downloads toponym data for the package.
 #' @details
-#' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/), which is later used by \code{readFiles()}.
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-#' @param countries character string with country reference (name or iso-code).
-#' @param save logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.
+#' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/) and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#' @param countries character string with country designation (name or ISO-code).
+#' @param save logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in a temporary folder.
 #' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
 #' @examples

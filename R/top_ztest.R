@@ -4,12 +4,12 @@
 #'
 #' @details
 #' This function lets users apply a z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #'
 #' @param strings character string with regular expression to filter data.
-#' @param countries character string with country reference (name or iso-code).
-#' @param polygon data frame. Polygon for comparison with the country.
+#' @param countries character string with country designation (name or ISO-code).
+#' @param polygon data frame. Defines the polygon for comparison with the remainder of a country (or countries).
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.

@@ -2,14 +2,14 @@
 % Please edit documentation in R/get_data.R
 \name{getData}
 \alias{getData}
-\title{Downloads GeoName data}
+\title{Downloads GeoNames data}
 \usage{
 getData(countries, save = TRUE, overwrite = FALSE)
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
-\item{save}{logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in the temporary folder.}
+\item{save}{logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in a temporary folder.}
 
 \item{overwrite}{logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.}
 }
@@ -17,8 +17,8 @@ getData(countries, save = TRUE, overwrite = FALSE)
 This function downloads toponym data for the package.
 }
 \details{
-The data is downloaded from the \href{https://download.geonames.org/export/dump/}{GeoNames download page}, which is later used by \code{readFiles()}.
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+The data is downloaded from the \href{https://download.geonames.org/export/dump/}{GeoNames download page} and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 }
 \examples{
 \dontrun{

@@ -2,7 +2,7 @@
 % Please edit documentation in R/country.R
 \name{country}
 \alias{country}
-\title{Country References}
+\title{Country Designations}
 \usage{
 country(query = NULL, regions = FALSE)
 }
@@ -12,22 +12,24 @@ country(query = NULL, regions = FALSE)
 \item{regions}{logical. If \code{TRUE}, outputs the region names of the respective countries.}
 }
 \value{
-Returns a list of country references or (a column selection of) the full country table.
+Returns designations selected from a data frame containing designations for every country.
 }
 \description{
 This function returns country codes, names and regional names used by the \code{toponym} package.
 }
 \details{
-If you refer to an individual country, you receive the remaining forms of reference.
-If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length. If you enter "names", you receive a vector of all country names. If you enter "country table", you receive the data frame with all country references.
+If you enter to an individual country designation, you receive the three different designations (IS02, ISO3, name).
+If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length.
+If you enter "names", you receive a vector of all country names.
+If you enter "country table", you receive a data frame with all three designations for every country.
 }
 \examples{
 \dontrun{
 country(query = "ISO3")
-## returns a list with a vector of all ISO3 codes
+## returns a vector of all ISO3 codes
 
 country(query = "Thailand")
-## returns a list with a data frame with the ISO2, ISO3 code and the full name
+## returns a list with a data frame with ISO2 code, ISO3 code and the full name
 
 country(query = "Thailand", regions = TRUE)
 ## returns a list with a vector with all region names

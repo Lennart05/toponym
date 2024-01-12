@@ -2,12 +2,12 @@
 % Please edit documentation in R/ortho.R
 \name{ortho}
 \alias{ortho}
-\title{Symbols Data}
+\title{Orthographical symbols}
 \usage{
 ortho(countries, column = "alternatenames")
 }
 \arguments{
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
 \item{column}{character string naming the column of interest.}
 }
@@ -15,10 +15,10 @@ ortho(countries, column = "alternatenames")
 A table with frequencies of all symbols.
 }
 \description{
-This functions retrieves all symbols used in country data sets.
+This function retrieves all symbols used in country data sets.
 }
 \details{
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 The default column is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 }
