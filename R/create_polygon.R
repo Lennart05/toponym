@@ -13,6 +13,7 @@
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' \code{region_name} accepts region names for the selected countries, which can also be retrieved by \code{country()}.
 #' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from the \code{geodata} package.
+#'
 #' In RGui, users either have to middle-click or right-click and then press stop.
 #'
 #' In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot.
