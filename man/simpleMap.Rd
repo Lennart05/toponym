@@ -4,16 +4,7 @@
 \alias{simpleMap}
 \title{Plots toponyms onto a map}
 \usage{
-simpleMap(
-  strings,
-  coordinates,
-  color,
-  regions,
-  plot,
-  polygon,
-  ratio_string,
-  fq
-)
+simpleMap(strings, coordinates, color, regions, plot, ratio_string, fq)
 }
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
@@ -25,8 +16,6 @@ simpleMap(
 \item{regions}{numeric. Specifies the level of regional borders. By default \code{0} displaying only country borders.}
 
 \item{plot}{logical. If \code{FALSE}, then the plot will not be printed but saved as .png in the current working directory.}
-
-\item{polygon}{data frame. Selects toponyms only inside the polygon.}
 
 \item{ratio_string}{character string. Ratio of occurrences in the polygon from \code{topComp()}.}
 
