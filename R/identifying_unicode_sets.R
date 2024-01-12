@@ -75,8 +75,8 @@ IS <- function(input) {  # stands for Identify Script
   for (i in 1:length(non.latin)) {
     find.non.latin <- grepl(non.latin[i], input)
     if (find.non.latin[1]==TRUE) {
-      message("You entered one or more", script.names[i],
-            "characters, so the alternate names column of geonames will be used.\n")
+      message("You entered one or more ", script.names[i],
+            " characters, so the alternate names column of geonames will be used.\n")
       result <- "non.latinate"
       return(result)
     }
