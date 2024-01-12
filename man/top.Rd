@@ -30,7 +30,7 @@ This function returns and plots selected toponyms onto a map.
 }
 \details{
 This function is used to plot all locations matching the regular expression from \code{strings}.
-Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 
 This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.

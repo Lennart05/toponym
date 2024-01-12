@@ -34,7 +34,7 @@ Users whose points are shifted away, are advised to set the zoom settings of RSt
 
 Tools -> Global Options -> Appearance -> Zoom
 
-For further details on the point-and-click mechanisms refer to the help page for spatstatLocator.
+For further details on the point-and-click mechanisms refer to the help page for \code{spatstatLocator}.
 }
 \examples{
 \dontrun{

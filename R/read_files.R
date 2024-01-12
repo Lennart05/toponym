@@ -3,8 +3,8 @@
 #' This function reads toponym data for the package.
 #' @details
 #' This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
-#' Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
-#' @param countries character string with country reference (name or iso-code).
+#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#' @param countries character string with country designation (name or iso-code).
 #' @param feat.class character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' @keywords internal
 #' @return A data frame with GeoNames data.

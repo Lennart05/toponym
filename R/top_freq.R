@@ -5,7 +5,7 @@
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #'
 #' @param countries character string with country designation (name or ISO-code).
-#' @param len numeric. The character length of the toponyms.
+#' @param len numeric. The length of the substring within toponyms.
 #' @param limit numeric. The number of the most frequent toponyms.
 
 #' @param ... Additional parameters:

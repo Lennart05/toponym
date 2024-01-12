@@ -11,9 +11,9 @@ simpleMap(strings, coordinates, color, regions, plot, ratio_string, fq)
 
 \item{coordinates}{coordinates with country codes and matched strings filtered by \code{getCoordinates()}.}
 
-\item{color}{character string. indicating, which color is assigned to each country code in order.}
+\item{color}{character string indicating, which color is assigned to each string.}
 
-\item{regions}{numeric. Specifies the level of regional borders. By default \code{0} displaying only country borders.}
+\item{regions}{numeric. Specifies the level of regional borders. By default \code{0} for displaying only country borders.}
 
 \item{plot}{logical. If \code{FALSE}, then the plot will not be printed but saved as .png in the current working directory.}
 

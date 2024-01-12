@@ -9,7 +9,7 @@ topFreq(countries, len, limit, ...)
 \arguments{
 \item{countries}{character string with country designation (name or ISO-code).}
 
-\item{len}{numeric. The character length of the toponyms.}
+\item{len}{numeric. The length of the substring within toponyms.}
 
 \item{limit}{numeric. The number of the most frequent toponyms.}
 

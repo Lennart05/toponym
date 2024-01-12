@@ -52,10 +52,10 @@ country <- function(query = NULL, regions = FALSE) {
       warn[[i]] <- query[i]
     } # check for NAs
   } else { # if regions is TRUE
-    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, the query must contain a country reference.")
+    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, the query must contain a country designation.")
     map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
-    error <- paste0("The query '", query[i], "' is an invalid country reference")
+    error <- paste0("The query '", query[i], "' is an invalid country designation")
 
     output[[i]] <- tryCatch(expr = {
       gadm(country = query[i], path = map_path)$NAME_1
@@ -80,10 +80,10 @@ country <- function(query = NULL, regions = FALSE) {
   if(n_warn == 1){
     warning(paste0("The query '", warn, "' is an invalid country reference."))
   }else if(n_warn > 1){
-    warning(paste0("The queries '", paste(warn, collapse = ", "), "' are invalid country references."))
+    warning(paste0("The queries '", paste(warn, collapse = ", "), "' are invalid country designations."))
   }
   if(n_warn == length(query))
-    stop("There were no correct country references. No data returned.")
+    stop("There were no correct country designation. No data returned.")
   output <- output[!sapply(output, function(x) all(is.na(x)))]
   return(output)
 }

@@ -22,7 +22,7 @@
 #' Tools -> Global Options -> Appearance -> Zoom
 #'
 #'
-#' For further details on the point-and-click mechanisms refer to the help page for spatstatLocator.
+#' For further details on the point-and-click mechanisms refer to the help page for \code{spatstatLocator}.
 #'
 #' @examples
 #' \dontrun{
@@ -69,8 +69,6 @@ createPolygon <- function(countries, ...) {
     }
     polygon <- as.data.frame(crds(map)) # retrieves coordinates of subset or country from map data
   } else { # lets users draw on subset or country
-    message("If you use RGui, you either have to middle-click or right-click and then press stop. ESC does not work.")
-
     sp::plot(map) # plots the map
     polygon <- spatstatLocator(type = "o") # lets users draw a polygon on the plotted map
     if(length(polygon$x) == 0) stop("No points were clicked.")
