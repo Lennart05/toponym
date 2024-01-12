@@ -9,32 +9,31 @@ top(strings, countries, ...)
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
 
-\item{countries}{character string with country reference (name or iso-code).}
+\item{countries}{character string with country designation (name or ISO-code).}
 
 \item{...}{Additional parameters:
 \itemize{
 \item\code{color} character string indicating, which color is assigned to each string.
-\item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} displaying only country borders.
+\item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{df} logical. If \code{TRUE}, matches will be saved in the global environment.
 \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
-\item\code{mapdata} data frame. A user-specific data frame with toponym coordinates. Column names must match those of the GeoNames data. It is used instead of the GeoNames data.
 }}
 }
 \value{
 A plot of selected toponym(s) with the number of occurrences.
 }
 \description{
-This function plots selected toponyms onto a map.
+This function returns and plots selected toponyms onto a map.
 }
 \details{
 This function is used to plot all locations matching the regular expression from \code{strings}.
 Parameter \code{countries} accepts all references found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 
-This function calls the \code{simpleMap()} function to generate a map to plot all locations, passed through by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.
+This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.
 The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
@@ -45,15 +44,15 @@ top("itz$", "DE")
 # and saves the locations in a data frame in the global environment.
 
 
-top("^By", "DK", color = "green", df = FALSE, csv = TRUE, plot = FALSE)
-# saves a plot with all populated places colored in green
-# in Denmark starting with "By" (case sensitive)
+top("^Vlad", "RU", color = "green", df = FALSE, csv = TRUE, plot = FALSE)
+# saves a plot with all populated places
+# in Russia starting with "Vlad" (case sensitive) colored in green
 # and saves it as .png together with the matches as .csv in the working directory.
 
 
 top(c("itz$", "ice$"), c("DE", "PL"))
-# prints a plot with all populated places in Germany colored in red and Poland colored in cyan
-# ending with either "itz" or "ice"
+# prints a plot with all populated places in Germany and Poland ending with either "itz" or "ice"
+# colored in red ("itz") and cyan ("ice")
 # and saves matches in the global environment.
 }
 }
