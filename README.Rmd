@@ -1,6 +1,5 @@
 ---
 title: "toponym"
-author: Lennart Chevallier & Søren Wichmann
 date: October 24, 2023
 output:
   github_document
