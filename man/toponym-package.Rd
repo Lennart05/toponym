@@ -18,7 +18,7 @@ The main functions are the following:
 \item\code{\link{topFreq}} retrieves most frequent toponyms.
 \item\code{\link{topZtest}} lets users apply a Z-test on toponym distributions
 }
-For more detailed descriptions read the respective documentation.
+For more detailed descriptions please read the respective documentation.
 }
 \seealso{
 Useful links:
