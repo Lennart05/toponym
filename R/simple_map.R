@@ -19,15 +19,14 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, 
   cc <- coordinates$`country code`
   matches <- coordinates$`matches`
   mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains colors
-
-
+  mapper_l <- grepl("mapper", sys.calls()[[1]][1]) # checks if used by mapper
   nas <- unique(which(is.na(x)), which(is.na(y))) # checks for NAs
   if (length(nas) > 0) {
     x <- x[-nas]
     y <- y[-nas]
   }
   if (length(x) == 0 | length(y) == 0) {
-    stop("\nThere are no coordinates to plot\n")
+    stop("\nThere are no coordinates to plot.\n")
   }
   md <- cbind(as.numeric(x), as.numeric(y), cc, matches) %>% # creates df out of x and y coordinates
     as.data.frame() %>%
@@ -90,7 +89,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, 
       ylim = c(min(lat_range), max(lat_range))
     ) +
     scale_color_manual(values = color, limits = unique(md$matches)) +
-    labs(x = "longitude", y = "latitude", color = "string", title = paste(strings, lengths, collapse = "| ")) + # legend only with string & frequency
+    labs(x = "longitude", y = "latitude", color = "string", title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
     {
       if (!is.null(ratio_string) && !is.null(fq)) labs(title = paste(strings, ratio_string, fq, collapse = " "))
     } # extended legend if created with topCompOut()
