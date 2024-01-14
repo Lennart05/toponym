@@ -12,7 +12,7 @@
 #' @param fq character string. Number of occurrences in the designated polygon and in total.
 #' @keywords internal
 #' @return A plot of all selected toponyms.
-simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string, fq) {
+simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string = NULL, fq = NULL) {
 
   x <- coordinates$latitude
   y <- coordinates$longitude
