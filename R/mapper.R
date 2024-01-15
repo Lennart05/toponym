@@ -24,8 +24,8 @@ opt <- list(...)
 if (is.null(opt$regions)) opt$regions <- 0
 if (is.null(opt$plot)) opt$plot <- TRUE
 
-if(!is.data.frame(mapdata)) stop("'mapdata' must be a data frame.")
-if(!all(c("name", "latitude", "longitude") %in% colnames(mapdata))) stop("'mapdata' must have the following columns: `latitude' & 'longitude'.")
+if(!is.data.frame(mapdata)) stop("Parameter 'mapdata' must be a data frame.")
+if(!all(c("name", "latitude", "longitude") %in% colnames(mapdata))) stop("Parameter 'mapdata' must have the following columns: `latitude' & 'longitude'.")
 if(!"country code" %in% colnames(mapdata) && opt$regions > 0) stop("Since no country codes were provided, parameter `regions` cannot exceed 0.")
 
 if("color" %in% colnames(mapdata)) warning(paste("sum(is.na(mapdata$`color`) entries are empty in the color column."))

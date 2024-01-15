@@ -4,7 +4,15 @@
 \alias{simpleMap}
 \title{Plots toponyms onto a map}
 \usage{
-simpleMap(strings, coordinates, color, regions, plot, ratio_string, fq)
+simpleMap(
+  strings,
+  coordinates,
+  color,
+  regions,
+  plot,
+  ratio_string = NULL,
+  fq = NULL
+)
 }
 \arguments{
 \item{strings}{character string with regular expression to filter data.}

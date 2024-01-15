@@ -39,8 +39,7 @@
 #' }
 #' @return A data frame with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {
-
-  if(missing(countries)) stop("Argument 'countries' must be defined.")
+  if(missing(countries)) stop("Parameter 'countries' must be defined.")
 
   map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
@@ -58,6 +57,7 @@ createPolygon <- function(countries, ...) {
       opt$regions <- 1
     } # admin level = regions needs to be at least 1 if specific regions are to be displayed
     map <- gadm(country = countries, level = opt$regions, path = map_path)
+    Encoding(map$NAME_1) <- "UTF-8"
     map <- map[map$NAME_1 %in% opt$region_name, ]
   }
 

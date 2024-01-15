@@ -6,20 +6,20 @@
 #' @param strings character string with regular expression to filter data.
 #' @param df logical. If \code{TRUE}, matches will be saved in the global environment.
 #' @param csv logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
+#' @param tsv logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
-getCoordinates <- function(strings, gn, df, csv, ...) {
+getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
+
   opt <- list(...)
   # removes coordinates outside of the polygon
-
   if (!is.null(opt$polygon)) {
-    con.hull <- poly(opt$polygon)
-
-    poly_log <- as.logical(point.in.polygon(gn[,"longitude"], gn[, "latitude"], con.hull$X, con.hull$Y)) # check which places are in the polygon
+    if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+    poly_log <- as.logical(point.in.polygon(gn[,"longitude"], gn[, "latitude"], opt$polygon$lons, opt$polygon$lats)) # check which places are in the polygon
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }
@@ -53,21 +53,30 @@ getCoordinates <- function(strings, gn, df, csv, ...) {
 
 
 
-  # saves data as df and/or csv
-  if (df == TRUE || csv == TRUE) {
+  # saves data as df and/or csv/tsv
+  if (any(df, csv, tsv)) {
     strings_raw <- gsub("[[:punct:]]", "", strings)
     dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse = "_")
     if (df == TRUE) {
       dat <- assign(dat_name, output, envir = .GlobalEnv)
       message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
     }
-    if (csv == TRUE) {
-      csv_dir <- file.path(getwd(), "data frames")
-      csv_name <- paste(file.path(csv_dir, dat_name), ".csv", sep = "")
-      if (!dir.exists(csv_dir)) dir.create(csv_dir)
-      utils::write.csv(output, csv_name)
-      message(paste("\nDataframe", dat_name, "saved as csv in dataframes folder of the working directory.\n"))
+    if(any(csv, tsv)){
+      file_dir <- file.path(getwd(), "data frames")
+      if (!dir.exists(file_dir)) dir.create(file_dir)
     }
+    if (csv == TRUE) {
+      csv_name <- paste(file.path(file_dir, dat_name), ".csv", sep = "")
+      utils::write.table(output, file = csv_name, quote=FALSE, sep=';', row.names = FALSE)
+      message(paste("\nDataframe", dat_name, "saved as csv in `data frames` folder of the working directory.\n"))
+    }
+    if (tsv == TRUE) {
+      tsv_name <- paste(file.path(file_dir, dat_name), ".tsv", sep = "")
+      utils::write.table(output, file = tsv_name, quote=FALSE, sep='\t', row.names = FALSE)
+      message(paste("\nDataframe", dat_name, "saved as tsv in `data frames` folder of the working directory.\n"))
+    }
+
+
   }
 
   return(list(latitude = lat_strings, longitude = lon_strings, "country code" = country, "matches" = m_strings))

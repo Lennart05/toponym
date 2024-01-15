@@ -13,10 +13,10 @@
 #' @keywords internal
 #' @return A plot of all selected toponyms.
 simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string = NULL, fq = NULL) {
-
   x <- coordinates$latitude
   y <- coordinates$longitude
   cc <- coordinates$`country code`
+
   matches <- coordinates$`matches`
   mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains colors
   mapper_l <- grepl("mapper", sys.calls()[[1]][1]) # checks if used by mapper
@@ -51,7 +51,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   if (regions == 0) {
     map <- world(path = map_path) # gets world map from pkg "geodata"
   } else {
-    map <- gadm(country = unique(cc), level = regions, path = map_path) # gets map of specified countries with domestic borders from pkg "rnaturalearth"
+    map <- gadm(country = unique(cc), level = regions, path = map_path) # gets map of specified countries with domestic borders from pkg "geodata"
     # if(!missing(region_name)){map <- map[map$NAME_1 %in% region_name,]}
     if(is.null(map)) stop(paste("Map data could not be retrieved.", if(regions >= 1) "'regions' argument may be set too high"))
   }
@@ -114,7 +114,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   if (plot == FALSE) {
     plot_name <- paste0("plot_", paste(regmatches(strings, regexpr("[a-zA-Z]+", strings)), collapse = "_"), ".png", collapse = "_")
     ggsave(plot_name, path = file.path(getwd(), "plots"))
-    message(paste("\nPlot", plot_name, "saved in plots folder of the working directory.\n"))
+    message(paste("\nPlot", plot_name, "saved in `plots` folder of the working directory.\n"))
   } else {
     print(p)
   }

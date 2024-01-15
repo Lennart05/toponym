@@ -9,6 +9,7 @@
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 #' \item\code{df} logical. If \code{TRUE}, matches will be saved in the global environment.
 #' \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
+#' \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 #' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 #' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
@@ -44,24 +45,22 @@
 #' @return A plot of selected toponym(s) with the number of occurrences.
 #' @export
 top <- function(strings, countries, ...) {
-
    countries <- country(query = countries)
   for (i in 1:length(countries)) {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
-
   opt <- list(...)
-
   if (is.null(opt$df)) opt$df <- TRUE
   if (is.null(opt$csv)) opt$csv <- FALSE
+  if (is.null(opt$tsv)) opt$tsv <- FALSE
   if (is.null(opt$plot)) opt$plot <- TRUE
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
   if (is.null(opt$regions)) opt$regions <- 0
-
+  if (is.logical(opt$regions)) stop("Parameter `regions` must be numeric, not logical.")
 
   try(getData(countries), silent = TRUE) # gets data
-  gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
-  coordinates <- getCoordinates(strings, gn, opt$df, opt$csv, polygon = opt$polygon) # coordinates of matches
-  simpleMap(strings, coordinates, opt$color, opt$regions, opt$plot, opt$ratio_string, opt$fq) # inserts coordinates and generates map
+  gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
+  coordinates <- getCoordinates(strings, gn, df = opt$df, csv = opt$csv, tsv = opt$tsv, polygon = opt$polygon) # coordinates of matches
+  simpleMap(strings, coordinates, color = opt$color, regions = opt$regions, plot = opt$plot, ratio_string = opt$ratio_string, fq = opt$fq) # inserts coordinates and generates map
 }

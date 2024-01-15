@@ -4,7 +4,7 @@
 \alias{getCoordinates}
 \title{Coordinates Selection}
 \usage{
-getCoordinates(strings, gn, df, csv, ...)
+getCoordinates(strings, gn, df, csv, tsv, ...)
 }
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
@@ -14,6 +14,8 @@ getCoordinates(strings, gn, df, csv, ...)
 \item{df}{logical. If \code{TRUE}, matches will be saved in the global environment.}
 
 \item{csv}{logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.}
+
+\item{tsv}{logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.}
 
 \item{...}{Additional parameter:
 \itemize{
