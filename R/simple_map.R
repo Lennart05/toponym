@@ -40,8 +40,8 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
 
 
   # get max min long and lat and add a frame of 10% around the points
-  lat_range <- range(md[, 1])
-  lng_range <- range(md[, 2])
+  lat_range <- range(md[, "V1"])
+  lng_range <- range(md[, "V2"])
   lat_extend <- 0.1 * diff(lat_range)
   lng_extend <- 0.1 * diff(lng_range)
   lat_range <- c(lat_range - lat_extend, lat_range + lat_extend)
@@ -65,7 +65,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   map <- sf::st_as_sf(map) # converts map into simple features map
 
   if(!is.null(matches)){ #if matches are given
-  lengths <- as.data.frame(table(md[, 4])) # frequencies of each string in the same order
+  lengths <- as.data.frame(table(md[, "matches"])) # frequencies of each string in the same order
   if (length(strings) == nrow(lengths)) { # if multiple toponyms (i.e. endings etc.) result from one string
     lengths <- lengths[match(gsub("[[:punct:]]", "", strings), lengths$Var1), ][, 2]
   } else if (length(strings) == 1) {
@@ -76,9 +76,9 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
 
   ########### colors
   if(mapper_color){ #if no color column exists in mapper data
-  if (is.null(color)) color <- rainbow(length(unique(md[, 4])))
+  if (is.null(color)) color <- rainbow(length(unique(md[, "matches"])))
 
-  if (length(color) != length(unique(md[, 4]))) stop("The number of colors does not match the number of toponyms for mapping.")
+  if (length(color) != length(unique(md[, "matches"]))) stop("The number of colors does not match the number of toponyms for mapping.")
   }
   }
 
@@ -88,7 +88,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = if(!is.null(matches)){md[, 4]} else{color})) +
+    geom_point(data = md, mapping = aes(x = md[, "V2"], y = md[, "V1"], col = if(!is.null(matches)){md[, "matches"]} else{color})) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
@@ -103,7 +103,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = coordinates$`color`)) +
+    geom_point(data = md, mapping = aes(x = md[, "V2"], y = md[,"V1"], col = coordinates$`color`)) +
     scale_color_manual(values = unique(coordinates$`color`), limits = unique(coordinates$`color`)) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
