@@ -22,7 +22,7 @@ topZtest <- function(strings, countries, polygon, ...) {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
-
+  if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
 
@@ -30,9 +30,8 @@ topZtest <- function(strings, countries, polygon, ...) {
   gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
 
 
-  con.hull <- poly(polygon)
 
-  poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
+  poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, polygon$lons, polygon$lats)) # check which places are in the polygon
 
   poly_log <- as.vector(table(poly_log))
 
@@ -44,7 +43,7 @@ topZtest <- function(strings, countries, polygon, ...) {
   lat_strings <- gn$latitude[strings_ID]
   lon_strings <- gn$longitude[strings_ID]
   # logical vectors storing if each place is within the given polygon
-  loc_log <- as.logical(point.in.polygon(lon_strings, lat_strings, con.hull$X, con.hull$Y))
+  loc_log <- as.logical(point.in.polygon(lon_strings, lat_strings, polygon$lons, polygon$lats))
 
   loc_log <- as.vector(table(loc_log))
 

@@ -12,7 +12,6 @@
 #' \itemize{
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
 #' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
-#' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #'
@@ -40,8 +39,8 @@ topFreq <- function(countries, len, limit, ...) {
   } # converts input into ISO2 codes
   countries <- unlist(countries)
 
-  if(missing(len)) stop("Argument 'len' must be defined.")
-  if(missing(limit) && limit != "fnc") stop("Argument 'limit' must be defined.")
+  if(missing(len)) stop("Parameter 'len' must be defined.")
+  if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")
 
 
   opt <- list(...)
@@ -52,9 +51,8 @@ topFreq <- function(countries, len, limit, ...) {
   gn <- readFiles(countries, opt$feat.class)
 
   if (!is.null(opt$polygon)) {
-    con.hull <- poly(opt$polygon)
-
-    poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, con.hull$X, con.hull$Y)) # check which places are in the polygon
+  if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+    poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, opt$polygon$lons, opt$polygon$lats)) # check which places are in the polygon
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }

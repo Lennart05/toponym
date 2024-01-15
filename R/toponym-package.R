@@ -16,7 +16,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom utils write.csv
+#' @importFrom utils write.table
 #' @importFrom utils download.file
 #' @importFrom utils unzip
 #' @importFrom utils read.table
