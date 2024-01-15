@@ -18,8 +18,12 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   cc <- coordinates$`country code`
 
   matches <- coordinates$`matches`
-  mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains colors
+  mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains color
   mapper_l <- grepl("mapper", sys.calls()[[1]][1]) # checks if used by mapper
+  if(all(!is.null(color), mapper_color, is.null(matches))) {
+    if(length(color) != length(x) && length(color) != 1) stop("Length of parameter `color` must be either equal to the number of points or 1 if no `matches` column is given.")
+  }
+
   nas <- unique(which(is.na(x)), which(is.na(y))) # checks for NAs
   if (length(nas) > 0) {
     x <- x[-nas]
@@ -60,7 +64,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
 
   map <- sf::st_as_sf(map) # converts map into simple features map
 
-
+  if(!is.null(matches)){ #if matches are given
   lengths <- as.data.frame(table(md[, 4])) # frequencies of each string in the same order
   if (length(strings) == nrow(lengths)) { # if multiple toponyms (i.e. endings etc.) result from one string
     lengths <- lengths[match(gsub("[[:punct:]]", "", strings), lengths$Var1), ][, 2]
@@ -70,20 +74,21 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
     lengths <- NULL
   }
 
-
   ########### colors
   if(mapper_color){ #if no color column exists in mapper data
   if (is.null(color)) color <- rainbow(length(unique(md[, 4])))
 
   if (length(color) != length(unique(md[, 4]))) stop("The number of colors does not match the number of toponyms for mapping.")
   }
+  }
+
 
   # creates plot
   if(mapper_color){ # no mapper color column
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = md[, 4])) +
+    geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = if(!is.null(matches)){md[, 4]} else{color})) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
@@ -99,6 +104,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
     geom_sf(data = map) +
     theme_classic() +
     geom_point(data = md, mapping = aes(x = md[, 2], y = md[, 1], col = coordinates$`color`)) +
+    scale_color_manual(values = unique(coordinates$`color`), limits = unique(coordinates$`color`)) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
