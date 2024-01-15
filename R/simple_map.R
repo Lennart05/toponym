@@ -94,7 +94,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
       ylim = c(min(lat_range), max(lat_range))
     ) +
     scale_color_manual(values = color, limits = unique(md$matches)) +
-    labs(x = "longitude", y = "latitude", color = "string", title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
+    labs(x = "longitude", y = "latitude", color = if(!is.null(matches)){"string"} else{"color"}, title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
     {
       if (!is.null(ratio_string) && !is.null(fq)) labs(title = paste(strings, ratio_string, fq, collapse = " "))
     } # extended legend if created with topCompOut()
