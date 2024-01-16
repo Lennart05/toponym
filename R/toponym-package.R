@@ -16,22 +16,16 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom utils write.table
-#' @importFrom utils download.file
-#' @importFrom utils unzip
-#' @importFrom utils read.table
-#' @importFrom utils tail
+#' @importFrom utils write.table download.file unzip read.table tail
 #' @importFrom geodata world
 #' @importFrom geodata gadm
 #' @importFrom terra crds
 #' @importFrom graphics segments
-#' @importFrom grDevices chull
 #' @importFrom grDevices rainbow
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate_at
 #' @importFrom sf st_as_sf
-#' @importFrom spatstat.geom owin
-#' @importFrom spatstat.geom inside.owin
+#' @importFrom spatstat.geom owin inside.owin
 #' @importFrom spatstat.utils spatstatLocator
 #' @importFrom stats prop.test
 #' @importFrom ggplot2 ggplot geom_sf theme_classic geom_point aes coord_sf scale_color_manual labs ggsave
