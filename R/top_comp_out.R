@@ -37,6 +37,7 @@
 #' ## in Belgium if more than 50% of the places lie in the polygon for Flanders.
 #' }
 topCompOut <- function(countries, len, rat, polygon, ...) {
+   ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$type)) opt$type <- "$"
   if(is.null(opt$feat.class)) opt$feat.class <- "P"

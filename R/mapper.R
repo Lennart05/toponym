@@ -8,13 +8,12 @@
 #' \item\code{color} character string indicating, which color is assigned to each string.
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 #' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
-#' \item\code{label} character string. Text for the title of plot.
+#' \item\code{label} character string. Text for the title of the plot.
 #' }
 #' @details
 #' This function's purpose is to allow users to provide own data frames or curated ones exported by this package.
-#' The data frame must have at least two columns called `latitude` & `longtitude`. If the data frame has a column `color`, the function will assign every value in that column to the respective coordinates and ignore the optional parameter \code{color}.
+#' The data frame must have at least two columns called `latitude` & `longtitude`. If the data frame has a column `color`, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
 #' If `regions`  is set to a value higher than 0, either the data frame must have a column `country codes` or the parameter \code{countries} must be defined.
-#' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' @return A plot.
 #' @export
 #'

@@ -43,9 +43,11 @@ createPolygon <- function(countries, ...) {
 
   map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
+  ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$regions)) opt$regions <- 0
   if(is.null(opt$retrieve)) opt$retrieve <- FALSE
+  if(is.logical(opt$regions)) stop("Parameter `regions` must be numeric, not logical.")
 
   if (any(countries == "world")) {
     countries <- "world"
@@ -69,7 +71,7 @@ createPolygon <- function(countries, ...) {
     }
     polygon <- as.data.frame(crds(map)) # retrieves coordinates of subset or country from map data
   } else { # lets users draw on subset or country
-    sp::plot(map) # plots the map
+    plot(map) # plots the map
     polygon <- spatstatLocator(type = "o") # lets users draw a polygon on the plotted map
     if(length(polygon$x) == 0) stop("No points were clicked.")
     segments(polygon$x[1], polygon$y[1], tail(polygon$x, n = 1), tail(polygon$y, n = 1))

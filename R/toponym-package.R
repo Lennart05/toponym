@@ -30,8 +30,8 @@
 #' @importFrom dplyr %>%
 #' @importFrom dplyr mutate_at
 #' @importFrom sf st_as_sf
-#' @importFrom sp point.in.polygon
-#' @importFrom sp plot
+#' @importFrom spatstat.geom owin
+#' @importFrom spatstat.geom inside.owin
 #' @importFrom spatstat.utils spatstatLocator
 #' @importFrom stats prop.test
 #' @importFrom ggplot2 ggplot geom_sf theme_classic geom_point aes coord_sf scale_color_manual labs ggsave

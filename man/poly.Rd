@@ -2,7 +2,7 @@
 % Please edit documentation in R/poly.R
 \name{poly}
 \alias{poly}
-\title{Transforms coordinates into a convex hull}
+\title{Transforms coordinates into a window}
 \usage{
 poly(polygon)
 }
@@ -10,9 +10,9 @@ poly(polygon)
 \item{polygon}{data frame, coordinates of the polygon.}
 }
 \value{
-A convex hull.
+An object of class \code{owin} which is a polygonal window.
 }
 \description{
-Transforms coordinates into a convex hull
+This function transforms polygonal data into an object of class \code{owin} for \code{spatstat.geom} functions.
 }
 \keyword{internal}

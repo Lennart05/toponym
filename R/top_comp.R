@@ -62,7 +62,10 @@ topComp <- function(countries, len, rat, polygon, ...) {
   } # converts input into ISO2 codes
   countries <- unlist(countries)
   if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
-  
+
+  poly_owin <- poly(polygon)
+
+   ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
@@ -92,7 +95,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     n.tops <- nrow(gn) # number of all toponyms anywhere
     in.poly <- rep(NA, n.tops)
     for (i in 1:n.tops) {
-      in.poly[i] <- as.logical(point.in.polygon(gn$longitude[i], gn$latitude[i], polygon$lons, polygon$lats))
+      in.poly[i] <- inside.owin(x = gn$longitude[i], y = gn$latitude[i], w = poly_owin) # check which places are in the polygon
     }
     n.tops.in.poly <- sum(in.poly) # number of all toponyms in polygon
     n.tops.out.poly <- n.tops - n.tops.in.poly # number of all toponyms outside polygon
@@ -106,7 +109,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     lon_strings[[i]] <- gn$longitude[toponyms_ID_o[[i]]]
 
     # logical vectors storing if each place is within the given polygon
-    loc_log[[i]] <- as.logical(point.in.polygon(lon_strings[[i]], lat_strings[[i]], polygon$lons, polygon$lats))
+    loc_log[[i]] <- inside.owin(x = lon_strings[[i]], y = lat_strings[[i]], w = poly_owin)
     n.top.in.poly <- sum(loc_log[[i]]) # number of target toponym in polygon
     n.top <- length(loc_log[[i]]) # number of target toponym anywhere
     n.top.out.poly <- n.top - n.top.in.poly

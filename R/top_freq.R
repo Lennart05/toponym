@@ -43,6 +43,7 @@ topFreq <- function(countries, len, limit, ...) {
   if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")
 
 
+  ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
@@ -52,7 +53,9 @@ topFreq <- function(countries, len, limit, ...) {
 
   if (!is.null(opt$polygon)) {
   if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
-    poly_log <- as.logical(point.in.polygon(gn$longitude, gn$latitude, opt$polygon$lons, opt$polygon$lats)) # check which places are in the polygon
+    poly_owin <- poly(opt$polygon)
+
+    poly_log <- inside.owin(x = gn$longitude, y = gn$latitude, w = poly_owin) # check which places are in the polygon
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }

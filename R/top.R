@@ -50,6 +50,7 @@ top <- function(strings, countries, ...) {
     countries[i] <- countries[[i]][, 1]
   } # converts input into ISO2 codes
   countries <- unlist(countries)
+  ##### store additional parameters and set defaults
   opt <- list(...)
   if (is.null(opt$df)) opt$df <- TRUE
   if (is.null(opt$csv)) opt$csv <- FALSE

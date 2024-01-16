@@ -15,11 +15,16 @@
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
 getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
+  ##### store additional parameters and set defaults
   opt <- list(...)
+
   # removes coordinates outside of the polygon
   if (!is.null(opt$polygon)) {
     if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
-    poly_log <- as.logical(point.in.polygon(gn[,"longitude"], gn[, "latitude"], opt$polygon$lons, opt$polygon$lats)) # check which places are in the polygon
+
+    poly_owin <- poly(opt$polygon)
+
+    poly_log <- inside.owin(x = gn$longitude, y = gn$latitude, w = poly_owin) # check which places are in the polygon
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }
