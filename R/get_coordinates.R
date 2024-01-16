@@ -67,18 +67,18 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
       message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
     }
     if(any(csv, tsv)){
-      file_dir <- file.path(getwd(), "data frames")
+      file_dir <- file.path(getwd(), "dataframes")
       if (!dir.exists(file_dir)) dir.create(file_dir)
     }
     if (csv == TRUE) {
       csv_name <- paste(file.path(file_dir, dat_name), ".csv", sep = "")
       utils::write.table(output, file = csv_name, quote=FALSE, sep=';', row.names = FALSE)
-      message(paste("\nDataframe", dat_name, "saved as csv in `data frames` folder of the working directory.\n"))
+      message(paste("\nDataframe", dat_name, "saved as csv in `dataframes` folder of the working directory.\n"))
     }
     if (tsv == TRUE) {
       tsv_name <- paste(file.path(file_dir, dat_name), ".tsv", sep = "")
       utils::write.table(output, file = tsv_name, quote=FALSE, sep='\t', row.names = FALSE)
-      message(paste("\nDataframe", dat_name, "saved as tsv in `data frames` folder of the working directory.\n"))
+      message(paste("\nDataframe", dat_name, "saved as tsv in `dataframes` folder of the working directory.\n"))
     }
 
 
