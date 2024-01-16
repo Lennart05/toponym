@@ -26,5 +26,5 @@ This function plots a user-specific data frame onto a map.
 \details{
 This function's purpose is to allow users to provide own data frames or curated ones exported by this package.
 The data frame must have at least two columns called \code{latitude} & \code{longtitude}. If the data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
-If \code{regions}  is set to a value higher than 0, either the data frame must have a column \verb{country codes} or the parameter \code{countries} must be defined.
+If \code{regions}  is set to a value higher than 0, the data frame must have a column \verb{country codes}.
 }

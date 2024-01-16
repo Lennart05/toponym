@@ -13,7 +13,7 @@
 #' @details
 #' This function's purpose is to allow users to provide own data frames or curated ones exported by this package.
 #' The data frame must have at least two columns called `latitude` & `longtitude`. If the data frame has a column `color`, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
-#' If `regions`  is set to a value higher than 0, either the data frame must have a column `country codes` or the parameter \code{countries} must be defined.
+#' If `regions`  is set to a value higher than 0, the data frame must have a column `country codes`.
 #' @return A plot.
 #' @export
 #'
