@@ -71,7 +71,7 @@ createPolygon <- function(countries, ...) {
     }
     polygon <- as.data.frame(crds(map)) # retrieves coordinates of subset or country from map data
   } else { # lets users draw on subset or country
-    plot(map) # plots the map
+    terra::plot(map) # plots the map
     polygon <- spatstatLocator(type = "o") # lets users draw a polygon on the plotted map
     if(length(polygon$x) == 0) stop("No points were clicked.")
     segments(polygon$x[1], polygon$y[1], tail(polygon$x, n = 1), tail(polygon$y, n = 1))
