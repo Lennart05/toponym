@@ -8,7 +8,7 @@
 #' @return An object of class `owin` which is a polygonal window.
 #'
 poly <- function(polygon) {
-  pol <- list(x = polygon$lons, y = polygon$lats)
+  pol <- list(x = polygon$lats, y = polygon$lons)
 
   #owin function from spatstat.geom
   poly_owin <- owin(poly = pol)
