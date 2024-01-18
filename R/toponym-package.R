@@ -19,7 +19,7 @@
 #' @importFrom utils write.table download.file unzip read.table tail
 #' @importFrom geodata world
 #' @importFrom geodata gadm
-#' @importFrom terra crds
+#' @importFrom terra crds plot
 #' @importFrom graphics segments
 #' @importFrom grDevices rainbow
 #' @importFrom dplyr %>%
