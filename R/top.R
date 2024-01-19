@@ -58,7 +58,7 @@ top <- function(strings, countries, ...) {
   if (is.null(opt$plot)) opt$plot <- TRUE
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
   if (is.null(opt$regions)) opt$regions <- 0
-  if (is.logical(opt$regions)) stop("Parameter `regions` must be numeric, not logical.")
+  if (!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
 
   try(getData(countries), silent = TRUE) # gets data
   gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
