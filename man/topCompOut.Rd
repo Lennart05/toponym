@@ -27,7 +27,7 @@ topCompOut(countries, len, rat, polygon, ...)
 }}
 }
 \value{
-Data frames and plots saved in a sub folder (called 'data frames' and 'plots') in the working directory or package environment.
+Data frames and plots saved in a sub folder (called 'dataframes' and 'plots') in the working directory or global environment.
 }
 \description{
 This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies. It generates maps of them and saves them along with the corresponding data frames.

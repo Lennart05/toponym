@@ -4,15 +4,18 @@
 \alias{country}
 \title{Country Designations}
 \usage{
-country(query = NULL, regions = FALSE)
+country(query = NULL, ...)
 }
 \arguments{
-\item{query}{character string. Enter query to access information on countries.}
+\item{query}{a vector with character string. Enter query to access information on countries.}
 
-\item{regions}{logical. If \code{TRUE}, outputs the region names of the respective countries.}
+\item{...}{Addtional parameter:
+\itemize{
+\item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
+}}
 }
 \value{
-Returns designations selected from a data frame containing designations for every country.
+Returns country designations selected from a data frame. Returns region designations in a matrix selected from \code{geodata} map data.
 }
 \description{
 This function returns country codes, names and regional names used by the \code{toponym} package.
@@ -22,6 +25,7 @@ If you enter to an individual country designation, you receive the three differe
 If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length.
 If you enter "names", you receive a vector of all country names.
 If you enter "country table", you receive a data frame with all three designations for every country.
+Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
 }
 \examples{
 \dontrun{

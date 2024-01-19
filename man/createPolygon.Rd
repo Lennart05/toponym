@@ -13,6 +13,7 @@ createPolygon(countries, ...)
 \itemize{
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{region_name} character string with region name.
+\item\code{region_ID} character string with region ID.
 \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 }}
 }
@@ -24,27 +25,29 @@ This function lets users create a polygon by point-and-click or directly retriev
 }
 \details{
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-\code{region_name} accepts region names for the selected countries, which can also be retrieved by \code{country()}.
-This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package. The maps are retrieved from the \code{geodata} package.
+\code{region_ID} and \code{region_name} accepts region designations for the selected countries, which can be retrieved by \code{country()}.
+The function prioritizes any \code{region_ID} and ignores \code{region_name} if users provide both.
+The matrix listing all region designations may be incomplete as the \code{geodata} mapa data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
 
-In RGui, users either have to middle-click or right-click and then press stop.
+This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package for the point-and-click functionality.
+In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 
 In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot.
 Users whose points are shifted away, are advised to set the zoom settings of RStudio and of their device to 100\%:
 
 Tools -> Global Options -> Appearance -> Zoom
 
-For further details on the point-and-click mechanisms refer to the help page for \code{spatstatLocator}.
+For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 }
 \examples{
 \dontrun{
-createPolygon("NA", region_name = "Ohangwena")
+createPolygon("NA", region_ID = "NAM.7_1")
 
 # a plot of the region Ohangwena in Namibia
 # by point-and-click a polygon can be created
-
+# use country() to find all acceptable region IDs
 Ohangwena_polygon <- createPolygon(
-"NA", region_name = "Ohangwena", retrieve = TRUE
+"NA", region_ID = "NAM.7_1", retrieve = TRUE
 )
 # no plot appears
 # the coordinates of the region are stored in the object

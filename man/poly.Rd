@@ -14,5 +14,6 @@ An object of class \code{owin} which is a polygonal window.
 }
 \description{
 This function transforms polygonal data into an object of class \code{owin} for \code{spatstat.geom} functions.
+If data points run clockwise, data will be reversed for \code{owin} function. It requires counterclockwise data.
 }
 \keyword{internal}
