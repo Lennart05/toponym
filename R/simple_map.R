@@ -17,10 +17,10 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   y <- coordinates$longitude
   cc <- coordinates$`country code`
 
-  matches <- coordinates$`matches`
+  group <- coordinates$`group`
   mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains color
   mapper_l <- grepl("mapper", sys.calls()[[1]][1]) # checks if used by mapper
-  if(all(!is.null(color), mapper_color, is.null(matches))) {
+  if(all(!is.null(color), mapper_color, is.null(group))) {
     if(length(color) != length(x) && length(color) != 1) stop("Length of parameter `color` must be either equal to the number of points or 1 if no `matches` column is given.")
   }
 
@@ -32,7 +32,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   if (length(x) == 0 | length(y) == 0) {
     stop("\nThere are no coordinates to plot.\n")
   }
-  md <- cbind(as.numeric(x), as.numeric(y), cc, matches) %>% # creates df out of x and y coordinates
+  md <- cbind(as.numeric(x), as.numeric(y), cc, group) %>% # creates df out of x and y coordinates
     as.data.frame() %>%
     mutate_at(c("V1", "V2"), as.numeric)
 
@@ -57,15 +57,15 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   } else {
     map <- gadm(country = unique(cc), level = regions, path = map_path) # gets map of specified countries with domestic borders from pkg "geodata"
     # if(!missing(region_name)){map <- map[map$NAME_1 %in% region_name,]}
-    if(is.null(map)) stop(paste("Map data could not be retrieved.", if(regions >= 1) "'regions' argument may be set too high"))
+    if(is.null(map)) stop(paste("Map data could not be retrieved.", if(regions >= 1) "'regions' parameter may be set too high"))
   }
 
 
 
   map <- sf::st_as_sf(map) # converts map into simple features map
 
-  if(!is.null(matches)){ #if matches are given
-  lengths <- as.data.frame(table(md[, "matches"])) # frequencies of each string in the same order
+  if(!is.null(group)){ #if group are given
+  lengths <- as.data.frame(table(md[, "group"])) # frequencies of each string in the same order
   if (length(strings) == nrow(lengths)) { # if multiple toponyms (i.e. endings etc.) result from one string
     lengths <- lengths[match(gsub("[[:punct:]]", "", strings), lengths$Var1), ][, 2]
   } else if (length(strings) == 1) {
@@ -76,9 +76,9 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
 
   ########### colors
   if(mapper_color){ #if no color column exists in mapper data
-  if (is.null(color)) color <- rainbow(length(unique(md[, "matches"])))
+  if (is.null(color)) color <- rainbow(length(unique(md[, "group"])))
 
-  if (length(color) != length(unique(md[, "matches"]))) stop("The number of colors does not match the number of toponyms for mapping.")
+  if (length(color) != length(unique(md[, "group"]))) stop("The number of colors does not match the number of toponyms for mapping.")
   }
   }
 
@@ -88,13 +88,13 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ratio_string =
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, "V2"], y = md[, "V1"], col = if(!is.null(matches)){md[, "matches"]} else{color})) +
+    geom_point(data = md, mapping = aes(x = md[, "V2"], y = md[, "V1"], col = if(!is.null(group)){md[, "group"]} else{color})) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
     ) +
-    scale_color_manual(values = color, limits = unique(md$matches)) +
-    labs(x = "longitude", y = "latitude", color = if(!is.null(matches)){"string"} else{"color"}, title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
+    scale_color_manual(values = color, limits = unique(md$group)) +
+    labs(x = "longitude", y = "latitude", color = if(!is.null(group)){"string"} else{"color"}, title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
     {
       if (!is.null(ratio_string) && !is.null(fq)) labs(title = paste(strings, ratio_string, fq, collapse = " "))
     } # extended legend if created with topCompOut()

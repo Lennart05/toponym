@@ -45,13 +45,13 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
     m_strings <- alt_l[[2]]
   } else {
     w_strings <- unique(grep(paste(strings, collapse = "|"), gn$name, perl = TRUE)) # gets all indexes of matches
-    m_strings <- regmatches(gn$name, regexpr(paste(strings, collapse = "|"), gn$name, perl = TRUE)) # gets matches
+    m_strings <- regmatches(gn$name, regexpr(paste(strings, collapse = "|"), gn$name, perl = TRUE)) # gets matched strings
   }
   output <- gn[w_strings, ]
   lat_strings <- output$latitude # gets respective lat coordinates
   lon_strings <- output$longitude # gets respective lon coordinates
   country <- output$"country code" # gets respective cc
-  output["group"] <- m_strings # adds matches to "groups" column
+  output["group"] <- m_strings # adds matches to "group" column
 
 
 
@@ -84,5 +84,5 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
   }
 
-  return(list(latitude = lat_strings, longitude = lon_strings, "country code" = country, "matches" = m_strings))
+  return(list(latitude = lat_strings, longitude = lon_strings, "country code" = country, "group" = m_strings))
 }
