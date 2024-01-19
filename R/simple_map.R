@@ -12,7 +12,7 @@
 #' \itemize{
 #' \item\code{ratio_string} character string. Ratio of occurrences in the polygon from \code{topComp()}.
 #' \item\code{fq} character string. Number of occurrences in the designated polygon and in total.
-#' \item\code{legend_title}
+#' \item\code{legend_title} character string. Only if \code{mapper} is used. Text for the title of the legend. It is prioritized over `string` and `color` even if a `group` and `color` column exists.
 #' }
 #' @keywords internal
 #' @return A plot of all selected toponyms.
@@ -47,8 +47,8 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
 
 
   # get max min long and lat and add a frame of 10% around the points
-  lat_range <- range(md[, "V1"])
-  lng_range <- range(md[, "V2"])
+  lat_range <- range(md$V1)
+  lng_range <- range(md$V2)
   lat_extend <- 0.1 * diff(lat_range)
   lng_extend <- 0.1 * diff(lng_range)
   lat_range <- c(lat_range - lat_extend, lat_range + lat_extend)
@@ -112,7 +112,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = md[, "V2"], y = md[,"V1"], col = md$group)) +
+    geom_point(data = md, mapping = aes(x = V2, y = V1, col = md$group)) +
     scale_color_manual(values = unique(coordinates$`color`), limits = unique(coordinates$`color`), name = if(!is.null(opt$legend_title)){opt$legend_title}else{"string"}) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),

@@ -15,6 +15,7 @@ mapper(mapdata, ...)
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 \item\code{label} character string. Text for the title of the plot.
+\item\code{legend_title} character string. Text for the title of the legend. It is prioritized over \code{string} and \code{color} even if a \code{group} and \code{color} column exists.
 }}
 }
 \value{
@@ -25,6 +26,8 @@ This function plots a user-specific data frame onto a map.
 }
 \details{
 This function's purpose is to allow users to provide own data frames or curated ones exported by this package.
-The data frame must have at least two columns called \code{latitude} & \code{longtitude}. If the data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
+The data frame must have at least two columns called \code{latitude} & \code{longtitude}.
+If the data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
+If the data frame has a column \code{group}, the function will group data and display a legend.
 If \code{regions}  is set to a value higher than 0, the data frame must have a column \verb{country codes}.
 }
