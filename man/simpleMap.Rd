@@ -4,15 +4,7 @@
 \alias{simpleMap}
 \title{Plots toponyms onto a map}
 \usage{
-simpleMap(
-  strings,
-  coordinates,
-  color,
-  regions,
-  plot,
-  ratio_string = NULL,
-  fq = NULL
-)
+simpleMap(strings, coordinates, color, regions, plot, ...)
 }
 \arguments{
 \item{strings}{character string with regular expression to filter data.}
@@ -25,9 +17,12 @@ simpleMap(
 
 \item{plot}{logical. If \code{FALSE}, then the plot will not be printed but saved as .png in the current working directory.}
 
-\item{ratio_string}{character string. Ratio of occurrences in the polygon from \code{topComp()}.}
-
-\item{fq}{character string. Number of occurrences in the designated polygon and in total.}
+\item{...}{Addtional parameters:
+\itemize{
+\item\code{ratio_string} character string. Ratio of occurrences in the polygon from \code{topComp()}.
+\item\code{fq} character string. Number of occurrences in the designated polygon and in total.
+\item\code{legend_title}
+}}
 }
 \value{
 A plot of all selected toponyms.

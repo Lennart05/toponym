@@ -34,7 +34,10 @@ country <- function(query = NULL, ...) {
   if(opt$regions > 1) stop("`regions` values higher than 1 cannot be satisfied.")
 
 
-  if(!(is.character(query))) stop("The query must contain a character string.")
+  if(!is.character(query)) stop("The query must contain a character string.")
+  query <- query[!nchar(query) == 1] #removes input which is only one character long
+  if(length(query) == 0) stop("The query contains no valid input.")
+
   countryInfo <- toponym::countryInfo
   spec_col <- c("country table", "ISO2", "ISO3", "names")
   output <- list()
@@ -89,7 +92,7 @@ country <- function(query = NULL, ...) {
     warn <- warn[!sapply(warn, is.null)]
     }
   if(n_warn == 1){
-    warning(paste0("The query '", warn, "' is an invalid country reference."))
+    warning(paste0("The query '", warn, "' is an invalid country designation."))
   }else if(n_warn > 1){
     warning(paste0("The queries '", paste(warn, collapse = ", "), "' are invalid country designations."))
   }
