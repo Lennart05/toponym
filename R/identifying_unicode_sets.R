@@ -65,8 +65,8 @@ IS <- function(input) {  # stands for Identify Script
                  Sinhala, Georgian, Geez.Ethiopian, Mongolian,
                  Hiragana, Katakana, Hangul, Hangul.Jamo,
                  Hangul.Compatibility.Jamo)
-  script.names <- c("Greek or Coptic", "Cyrillic", "Armenian", "Arabic",
-                    "Hebrew", "Syriac", "Devanagari", "Bengali/Assamese", "Gurmukhi",
+  script.names <- c("Greek or Coptic", "Cyrillic", "Armenian", "Hebrew",
+                    "Arabic", "Syriac", "Devanagari", "Bengali/Assamese", "Gurmukhi",
                     "Gujarati", "Oriya", "Tamil", "Telugu", "Kannada", "Malayalam",
                     "Sinhala", "Georgian", "Geez/Ethiopian", "Mongolian",
                     "Japanese", "Japanese", "Hangul", "Hangul",
