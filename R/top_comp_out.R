@@ -23,7 +23,7 @@
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
 #'
-#' @return Data frames and plots saved in a sub folder (called 'data frames' and 'plots') in the working directory or package environment.
+#' @return Data frames and plots saved in a sub folder (called 'dataframes' and 'plots') in the working directory or global environment.
 #' @export
 #'
 #' @examples
