@@ -51,7 +51,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   lat_strings <- output$latitude # gets respective lat coordinates
   lon_strings <- output$longitude # gets respective lon coordinates
   country <- output$"country code" # gets respective cc
-  output["matches"] <- m_strings # adds matches
+  output["group"] <- m_strings # adds matches to "groups" column
 
 
 
