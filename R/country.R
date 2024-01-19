@@ -2,13 +2,17 @@
 #' @description
 #' This function returns country codes, names and regional names used by the \code{toponym} package.
 #'
-#' @param query character string. Enter query to access information on countries.
-#' @param regions logical. If \code{TRUE}, outputs the region names of the respective countries.
+#' @param query a vector with character string. Enter query to access information on countries.
+#' @param ... Addtional parameter:
+#' \itemize{
+#' \item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
+#' }
 #' @details If you enter to an individual country designation, you receive the three different designations (IS02, ISO3, name).
 #' If you enter "ISO2" or "ISO3", you receive a vector of all ISO-codes of the respective length.
 #' If you enter "names", you receive a vector of all country names.
 #' If you enter "country table", you receive a data frame with all three designations for every country.
-#' @return Returns designations selected from a data frame containing designations for every country.
+#' Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
+#' @return Returns country designations selected from a data frame. Returns region designations in a matrix selected from \code{geodata} map data.
 #' @export
 #'
 #' @examples
@@ -22,7 +26,13 @@
 #' country(query = "Thailand", regions = TRUE)
 #' ## returns a list with a vector with all region names
 #' }
-country <- function(query = NULL, regions = FALSE) {
+country <- function(query = NULL, ...) {
+
+  opt <- list(...)
+  if(is.null(opt$regions)) opt$regions <- 0
+  if(!is.numeric(opt$regions)) stop("`regions` must be numeric.")
+  if(opt$regions > 1) stop("`regions` values higher than 1 cannot be satisfied.")
+
 
   if(!(is.character(query))) stop("The query must contain a character string.")
   countryInfo <- toponym::countryInfo
@@ -30,7 +40,7 @@ country <- function(query = NULL, regions = FALSE) {
   output <- list()
   warn <- list()
   for(i in 1:length(query)){
-  if (regions == FALSE) {
+  if (opt$regions == 0) {
     if (any(query == spec_col[1])) {
       return(countryInfo)
     } else if (query[i] == spec_col[2]) { # outputs all ISO2 codes
@@ -51,23 +61,24 @@ country <- function(query = NULL, regions = FALSE) {
     if (anyNA(output[[i]])) {
       warn[[i]] <- query[i]
     } # check for NAs
-  } else { # if regions is TRUE
-    if(any(query == spec_col)) stop("If parameter 'regions' is set to TRUE, the query must contain a country designation.")
+  } else if(opt$regions == 1) { # if regions is 1
+    if(any(query %in% spec_col)) stop("If parameter 'regions' is set to 1, the query must contain a country designation.")
     map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
     error <- paste0("The query '", query[i], "' is an invalid country designation")
 
     output[[i]] <- tryCatch(expr = {
-      gadm(country = query[i], path = map_path)$NAME_1
+     gadm(country = query[i], path = map_path)
     },
     error = function(e){
       warning(error)
       return(NA)
     }
     )
-    if(!all(is.na(output[[i]]))){
-      Encoding(output[[i]]) <- "UTF-8" # corrects encoding
-    }
+    name <- output[[i]]$NAME_1 #
+    Encoding(name) <- "UTF-8" # corrects encoding
+    ID <- output[[i]]$GID_1 # region ID
+    output[[i]] <- cbind(name, ID)
   }
 
   } # loop ends
