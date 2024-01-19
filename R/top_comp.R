@@ -2,7 +2,7 @@
 #' @description
 #' This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies.
 #' @details
-#' This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those toponyms that match the ratio criterion.
+#' This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those that match the ratio criterion.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #' @param countries character string with country designation (name or ISO-code).
