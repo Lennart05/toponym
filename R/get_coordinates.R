@@ -10,6 +10,7 @@
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
+#' \item\code{name} character string. Defines name of output data frame.
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
@@ -17,6 +18,8 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
   ##### store additional parameters and set defaults
   opt <- list(...)
+
+  if(!is.null(opt$name) && !is.character(opt$name[1])) stop("Data frame name must be a character string. Only the first element will be considered.")
 
   # removes coordinates outside of the polygon
   if (!is.null(opt$polygon)) {
@@ -62,6 +65,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   if (any(df, csv, tsv)) {
     strings_raw <- gsub("[[:punct:]]", "", strings)
     dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse = "_")
+    if(!is.null(opt$name)) dat_name <- opt$name[1]
     if (df == TRUE) {
       dat <- assign(dat_name, output, envir = .GlobalEnv)
       message(paste("\nDataframe", dat_name, "saved in global environment.\n"))

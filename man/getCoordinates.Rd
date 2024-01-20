@@ -20,6 +20,7 @@ getCoordinates(strings, gn, df, csv, tsv, ...)
 \item{...}{Additional parameter:
 \itemize{
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
+\item\code{name} character string. Defines name of output data frame.
 }}
 }
 \value{
