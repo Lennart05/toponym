@@ -93,27 +93,27 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
 
 
   # creates plot
-  if(mapper_color){ # no mapper color column
+  if(mapper_color){ # TRUE if no mapper color column
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = V2, y = V1, col = if(!is.null(group)){group} else{color})) +
+    geom_point(data = md, mapping = aes(x = md[,"V2"], y = md[,"V1"], col = if(!is.null(group)){group} else{color})) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
     ) +
-    scale_color_manual(values = color, limits = unique(md$group), name = if(!is.null(opt$legend_title)){opt$legend_title}else if(!is.null(group)){"string"} else("color")) +
+    scale_color_manual(values = color, limits = unique(group), name = if(!is.null(opt$legend_title)){opt$legend_title}else if(!is.null(group)){"string"} else("color")) +
     labs(x = "longitude", y = "latitude", title = paste(strings, if(!mapper_l){lengths}, collapse = "| ")) + # legend only with string & frequency
     {
       if (!is.null(opt$ratio_string) && !is.null(opt$fq)) labs(title = paste(strings, opt$ratio_string, opt$fq, collapse = " "))
     } # extended legend if created with topCompOut()
 
-  } else{ #mapper color column
+  } else if(!mapper_color){ # FALSE if mapper color column
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = V2, y = V1, col = if(!is.null(group)){group} else{coordinates$`color`})) +
-    scale_color_manual(values = unique(coordinates$`color`), limits = unique(coordinates$`color`), name = if(!is.null(opt$legend_title)){opt$legend_title}else{"string"}) +
+    geom_point(data = md, mapping = aes(x = md[,"V2"], y = md[,"V1"], col = if(!is.null(group)){group} else{coordinates$`color`})) +
+    scale_color_manual(values = unique(coordinates$`color`), limits = if(!is.null(group)){unique(group)}else{unique(coordinates$`color`)}, name = if(!is.null(opt$legend_title)){opt$legend_title}else{"string"}) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
       ylim = c(min(lat_range), max(lat_range))
