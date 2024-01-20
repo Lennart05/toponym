@@ -66,7 +66,7 @@ createPolygon <- function(countries, ...) {
     if (opt$regions == 0) opt$regions <- 1 # admin level = regions needs to be at least 1 if specific regions are to be displayed
 
     map <- gadm(country = countries, level = opt$regions, path = map_path)  ## country map first
-    if(is.null(map)) stop(paste("Map data could not be retrieved.", if(opt$regions >= 1) "'regions' parameter may be set too high"))
+    if(is.null(map)) stop(paste("Map data could not be retrieved.", if(opt$regions >= 1) "Parameter 'regions' parameter may be set too high"))
 
     if(!is.null(opt$region_ID)){ # FIRST region ID
     map <- map[map$GID_1 %in% opt$region_ID]   ## selection of region within country
