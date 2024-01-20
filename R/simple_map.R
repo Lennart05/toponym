@@ -21,8 +21,8 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   y <- coordinates$longitude
   cc <- coordinates$`country code`
   group <- coordinates$`group`
-
-
+  if(!is.numeric(regions)) stop("Parameter `regions` must be numeric.")
+  if(!is.logical(plot)) stop("`plot` must be logical.")
   opt <- list(...)
 
   mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains color
@@ -85,7 +85,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   if(mapper_color){ #if no color column exists in mapper data
   if (is.null(color)) color <- rainbow(length(unique(md$group)))
 
-  if (length(color) != length(unique(md$group))) stop("The number of colors does not match the number of toponyms for mapping.")
+  if (length(color) != length(unique(md$group))) stop("The number of colors does not match the number of toponyms/groups for mapping.")
   }
   }
 
@@ -112,7 +112,7 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   p <- ggplot() +
     geom_sf(data = map) +
     theme_classic() +
-    geom_point(data = md, mapping = aes(x = V2, y = V1, col = md$group)) +
+    geom_point(data = md, mapping = aes(x = V2, y = V1, col = if(!is.null(group)){group} else{coordinates$`color`})) +
     scale_color_manual(values = unique(coordinates$`color`), limits = unique(coordinates$`color`), name = if(!is.null(opt$legend_title)){opt$legend_title}else{"string"}) +
     coord_sf(
       xlim = c(min(lng_range), max(lng_range)),
