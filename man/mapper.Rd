@@ -29,5 +29,6 @@ This function's purpose is to allow users to provide own data frames or curated 
 The data frame must have at least two columns called \code{latitude} & \code{longtitude}.
 If the data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color}.
 If the data frame has a column \code{group}, the function will group data and display a legend.
+If the data frame has a \code{color} and a \code{group} column, the assignment must match each other. Every \code{group} must be assigned a unique color throughout the data frame.
 If \code{regions}  is set to a value higher than 0, the data frame must have a column \verb{country codes}.
 }
