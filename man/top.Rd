@@ -21,6 +21,7 @@ top(strings, countries, ...)
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
+\item\code{name} character string. Defines name of output data frame.
 }}
 }
 \value{
