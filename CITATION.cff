@@ -6,6 +6,6 @@ authors:
 - family-names: "Wichmann"
   given-names: "Søren"
 title: "Toponym Package"
-version: 0.9.1
-date-released: 2023-05-08
+version: 0.9.9
+date-released: 2024-01-24
 url: "https://github.com/Lennart05/toponym"
