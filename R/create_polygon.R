@@ -18,6 +18,7 @@
 #'
 #'
 #' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package for the point-and-click functionality.
+#'
 #' In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 #'
 #' In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot.

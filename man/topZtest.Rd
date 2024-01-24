@@ -25,7 +25,7 @@ An object of class \code{htest} containing the results.
 This function applies a Z-test.
 }
 \details{
-This function lets users apply a z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
+This function lets users apply a Z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 }
