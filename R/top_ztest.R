@@ -17,6 +17,9 @@
 #' @export
 #' @return An object of class \code{htest} containing the results.
 topZtest <- function(strings, countries, polygon, ...) {
+
+  if(length(strings)>1) stop("This function only permits one string at a time.")
+
     countries <- country(query = countries)
   for (i in 1:length(countries)) {
     countries[i] <- countries[[i]][, 1]
