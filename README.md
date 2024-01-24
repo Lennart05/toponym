@@ -9,11 +9,11 @@ January 24, 2024
 Welcome to the `toponym` GitHub page!
 
 The `toponym` package supplies users of R with tools to visualize and
-analyze toponym (= place name) distributions. It is intended as
+analyze toponym (= place name) distributions. It is intended as an
 interface to the [GeoNames](https://www.geonames.org/) data. A regular
 expression filters data and a map is created displaying locations which
 comply with it. The functions make data and plots available for further
-analysis –either within R or in the working directory. Users can select
+analysis – either within R or in the working directory. Users can select
 regions within countries, provide coordinates to define regions, or
 specify a region within the package to restrict the data selection to
 that region or compare regions with the remainder of countries.
@@ -33,9 +33,9 @@ devtools::install_github("Lennart05/toponym")
 ## Create a simple map
 
 The function `top()`, meaning “toponym”, creates maps of places
-complying with a regular expression. First, one or more strings, then
-one or more countries are given. The following code is a simple example
-of this:
+complying with a regular expression. Minimally one or more strings and
+one or more countries (in that order) are given as input. The following
+code is a simple example of this:
 
 ``` r
 library(toponym) # load the package
@@ -46,7 +46,7 @@ top("itz$", "DE")
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-The plot displays all locations, which end in “-itz” in Germany, their
+The plot displays all locations which end in “-itz” in Germany, their
 total frequency (2182), and stores the data in the global environment.
 
 ## Country designations
@@ -100,13 +100,13 @@ country("Mali", regions = 1)
 #>  [7,] "Ségou"     "MLI.7_1"
 #>  [8,] "Sikasso"   "MLI.8_1"
 #>  [9,] "Timbuktu"  "MLI.9_1"
-# returns all region names and IDs of Mali available to the data set
+# returns all region names and IDs of Mali available in the data
 ```
 
-## Frequent toponym strings
+## Frequent toponym substrings
 
-`topFreq()` lets users find frequent toponym strings. A simple example
-for the Philippines would be:
+`topFreq()` lets users find strings frequently recurring in toponym. A
+simple example for the Philippines would be:
 
 ``` r
 topFreq(countries = "Philippines",
@@ -125,9 +125,9 @@ three characters (`len = 3`).
 
 The additional parameter `polygon` allows users to restrict the data to
 a subset of the selected countries. Only toponyms within the polygon are
-selected. The polygon must intersect a country of parameter `countries`.
-The package contains a predefined polygon for the historical Danelaw
-area of England for exemplary use:
+selected. The polygon must intersect a country specified by the
+parameter `countries`. The package contains a predefined polygon for the
+historical Danelaw area of England for purposes of illustration:
 
 ``` r
 topFreq(countries = "GB",
@@ -142,7 +142,7 @@ topFreq(countries = "GB",
 
 ## Create polygons
 
-Coordinates, which delimit a polygon, are accepted in the form of a data
+Coordinates which delimit a polygon are input in the form of a data
 frame. The `createPolygon()` function helps users to define their own
 polygon by point-and-click or to retrieve map data.
 
@@ -151,9 +151,12 @@ argentina_polygon <- createPolygon(countries = "AR", regions = 1)
 ```
 
 In this example, a map of Argentina `AR` with highest-level
-administrative borders `regions = 1` will appear as plot. Now, users can
-click to set points which define a polygon. The last point should not
-repeat the first point. Once finished, a data frame with longitudinal
+administrative borders `regions = 1` will appear as a plot. Now users
+can click to set points which define a polygon. The last point should
+not repeat the first point. In RGui, users exit the point selection by
+middle-clicking or right-clicking and then pressing stop. In RStudio,
+users exit the point selection by pressing ESC or Finish in the top
+right corner of the plot. Once finished, a data frame with longitudinal
 and latitudinal coordinates called `argentina_polygon` is created.
 
 ## Strings specific to a region
@@ -178,15 +181,15 @@ topComp(countries = "GB",
 
 The function compares the frequency of trailing strings (`type = "$"`)
 within the Danelaw area (`polygon = toponym::danelaw_polygon`) with
-their frequency in the United Kingdom (`countries = "GB"`) as a whole
-and returns a data frame. The output is in descending order by their
-proportional frequency. The search is limited to the 100 (`limit = 100`)
-most frequent strings in the United Kingdom consisting of (a length of)
-three characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`)
-means that at least 80% of all occurrences (in the country or countries)
-must be inside the polygon. In this case, the string “-rpe” occurs 175
-times in the United Kingdom and 156 of these 176 occurrences are within
-the target polygon resulting in a ratio percentage of 89.14%.
+their frequency in the United Kingdom (`countries = "GB"`) and returns a
+data frame. The output is in descending order by their proportional
+frequency. The search is limited to the 100 (`limit = 100`) most
+frequent strings in theUnited Kingdom consisting of (a length of) three
+characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that
+at least 80% of all occurrences (in the country or countries) must be
+inside the polygon. In this case, the string “-rpe” occurs 175 times in
+the United Kingdom and 156 of these 176 occurrences are within the
+target polygon resulting in a ratio percentage of 89.14%.
 
 ## Creating multiple maps at once
 
@@ -199,10 +202,11 @@ topCompOut(countries = "GB",
                 )
 ```
 
-Running this with the same settings leaves us with a distributional map
-and a data frame of every string. The plots are saved in the working
-directory in a separate folder called “plots”. The data frames are saved
-in another folder called “data frames”.
+Running this with the same settings as just used for `topComp()`
+produces a distributional map and a data frame of every string. The
+plots are saved in the working directory in a separate folder called
+“plots”. The data frames are saved in another folder called “data
+frames”.
 
 ## Apply a Z-test
 
@@ -249,7 +253,10 @@ The core functions are as follows:
 - `topFreq()` retrieves most frequent toponyms.
 - `topZtest()` lets users apply a Z-test on toponym distributions.
 
-For help type `?function` or `?toponym`
+For help type `?toponym` or a question mark following the individual
+function name (or use the `help()` syntax). A link to the index at the
+bottom of each help page provides a useful way of navigating the
+package.
 
 ## Regular expression
 
@@ -261,12 +268,14 @@ guide](https://cran.r-project.org/web/packages/stringr/vignettes/regular-express
 
 The toponym data comes from [GeoNames](https://www.geonames.org/) and
 will be automatically downloaded when you call any of the core
-functions. It is recommended to save the data of the countries you look
-at in the package directory. This is the default option of the function
-`getData()` but it is possible to place it in the temporary folder by
-changing the parameter to `save = FALSE`. Type `tempdir()` to find the
-temporary directory of the current session. For mapping purposes as well
-as region designations, the
+functions. It is recommended to save the data of the countries you
+access in the package directory. This is the default option of the
+function `getData()` but it is possible to place it in the temporary
+folder by changing the parameter to `save = FALSE`. If you want to store
+data only temporary, you need to use `getData()` before any other
+function. Type `tempdir()` to find the temporary directory of the
+current session. For mapping purposes as well as region designations,
+the
 [geodata](https://cran.r-project.org/web/packages/geodata/index.html)
 package is used. It provides spatial data for all countries and regions
 available in this package. All maps are stored in the geodata package
