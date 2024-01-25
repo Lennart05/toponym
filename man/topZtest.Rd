@@ -7,9 +7,9 @@
 topZtest(strings, countries, polygon, ...)
 }
 \arguments{
-\item{strings}{character string with regular expression to filter data.}
+\item{strings}{a character string with a regular expression to be tested.}
 
-\item{countries}{character string with country designation (name or ISO-code).}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
 \item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
