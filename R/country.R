@@ -12,7 +12,7 @@
 #' If you enter "names", you receive a vector of all country names.
 #' If you enter "country table", you receive a data frame with all three designations for every country.
 #' Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
-#' @return Returns country designations selected from a data frame. If regions is set to {1}, returns region designations in a matrix selected from \code{geodata} map data.
+#' @return Returns country designations selected from a data frame. If regions is set to \code{1}, returns region designations in a matrix selected from \code{geodata} map data.
 #' @export
 #'
 #' @examples

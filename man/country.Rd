@@ -15,7 +15,7 @@ country(query = NULL, ...)
 }}
 }
 \value{
-Returns country designations selected from a data frame. If regions is set to {1}, returns region designations in a matrix selected from \code{geodata} map data.
+Returns country designations selected from a data frame. If regions is set to \code{1}, returns region designations in a matrix selected from \code{geodata} map data.
 }
 \description{
 This function returns country codes, names and regional names used by the \code{toponym} package.
