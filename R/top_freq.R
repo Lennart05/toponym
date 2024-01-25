@@ -1,17 +1,17 @@
 #' @title Retrieves the most frequent toponyms
 #' @description
-#' This function returns the most frequent toponyms in countries or a polygon.
+#' This function returns the most frequent toponym substrings in countries or a polygon.
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #'
-#' @param countries character string with country designation (name or ISO-code).
+#' @param countries a character string vector with country designations (names or ISO-codes).
 #' @param len numeric. The length of the substring within toponyms.
 #' @param limit numeric. The number of the most frequent toponyms.
 
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
-#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #'

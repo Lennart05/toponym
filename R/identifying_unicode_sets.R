@@ -1,6 +1,6 @@
-#' @title Identifying Scripts
+#' @title Identifying scripts
 #' @description
-#' This function detects if the script is a latinate or not.
+#' This function detects if the script might be a latinate or not.
 #' @param input character string
 #' @keywords internal
 #'
@@ -19,7 +19,6 @@ IS <- function(input) {  # stands for Identify Script
   # but in col. 4 (alternate names) of geonames;
   # note that Latin-like scripts, even very derived ones like Vietnamese,
   # will be in column 2
-
 
 
 

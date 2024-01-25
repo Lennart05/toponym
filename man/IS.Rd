@@ -2,7 +2,7 @@
 % Please edit documentation in R/identifying_unicode_sets.R
 \name{IS}
 \alias{IS}
-\title{Identifying Scripts}
+\title{Identifying scripts}
 \usage{
 IS(input)
 }
@@ -13,6 +13,6 @@ IS(input)
 A character string indicating if it's a latinate or not.
 }
 \description{
-This function detects if the script is a latinate or not.
+This function detects if the script might be a latinate or not.
 }
 \keyword{internal}

@@ -7,7 +7,7 @@
 topCompOut(countries, len, rat, polygon, ...)
 }
 \arguments{
-\item{countries}{character string with country designation (name or ISO-code)}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
 \item{len}{numeric. The length of the substring within toponyms.}
 
@@ -21,7 +21,7 @@ topCompOut(countries, len, rat, polygon, ...)
 \item\code{csv} logical. If \code{TRUE}, the filtered data frames will be saved as .csv in the current working directory.
 \item\code{tsv} logical. If \code{TRUE}, the filtered data frames will be saved as .tsv in the current working directory.
 \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
-\item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 }}

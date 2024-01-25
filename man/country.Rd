@@ -2,20 +2,20 @@
 % Please edit documentation in R/country.R
 \name{country}
 \alias{country}
-\title{Country Designations}
+\title{Country designations}
 \usage{
 country(query = NULL, ...)
 }
 \arguments{
-\item{query}{a vector with character string. Enter query to access information on countries.}
+\item{query}{a character string vector. Enter queries to access information on countries.}
 
-\item{...}{Addtional parameter:
+\item{...}{Additional parameter:
 \itemize{
 \item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
 }}
 }
 \value{
-Returns country designations selected from a data frame. Returns region designations in a matrix selected from \code{geodata} map data.
+Returns country designations selected from a data frame. If regions is set to {1}, returns region designations in a matrix selected from \code{geodata} map data.
 }
 \description{
 This function returns country codes, names and regional names used by the \code{toponym} package.
@@ -35,7 +35,7 @@ country(query = "ISO3")
 country(query = "Thailand")
 ## returns a list with a data frame with ISO2 code, ISO3 code and the full name
 
-country(query = "Thailand", regions = TRUE)
+country(query = "Thailand", regions = 1)
 ## returns a list with a vector with all region names
 }
 }

@@ -7,8 +7,8 @@
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #'
-#' @param strings character string with regular expression to filter data.
-#' @param countries character string with country designation (name or ISO-code).
+#' @param strings a character string with a regular expression to be tested.
+#' @param countries a character string vector with country designations (names or ISO-codes).
 #' @param polygon data frame. Defines the polygon for comparison with the remainder of a country (or countries).
 #' @param ... Additional parameter:
 #' \itemize{

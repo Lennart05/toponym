@@ -1,9 +1,9 @@
-#' @title Coordinates Selection
+#' @title Coordinate selection
 #' @description
-#' This function returns the coordinates of selected toponyms.
-#' @details This function returns coordinates (longitude and latitude) and country codes of all locations, which match the regular expression, given in \code{strings}. The return is used by \code{simple_map()}.
+#' This function returns coordinates of selected toponyms (strings).
+#' @details This function returns coordinates (longitude and latitude), country codes and the matched strings. The return is used by \code{simple_map()}.
 #' @param gn data frame which will be accessed.
-#' @param strings character string with regular expression to filter data.
+#' @param strings a character string vector with regular expressions to filter data.
 #' @param df logical. If \code{TRUE}, matches will be saved in the global environment.
 #' @param csv logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 #' @param tsv logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.

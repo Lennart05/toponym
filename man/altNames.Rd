@@ -2,14 +2,14 @@
 % Please edit documentation in R/alt_names.R
 \name{altNames}
 \alias{altNames}
-\title{Alternatenames Filter}
+\title{Alternatenames filter}
 \usage{
 altNames(gn, strings)
 }
 \arguments{
 \item{gn}{data frame(s), which will be accessed.}
 
-\item{strings}{character string with regular expression to filter data.}
+\item{strings}{a character string vector with regular expressions to filter data.}
 }
 \value{
 A list of two vectors, logical values and matched strings.

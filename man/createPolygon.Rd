@@ -7,13 +7,13 @@
 createPolygon(countries, ...)
 }
 \arguments{
-\item{countries}{character string with country designation (name or ISO-code).}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
 \item{...}{Additional parameters:
 \itemize{
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-\item\code{region_name} character string with region name.
-\item\code{region_ID} character string with region ID.
+\item\code{region_name} a character string vector with region names.
+\item\code{region_ID} a character string vector with region IDs.
 \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 }}
 }

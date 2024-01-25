@@ -1,8 +1,8 @@
-#' @title  Alternatenames Filter
+#' @title  Alternatenames filter
 #' @description Checks alternatenames column
 #'
 #' @param gn data frame(s), which will be accessed.
-#' @param strings character string with regular expression to filter data.
+#' @param strings a character string vector with regular expressions to filter data.
 #' @keywords internal
 #'
 #' @return A list of two vectors, logical values and matched strings.

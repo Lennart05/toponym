@@ -1,4 +1,4 @@
-#' @title Coordinates of a Flanders
+#' @title Coordinates of Flanders
 #' @keywords internal
 #' @description
 #' A small data frame containing coordinates for the polygon framing Flanders.

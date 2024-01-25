@@ -2,12 +2,12 @@
 % Please edit documentation in R/get_coordinates.R
 \name{getCoordinates}
 \alias{getCoordinates}
-\title{Coordinates Selection}
+\title{Coordinate selection}
 \usage{
 getCoordinates(strings, gn, df, csv, tsv, ...)
 }
 \arguments{
-\item{strings}{character string with regular expression to filter data.}
+\item{strings}{a character string vector with regular expressions to filter data.}
 
 \item{gn}{data frame which will be accessed.}
 
@@ -27,9 +27,9 @@ getCoordinates(strings, gn, df, csv, tsv, ...)
 A list with the coordinates (longitude and latitude), country codes and matched strings.
 }
 \description{
-This function returns the coordinates of selected toponyms.
+This function returns coordinates of selected toponyms (strings).
 }
 \details{
-This function returns coordinates (longitude and latitude) and country codes of all locations, which match the regular expression, given in \code{strings}. The return is used by \code{simple_map()}.
+This function returns coordinates (longitude and latitude), country codes and the matched strings. The return is used by \code{simple_map()}.
 }
 \keyword{internal}

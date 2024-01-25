@@ -3,7 +3,7 @@
 \docType{data}
 \name{flanders_polygon}
 \alias{flanders_polygon}
-\title{Coordinates of a Flanders}
+\title{Coordinates of Flanders}
 \format{
 An object of class \code{data.frame} with 22 rows and 2 columns.
 }

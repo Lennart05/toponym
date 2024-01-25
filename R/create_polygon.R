@@ -1,12 +1,12 @@
 #' @title Creates a polygon
 #' @description
 #' This function lets users create a polygon by point-and-click or directly retrieve polygon data.
-#' @param countries character string with country designation (name or ISO-code).
+#' @param countries a character string vector with country designations (names or ISO-codes).
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-#' \item\code{region_name} character string with region name.
-#' \item\code{region_ID} character string with region ID.
+#' \item\code{region_name} a character string vector with region names.
+#' \item\code{region_ID} a character string vector with region IDs.
 #' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 #' }
 #' @export
@@ -53,6 +53,7 @@ createPolygon <- function(countries, ...) {
   if(is.null(opt$regions)) opt$regions <- 0
   if(is.null(opt$retrieve)) opt$retrieve <- FALSE
   if(!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
+  if(!is.logical(opt$retrieve)) stop("Parameter `retrieve` must be logical.")
 
   if (any(countries == "world")) {
     countries <- "world"

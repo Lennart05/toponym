@@ -4,18 +4,21 @@
 \alias{ortho}
 \title{Orthographical symbols}
 \usage{
-ortho(countries, column = "alternatenames")
+ortho(countries, ...)
 }
 \arguments{
-\item{countries}{character string with country designation (name or ISO-code).}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
-\item{column}{character string naming the column of interest.}
+\item{...}{Additional parameter:
+\itemize{
+\item\code{column} a character string naming the column of interest.
+}}
 }
 \value{
 A table with frequencies of all symbols.
 }
 \description{
-This function retrieves all symbols used in country data sets.
+This function retrieves all symbols used in country data.
 }
 \details{
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.

@@ -1,9 +1,9 @@
-#' @title Country Designations
+#' @title Country designations
 #' @description
 #' This function returns country codes, names and regional names used by the \code{toponym} package.
 #'
-#' @param query a vector with character string. Enter query to access information on countries.
-#' @param ... Addtional parameter:
+#' @param query a character string vector. Enter queries to access information on countries.
+#' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
 #' }
@@ -12,7 +12,7 @@
 #' If you enter "names", you receive a vector of all country names.
 #' If you enter "country table", you receive a data frame with all three designations for every country.
 #' Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
-#' @return Returns country designations selected from a data frame. Returns region designations in a matrix selected from \code{geodata} map data.
+#' @return Returns country designations selected from a data frame. If regions is set to {1}, returns region designations in a matrix selected from \code{geodata} map data.
 #' @export
 #'
 #' @examples
@@ -23,7 +23,7 @@
 #' country(query = "Thailand")
 #' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name
 #'
-#' country(query = "Thailand", regions = TRUE)
+#' country(query = "Thailand", regions = 1)
 #' ## returns a list with a vector with all region names
 #' }
 country <- function(query = NULL, ...) {

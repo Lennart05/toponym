@@ -7,9 +7,9 @@
 top(strings, countries, ...)
 }
 \arguments{
-\item{strings}{character string with regular expression to filter data.}
+\item{strings}{a character string vector with regular expressions to filter data.}
 
-\item{countries}{character string with country designation (name or ISO-code).}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
 \item{...}{Additional parameters:
 \itemize{
@@ -19,7 +19,7 @@ top(strings, countries, ...)
 \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
-\item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
 }}

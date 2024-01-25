@@ -7,9 +7,9 @@
 getData(countries, save = TRUE, overwrite = FALSE)
 }
 \arguments{
-\item{countries}{character string with country designation (name or ISO-code).}
+\item{countries}{a character string vector with country designations (names or ISO-codes).}
 
-\item{save}{logical. If \code{TRUE}, the data sets will be extracted to the package folder. Otherwise, it will be saved in a temporary folder.}
+\item{save}{logical. If \code{TRUE}, the data sets will be extracted to the package folder. If \code{FALSE} it will be saved in a temporary folder.}
 
 \item{overwrite}{logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.}
 }

@@ -7,7 +7,7 @@
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
 #'
-#' @param countries character string with country designation (name or ISO-code)
+#' @param countries a character string vector with country designations (names or ISO-codes).
 #' @param len numeric. The length of the substring within toponyms.
 #' @param rat numeric. The cut-off ratio (a number between 0.0 and 1) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).
 #' @param polygon data frame. Defines the polygon for comparison with the remainder of a country (or countries).
@@ -18,7 +18,7 @@
 #' \item\code{csv} logical. If \code{TRUE}, the filtered data frames will be saved as .csv in the current working directory.
 #' \item\code{tsv} logical. If \code{TRUE}, the filtered data frames will be saved as .tsv in the current working directory.
 #' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
-#' \item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
 #' }
