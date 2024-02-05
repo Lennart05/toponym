@@ -8,7 +8,7 @@
 #' }
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-#' The default column is \code{"alternativenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
+#' The default column is \code{"alternatenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 #' It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 #'
 #'
