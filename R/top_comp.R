@@ -74,13 +74,16 @@ topComp <- function(countries, len, rat, polygon, ...) {
   getData(countries) # gets data
   gn <- readFiles(countries, opt$feat.class)
   if (is.null(opt$limit)) {
+    message("The limit was not specified. All toponyms will be tested. This may take a while.")
     toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type)
-    opt$limit <- length(toponyms_o)
-    message("Limit was not specified. All toponyms will be tested. This may take a while.")
+
   } else{
     toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type)
-    toponyms_o <- names(toponyms_o)
   }
+  toponyms_o <- toponyms_o[!is.na(toponyms_o)]
+  toponyms_o <- names(toponyms_o)
+  opt$limit <- length(toponyms_o)
+
   toponyms_ID_o <- list()
   lat_strings <- list()
   lon_strings <- list()
@@ -160,6 +163,6 @@ topComp <- function(countries, len, rat, polygon, ...) {
 
     return(dat)
   } else {
-    warning("No toponyms satisfy the criteria")
+    warning("No toponym satisfies the criteria")
   }
 }

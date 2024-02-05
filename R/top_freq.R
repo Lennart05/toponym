@@ -87,6 +87,10 @@ topFreq <- function(countries, len, limit, ...) {
   if (limit == "fnc") {
     toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) # only strings left
   } else {
+    if(length(toponyms) < limit) {
+      limit <- length(toponyms)
+      warning(paste0("The limit exceeds the total number of toponyms. All ",length(toponyms)," toponyms will be tested."))
+    }
     freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
     return(freq_top)
   }

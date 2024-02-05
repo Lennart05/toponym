@@ -58,6 +58,8 @@ top <- function(strings, countries, ...) {
   if (is.null(opt$tsv)) opt$tsv <- FALSE
   if (is.null(opt$plot)) opt$plot <- TRUE
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
+  if (is.null(opt$column)) opt$column <- "name"
+  if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (is.null(opt$regions)) opt$regions <- 0
   if (!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
 
