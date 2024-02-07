@@ -184,7 +184,7 @@ within the Danelaw area (`polygon = toponym::danelaw_polygon`) with
 their frequency in the United Kingdom (`countries = "GB"`) and returns a
 data frame. The output is in descending order by their proportional
 frequency. The search is limited to the 100 (`limit = 100`) most
-frequent strings in theUnited Kingdom consisting of (a length of) three
+frequent strings in the United Kingdom consisting of (a length of) three
 characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that
 at least 80% of all occurrences (in the country or countries) must be
 inside the polygon. In this case, the string “-rpe” occurs 175 times in
