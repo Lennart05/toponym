@@ -23,11 +23,6 @@ altNames <- function(gn, strings) {
   alt_names <- alt_names[w_strings, ]
   if(is.null(alt_names)) stop("\nThere were no matches.\n")
 
-  for (i in 1:nrow(alt_names)) {
-    m_strings[[i]] <- regmatches(alt_names[i, ], regexpr(paste(strings, collapse = "|"), alt_names[i, ], perl = TRUE)) # gets matches
-  }
-  m_strings <- do.call(rbind, unname(lapply(m_strings, `length<-`, max(lengths(m_strings)))))
-  m_strings <- m_strings[, 1]
 
-  return(list(w_strings, m_strings))
+  return(list(w_strings, alt_names))
 }

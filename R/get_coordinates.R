@@ -11,6 +11,7 @@
 #' \itemize{
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{name} character string. Defines name of output data frame.
+#' \item\code{column} a character string vector. Selects the column(s) for query
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
@@ -39,17 +40,38 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   for (i in 1:length(strings)) {
     results[[i]] <- IS(strings[[i]])
   }
-  if (sum(results == "non.latinate") > 0) { ## if strings contain non.latinates
+
+  if("alternatenames" %in% opt$column) alt <- TRUE # set true if alt names column is selected
+  opt$column <- opt$column[opt$column %in% c("name", "asciiname")] # only select name and asciiname
+  gn_selection <- gn[,c(opt$column)]
+
+  w_strings <- !!rowSums(sapply(gn_selection, grepl, pattern = "berg$", perl = TRUE)) # logical values if matched in names or asciiname
+  m_strings <- regmatches(gn$asciiname, regexpr(paste(strings, collapse = "|"), gn$asciiname, perl = TRUE)) # gets matched strings
+#### merge m_strings if multiple rows!
+
+
+
+
+  if (sum(results == "non.latinate") > 0 || alt) { ## if strings contain non.latinates
     NApc <- paste0(round(sum(is.na(gn$alternatenames)) / nrow(gn) * 100), "%") ## % of NA in alternatenames col
     message(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
-    alt_l <- altNames(gn, strings)
-    w_strings <- alt_l[[1]]
-    m_strings <- alt_l[[2]]
-  } else {
-    w_strings <- unique(grep(paste(strings, collapse = "|"), gn$name, perl = TRUE)) # gets all indexes of matches
-    m_strings <- regmatches(gn$name, regexpr(paste(strings, collapse = "|"), gn$name, perl = TRUE)) # gets matched strings
+    alternative_names <- altNames(gn, strings)
+    w_strings <- w_strings + alternative_names[[1]]
+
+
+
+    for (i in 1:nrow(alt_names)) {
+      m_strings[[i]] <- regmatches(alt_names[i, ], regexpr(paste(strings, collapse = "|"), alt_names[i, ], perl = TRUE)) # gets matches
+    }
+    m_strings <- do.call(rbind, unname(lapply(m_strings, `length<-`, max(lengths(m_strings)))))
+    m_strings <- m_strings[, 1]
+
+    w_strings[w_strings == 2] <- 1
+    w_strings <- as.logical(w_strings)
   }
+
+
   output <- gn[w_strings, ]
   lat_strings <- output$latitude # gets respective lat coordinates
   lon_strings <- output$longitude # gets respective lon coordinates
