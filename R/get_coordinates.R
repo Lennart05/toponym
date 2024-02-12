@@ -11,7 +11,7 @@
 #' \itemize{
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{name} character string. Defines name of output data frame.
-#' \item\code{column} a character string vector. Selects the column(s) for query
+#' \item\code{column} a character string vector. Selects the column(s) for query.
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
@@ -21,7 +21,6 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   opt <- list(...)
 
   if(!is.null(opt$name) && !is.character(opt$name[1])) stop("Data frame name must be a character string. Only the first element will be considered.")
-
   # removes coordinates outside of the polygon
   if (!is.null(opt$polygon)) {
     if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
@@ -35,48 +34,52 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
 
 
-
-  results <- list()
+  m <- list() # pos of matches
+  script <- list()
   for (i in 1:length(strings)) {
-    results[[i]] <- IS(strings[[i]])
+    script[[i]] <- IS(strings[[i]]) # checks if any string contains non.latinates
   }
 
-  if("alternatenames" %in% opt$column) alt <- TRUE # set true if alt names column is selected
+
+
+
+
+  if("alternatenames" %in% opt$column) {alt <- TRUE} # set true if alt names column is selected
+  else{alt <- FALSE}
+
   opt$column <- opt$column[opt$column %in% c("name", "asciiname")] # only select name and asciiname
-  gn_selection <- gn[,c(opt$column)]
+  gn_selection <- as.data.frame(gn[,c(opt$column)])
 
-  w_strings <- !!rowSums(sapply(gn_selection, grepl, pattern = "berg$", perl = TRUE)) # logical values if matched in names or asciiname
-  m_strings <- regmatches(gn$asciiname, regexpr(paste(strings, collapse = "|"), gn$asciiname, perl = TRUE)) # gets matched strings
-#### merge m_strings if multiple rows!
+  if(any(opt$column %in% c("name", "asciiname"))){
+  w_strings <- !!rowSums(sapply(as.data.frame(gn_selection), grepl, pattern = paste(strings, collapse = "|"), perl = TRUE)) # logical values if matched in names or asciiname
+  } else{w_strings <- NULL}
 
-
-
-
-  if (sum(results == "non.latinate") > 0 || alt) { ## if strings contain non.latinates
+  if (sum(script == "non.latinate") > 0 || alt) { ## if strings contain non.latinates or alt col is selected
     NApc <- paste0(round(sum(is.na(gn$alternatenames)) / nrow(gn) * 100), "%") ## % of NA in alternatenames col
     message(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
-    alternative_names <- altNames(gn, strings)
-    w_strings <- w_strings + alternative_names[[1]]
-
-
-
-    for (i in 1:nrow(alt_names)) {
-      m_strings[[i]] <- regmatches(alt_names[i, ], regexpr(paste(strings, collapse = "|"), alt_names[i, ], perl = TRUE)) # gets matches
-    }
-    m_strings <- do.call(rbind, unname(lapply(m_strings, `length<-`, max(lengths(m_strings)))))
-    m_strings <- m_strings[, 1]
-
+    alternate_names <- altNames(gn, strings)
+    if(!is.null(w_strings)){
+    w_strings <- w_strings + alternate_names[[1]]
     w_strings[w_strings == 2] <- 1
-    w_strings <- as.logical(w_strings)
+    w_strings <- as.logical(w_strings) # logical vector indicating if any of the columns has a match
+    }else{
+      w_strings <- alternate_names[[1]]
+    }
+    gn_selection <- cbind(gn_selection, alternate_names[[2]]) # merge selected cols and all alt name cols
   }
 
+  m_strings <- rep(NA,nrow(gn)) # vector with NA values of gn length
+  for(j in 1:ncol(gn_selection)){
+    m[[j]] <- regexpr(paste(strings, collapse = "|"), gn_selection[,j], perl = TRUE) #pos of match
+    m[[j]][is.na(m[[j]])] <- -1 # replace NA with -1
+    m_strings[m[[j]]!=-1] <- regmatches(gn_selection[, j], m[[j]]) # gets matched strings or NA
+  }
 
+  gn["group"] <- m_strings # adds matches to "group" column
   output <- gn[w_strings, ]
   lat_strings <- output$latitude # gets respective lat coordinates
   lon_strings <- output$longitude # gets respective lon coordinates
-  country <- output$"country code" # gets respective cc
-  output["group"] <- m_strings # adds matches to "group" column
 
 
 
@@ -110,5 +113,5 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
   }
 
-  return(list(latitude = lat_strings, longitude = lon_strings, "country code" = country, "group" = m_strings))
+  return(list(latitude = lat_strings, longitude = lon_strings, "country code" = output$"country code", "group" = output$group))
 }

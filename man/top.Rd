@@ -22,6 +22,7 @@ top(strings, countries, ...)
 \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
+\item\code{column} character string vector. Selects the column(s) for query.
 }}
 }
 \value{

@@ -20,7 +20,7 @@ altNames <- function(gn, strings) {
   if(!any(unlist(alt_l))) stop("\nThere were no matches.\n")
 
   w_strings <- as.logical(unlist(alt_l))
-  alt_names <- alt_names[w_strings, ]
+  #alt_names <- alt_names[w_strings, ]
   if(is.null(alt_names)) stop("\nThere were no matches.\n")
 
 

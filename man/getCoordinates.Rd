@@ -21,6 +21,7 @@ getCoordinates(strings, gn, df, csv, tsv, ...)
 \itemize{
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
+\item\code{column} a character string vector. Selects the column(s) for query.
 }}
 }
 \value{

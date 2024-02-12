@@ -14,6 +14,7 @@
 #' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{name} character string. Defines name of output data frame.
+#' \item\code{column} character string vector. Selects the column(s) for query.
 #' }
 #'
 #' @details
@@ -60,11 +61,12 @@ top <- function(strings, countries, ...) {
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
   if (is.null(opt$column)) opt$column <- "name"
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
+  if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
   if (is.null(opt$regions)) opt$regions <- 0
   if (!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
 
   try(getData(countries), silent = TRUE) # gets data
   gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
-  coordinates <- getCoordinates(strings = strings, gn = gn, df = opt$df, csv = opt$csv, tsv = opt$tsv, polygon = opt$polygon, name = opt$name) # coordinates of matches
+  coordinates <- getCoordinates(strings = strings, gn = gn, df = opt$df, csv = opt$csv, tsv = opt$tsv, polygon = opt$polygon, name = opt$name, column = opt$column) # coordinates of matches
   simpleMap(strings, coordinates, color = opt$color, regions = opt$regions, plot = opt$plot, ratio_string = opt$ratio_string, fq = opt$fq) # inserts coordinates and generates map
 }
