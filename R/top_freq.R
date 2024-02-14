@@ -60,17 +60,21 @@ topFreq <- function(countries, len, limit, ...) {
     gn <- gn[poly_log, ] # only those in the polygon left
   }
 
+  if(len > max(nchar(gn$name))) stop(paste0("Parameter `len` exceeds the length of the longest name (", max(nchar(gn$name)), ") in the data."))
+
   if(opt$type == "ngram"){
   toponyms <- list()
   ngram_names <- gn[nchar(gn$name) >= len, "name"] # removes places which are shorter than ngram length
   for(i in 1:length(ngram_names)){
-    toponyms[[i]] <- ngram(ngram_names[i], sep = "", n = len)
-    ngrams <- get.phrasetable(toponyms[[i]])$ngrams
-    ngrams <- ngrams[!grepl("  ", ngrams)] # ngrams containing space bar removed
-    toponyms[[i]] <- gsub(" ", "", ngrams, fixed = TRUE) # remove all white space
-  }
-  toponyms <- unlist(toponyms)
-
+    toponyms[[i]] <- get.phrasetable(ngram(ngram_names[i], sep = "", n = len))[,c("ngrams", "freq")] #get ngrams & freq
+    toponyms[[i]] <- toponyms[[i]][!grepl("  ", toponyms[[i]]$ngrams),] # ngrams containing space bar removed
+    toponyms[[i]]$ngrams <- gsub(" ", "", toponyms[[i]]$ngrams , fixed = TRUE) # remove all white space
+    }
+  toponyms <- aggregate(freq ~ ngrams, data = do.call("rbind", toponyms), FUN = sum) #merge ngrams by frequency
+  toponyms <- toponyms[order(toponyms$freq, decreasing = TRUE),]
+  freq_top <- as.table(toponyms$freq)
+  names(freq_top) <- toponyms$ngrams
+  freq_top <- freq_top[1:limit]
   }else{
   # query all toponyms from the dataset
   toponyms <- paste(
@@ -93,18 +97,18 @@ topFreq <- function(countries, len, limit, ...) {
     },
     sep = ""
   )
-  }
   freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
+  }
 
 
   # order them by frequency
   if (limit == "fnc") {
     toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) # only strings left
   } else {
-    if(length(toponyms) < limit) {
-      limit <- length(toponyms)
-      warning(paste0("The limit exceeds the total number of toponyms. All ",length(toponyms)," toponyms will be tested."))
-    }
+    #if(length(toponyms) < limit) {
+   #   limit <- length(toponyms)
+    #  warning(paste0("Parameter `limit` exceeds the total number of toponyms. All ",length(toponyms)," toponyms will be tested."))
+    #}
     return(freq_top)
   }
 }

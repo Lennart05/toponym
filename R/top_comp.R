@@ -12,7 +12,7 @@
 #'
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
+#' \item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
 #' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
@@ -74,7 +74,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
   getData(countries) # gets data
   gn <- readFiles(countries, opt$feat.class)
   if (is.null(opt$limit)) {
-    message("The limit was not specified. All toponyms will be tested. This may take a while.")
+    message("Parameter `limit` was not specified. All toponyms will be tested. This may take a while.")
     toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type)
 
   } else{
