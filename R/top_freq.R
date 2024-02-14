@@ -10,7 +10,7 @@
 
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
+#' \item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
 #' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
@@ -60,13 +60,24 @@ topFreq <- function(countries, len, limit, ...) {
     gn <- gn[poly_log, ] # only those in the polygon left
   }
 
+  if(opt$type == "ngram"){
+  toponyms <- list()
+  ngram_names <- gn[nchar(gn$name) >= len, "name"] # removes places which are shorter than ngram length
+  for(i in 1:length(ngram_names)){
+    toponyms[[i]] <- ngram(ngram_names[i], sep = "", n = len)
+    ngrams <- get.phrasetable(toponyms[[i]])$ngrams
+    ngrams <- ngrams[!grepl("  ", ngrams)] # ngrams containing space bar removed
+    toponyms[[i]] <- gsub(" ", "", ngrams, fixed = TRUE) # remove all white space
+  }
+  toponyms <- unlist(toponyms)
 
+  }else{
   # query all toponyms from the dataset
   toponyms <- paste(
     if (opt$type == "^") {
       "^"
     },
-    # creates a reg expr looking for endings of length "len"
+    # creates a reg expr looking for strings of length "len"
     regmatches(
       gn$name,
       regexpr(paste0(
@@ -82,6 +93,9 @@ topFreq <- function(countries, len, limit, ...) {
     },
     sep = ""
   )
+  }
+  freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
+
 
   # order them by frequency
   if (limit == "fnc") {
@@ -91,7 +105,14 @@ topFreq <- function(countries, len, limit, ...) {
       limit <- length(toponyms)
       warning(paste0("The limit exceeds the total number of toponyms. All ",length(toponyms)," toponyms will be tested."))
     }
-    freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
     return(freq_top)
   }
 }
+
+
+
+
+
+
+
+

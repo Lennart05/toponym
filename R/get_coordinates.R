@@ -44,8 +44,8 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
 
 
-  if("alternatenames" %in% opt$column) {alt <- TRUE} # set true if alt names column is selected
-  else{alt <- FALSE}
+  if("alternatenames" %in% opt$column) {alt <- TRUE # set true if alt names column is selected
+  } else{alt <- FALSE}
 
   opt$column <- opt$column[opt$column %in% c("name", "asciiname")] # only select name and asciiname
   gn_selection <- as.data.frame(gn[,c(opt$column)])
@@ -68,8 +68,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
     }
     gn_selection <- cbind(gn_selection, alternate_names[[2]]) # merge selected cols and all alt name cols
   }
-
-  m_strings <- rep(NA,nrow(gn)) # vector with NA values of gn length
+  m_strings <- rep(NA,nrow(gn))  # vector with NA values of gn length
   for(j in 1:ncol(gn_selection)){
     m[[j]] <- regexpr(paste(strings, collapse = "|"), gn_selection[,j], perl = TRUE) #pos of match
     m[[j]][is.na(m[[j]])] <- -1 # replace NA with -1
