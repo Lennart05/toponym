@@ -43,18 +43,17 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
 
 
+  cols <- c("name", "asciiname", "alternatenames")
+  which_col <- match(opt$column, c("name", "asciiname", "alternatenames"))
+  which_col <- which_col[!is.na(which_col)]
+  gn_selection <- as.data.frame(gn[,cols[rev(which_col)[which_col !=3]]]) #select all cols in reversed order but alt names
 
-  if("alternatenames" %in% opt$column) {alt <- TRUE # set true if alt names column is selected
-  } else{alt <- FALSE}
+  w_strings <- NULL
+  if(any(1:2 %in% which_col)){
+  w_strings <- !!rowSums(sapply(gn_selection, grepl, pattern = paste(strings, collapse = "|"), perl = TRUE)) # logical values if matched in names or asciiname
+  }
 
-  opt$column <- opt$column[opt$column %in% c("name", "asciiname")] # only select name and asciiname
-  gn_selection <- as.data.frame(gn[,c(opt$column)])
-
-  if(any(opt$column %in% c("name", "asciiname"))){
-  w_strings <- !!rowSums(sapply(as.data.frame(gn_selection), grepl, pattern = paste(strings, collapse = "|"), perl = TRUE)) # logical values if matched in names or asciiname
-  } else{w_strings <- NULL}
-
-  if (sum(script == "non.latinate") > 0 || alt) { ## if strings contain non.latinates or alt col is selected
+  if (sum(script == "non.latinate") > 0 || 3 %in% which_col) { ## if strings contain non.latinates or alt col is selected
     NApc <- paste0(round(sum(is.na(gn$alternatenames)) / nrow(gn) * 100), "%") ## % of NA in alternatenames col
     message(paste(NApc, "of all entries in the alternate names column are empty."))
     ### if no names in alternatenames
@@ -66,7 +65,10 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
     }else{
       w_strings <- alternate_names[[1]]
     }
-    gn_selection <- cbind(gn_selection, alternate_names[[2]]) # merge selected cols and all alt name cols
+    alternate_names[[2]] <- alternate_names[[2]][,order(ncol(alternate_names[[2]]):1)] #reverse col order
+    if(which_col[1] == 3 & length(which_col) > 1) {gn_selection <- cbind(gn_selection, alternate_names[[2]]) #put alt names last if first in selection
+    }else if(length(which_col) == 1) {gn_selection <- alternate_names[[2]] # merge selected cols and all alt name cols
+    }else {gn_selection <- cbind(alternate_names, gn_selection)}
   }
   m_strings <- rep(NA,nrow(gn))  # vector with NA values of gn length
   for(j in 1:ncol(gn_selection)){
