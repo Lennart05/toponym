@@ -126,22 +126,25 @@ topComp <- function(countries, len, rat, polygon, ...) {
     }
 
     # select only toponyms which surpass parameter rat
-    if (ratio[[i]] > rat) {
+    surpass <- ratio[[i]] > rat
+    surpass[is.na(surpass)] <- FALSE #turn NA to FALSE
+    if (surpass) {
       if (opt$freq.type == "abs") {
         dat[[i]] <- cbind(
           toponyms_o[i], round(ratio[[i]], 4) * 100,
           paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
         )
+
       }
       if (opt$freq.type == "rel") {
         dat[[i]] <- cbind(
           toponyms_o[i], round(ratio[[i]], 4),
           paste0(sum(loc_log[[i]]), "/", length(loc_log[[i]]))
         )
-      }
+
     }
   }
-
+  }
   # transforms list into a df for printout
   if (length(dat) > 0) {
     dat <- as.data.frame(cbind(
