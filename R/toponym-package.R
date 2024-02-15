@@ -20,6 +20,7 @@
 #' @importFrom geodata world
 #' @importFrom geodata gadm
 #' @importFrom terra crds plot
+#' @importFrom ngram get.phrasetable ngram
 #' @importFrom graphics segments
 #' @importFrom grDevices rainbow
 #' @importFrom dplyr %>%
