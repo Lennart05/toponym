@@ -42,7 +42,6 @@ topFreq <- function(countries, len, limit, ...) {
   if(missing(len)) stop("Parameter 'len' must be defined.")
   if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")
 
-
   ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
@@ -74,6 +73,7 @@ topFreq <- function(countries, len, limit, ...) {
   toponyms <- toponyms[order(toponyms$freq, decreasing = TRUE),]
   freq_top <- as.table(toponyms$freq)
   names(freq_top) <- toponyms$ngrams
+  if (limit == "fnc") limit <- length(freq_top)
   freq_top <- freq_top[1:limit]
   }else{
   # query all toponyms from the dataset
@@ -97,21 +97,16 @@ topFreq <- function(countries, len, limit, ...) {
     },
     sep = ""
   )
+  if (limit == "fnc") limit <- length(toponyms)
   freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
   }
 
+  freq_top <- freq_top[!is.na(freq_top)] # rm nas
 
-  # order them by frequency
-  if (limit == "fnc") {
-    toponyms_o <- names(table(toponyms)[order(table(toponyms), decreasing = TRUE)]) # only strings left
-  } else {
-    #if(length(toponyms) < limit) {
-   #   limit <- length(toponyms)
-    #  warning(paste0("Parameter `limit` exceeds the total number of toponyms. All ",length(toponyms)," toponyms will be tested."))
-    #}
-    return(freq_top)
-  }
+
+  return(freq_top)
 }
+
 
 
 
