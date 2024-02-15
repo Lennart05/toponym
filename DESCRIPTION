@@ -22,6 +22,7 @@ Imports:
     geodata (>= 0.5.8),
     ggplot2 (>= 3.4.0),
     grDevices (>= 4.1.2),
+    ngram (>= 3.2.3),
     sf (>= 1.0.14),
     spatstat.geom (>= 3.2.7),
     spatstat.utils (>= 3.0.3),
