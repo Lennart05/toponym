@@ -46,7 +46,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   cols <- c("name", "asciiname", "alternatenames")
   which_col <- match(opt$column, c("name", "asciiname", "alternatenames"))
   which_col <- which_col[!is.na(which_col)]
-  gn_selection <- as.data.frame(gn[,cols[rev(which_col)[which_col !=3]]]) #select all cols in reversed order but alt names
+  gn_selection <- as.data.frame(gn[,cols[rev(which_col)[rev(which_col) !=3]]]) #select all cols in reversed order but alt names
 
   w_strings <- NULL
   if(any(1:2 %in% which_col)){
@@ -72,7 +72,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
   }
   m_strings <- rep(NA,nrow(gn))  # vector with NA values of gn length
   for(j in 1:ncol(gn_selection)){
-    m[[j]] <- regexpr(paste(strings, collapse = "|"), gn_selection[,j], perl = TRUE) #pos of match
+    m[[j]] <- regexpr(paste(strings, collapse = "|"), gn_selection[, j], perl = TRUE) #pos of match
     m[[j]][is.na(m[[j]])] <- -1 # replace NA with -1
     m_strings[m[[j]]!=-1] <- regmatches(gn_selection[, j], m[[j]]) # gets matched strings or NA
   }
