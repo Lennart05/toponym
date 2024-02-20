@@ -39,9 +39,9 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   if (length(x) == 0 | length(y) == 0) {
     stop("\nThere are no coordinates to plot.\n")
   }
-  md <- cbind(as.numeric(x), as.numeric(y), cc, group) %>% # creates df out of x and y coordinates
-    as.data.frame() %>%
-    mutate_at(c("V1", "V2"), as.numeric)
+  md <- as.data.frame(cbind(as.numeric(x), as.numeric(y), cc, group)) # creates df out of x and y coordinates
+  md$V1   <-  as.numeric(md$V1)
+  md$V2   <-  as.numeric(md$V2)
 
 
 
