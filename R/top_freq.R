@@ -4,14 +4,16 @@
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #'
-#' @param countries a character string vector with country designations (names or ISO-codes).
+#' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+#'
+#' @param countries character string vector with country designations (names or ISO-codes).
 #' @param len numeric. The length of the substring within toponyms.
-#' @param limit numeric. The number of the most frequent toponyms.
+#' @param limit numeric. The number of the most frequent toponym substrings.
 
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
-#' \item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' }
 #'
@@ -21,14 +23,14 @@
 #' @examples
 #' \dontrun{
 #' topFreq(countries = "Namibia", len = 3, limit = 10)
-#' ## returns the top ten most frequent toponym endings
+#' ## returns the top 10 most frequent toponym endings
 #' ## of three-character length in Namibia
 #'
 #' topFreq(
 #'   countries = "GB", len = 3, limit = 10,
 #'   polygon = toponym::danelaw_polygon
 #' )
-#' ## returns the top ten most frequent toponym endings
+#' ## returns the top 10 most frequent toponym endings
 #' ## in the polygon which is inside the United Kingdom.
 #' }
 topFreq <- function(countries, len, limit, ...) {
@@ -69,7 +71,7 @@ topFreq <- function(countries, len, limit, ...) {
     toponyms[[i]] <- toponyms[[i]][!grepl("  ", toponyms[[i]]$ngrams),] # ngrams containing space bar removed
     toponyms[[i]]$ngrams <- gsub(" ", "", toponyms[[i]]$ngrams , fixed = TRUE) # remove all white space
     }
-  toponyms <- aggregate(freq ~ ngrams, data = do.call("rbind", toponyms), FUN = sum) #merge ngrams by frequency
+  toponyms <- stats::aggregate(freq ~ ngrams, data = do.call("rbind", toponyms), FUN = sum) #merge ngrams by frequency
   toponyms <- toponyms[order(toponyms$freq, decreasing = TRUE),]
   freq_top <- as.table(toponyms$freq)
   names(freq_top) <- toponyms$ngrams

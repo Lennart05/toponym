@@ -1,13 +1,14 @@
 #' @title Orthographical symbols
 #' @description
 #' This function retrieves all symbols used in country data.
-#' @param countries a character string vector with country designations (names or ISO-codes).
+#' @param countries character string vector with country designations (names or ISO-codes).
 #' @param ... Additional parameter:
 #' \itemize{
-#' \item\code{column} a character string naming the column of interest.
+#' \item\code{column} character string. Selects the column for query.
 #' }
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#'
 #' The default column is \code{"alternatenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 #' It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 #'
@@ -52,11 +53,11 @@ ortho <- function(countries, ...) {
   # split each element of column into characters, remove punctuation,
   # and output table of frequencies
   chars_split <- lapply(t_col, function(z) strsplit(z, "")[[1]])
-  chars_unlisted <- unlist(chars_split)
-  punct_chars <- which(chars_unlisted %in% c(" ", ",", ";", "."))
+  symbols <- unlist(chars_split)
+  punct_chars <- which(symbols %in% c(" ", ",", ";", "."))
   if (length(punct_chars) > 0) {
-    chars_unlisted <- chars_unlisted[-punct_chars]
+    symbols <- symbols[-punct_chars]
   }
-  char_table <- sort(table(chars_unlisted), decreasing = TRUE)
+  char_table <- sort(table(symbols), decreasing = TRUE)
   return(char_table)
 }

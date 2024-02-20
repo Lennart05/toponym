@@ -2,7 +2,7 @@
 #' @description Checks alternatenames column
 #'
 #' @param gn data frame(s), which will be accessed.
-#' @param strings a character string vector with regular expressions to filter data.
+#' @param strings character string vector with regular expressions to filter data.
 #' @keywords internal
 #'
 #' @return A list of two vectors, logical values and matched strings.

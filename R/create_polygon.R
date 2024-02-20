@@ -1,23 +1,21 @@
 #' @title Creates a polygon
 #' @description
 #' This function lets users create a polygon by point-and-click or directly retrieve polygon data.
-#' @param countries a character string vector with country designations (names or ISO-codes).
+#' @param countries character string vector with country designations (names or ISO-codes).
 #' @param ... Additional parameters:
 #' \itemize{
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-#' \item\code{region_name} a character string vector with region names.
-#' \item\code{region_ID} a character string vector with region IDs.
+#' \item\code{region_ID} character string vector with region IDs.
+#' \item\code{region_name} character string vector with region names.
 #' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
 #' }
 #' @export
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#'
 #' \code{region_ID} and \code{region_name} accepts region designations for the selected countries, which can be retrieved by \code{country()}.
 #' The function prioritizes any \code{region_ID} and ignores \code{region_name} if users provide both.
-#' The matrix listing all region designations may be incomplete as the \code{geodata} mapa data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
-#'
-#'
-#' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package for the point-and-click functionality.
+#' The matrix from \code{country()} listing all region designations may be incomplete as the \code{geodata} mapa data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
 #'
 #' In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 #'
@@ -26,7 +24,7 @@
 #'
 #' Tools -> Global Options -> Appearance -> Zoom
 #'
-#'
+#' This function uses the function \code{spatstatLocator} provided by the \code{spatstat.utils} package for the point-and-click functionality.
 #' For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 #'
 #' @examples
@@ -36,11 +34,13 @@
 #' # a plot of the region Ohangwena in Namibia
 #' # by point-and-click a polygon can be created
 #' # use country() to find all acceptable region IDs
+#'
 #' Ohangwena_polygon <- createPolygon(
 #' "NA", region_ID = "NAM.7_1", retrieve = TRUE
 #' )
 #' # no plot appears
 #' # the coordinates of the region are stored in the object
+#' # and can be used by other functions
 #' }
 #' @return A data frame with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {

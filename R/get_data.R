@@ -3,7 +3,7 @@
 #' @details
 #' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/) and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-#' @param countries a character string vector with country designations (names or ISO-codes).
+#' @param countries character string vector with country designations (names or ISO-codes).
 #' @param save logical. If \code{TRUE}, the data sets will be extracted to the package folder. If \code{FALSE} it will be saved in a temporary folder.
 #' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)

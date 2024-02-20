@@ -3,7 +3,7 @@
 #' This function returns coordinates of selected toponyms (strings).
 #' @details This function returns coordinates (longitude and latitude), country codes and the matched strings. The return is used by \code{simple_map()}.
 #' @param gn data frame which will be accessed.
-#' @param strings a character string vector with regular expressions to filter data.
+#' @param strings character string vector with regular expressions to filter data.
 #' @param df logical. If \code{TRUE}, matches will be saved in the global environment.
 #' @param csv logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 #' @param tsv logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
@@ -11,7 +11,7 @@
 #' \itemize{
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{name} character string. Defines name of output data frame.
-#' \item\code{column} a character string vector. Selects the column(s) for query.
+#' \item\code{column} character string vector. Selects the column(s) for query.
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
