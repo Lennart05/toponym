@@ -7,57 +7,61 @@
 topComp(countries, len, rat, polygon, ...)
 }
 \arguments{
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{len}{numeric. The length of the substring within toponyms.}
 
-\item{rat}{numeric. The cut-off ratio (a number between 0.0 and 1) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).}
+\item{rat}{numeric. The cut-off ratio (a number between 0.0 and 1 for \code{freq.type = "abs"}) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).}
 
 \item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
 \item{...}{Additional parameters:
 \itemize{
 \item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
-\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
-\item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
+\item\code{limit} numeric. The number of the most frequent toponym substrings which will be tested.
 }}
 }
 \value{
 A data frame printed out and saved in the global environment. It shows toponym substrings surpassing the ratio, the ratio and the frequency.
 }
 \description{
-This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies.
+This function retrieves the most frequent toponym substrings in a given polygon relative to country frequencies.
 }
 \details{
 This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those that match the ratio criterion.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
+Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 }
 \examples{
 \dontrun{
 topComp("GB",
-  limit = 100, len = 4, rat = .9,
+  limit = 100,
+   len = 4,
+    rat = .7,
   polygon = toponym::danelaw_polygon
 )
-## prints and saves a data frame of the top 100 four-character-long endings in Great Britain
-## if more than 90\% of them belong to the polygon
+## prints and saves a data frame of the top 100 four-character-long endings in the United Kingdom
+## if more than 70\% of them belong to the polygon
 ## corresponding to the Danelaw area.
 
 
 topComp("GB",
-  len = 3, rat = 1,
+  limit = 100,
+  len = 3,
+  rat = 1,
   polygon = toponym::danelaw_polygon,
   freq.type = "rel"
 )
-## prints and saves a data frame of all three-character-long endings in Great Britain
+## prints and saves a data frame of the top 100 three-character-long endings in the United Kingdom
 ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
 
 
 topComp(c("BE", "NL"),
-  rat = .8,
-  len = 3,
   limit = 50,
+  len = 3,
+  rat = .8,
   polygon = toponym::flanders_polygon
 )
 

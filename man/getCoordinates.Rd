@@ -7,7 +7,7 @@
 getCoordinates(strings, gn, df, csv, tsv, ...)
 }
 \arguments{
-\item{strings}{a character string vector with regular expressions to filter data.}
+\item{strings}{character string vector with regular expressions to filter data.}
 
 \item{gn}{data frame which will be accessed.}
 
@@ -21,7 +21,7 @@ getCoordinates(strings, gn, df, csv, tsv, ...)
 \itemize{
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
-\item\code{column} a character string vector. Selects the column(s) for query.
+\item\code{column} character string vector. Selects the column(s) for query.
 }}
 }
 \value{

@@ -2,24 +2,24 @@
 % Please edit documentation in R/top.R
 \name{top}
 \alias{top}
-\title{Toponym Map}
+\title{Toponym map}
 \usage{
 top(strings, countries, ...)
 }
 \arguments{
-\item{strings}{a character string vector with regular expressions to filter data.}
+\item{strings}{character string vector with regular expressions to filter data.}
 
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{color} character string indicating, which color is assigned to each string.
+\item\code{color} character string vector indicating, which color is assigned to each string.
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{df} logical. If \code{TRUE}, matches will be saved in the global environment.
 \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
-\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
 \item\code{column} character string vector. Selects the column(s) for query.
@@ -34,16 +34,16 @@ This function returns and plots selected toponyms onto a map.
 \details{
 This function is used to plot all locations matching the regular expression from \code{strings}.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
+Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 
-This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot also displays additional information if used by \code{topCompOut()}.
+This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot displays additional information if used by \code{topCompOut()}.
 The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
 \dontrun{
 top("itz$", "DE")
 # prints a plot with all populated places
-# in Germany ending with "itz"
+# in Germany ending in "itz"
 # and saves the locations in a data frame in the global environment.
 
 
@@ -54,7 +54,7 @@ top("^Vlad", "RU", color = "green", df = FALSE, csv = TRUE, plot = FALSE)
 
 
 top(c("itz$", "ice$"), c("DE", "PL"))
-# prints a plot with all populated places in Germany and Poland ending with either "itz" or "ice"
+# prints a plot with all populated places in Germany and Poland ending in either "itz" or "ice"
 # colored in red ("itz") and cyan ("ice")
 # and saves matches in the global environment.
 }

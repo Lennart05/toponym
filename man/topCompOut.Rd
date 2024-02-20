@@ -7,11 +7,11 @@
 topCompOut(countries, len, rat, polygon, ...)
 }
 \arguments{
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{len}{numeric. The length of the substring within toponyms.}
 
-\item{rat}{numeric. The cut-off ratio (a number between 0.0 and 1) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).}
+\item{rat}{numeric. The cut-off ratio (a number between 0.0 and 1 for \code{freq.type = "abs"}) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).}
 
 \item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
@@ -20,32 +20,37 @@ topCompOut(countries, len, rat, polygon, ...)
 \item\code{df} logical. If \code{TRUE}, the filtered data frames will be saved in the global environment.
 \item\code{csv} logical. If \code{TRUE}, the filtered data frames will be saved as .csv in the current working directory.
 \item\code{tsv} logical. If \code{TRUE}, the filtered data frames will be saved as .tsv in the current working directory.
-\item\code{type} character string. Either by default "$" (ending) or "^" (beginning)
-\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
+\item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
-\item\code{limit} numeric. The number of the most frequent toponyms which will be tested.
+\item\code{limit} numeric. The number of the most frequent toponym substrings which will be tested.
 }}
 }
 \value{
 Data frames and plots saved in a sub folder (called 'dataframes' and 'plots') in the working directory or global environment.
 }
 \description{
-This function retrieves the most frequent substrings of toponyms in a given polygon relative to country frequencies. It generates maps of them and saves them along with the corresponding data frames.
+This function retrieves the most frequent toponym substrings in a given polygon relative to country frequencies. It generates maps of them and saves them along with the corresponding data frames.
 }
 \details{
 This function applies the list of toponyms returned by \code{topComp()} to \code{top()}.
 A series of maps showing the toponym, ratio in percentage and numbers will be generated and locally saved.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
+Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 }
 \examples{
 \dontrun{
 topCompOut(
-  countries = "BE", limit = 100, len = 3, rat = .5,
-  toponym::flanders_polygon
-)
+  countries = "BE",
+   limit = 10,
+   len = 3,
+   rat = .95,
+   df = FALSE,
+   polygon = toponym::flanders_polygon
+   )
 
-## generates and saves the data frames & maps of the top hundred three-character-long endings
-## in Belgium if more than 50\% of the places lie in the polygon for Flanders.
-}
+## generates and saves the data frames & maps of the top 10 three-character-long endings
+## in Belgium if more than 95\% of of them belong to the polygon
+## corresponding to Flanders. The data frames are not saved
+## in the global environment (df = FALSE).}
 }

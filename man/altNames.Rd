@@ -9,7 +9,7 @@ altNames(gn, strings)
 \arguments{
 \item{gn}{data frame(s), which will be accessed.}
 
-\item{strings}{a character string vector with regular expressions to filter data.}
+\item{strings}{character string vector with regular expressions to filter data.}
 }
 \value{
 A list of two vectors, logical values and matched strings.

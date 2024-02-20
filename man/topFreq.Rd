@@ -7,16 +7,16 @@
 topFreq(countries, len, limit, ...)
 }
 \arguments{
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{len}{numeric. The length of the substring within toponyms.}
 
-\item{limit}{numeric. The number of the most frequent toponyms.}
+\item{limit}{numeric. The number of the most frequent toponym substrings.}
 
 \item{...}{Additional parameters:
 \itemize{
 \item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
-\item\code{feat.class} a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 }}
 }
@@ -28,18 +28,20 @@ This function returns the most frequent toponym substrings in countries or a pol
 }
 \details{
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+
+Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 }
 \examples{
 \dontrun{
 topFreq(countries = "Namibia", len = 3, limit = 10)
-## returns the top ten most frequent toponym endings
+## returns the top 10 most frequent toponym endings
 ## of three-character length in Namibia
 
 topFreq(
   countries = "GB", len = 3, limit = 10,
   polygon = toponym::danelaw_polygon
 )
-## returns the top ten most frequent toponym endings
+## returns the top 10 most frequent toponym endings
 ## in the polygon which is inside the United Kingdom.
 }
 }

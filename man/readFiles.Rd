@@ -7,9 +7,9 @@
 readFiles(countries, feat.class = "P")
 }
 \arguments{
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
-\item{feat.class}{a character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.}
+\item{feat.class}{character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.}
 }
 \value{
 A data frame with GeoNames data.

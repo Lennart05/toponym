@@ -7,15 +7,15 @@
 topZtest(strings, countries, polygon, ...)
 }
 \arguments{
-\item{strings}{a character string with a regular expression to be tested.}
+\item{strings}{character string with a regular expression to be tested.}
 
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{polygon}{data frame. Defines the polygon for comparison with the remainder of a country (or countries).}
 
 \item{...}{Additional parameter:
 \itemize{
-\item\code{feat.class} character string. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+\item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 }}
 }
 \value{
@@ -27,5 +27,5 @@ This function applies a Z-test.
 \details{
 This function lets users apply a Z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-Polygons passed through the \code{polygon} parameter need to intersect a country of \code{countries}.
+Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 }

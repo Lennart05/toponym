@@ -7,11 +7,11 @@
 ortho(countries, ...)
 }
 \arguments{
-\item{countries}{a character string vector with country designations (names or ISO-codes).}
+\item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{...}{Additional parameter:
 \itemize{
-\item\code{column} a character string naming the column of interest.
+\item\code{column} character string. Selects the column for query.
 }}
 }
 \value{
@@ -22,6 +22,7 @@ This function retrieves all symbols used in country data.
 }
 \details{
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+
 The default column is \code{"alternatenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 }
