@@ -45,6 +45,17 @@ top("itz$", "DE")
 
 The plot displays all locations which end in "-itz" in Germany, their total frequency (2182), and stores the data in the global environment.
 
+For the purpose of plotting an edited data frame, we offer the `mapper()`function. This accepts user-defined title, legends, colors, and groups. An example using the previously created data frame is the following, where occurrences of -witz and -itz east of a 10.5 longitudinal line are displayed:
+
+```{r example mapper}
+itz_east <- data_itz[data_itz$longitude > 10.5,]
+itz_east$color <- "darkgrey"                # creates color column with color dark grey
+witz_indices <- grep("witz", itz_east$name) # stores indices for lines containing "witz" 
+itz_east[witz_indices, "color"] <- "green"  # sets color of "witz" entries to green
+itz_east[witz_indices, "group"] <- "witz"   # sets group labels with "itz" to "witz"
+mapper(itz_east, title = "-witz and -itz in the East")
+```
+
 ## Country designations
 
 The data is meant to cover maps and toponyms of the world. The function `country()` lets users access all permitted country and region designations used by this package. The query `country table` returns the entire data frame.
@@ -134,8 +145,8 @@ Running this with the same settings as just used for `topComp()` produces a dist
 
 ```{r ztest flanders}
 topZtest(strings = "aat$",
-           countries = "BEL",
-           polygon = toponym::flanders_polygon
+         countries = "BEL",
+         polygon = toponym::flanders_polygon
                 )
 ```
 In this example, the function compares the toponymic distribution of the trailing string "-aat" (`strings = "aat$"`) in Flanders (`polygon = toponym::flanders_polygon`) with Belgium (`countries = "BEL"`) as a whole. The result of the two proportion test is returned as an object of class `htest`.
@@ -146,9 +157,10 @@ The core functions are as follows:
 * `top()` returns and plots selected toponyms onto a map.
 * `country()` helps in navigating designations of countries and regions used by the package.
 * `creatPolygon()` lets users create a polygon by point-and-click or directly retrieve polygon data.
-* `topComp()` compares toponyms in a polygon and in the remainder of a country (or countries).
+* `mapper()` plots a user-specific data frame onto a map.
+* `topComp()` compares toponym substrings in a polygon and in the remainder of a country (or countries).
 * `topCompOut()` saves multiple maps and toponym data.
-* `topFreq()` retrieves most frequent toponyms.
+* `topFreq()` retrieves most frequent toponym substrings.
 * `topZtest()` lets users apply a Z-test on toponym distributions.
 
 For help type `?toponym` or a question mark following the individual function name (or use the `help()` syntax). A link to the index at the bottom of each help page provides a useful way of navigating the package.

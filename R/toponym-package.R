@@ -6,6 +6,7 @@
 #' \item\code{\link{top}} returns and plots selected toponyms onto a map.
 #' \item\code{\link{country}} helps in navigating designations of countries and regions used by the package.
 #' \item\code{\link{createPolygon}} lets users create a polygon by point-and-click or directly retrieve polygon data.
+#' \iten\code{\link{mapper}} plots a user-specific data frame onto a map.
 #' \item\code{\link{topComp}} compares toponym substrings in a polygon and in the remainder of a country (or countries).
 #' \item\code{\link{topCompOut}} saves multiple maps and toponym data.
 #' \item\code{\link{topFreq}} retrieves most frequent toponym substrings.

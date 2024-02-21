@@ -49,6 +49,23 @@ top("itz$", "DE")
 The plot displays all locations which end in “-itz” in Germany, their
 total frequency (2182), and stores the data in the global environment.
 
+For the purpose of plotting an edited data frame, we offer the
+`mapper()`function. This accepts user-defined title, legends, colors,
+and groups. An example using the previously created data frame is the
+following, where occurrences of -witz and -itz east of a 10.5
+longitudinal line are displayed:
+
+``` r
+itz_east <- data_itz[data_itz$longitude > 10.5,]
+itz_east$color <- "darkgrey"                # creates color column with color dark grey
+witz_indices <- grep("witz", itz_east$name) # stores indices for lines containing "witz" 
+itz_east[witz_indices, "color"] <- "green"  # sets color of "witz" entries to green
+itz_east[witz_indices, "group"] <- "witz"   # sets group labels with "itz" to "witz"
+mapper(itz_east, title = "-witz and -itz in the East")
+```
+
+<img src="man/figures/README-example mapper-1.png" width="100%" />
+
 ## Country designations
 
 The data is meant to cover maps and toponyms of the world. The function
@@ -184,7 +201,7 @@ within the Danelaw area (`polygon = toponym::danelaw_polygon`) with
 their frequency in the United Kingdom (`countries = "GB"`) and returns a
 data frame. The output is in descending order by their proportional
 frequency. The search is limited to the 100 (`limit = 100`) most
-frequent strings in the United Kingdom consisting of (a length of) three
+frequent strings in theUnited Kingdom consisting of (a length of) three
 characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that
 at least 80% of all occurrences (in the country or countries) must be
 inside the polygon. In this case, the string “-rpe” occurs 175 times in
@@ -216,8 +233,8 @@ or countries:
 
 ``` r
 topZtest(strings = "aat$",
-           countries = "BEL",
-           polygon = toponym::flanders_polygon
+         countries = "BEL",
+         polygon = toponym::flanders_polygon
                 )
 #> 
 #>  2-sample test for equality of proportions with continuity correction
@@ -247,10 +264,11 @@ The core functions are as follows:
   used by the package.
 - `creatPolygon()` lets users create a polygon by point-and-click or
   directly retrieve polygon data.
-- `topComp()` compares toponyms in a polygon and in the remainder of a
-  country (or countries).
+- `mapper()` plots a user-specific data frame onto a map.
+- `topComp()` compares toponym substrings in a polygon and in the
+  remainder of a country (or countries).
 - `topCompOut()` saves multiple maps and toponym data.
-- `topFreq()` retrieves most frequent toponyms.
+- `topFreq()` retrieves most frequent toponym substrings.
 - `topZtest()` lets users apply a Z-test on toponym distributions.
 
 For help type `?toponym` or a question mark following the individual
@@ -274,8 +292,9 @@ function `getData()` but it is possible to place it in the temporary
 folder by changing the parameter to `save = FALSE`. If you want to store
 data only temporary, you need to use `getData()` before any other
 function. Type `tempdir()` to find the temporary directory of the
-current session. For mapping purposes as well as region designations,
-the
+current session.
+
+For mapping purposes as well as region designations, the
 [geodata](https://cran.r-project.org/web/packages/geodata/index.html)
 package is used. It provides spatial data for all countries and regions
 available in this package. All maps are stored in the geodata package
