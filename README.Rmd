@@ -1,6 +1,6 @@
 ---
 title: "toponym"
-date: Februar 21, 2024
+date: February 21, 2024
 output:
   github_document
   

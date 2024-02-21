@@ -1,6 +1,6 @@
 toponym
 ================
-Februar 21, 2024
+February 21, 2024
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 <!-- badges: start -->
