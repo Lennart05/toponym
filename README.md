@@ -64,7 +64,7 @@ itz_east[witz_indices, "group"] <- "witz"   # sets group labels with "itz" to "w
 mapper(itz_east, title = "-witz and -itz in the East")
 ```
 
-<img src="man/figures/README-example mapper-1.png" width="100%" />
+<img src="man/figures/README-mapper-1.png" width="100%" />
 
 ## Country designations
 

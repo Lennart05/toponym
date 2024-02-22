@@ -11,6 +11,7 @@ fontsize: 12pt
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(
+  dev.args = list(png = list(type = "cairo")),
   collapse = TRUE,
   comment = "#>",
   fig.path = "man/figures/README-",
@@ -45,9 +46,9 @@ top("itz$", "DE")
 
 The plot displays all locations which end in "-itz" in Germany, their total frequency (2182), and stores the data in the global environment.
 
-For the purpose of plotting an edited data frame, we offer the `mapper()`function. This accepts user-defined title, legends, colors, and groups. An example using the previously created data frame is the following, where occurrences of -witz and -itz east of a 10.5 longitudinal line are displayed:
+For the purpose of plotting an edited data frame, we offer the `mapper()`function. This accepts a user-defined title, legend, colors, and groups. An example using the previously created data frame is the following, where occurrences of -witz and -itz east of a 10.5 longitudinal line are displayed:
 
-```{r example mapper}
+```{r mapper}
 itz_east <- data_itz[data_itz$longitude > 10.5,]
 itz_east$color <- "darkgrey"                # creates color column with color dark grey
 witz_indices <- grep("witz", itz_east$name) # stores indices for lines containing "witz" 
