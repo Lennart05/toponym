@@ -85,7 +85,7 @@ country("Mali", regions = 1)
 
 ## Frequent toponym substrings
 
-`topFreq()` lets users find strings frequently recurring in toponym. A simple example for the Philippines would be:
+`topFreq()` lets users find strings frequently recurring in toponyms. A simple example for the Philippines would be:
 ```{r}
 topFreq(countries = "Philippines",
         len = 3,
@@ -94,7 +94,7 @@ topFreq(countries = "Philippines",
 ```
 Among all toponyms in the data for the Philippines (`countries = "Philippines"`), these are the ten (`limit = 10`) most frequent trailing (`type = "$"`) strings consisting of (a length of) three characters (`len = 3`).
 
-The additional parameter `polygon` allows users to restrict the data to a subset of the selected countries. Only toponyms within the polygon are selected. The polygon must intersect a country specified by the parameter `countries`. The package contains a predefined polygon for the historical Danelaw area of England for purposes of illustration: 
+The additional parameter `polygon` allows users to restrict the data to a subset of the selected countries. Only toponyms within the polygon are selected. The polygon need to intersect or be within a country specified by the `countries` parameter. The package contains a predefined polygon for the historical Danelaw area of England for purposes of illustration: 
 
 ```{r}
 topFreq(countries = "GB",
@@ -124,7 +124,7 @@ topComp(countries = "GB",
        )
 ```
 
-The function compares the frequency of trailing strings (`type = "$"`) within the Danelaw area (`polygon = toponym::danelaw_polygon`) with their frequency in the United Kingdom (`countries = "GB"`) and returns a data frame. The output is in descending order by their proportional frequency. The search is limited to the 100 (`limit = 100`) most frequent strings in theUnited Kingdom consisting of (a length of) three characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that at least 80% of all occurrences (in the country or countries) must be inside the polygon. In this case, the string "-rpe" occurs 175 times in the United Kingdom and 156 of these 176 occurrences are within the target polygon resulting in a ratio percentage of 89.14%.
+The function compares the frequency of trailing strings (`type = "$"`) within the Danelaw area (`polygon = toponym::danelaw_polygon`) with their frequency in the United Kingdom (`countries = "GB"`) and returns a data frame. The output is in descending order by their proportional frequency. The search is limited to the 100 (`limit = 100`) most frequent strings in the United Kingdom consisting of (a length of) three characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that at least 80% of all occurrences (in the country or countries) must be inside the polygon. In this case, the string "-rpe" occurs 175 times in the United Kingdom and 156 of these 176 occurrences are within the target polygon resulting in a ratio percentage of 89.14%.
 
 ## Creating multiple maps at once
 
@@ -137,7 +137,7 @@ topCompOut(countries = "GB",
                 )
 ```
 
-Running this with the same settings as just used for `topComp()` produces a distributional map and a data frame of every string. The plots are saved in the working directory in a separate folder called "plots". The data frames are saved in another folder called "data frames".
+Running this with the same settings as just used for `topComp()` produces a distributional map and a data frame of every string. The plots are saved in the working directory in a separate folder called "plots". The data frames are saved in another folder called "dataframes".
 
 
 ## Apply a Z-test 
