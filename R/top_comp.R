@@ -131,7 +131,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
     }
 
     # select only toponyms which surpass parameter rat
-    surpass <- ratio[[i]] > rat
+    surpass <- ratio[[i]] >= rat
     surpass[is.na(surpass)] <- FALSE #turn NA to FALSE
     if (surpass) {
       if (opt$freq.type == "abs") {
