@@ -37,5 +37,5 @@ If the input data frame has a column \code{group}, the function will group data 
 
 If the input data frame has a \code{color} and a \code{group} column, the assignment must match each other. Every \code{group} (every unique string in that column) must be assigned a unique color throughout the data frame.
 
-If \code{regions}  is set to a value higher than \code{0}, the data frame must have a column \verb{country codes}.
+If \code{regions}  is set to a value higher than \code{0}, the data frame must have a column \verb{country code}.
 }

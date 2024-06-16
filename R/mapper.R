@@ -24,7 +24,7 @@
 #'
 #' If the input data frame has a `color` and a `group` column, the assignment must match each other. Every `group` (every unique string in that column) must be assigned a unique color throughout the data frame.
 #'
-#' If `regions`  is set to a value higher than \code{0}, the data frame must have a column `country codes`.
+#' If `regions`  is set to a value higher than \code{0}, the data frame must have a column `country code`.
 #' @return A plot.
 #' @export
 #'
