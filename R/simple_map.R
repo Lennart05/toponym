@@ -13,6 +13,7 @@
 #' \item\code{ratio_string} character string. Ratio of occurrences in the polygon from \code{topComp()}.
 #' \item\code{fq} character string. Number of occurrences in the designated polygon and in total.
 #' \item\code{legend_title} character string. Only if \code{mapper} is used. Text for the title of the legend. It is prioritized over `string` and `color` even if a `group` and `color` column exists.
+#' \item\code{frame} data frame. Sets the frame of the map.
 #' }
 #' @keywords internal
 #' @return A plot of all selected toponyms.
@@ -24,13 +25,19 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
   if(!is.numeric(regions)) stop("Parameter `regions` must be numeric.")
   if(!is.logical(plot)) stop("`plot` must be logical.")
   opt <- list(...)
-
+  
   mapper_color <- is.null(coordinates$`color`) # checks if mapper data contains color
   mapper_l <- grepl("mapper", sys.calls()[[1]][1]) # checks if used by mapper
   if(all(!is.null(color), mapper_color, is.null(group))) {
     if(length(color) != length(x) && length(color) != 1) stop("Length of parameter `color` must be either equal to the number of points or 1 if no `group` column is given.")
   }
 
+  if (!is.null(opt$frame)){
+  if (!is.data.frame(opt$frame)) stop("Parameter 'frame' must be a data frame.")
+  if (!all(c("lats", "lons") %in% colnames(opt$frame))) stop("Parameter `frame` must have the following columns: `lats` & `lons`.")
+  if (!any(is.numeric(c(opt$frame$lats, opt$frame$lons)))) stop("The columns  `lats` & `lons` must be numeric.")
+  }
+  
   nas <- unique(which(is.na(x)), which(is.na(y))) # checks for NAs
   if (length(nas) > 0) {
     x <- x[-nas]
@@ -45,14 +52,21 @@ simpleMap <- function(strings, coordinates, color, regions, plot, ...) {
 
 
 
-
+  if(is.data.frame(opt$frame)){
+  frame_lats <- opt$frame$lats
+  frame_lons <- opt$frame$lons
+  } else{
+  frame_lats <- md$V1
+  frame_lons <- md$V2
+  }
   # get max min long and lat and add a frame of 10% around the points
-  lat_range <- range(md$V1)
-  lng_range <- range(md$V2)
+  lat_range <- range(frame_lats)
+  lng_range <- range(frame_lons)
   lat_extend <- 0.1 * diff(lat_range)
   lng_extend <- 0.1 * diff(lng_range)
   lat_range <- c(lat_range - lat_extend, lat_range + lat_extend)
   lng_range <- c(lng_range - lng_extend, lng_range + lng_extend)
+
   # 	for (i in 1:4) {
   # 		if (lng_range[i] > 180) {lng_range[i] <- 180}
   # 		if (lng_range[i] < -180) {lng_range[i] <- -180}

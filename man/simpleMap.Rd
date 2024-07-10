@@ -22,6 +22,7 @@ simpleMap(strings, coordinates, color, regions, plot, ...)
 \item\code{ratio_string} character string. Ratio of occurrences in the polygon from \code{topComp()}.
 \item\code{fq} character string. Number of occurrences in the designated polygon and in total.
 \item\code{legend_title} character string. Only if \code{mapper} is used. Text for the title of the legend. It is prioritized over \code{string} and \code{color} even if a \code{group} and \code{color} column exists.
+\item\code{frame} data frame. Sets the frame of the map.
 }}
 }
 \value{

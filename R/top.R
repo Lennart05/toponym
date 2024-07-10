@@ -15,12 +15,14 @@
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{name} character string. Defines name of output data frame.
 #' \item\code{column} character string vector. Selects the column(s) for query.
+#' \item\code{frame} data frame. Sets the frame of the map.
 #' }
 #'
 #' @details
 #' This function is used to plot all locations matching the regular expression from \code{strings}.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+#' Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must have two columns called `lats` & `lons`. The latitudinal and longitudinal ranges define the frame.   
 #'
 #' This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot displays additional information if used by \code{topCompOut()}.
 #' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
@@ -68,5 +70,5 @@ top <- function(strings, countries, ...) {
   try(getData(countries), silent = TRUE) # gets data
   gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
   coordinates <- getCoordinates(strings = strings, gn = gn, df = opt$df, csv = opt$csv, tsv = opt$tsv, polygon = opt$polygon, name = opt$name, column = opt$column) # coordinates of matches
-  simpleMap(strings, coordinates, color = opt$color, regions = opt$regions, plot = opt$plot, ratio_string = opt$ratio_string, fq = opt$fq) # inserts coordinates and generates map
+  simpleMap(strings, coordinates, color = opt$color, regions = opt$regions, plot = opt$plot, ratio_string = opt$ratio_string, fq = opt$fq, frame = opt$frame) # inserts coordinates and generates map
 }

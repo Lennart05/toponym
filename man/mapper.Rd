@@ -16,6 +16,7 @@ mapper(mapdata, ...)
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 \item\code{title} character string. Text for the title of the plot.
 \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the \code{color} column or parameter and the \code{group} column.
+\item\code{frame} data frame. Sets the frame of the map.
 }}
 }
 \value{
@@ -38,4 +39,6 @@ If the input data frame has a column \code{group}, the function will group data 
 If the input data frame has a \code{color} and a \code{group} column, the assignment must match each other. Every \code{group} (every unique string in that column) must be assigned a unique color throughout the data frame.
 
 If \code{regions}  is set to a value higher than \code{0}, the data frame must have a column \verb{country code}.
+
+Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must to have two columns called \code{lats} & \code{lons}. The latitudinal and longitudinal ranges define the frame.
 }

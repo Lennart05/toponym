@@ -23,6 +23,7 @@ top(strings, countries, ...)
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 \item\code{name} character string. Defines name of output data frame.
 \item\code{column} character string vector. Selects the column(s) for query.
+\item\code{frame} data frame. Sets the frame of the map.
 }}
 }
 \value{
@@ -35,6 +36,7 @@ This function returns and plots selected toponyms onto a map.
 This function is used to plot all locations matching the regular expression from \code{strings}.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must have two columns called \code{lats} & \code{lons}. The latitudinal and longitudinal ranges define the frame.
 
 This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot displays additional information if used by \code{topCompOut()}.
 The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.

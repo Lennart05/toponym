@@ -10,6 +10,7 @@
 #' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
 #' \item\code{title} character string. Text for the title of the plot.
 #' \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the `color` column or parameter and the `group` column.
+#' \item\code{frame} data frame. Sets the frame of the map.
 #' }
 #' @details
 #' This function's purpose is to allow users to provide own data frames or edited ones exported by this package.
@@ -25,6 +26,8 @@
 #' If the input data frame has a `color` and a `group` column, the assignment must match each other. Every `group` (every unique string in that column) must be assigned a unique color throughout the data frame.
 #'
 #' If `regions`  is set to a value higher than \code{0}, the data frame must have a column `country code`.
+#' 
+#' Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must to have two columns called `lats` & `lons`. The latitudinal and longitudinal ranges define the frame.
 #' @return A plot.
 #' @export
 #'
@@ -34,20 +37,20 @@ opt <- list(...)
 if (is.null(opt$regions)) opt$regions <- 0
 if (is.null(opt$plot)) opt$plot <- TRUE
 
-if(!is.data.frame(mapdata)) stop("Parameter 'mapdata' must be a data frame.")
-if(!all(c("latitude", "longitude") %in% colnames(mapdata))) stop("Parameter `mapdata` must have the following columns: `latitude` & `longitude`.")
-if(!any(is.numeric(c(mapdata$latitude, mapdata$longitude)))) stop("The columns  `latitude` & `longitude` must be numeric.")
-if(!"country code" %in% colnames(mapdata) && opt$regions > 0) stop("Since no country codes were provided, parameter `regions` cannot exceed 0.")
-if(!is.null(mapdata$group) && is.logical(mapdata$group)) stop("The column `group` cannot be logical.")
+if (!is.data.frame(mapdata)) stop("Parameter 'mapdata' must be a data frame.")
+if (!all(c("latitude", "longitude") %in% colnames(mapdata))) stop("Parameter `mapdata` must have the following columns: `latitude` & `longitude`.")
+if (!any(is.numeric(c(mapdata$latitude, mapdata$longitude)))) stop("The columns  `latitude` & `longitude` must be numeric.")
+if (!"country code" %in% colnames(mapdata) && opt$regions > 0) stop("Since no country codes were provided, parameter `regions` cannot exceed 0.")
+if (!is.null(mapdata$group) && is.logical(mapdata$group)) stop("The column `group` cannot be logical.")
 
-if(sum(is.na(mapdata$`color`)) > 0){
-if("color" %in% colnames(mapdata)) warning(paste(sum(is.na(mapdata$`color`))), " entries are empty in the color column.")
+if (sum(is.na(mapdata$`color`)) > 0){
+if ("color" %in% colnames(mapdata)) warning(paste(sum(is.na(mapdata$`color`))), " entries are empty in the color column.")
 }
 
-if(!is.null(mapdata$color) &&  !is.null(mapdata$group)){
+if (!is.null(mapdata$color) &&  !is.null(mapdata$group)){
   G <- match(unique(mapdata$group), mapdata$group)
   C <- match(unique(mapdata$color), mapdata$color)
-  if(!identical(G, C)) stop("The columns `group` and `color` contain a mismatch.")
+  if (!identical(G, C)) stop("The columns `group` and `color` contain a mismatch.")
 
 }
 
@@ -61,7 +64,8 @@ simpleMap(strings = opt$title, #optional title
           color = opt$color,
           regions = opt$regions,
           plot = opt$plot,
-          legend_title = opt$legend_title #optional legend title
+          legend_title = opt$legend_title, #optional legend title
+          frame = opt$frame
           )
 
 
