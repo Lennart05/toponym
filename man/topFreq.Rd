@@ -15,7 +15,7 @@ topFreq(countries, len, limit, ...)
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{type} character string. Either by default "$" (ending), "^" (beginning) or "ngram" (all substrings). Type "ngram" may take a while to compute.
+\item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
 \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 }}
