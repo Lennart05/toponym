@@ -17,7 +17,7 @@
 #' }
 #' @export
 getData <- function(countries, overwrite = FALSE) {
-  save <- as.logical(getOption("save_data"))
+  save <- getOption("save_data")
   
   packdir <- system.file("extdata", package = "toponym")
   if (any(countries == "all")) {

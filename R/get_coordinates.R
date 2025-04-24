@@ -29,7 +29,7 @@ getCoordinates <- function(strings, gn, csv, tsv, ...) {
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }
-  global <- as.logical(getOption("global"))
+  global <- getOption("global")
 
 
   m <- list() # pos of matches
