@@ -4,7 +4,6 @@
 #' @details This function returns coordinates (longitude and latitude), country codes and the matched strings. The return is used by \code{simple_map()}.
 #' @param gn data frame which will be accessed.
 #' @param strings character string vector with regular expressions to filter data.
-#' @param df logical. If \code{TRUE}, matches will be saved in the global environment.
 #' @param csv logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 #' @param tsv logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 #' @param ... Additional parameter:
@@ -15,8 +14,7 @@
 #' }
 #' @keywords internal
 #' @return A list with the coordinates (longitude and latitude), country codes and matched strings.
-getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
-
+getCoordinates <- function(strings, gn, csv, tsv, ...) {
   ##### store additional parameters and set defaults
   opt <- list(...)
 
@@ -31,7 +29,7 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
     gn <- gn[poly_log, ] # only those in the polygon left
   }
-
+  global <- as.logical(getOption("global"))
 
 
   m <- list() # pos of matches
@@ -87,12 +85,12 @@ getCoordinates <- function(strings, gn, df, csv, tsv, ...) {
 
 
 
-  # saves data as df and/or csv/tsv
-  if (any(df, csv, tsv)) {
+  # saves data as df (if global is set to TRUE) and/or csv/tsv
+  if (any(global, csv, tsv)) {
     strings_raw <- gsub("[[:punct:]]", "", strings)
     dat_name <- paste0("data_", paste(strings_raw, collapse = "_"), collapse = "_")
     if(!is.null(opt$name)) dat_name <- opt$name[1]
-    if (df == TRUE) {
+    if (global == TRUE) {
       dat <- assign(dat_name, output, envir = .GlobalEnv)
       message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
     }

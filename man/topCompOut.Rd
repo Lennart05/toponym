@@ -51,6 +51,5 @@ topCompOut(
 
 ## generates and saves the data frames & maps of the top 10 three-character-long endings
 ## in Belgium if more than 95\% of of them belong to the polygon
-## corresponding to Flanders. The data frames are not saved
-## in the global environment (df = FALSE).}
+## corresponding to Flanders.}
 }

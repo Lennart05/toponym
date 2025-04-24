@@ -4,7 +4,6 @@
 #' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/) and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' @param countries character string vector with country designations (names or ISO-codes).
-#' @param save logical. If \code{TRUE}, the data sets will be extracted to the package folder. If \code{FALSE} it will be saved in a temporary folder.
 #' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
 #' @examples
@@ -17,16 +16,14 @@
 #' ## from the zip files downloaded before to the package folder if used in the same session
 #' }
 #' @export
-getData <- function(countries, save = TRUE, overwrite = FALSE) {
+getData <- function(countries, overwrite = FALSE) {
+  save <- as.logical(getOption("save_data"))
+  
   packdir <- system.file("extdata", package = "toponym")
   if (any(countries == "all")) {
     countries <- substring(list.files(packdir), 1, 2)
   } else {
-      countries <- country(query = countries)
-  for (i in 1:length(countries)) {
-    countries[i] <- countries[[i]][, 1]
-  } # converts input into ISO2 codes
-  countries <- unlist(countries)
+	countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   }
 
   filename <- paste0(countries, ".txt")

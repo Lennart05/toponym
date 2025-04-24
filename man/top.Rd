@@ -15,7 +15,7 @@ top(strings, countries, ...)
 \itemize{
 \item\code{color} character string vector indicating, which color is assigned to each string.
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-\item\code{df} logical. If \code{TRUE}, matches will be saved in the global environment.
+\item\code{global} logical. If \code{TRUE}, matches will be saved in the global environment.
 \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
@@ -49,7 +49,7 @@ top("itz$", "DE")
 # and saves the locations in a data frame in the global environment.
 
 
-top("^Vlad", "RU", color = "green", df = FALSE, csv = TRUE, plot = FALSE)
+top("^Vlad", "RU", color = "green", csv = TRUE, plot = FALSE)
 # saves a plot with all populated places
 # in Russia starting with "Vlad" (case sensitive) colored in green
 # and saves it as .png together with the matches as .csv in the working directory.

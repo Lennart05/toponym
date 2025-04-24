@@ -1,6 +1,6 @@
 Package: toponym
 Title: Toponym Analysis & Visualization Tool
-Version: 0.1.0
+Version: 1.0.0
 Authors@R: c(
     person("Lennart", "Chevallier", email = "mail@lchevallier.de", role = c("aut", "cre")),
     person("Søren", "Wichmann", email = "wichmannsoeren@gmail.com", role = "aut"))

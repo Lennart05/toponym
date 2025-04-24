@@ -20,11 +20,8 @@ topZtest <- function(strings, countries, polygon, ...) {
 
   if(length(strings)>1) stop("This function only permits one string at a time.")
 
-    countries <- country(query = countries)
-  for (i in 1:length(countries)) {
-    countries[i] <- countries[[i]][, 1]
-  } # converts input into ISO2 codes
-  countries <- unlist(countries)
+  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  
   if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
 
   ##### store additional parameters and set defaults

@@ -30,11 +30,7 @@ ortho <- function(countries, ...) {
   if(!is.character(opt$column)) stop("The selected column must be a character string.")
 
   # convert input into ISO2 codes and remove incorrect country names
-    countries <- country(query = countries)
-  for (i in 1:length(countries)) {
-    countries[i] <- countries[[i]][, 1]
-  } # converts input into ISO2 codes
-  countries <- unlist(countries)
+  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
 
   # download data if not already on the computer
   getData(countries)

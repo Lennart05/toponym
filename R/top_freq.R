@@ -35,11 +35,7 @@
 #' }
 topFreq <- function(countries, len, limit, ...) {
 
-  countries <- country(query = countries)
-  for (i in 1:length(countries)) {
-    countries[i] <- countries[[i]][, 1]
-  } # converts input into ISO2 codes
-  countries <- unlist(countries)
+  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
 
   if(missing(len)) stop("Parameter 'len' must be defined.")
   if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")

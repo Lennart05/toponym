@@ -60,12 +60,11 @@
 #' }
 #'
 topComp <- function(countries, len, rat, polygon, ...) {
-
-  countries <- country(query = countries)
-  for (i in 1:length(countries)) {
-    countries[i] <- countries[[i]][, 1]
-  } # converts input into ISO2 codes
-  countries <- unlist(countries)
+  
+  global <- as.logical(getOption("global"))
+  
+  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  
   if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
 
   poly_owin <- poly(polygon)
@@ -165,10 +164,11 @@ topComp <- function(countries, len, rat, polygon, ...) {
       colnames(dat) <- c("toponym", "ratio", "frequency")
       dat <- dat[order(as.numeric(dat$ratio), decreasing = TRUE), ]
     }
+    if (global == TRUE) {
     dat_name <- paste0("data_top_", opt$limit)
     assign(dat_name, dat, envir = .GlobalEnv)
     message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
-
+    }
     return(dat)
   } else {
     warning("No toponym satisfies the criteria")

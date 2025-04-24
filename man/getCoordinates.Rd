@@ -4,14 +4,12 @@
 \alias{getCoordinates}
 \title{Coordinate selection}
 \usage{
-getCoordinates(strings, gn, df, csv, tsv, ...)
+getCoordinates(strings, gn, csv, tsv, ...)
 }
 \arguments{
 \item{strings}{character string vector with regular expressions to filter data.}
 
 \item{gn}{data frame which will be accessed.}
-
-\item{df}{logical. If \code{TRUE}, matches will be saved in the global environment.}
 
 \item{csv}{logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.}
 
