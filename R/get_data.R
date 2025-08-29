@@ -17,7 +17,8 @@
 #' }
 #' @export
 getData <- function(countries, overwrite = FALSE) {
-  save <- getOption("save_data")
+  toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
+  save <- toponym_options$save_data
   
   packdir <- system.file("extdata", package = "toponym")
   if (any(countries == "all")) {
