@@ -10,8 +10,6 @@
 #' @return A data frame with GeoNames data.
 readFiles <- function(countries, feat.class = "P") {
 
-  if(!exists(".top_env", mode = "environment")) .top_env <<- new.env(parent = emptyenv())
-
   filename <- list()
   for (i in 1:length(countries)) { # locates filename downloaded by getData()
     if (file.exists(paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt"))[i]) { # if it is in the package directory

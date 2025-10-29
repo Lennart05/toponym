@@ -30,7 +30,7 @@ getCoordinates <- function(strings, gn, csv, tsv, ...) {
     gn <- gn[poly_log, ] # only those in the polygon left
   }
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
-  global <- toponym_options$global
+  global <- toponym_options["global",1]
 
 
   m <- list() # pos of matches

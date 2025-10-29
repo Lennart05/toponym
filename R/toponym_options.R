@@ -30,7 +30,7 @@ toponymOptions <- function() {
   
   
   if(selection == 1){
-  if(toponym_options$global == TRUE){
+  if(toponym_options["global",1] == TRUE){
   cat("\nMatches from top() and strings from topComp() will be saved in the global environment.\n")
   } else {
   cat("\nMatches from top() and strings from topComp() will not be saved in the global environment.\n")
@@ -42,10 +42,10 @@ toponymOptions <- function() {
     stop("Input must be TRUE or FALSE.")
   }
   
-  toponym_options$global <- as.logical(selection)
+  toponym_options["global",1] <- as.logical(selection)
   
   }else if (selection == 2){
-  if(toponym_options$save_data == TRUE){
+  if(toponym_options["save_data", 1] == TRUE){
       cat("\nToponym data sets will be saved in the package folder.\n")
     } else {
       cat("\nToponym data sets will be saved in a temporary folder.\n")
@@ -56,7 +56,7 @@ toponymOptions <- function() {
     if (!(selection %in% c("TRUE", "FALSE"))) {
       stop("Input must be TRUE or FALSE.")
     }
-  toponym_options$save_data <- as.logical(selection)
+  toponym_options["save_data", 1] <- as.logical(selection)
   }
   
   saveRDS(toponym_options, paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))

@@ -61,7 +61,7 @@
 #'
 topComp <- function(countries, len, rat, polygon, ...) {
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
-  global <- toponym_options$global
+  global <- toponym_options["global",1]
   
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
