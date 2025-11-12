@@ -10,22 +10,22 @@ toponymOptions()
 This function does not return a value. It modifies package options based on user input.
 }
 \description{
-This function allows users to change settings related to the storage of toponym data.
-Users can decide whether to save matches and strings in the global environment or not.
-Further, users can decide whether toponym data from \code{geonames} is saved in the package folder or in a temporary folder.
+This function allows users to modify settings for managing toponym data.
+Users can choose whether to save matches and strings in the global environment or not to save them.
+Further, users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
 }
 \details{
 When the function is called, the user is prompted to select an option:
 \itemize{
-\item Typing \code{1} allows the user to change the setting related to storing objects in the global environment.
-\item Typing \code{2} allows the user to change the setting related to saving toponym datasets in the package folder or in a temporary folder.
+\item Option \code{1}: Allows the user to modify the setting for storing objects in the global environment.
+\item Option \code{2}: Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.
 }
 
 For option \code{1}, if the current setting is \code{TRUE}, matches from \code{top()} and strings from \code{topComp()}
-will be saved in the global environment; if the current setting is \code{FALSE}, they will not be saved.
+will be saved in the global environment; if the current setting is \code{FALSE}, the results will not be saved.
 
-For option \code{2}, if the current setting is \code{TRUE}, toponym datasets will be saved in the package folder;
-if the current setting \code{FALSE}, they will be saved in a temporary folder.
+For option \code{2}, if the current setting is \code{TRUE}, toponym data sets will be saved in the package folder;
+if the current setting is \code{FALSE}, toponym data sets will be saved in a temporary folder.
 }
 \examples{
 # Call the function to manage toponym options

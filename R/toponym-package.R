@@ -11,6 +11,7 @@
 #' \item\code{\link{topCompOut}} saves multiple maps and toponym data.
 #' \item\code{\link{topFreq}} retrieves most frequent toponym substrings.
 #' \item\code{\link{topZtest}} lets users apply a Z-test on toponym distributions
+#' \item\code{\link{toponymOptions}} lets users modify settings for managing toponym data
 #' }
 #' For more detailed descriptions please read the respective documentation.
 
