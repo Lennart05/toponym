@@ -7,7 +7,6 @@
 #' \itemize{
 #' \item\code{color} character string vector indicating, which color is assigned to each string.
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-#' \item\code{global} logical. If \code{TRUE}, matches will be saved in the global environment.
 #' \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
 #' \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
 #' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
@@ -49,7 +48,6 @@
 #' @return A plot of selected toponym(s) with the number of occurrences.
 #' @export
 top <- function(strings, countries, ...) {
-    # converts input into ISO2 codes
 
   
   ##### store additional parameters and set defaults
