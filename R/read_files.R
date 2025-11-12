@@ -9,7 +9,9 @@
 #' @keywords internal
 #' @return A data frame with GeoNames data.
 readFiles <- function(countries, feat.class = "P") {
-
+  
+  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  
   filename <- list()
   for (i in 1:length(countries)) { # locates filename downloaded by getData()
     if (file.exists(paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt"))[i]) { # if it is in the package directory
