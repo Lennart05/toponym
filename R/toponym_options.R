@@ -4,60 +4,38 @@
 #' Further, users can specify whether toponym data retrieved from `GeoNames` will be saved in the package folder or in a temporary folder.
 #'
 #' @details
-#' When the function is called, the user is prompted to select an option:
-#' - Option `1`: Allows the user to modify the setting for storing objects in the global environment.
-#' - Option `2`: Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.
-#' 
-#' For option `1`, if the current setting is `TRUE`, matches from `top()` and strings from `topComp()` 
+#' Parameter `global`: if the current setting is `TRUE`, matches from `top()` and strings from `topComp()` 
 #' will be saved in the global environment; if the current setting is `FALSE`, the results will not be saved.
 #' 
-#' For option `2`, if the current setting is `TRUE`, toponym data sets will be saved in the package folder; 
+#' Parameter `save_data`: if the current setting is `TRUE`, toponym data sets will be saved in the package folder; 
 #' if the current setting is `FALSE`, toponym data sets will be saved in a temporary folder.
 #' 
-#' @return This function does not return a value. It modifies package options based on user input.
+#' If no parameter is set, i.e. `toponymOptions()`, the complete data frame with current settings is printed.
+#' 
+#' @param global logical. Enter `TRUE` or `FALSE`. Allows the user to modify the setting for storing objects in the global environment.
+#' @param save_data logical. Enter `TRUE` or `FALSE`. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.
+#' 
+#' @return A data frame with the value(s) of the respective setting(s).
 #' 
 #' @examples
-#' # Call the function to manage toponym options
+#' # Show the current settings
 #' toponymOptions()
 #' 
 #' @export
-toponymOptions <- function() {
+toponymOptions <- function(global = NULL, save_data = NULL) {
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
   
-    cat("\nIf you type 1, you may modify the setting for storing objects in the global environment.\n") 
-    cat("\nIf you type 2, you may modify the setting for saving toponym data sets in the package folder or in a temporary folder.\n")
-  selection <- readline()
-  
-  
-  if(selection == 1){
-  if(toponym_options["global",1] == TRUE){
-  cat("\nCurrent Value: TRUE\nMatches from top() and strings from topComp() will be saved in the global environment.\n")
-  } else {
-  cat("\nCurrent Value: FALSE\nMatches from top() and strings from topComp() will not be saved in the global environment.\n")
-  }
-  cat("\nYou may modify this setting for the package.\nIf you type TRUE, objects will be saved in the global environment.\nIf you type FALSE, objects will not be saved in the global environment.\n")
-  cat("\nType TRUE or FALSE or leave by pressing enter.")
-  selection <- readline()
-  if (!any(c("TRUE", "FALSE") %in% selection)) {
-    stop("Input must be TRUE or FALSE.")
-  }
-  
-  toponym_options["global",1] <- as.logical(selection)
-  
-  }else if (selection == 2){
-  if(toponym_options["save_data", 1] == TRUE){
-      cat("\nCurrent Value: TRUE\nToponym data sets will be saved in the package folder.\n")
-    } else {
-      cat("\nCurrent Value: FALSE\nToponym data sets will be saved in a temporary folder.\n")
+  if(!is.null(global)){
+    toponym_options["global",1] <- as.logical(global)
+    cat("\nCurrent value:\n")
+    print(toponym_options["global",1]) 
     }
-    cat("\nYou may modify this setting for the package.\nIf you type TRUE, toponym data sets will be saved in the package folder.\nIf you type FALSE, toponym data sets will be saved in a temporary folder.\n")
-    cat("\nType TRUE or FALSE or leave by pressing enter.")
-    selection <- readline()
-    if (!(selection %in% c("TRUE", "FALSE"))) {
-      stop("Input must be TRUE or FALSE.")
-    }
-  toponym_options["save_data", 1] <- as.logical(selection)
+  if(!is.null(save_data)){toponym_options["save_data", 1] <- as.logical(save_data)
+  cat("\nCurrent value:\n")
+  print(toponym_options["save_data",1]) 
   }
-  
+  if(is.null(global) & is.null(save_data)){
+  print(toponym_options) 
+  }
   saveRDS(toponym_options, paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
 }
