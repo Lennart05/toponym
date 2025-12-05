@@ -1,9 +1,11 @@
 toponym
 ================
-February 21, 2024
+December 5, 2025
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
+
 <!-- badges: start -->
+
 <!-- badges: end -->
 
 Welcome to the `toponym` GitHub page!
@@ -46,8 +48,8 @@ top("itz$", "DE")
 
 <img src="man/figures/README-example-1.png" width="100%" />
 
-The plot displays all locations which end in “-itz” in Germany, their
-total frequency (2182), and stores the data in the global environment.
+The plot displays all locations which end in -itz in Germany, their
+total frequency (2170), and stores the data in the global environment.
 
 For the purpose of plotting an edited data frame, we offer the
 `mapper()`function. This accepts a user-defined title, legend, colors,
@@ -132,7 +134,7 @@ topFreq(countries = "Philippines",
         type = "$")
 #> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
-#> 1750 1247 1128  764  693  608  598  548  545  504
+#> 1767 1258 1136  771  709  615  604  552  551  510
 ```
 
 Among all toponyms in the data for the Philippines
@@ -142,9 +144,10 @@ three characters (`len = 3`).
 
 The additional parameter `polygon` allows users to restrict the data to
 a subset of the selected countries. Only toponyms within the polygon are
-selected. The polygon need to intersect or be within a country specified
-by the `countries` parameter. The package contains a predefined polygon
-for the historical Danelaw area of England for purposes of illustration:
+selected. The polygon needs to intersect or be within a country
+specified by the `countries` parameter. The package contains a
+predefined polygon for the historical Danelaw area of England for
+purposes of illustration:
 
 ``` r
 topFreq(countries = "GB",
@@ -153,8 +156,8 @@ topFreq(countries = "GB",
         polygon = toponym::danelaw_polygon
 )
 #> toponyms
-#> ton$ ham$ ley$ een$ ord$ rpe$ rth$ ill$ eld$ ell$ 
-#> 1213  430  300  191  157  156  153  149  146  128
+#> ton$ een$ ham$ ill$ ley$ End$ rpe$ eld$ ord$ rth$ 
+#> 1468  694  493  437  436  431  264  257  202  192
 ```
 
 ## Create polygons
@@ -178,9 +181,9 @@ and latitudinal coordinates called `argentina_polygon` is created.
 
 ## Strings specific to a region
 
-`topComp()` determines which toponym strings in the data are
-characteristic to a region. Consider again the following example for the
-Danelaw area:
+`topComp()`, meaning “toponym compare”, determines which toponym strings
+in the data are characteristic to a region. Consider again the following
+example for the Danelaw area:
 
 ``` r
 topComp(countries = "GB",
@@ -192,8 +195,7 @@ topComp(countries = "GB",
 #> 
 #> Dataframe data_top_100 saved in global environment.
 #>   toponym ratio_perc frequency
-#> 1    rpe$      89.14   156/175
-#> 2    lme$      80.43     37/46
+#> 1    rpe$       90.1   264/293
 ```
 
 The function compares the frequency of trailing strings (`type = "$"`)
@@ -204,9 +206,9 @@ frequency. The search is limited to the 100 (`limit = 100`) most
 frequent strings in the United Kingdom consisting of (a length of) three
 characters (`len = 3`). The cut-off ratio of 80% (`rat = .8`) means that
 at least 80% of all occurrences (in the country or countries) must be
-inside the polygon. In this case, the string “-rpe” occurs 175 times in
-the United Kingdom and 156 of these 176 occurrences are within the
-target polygon resulting in a ratio percentage of 89.14%.
+inside the polygon. In this case, the string -rpe occurs 293 times in
+the United Kingdom and 264 of these 293 occurrences are within the
+target polygon resulting in a ratio percentage of 90.1%.
 
 ## Creating multiple maps at once
 
@@ -240,20 +242,48 @@ topZtest(strings = "aat$",
 #>  2-sample test for equality of proportions with continuity correction
 #> 
 #> data:  c(string_in_poly, string_in_cc) out of c(top_in_poly, top_in_cc)
-#> X-squared = 321.76, df = 1, p-value < 2.2e-16
+#> X-squared = 321.66, df = 1, p-value < 2.2e-16
 #> alternative hypothesis: greater
 #> 95 percent confidence interval:
-#>  0.04767105 1.00000000
+#>  0.0476564 1.0000000
 #> sample estimates:
 #>       prop 1       prop 2 
-#> 0.0527035237 0.0003287851
+#> 0.0526875190 0.0003287851
 ```
 
 In this example, the function compares the toponymic distribution of the
-trailing string “-aat” (`strings = "aat$"`) in Flanders
+trailing string -aat (`strings = "aat$"`) in Flanders
 (`polygon = toponym::flanders_polygon`) with Belgium
 (`countries = "BEL"`) as a whole. The result of the two proportion test
 is returned as an object of class `htest`.
+
+## Manage Options of`toponym`
+
+`toponymOptions` allows users to modify settings for managing toponym
+data.
+
+For the parameter `global`: if the current setting is `TRUE`, matches
+from `top()` and strings from `topComp()` will be saved in the global
+environment; if the current setting is `FALSE`, the results will not be
+saved.
+
+For the parameter `save_data`: if the current setting is `TRUE`, toponym
+data sets will be saved in the package folder; if the current setting is
+`FALSE`, toponym data sets will be saved in a temporary folder.
+
+If no parameter is set, i.e. `toponymOptions()`, the complete data frame
+with current settings is printed, as illustrated in the following
+example:
+
+``` r
+toponymOptions()
+#>           value
+#> global     TRUE
+#> save_data  TRUE
+
+# toponymOptions(global = FALSE)
+# the command in the preceding line would change the parameter `global` from `TRUE` as shown in the table to `FALSE` as given in the command
+```
 
 ## The functions
 
@@ -262,7 +292,7 @@ The core functions are as follows:
 - `top()` returns and plots selected toponyms onto a map.
 - `country()` helps in navigating designations of countries and regions
   used by the package.
-- `creatPolygon()` lets users create a polygon by point-and-click or
+- `createPolygon()` lets users create a polygon by point-and-click or
   directly retrieve polygon data.
 - `mapper()` plots a user-specific data frame onto a map.
 - `topComp()` compares toponym substrings in a polygon and in the
@@ -270,6 +300,8 @@ The core functions are as follows:
 - `topCompOut()` saves multiple maps and toponym data.
 - `topFreq()` retrieves most frequent toponym substrings.
 - `topZtest()` lets users apply a Z-test on toponym distributions.
+- `toponymOptions()` allows users to modify settings for managing
+  toponym data.
 
 For help type `?toponym` or a question mark following the individual
 function name (or use the `help()` syntax). A link to the index at the
@@ -288,14 +320,12 @@ The toponym data comes from [GeoNames](https://www.geonames.org/) and
 will be automatically downloaded when you call any of the core
 functions. It is recommended to save the data of the countries you
 access in the package directory. This is the default option of the
-function `getData()` but it is possible to place it in the temporary
-folder by changing the parameter to `save = FALSE`. If you want to store
-data only temporary, you need to use `getData()` before any other
-function. Type `tempdir()` to find the temporary directory of the
-current session.
+function `toponymOptions` but it is possible to place it in the
+temporary folder by changing the parameter to `save_date = FALSE`. Type
+`tempdir()` to find the temporary directory of the current session.
 
 For mapping purposes as well as region designations, the
 [geodata](https://cran.r-project.org/web/packages/geodata/index.html)
 package is used. It provides spatial data for all countries and regions
-available in this package. All maps are stored in the geodata package
+available in this package. All maps are stored in the `geodata` package
 directory.
