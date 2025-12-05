@@ -21,7 +21,6 @@
 #' @importFrom utils write.table download.file unzip read.table tail
 #' @importFrom geodata world gadm
 #' @importFrom terra crds plot
-#' @importFrom ngram get.phrasetable ngram
 #' @importFrom graphics segments
 #' @importFrom grDevices rainbow
 #' @importFrom sf st_as_sf

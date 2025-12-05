@@ -58,22 +58,7 @@ topFreq <- function(countries, len, limit, ...) {
   }
 
   if(len > max(nchar(gn$name))) stop(paste0("Parameter `len` exceeds the length of the longest name (", max(nchar(gn$name)), ") in the data."))
-
-  if(opt$type == "ngram"){
-  toponyms <- list()
-  ngram_names <- gn[nchar(gn$name) >= len, "name"] # removes places which are shorter than ngram length
-  for(i in 1:length(ngram_names)){
-    toponyms[[i]] <- get.phrasetable(ngram(ngram_names[i], sep = "", n = len))[,c("ngrams", "freq")] #get ngrams & freq
-    toponyms[[i]] <- toponyms[[i]][!grepl("  ", toponyms[[i]]$ngrams),] # ngrams containing space bar removed
-    toponyms[[i]]$ngrams <- gsub(" ", "", toponyms[[i]]$ngrams , fixed = TRUE) # remove all white space
-    }
-  toponyms <- stats::aggregate(freq ~ ngrams, data = do.call("rbind", toponyms), FUN = sum) #merge ngrams by frequency
-  toponyms <- toponyms[order(toponyms$freq, decreasing = TRUE),]
-  freq_top <- as.table(toponyms$freq)
-  names(freq_top) <- toponyms$ngrams
-  if (limit == "fnc") limit <- length(freq_top)
-  freq_top <- freq_top[1:limit]
-  }else{
+  
   # query all toponyms from the dataset
   toponyms <- paste(
     if (opt$type == "^") {
@@ -97,7 +82,7 @@ topFreq <- function(countries, len, limit, ...) {
   )
   if (limit == "fnc") limit <- length(toponyms)
   freq_top <- table(toponyms)[order(table(toponyms), decreasing = TRUE)][1:limit] # only a selection of the most frequent toponyms
-  }
+  
 
   freq_top <- freq_top[!is.na(freq_top)] # rm nas
 

@@ -7,28 +7,25 @@ Authors@R: c(
 Author: Lennart Chevallier [aut, cre],
         Søren Wichmann [aut]
 Description: A package to analyze and visualize toponym distributions.
-Depends: R (>= 4.1.0)
+Depends:
+    R (>= 4.5)
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
-Suggests: 
-    knitr,
-    rmarkdown,
-    testthat (>= 3.0.0)
+RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 LazyData: true
 Imports: 
-    geodata (>= 0.5.8),
-    ggplot2 (>= 3.4.0),
-    grDevices (>= 4.1.2),
-    ngram (>= 3.2.3),
-    sf (>= 1.0.14),
-    spatstat.geom (>= 3.2.7),
-    spatstat.utils (>= 3.0.3),
-    stats (>= 4.1.2),
-    terra (>= 1.7.23),
-    utils (>= 4.1.2)
+    geodata (>= 0.6.6),
+    ggplot2 (>= 4.0.1),
+    grDevices (>= 4.5.1),
+    sf (>= 1.0.22),
+    spatstat.geom (>= 3.6.0),
+    spatstat.utils (>= 3.2.0),
+    stats (>= 4.5.1),
+    terra (>= 1.8.80),
+    utils (>= 4.5.1)
 URL: https://github.com/Lennart05/toponym
 BugReports: https://github.com/Lennart05/toponym/issues
-Config/testthat/edition: 3
+Suggests: 
+    knitr (>= 1.50)
