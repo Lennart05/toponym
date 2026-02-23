@@ -53,7 +53,7 @@ total frequency (2170), and stores the data in the global environment.
 
 For the purpose of plotting an edited data frame, we offer the
 `mapper()`function. This accepts a user-defined title, legend, colors,
-and groups.  An example using the previously created data frame is the
+and groups. An example using the previously created data frame is the
 following, where occurrences of -witz and -itz east of a 10.5
 longitudinal line are displayed:
 
