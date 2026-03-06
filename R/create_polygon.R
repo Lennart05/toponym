@@ -95,6 +95,6 @@ createPolygon <- function(countries, ...) {
     polygon <- data.frame(polygon$x, polygon$y) ## saves only lons and lats
   }
 
-  names(polygon) <- c("lons", "lats")
+  names(polygon) <- c("longitude", "latitude")
   return(polygon)
 }
