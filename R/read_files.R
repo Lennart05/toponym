@@ -9,7 +9,6 @@
 #' @keywords internal
 #' @return A data frame with GeoNames data.
 readFiles <- function(countries, feat.class = "P") {
-  
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
   filename <- list()
