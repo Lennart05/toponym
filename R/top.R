@@ -1,69 +1,125 @@
-#' @title Toponym map
+#' @title Toponym Selection
 #' @description
-#' This function returns and plots selected toponyms onto a map.
+#' This function returns coordinates of selected toponyms (strings).
 #' @param strings character string vector with regular expressions to filter data.
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{color} character string vector indicating, which color is assigned to each string.
-#' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-#' \item\code{csv} logical. If \code{TRUE}, matches will be saved as .csv in the current working directory.
-#' \item\code{tsv} logical. If \code{TRUE}, matches will be saved as .tsv in the current working directory.
-#' \item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
+#' \item\code{csv} character string. If specified, matches will be saved as .csv in the current working directory. The given character string defines the name of the .csv file.
+#' \item\code{tsv} character string. If specified, matches will be saved as .tsv in the current working directory. The given character string defines the name of the .tsv file.
 #' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
-#' \item\code{name} character string. Defines name of output data frame.
 #' \item\code{column} character string vector. Selects the column(s) for query.
-#' \item\code{frame} data frame. Sets the frame of the map.
 #' }
-#'
 #' @details
-#' This function is used to plot all locations matching the regular expression from \code{strings}.
+#' This function selects locations which match the regular expression from \code{strings}.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
-#' Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must have two columns called `lats` & `lons`. The latitudinal and longitudinal ranges define the frame.   
-#'
-#' This function calls the internal \code{simpleMap()} function to generate a map of all locations gotten by \code{getCoordinates()}. The plot displays additional information if used by \code{topCompOut()}.
 #' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
-#'
+#' 
 #' @examples
 #' \dontrun{
 #' top("itz$", "DE")
-#' # prints a plot with all populated places
+#' # returns a data frame with all populated places
 #' # in Germany ending in "itz"
-#' # and saves the locations in a data frame in the global environment.
 #'
 #'
-#' top("^Vlad", "RU", color = "green", csv = TRUE, plot = FALSE)
-#' # saves a plot with all populated places
-#' # in Russia starting with "Vlad" (case sensitive) colored in green
-#' # and saves it as .png together with the matches as .csv in the working directory.
+#' top("^Vlad", "RU", csv = "Vlad_RU")
+#' # returns a data frame with all populated places
+#' # in Russia starting with "Vlad" (case sensitive)
+#' # and saves this data frame as .csv named "Vlad_RU.csv" in the working directory.
 #'
 #'
 #' top(c("itz$", "ice$"), c("DE", "PL"))
-#' # prints a plot with all populated places in Germany and Poland ending in either "itz" or "ice"
-#' # colored in red ("itz") and cyan ("ice")
-#' # and saves matches in the global environment.
+#' # returns a data frame with all populated places
+#' # in Germany and Poland ending in either "itz" or "ice"
 #' }
-#' @return A plot of selected toponym(s) with the number of occurrences.
+#' @return A data frame of selected toponym(s).
 #' @export
 top <- function(strings, countries, ...) {
-
-  
   ##### store additional parameters and set defaults
   opt <- list(...)
-  if (is.null(opt$csv)) opt$csv <- FALSE
-  if (is.null(opt$tsv)) opt$tsv <- FALSE
-  if (is.null(opt$plot)) opt$plot <- TRUE
+  if (!is.null(opt$csv) && !is.character(opt$csv[1])) stop("File name must be a character string. Only the first element will be considered.")
+  if (!is.null(opt$tsv) && !is.character(opt$tsv[1])) stop("File name must be a character string. Only the first element will be considered.")
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
+  if (!is.character(opt$feat.class)) stop("Parameter `feat.class` must contain character string.")
   if (is.null(opt$column)) opt$column <- "name"
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
-  if (is.null(opt$regions)) opt$regions <- 0
-  if (!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
-
   try(getData(countries), silent = TRUE) # gets data
   gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
-  coordinates <- getCoordinates(strings = strings, gn = gn, csv = opt$csv, tsv = opt$tsv, polygon = opt$polygon, name = opt$name, column = opt$column) # coordinates of matches
-  simpleMap(strings, coordinates, color = opt$color, regions = opt$regions, plot = opt$plot, ratio_string = opt$ratio_string, fq = opt$fq, frame = opt$frame) # inserts coordinates and generates map
+  # removes coordinates outside of the polygon
+  if (!is.null(opt$polygon)) {
+    if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+
+    poly_owin <- poly(opt$polygon)
+
+    poly_log <- inside.owin(x = gn$longitude, y = gn$latitude, w = poly_owin) # check which places are in the polygon
+
+    gn <- gn[poly_log, ] # only those in the polygon left
+  }
+  
+  m <- list() # pos of matches
+  script <- list()
+  for (i in 1:length(strings)) {
+    script[[i]] <- IS(strings[[i]]) # checks if any string contains non.latinates
+  }
+
+
+
+
+  cols <- c("name", "asciiname", "alternatenames")
+  which_col <- match(opt$column, c("name", "asciiname", "alternatenames"))
+  which_col <- which_col[!is.na(which_col)]
+  gn_selection <- as.data.frame(gn[,cols[rev(which_col)[rev(which_col) !=3]]]) #select all cols in reversed order but alt names
+  w_strings <- NULL
+  if(any(1:2 %in% which_col)){
+  w_strings <- !!rowSums(sapply(gn_selection, grepl, pattern = paste(strings, collapse = "|"), perl = TRUE)) # logical values if matched in names or asciiname
+  }
+
+  if (sum(script == "non.latinate") > 0 || 3 %in% which_col) { ## if strings contain non.latinates or alt col is selected
+    NApc <- paste0(round(sum(is.na(gn$alternatenames)) / nrow(gn) * 100), "%") ## % of NA in alternatenames col
+    message(paste(NApc, "of all entries in the alternate names column are empty."))
+    ### if no names in alternatenames
+    alternate_names <- altNames(gn, strings)
+    if(!is.null(w_strings)){
+    w_strings <- w_strings + alternate_names[[1]]
+    w_strings[w_strings == 2] <- 1
+    w_strings <- as.logical(w_strings) # logical vector indicating if any of the columns has a match
+    }else{
+      w_strings <- alternate_names[[1]]
+    }
+    alternate_names[[2]] <- alternate_names[[2]][,order(ncol(alternate_names[[2]]):1)] #reverse col order
+    if(which_col[1] == 3 & length(which_col) > 1) {gn_selection <- cbind(gn_selection, alternate_names[[2]]) #put alt names last if first in selection
+    }else if(length(which_col) == 1) {gn_selection <- alternate_names[[2]] # merge selected cols and all alt name cols
+    }else {gn_selection <- cbind(alternate_names, gn_selection)}
+  }
+  m_strings <- rep(NA,nrow(gn)) # vector with NA values of gn length
+  for(j in 1:ncol(gn_selection)){
+    m[[j]] <- regexpr(paste(strings, collapse = "|"), gn_selection[, j], perl = TRUE) #pos of match
+    m[[j]][is.na(m[[j]])] <- -1 # replace NA with -1
+    m_strings[m[[j]]!=-1] <- regmatches(gn_selection[, j], m[[j]]) # gets matched strings or NA
+  }
+
+  gn["group"] <- m_strings # adds matches to "group" column
+  output <- gn[w_strings, ]
+
+
+  # saves data as csv or tsv
+  if (any(!is.null(c(opt$csv, opt$tsv)))) {
+      file_dir <- file.path(getwd(), "toponym_selection")
+      if (!dir.exists(file_dir)) dir.create(file_dir)
+    if (!is.null(opt$csv)) {
+      csv_name <- paste(file.path(file_dir, opt$csv), ".csv", sep = "")
+      utils::write.table(output, file = csv_name, quote=FALSE, sep=';', row.names = FALSE)
+      message(paste("\nData", csv_name, "saved as csv in `toponym_selection` folder of the working directory.\n"))
+    }
+    if (!is.null(opt$tsv)) {
+      tsv_name <- paste(file.path(file_dir, opt$tsv), ".tsv", sep = "")
+      utils::write.table(output, file = tsv_name, quote=FALSE, sep='\t', row.names = FALSE)
+      message(paste("\nData", tsv_name, "saved as tsv in `toponym_selection` folder of the working directory.\n"))
+    }
+  }
+
+  return(output)
 }
