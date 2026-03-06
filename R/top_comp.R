@@ -61,7 +61,6 @@
 #'
 topComp <- function(countries, len, rat, polygon, ...) {
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
-  global <- toponym_options["global",1]
   
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
@@ -164,13 +163,8 @@ topComp <- function(countries, len, rat, polygon, ...) {
       colnames(dat) <- c("toponym", "ratio", "frequency")
       dat <- dat[order(as.numeric(dat$ratio), decreasing = TRUE), ]
     }
-    if (global == TRUE) {
-    dat_name <- paste0("data_top_", opt$limit)
-    assign(dat_name, dat, envir = .GlobalEnv)
-    message(paste("\nDataframe", dat_name, "saved in global environment.\n"))
-    }
     return(dat)
   } else {
-    warning("No toponym satisfies the criteria")
+    warning("No toponym satisfies the criteria.")
   }
 }
