@@ -4,11 +4,9 @@
 \alias{toponymOptions}
 \title{Manage Options of \code{toponym}}
 \usage{
-toponymOptions(global = NULL, save_data = NULL)
+toponymOptions(save_data = NULL)
 }
 \arguments{
-\item{global}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for storing objects in the global environment.}
-
 \item{save_data}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.}
 }
 \value{
@@ -16,13 +14,9 @@ A data frame with the value(s) of the respective setting(s).
 }
 \description{
 This function allows users to modify settings for managing toponym data.
-Users can choose whether to save matches and strings in the global environment or not to save them.
-Further, users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
+Users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
 }
 \details{
-Parameter \code{global}: if the current setting is \code{TRUE}, matches from \code{top()} and strings from \code{topComp()}
-will be saved in the global environment; if the current setting is \code{FALSE}, the results will not be saved.
-
 Parameter \code{save_data}: if the current setting is \code{TRUE}, toponym data sets will be saved in the package folder;
 if the current setting is \code{FALSE}, toponym data sets will be saved in a temporary folder.
 

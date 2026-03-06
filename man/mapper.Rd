@@ -11,12 +11,14 @@ mapper(mapdata, ...)
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{color} character string vector indicating, which color is assigned to each string.
+\item\code{color} character string vector indicating, which color is assigned to each string. It is prioritized over colors based on the column \code{color}.
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-\item\code{plot} logical. If \code{FALSE}, the plot will not be printed but saved as .png in the current working directory.
+\item\code{plot_name} character string. If specified, the plot will not be printed but saved as .png in the current working directory. The given character string defines the name of the .png file.
 \item\code{title} character string. Text for the title of the plot.
-\item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the \code{color} column or parameter and the \code{group} column.
+\item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the \code{group} column.
+\item\code{show_legend} logical.
 \item\code{frame} data frame. Sets the frame of the map.
+\item\code{map_size} numeric. Specifies the value by which the size of the map is scaled.
 }}
 }
 \value{
@@ -26,19 +28,21 @@ A plot.
 This function plots a user-specific data frame onto a map.
 }
 \details{
-This function's purpose is to allow users to provide own data frames or edited ones exported by this package.
+This function's purpose is to allow users to provide data frames by the function \code{top()}, edited ones as well as own data frames.
 
 The data frame must have \emph{at least} two columns called \code{latitude} & \code{longtitude}.
 
 Data frames output by the function \code{top()} consist of, among others, a \code{latitude}, \code{longitude}, \verb{country code} and \code{group} column.
 
-If the input data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates and ignore the additional parameter \code{color} (see above).
+If the input data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates. However, if specified, the additional parameter \code{color} will be used instead of the colum \code{color} (see above).
 
 If the input data frame has a column \code{group}, the function will group data and display a legend.
 
 If the input data frame has a \code{color} and a \code{group} column, the assignment must match each other. Every \code{group} (every unique string in that column) must be assigned a unique color throughout the data frame.
 
-If \code{regions}  is set to a value higher than \code{0}, the data frame must have a column \verb{country code}.
+If \code{regions}  is set to a value greater than \code{0}, the data frame must have a column \verb{country code}.
 
-Parameter \code{frame} accepts data frames containing coordinates which define the frame. The data frame must to have two columns called \code{lats} & \code{lons}. The latitudinal and longitudinal ranges define the frame.
+Parameter \code{frame} accepts data frames containing coordinates which define the frame of the plot. The data frame must have a column called \code{latitude} & a column called \code{longitude}. The latitudinal and longitudinal ranges define the frame of the plot.
+
+Parameter \code{map_size} accepts numeric values of greater than -1. The map's size is scaled by the given value. Thus, a value of 0 extends the size by 0\%. A value of .1 extends the size by 10\%. A value of -.1 reduces the size by 10\% and so on.
 }
