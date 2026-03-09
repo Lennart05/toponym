@@ -19,7 +19,7 @@
 #' @examples
 #' \dontrun{
 #' ortho(countries = "ID")
-#' # outputs a table with frequencies all symbols
+#' # returns a table with frequencies of all symbols
 #' # in the "alternatenames" column for the Indonesia data set
 #' }
 ortho <- function(countries, ...) {

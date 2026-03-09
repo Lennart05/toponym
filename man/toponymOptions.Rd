@@ -10,10 +10,10 @@ toponymOptions(save_data = NULL)
 \item{save_data}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.}
 }
 \value{
-A data frame with the value(s) of the respective setting(s).
+A logical value.
 }
 \description{
-This function allows users to modify settings for managing toponym data.
+This function allows users to modify a setting for managing toponym data.
 Users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
 }
 \details{
@@ -23,7 +23,7 @@ if the current setting is \code{FALSE}, toponym data sets will be saved in a tem
 If no parameter is set, i.e. \code{toponymOptions()}, the complete data frame with current settings is printed.
 }
 \examples{
-# Show the current settings
+# Show the current setting
 toponymOptions()
 
 }

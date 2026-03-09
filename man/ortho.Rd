@@ -29,7 +29,7 @@ It outputs an ordered frequency table of all symbols used in a given column of t
 \examples{
 \dontrun{
 ortho(countries = "ID")
-# outputs a table with frequencies all symbols
+# returns a table with frequencies of all symbols
 # in the "alternatenames" column for the Indonesia data set
 }
 }

@@ -46,3 +46,11 @@ Parameter \code{frame} accepts data frames containing coordinates which define t
 
 Parameter \code{map_size} accepts numeric values of greater than -1. The map's size is scaled by the given value. Thus, a value of 0 extends the size by 0\%. A value of .1 extends the size by 10\%. A value of -.1 reduces the size by 10\% and so on.
 }
+\examples{
+\dontrun{
+mapper(top("itz$", "DE"))
+# returns a plot with all populated places
+# in Germany ending in "itz"
+}
+
+}

@@ -50,7 +50,7 @@ top <- function(strings, countries, ...) {
   gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
   # removes coordinates outside of the polygon
   if (!is.null(opt$polygon)) {
-    if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+    if(!all(c("longitude", "latitude") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
     poly_owin <- poly(opt$polygon)
 

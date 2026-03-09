@@ -29,3 +29,11 @@ This function lets users apply a Z-test (two proportion test), comparing the fre
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
 }
+\examples{
+\dontrun{
+topZtest("thorpe$", "GB", toponym::danelaw_polygon)
+)
+## returns an object of class \code{htest} containing the results.
+}
+
+}

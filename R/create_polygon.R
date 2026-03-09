@@ -31,15 +31,15 @@
 #' \dontrun{
 #' createPolygon("NA", region_ID = "NAM.7_1")
 #'
-#' # a plot of the region Ohangwena in Namibia
-#' # by point-and-click a polygon can be created
-#' # use country() to find all acceptable region IDs
+#' # a plot of the region Ohangwena in Namibia appears.
+#' # By point-and-click a polygon can be created.
+#' # After completion, a data frame with the coordinates of the polygon returns.
 #'
 #' Ohangwena_polygon <- createPolygon(
 #' "NA", region_ID = "NAM.7_1", retrieve = TRUE
 #' )
 #' # no plot appears
-#' # the coordinates of the region are stored in the object
+#' # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 #' # and can be used by other functions
 #' }
 #' @return A data frame with the coordinates of the polygon.

@@ -8,7 +8,7 @@
 #' @return An object of class `owin` which is a polygonal window.
 #'
 poly <- function(polygon) {
-  pol <- list(x = polygon$lons, y = polygon$lats)
+  pol <- list(x = polygon$longitude, y = polygon$latitude)
 
   x.coords <- c(pol$x, pol$x[1])
   y.coords <- c(pol$y, pol$y[1])

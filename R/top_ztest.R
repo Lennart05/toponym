@@ -15,6 +15,13 @@
 #' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' }
 #' @export
+#' @examples
+#' \dontrun{
+#' topZtest("thorpe$", "GB", toponym::danelaw_polygon)
+#' )
+#' ## returns an object of class \code{htest} containing the results.
+#' }
+#' 
 #' @return An object of class \code{htest} containing the results.
 topZtest <- function(strings, countries, polygon, ...) {
 
@@ -22,7 +29,7 @@ topZtest <- function(strings, countries, polygon, ...) {
 
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
-  if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+  if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
   ##### store additional parameters and set defaults
   opt <- list(...)

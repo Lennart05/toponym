@@ -33,9 +33,9 @@ Polygons passed through the \code{polygon} parameter need to intersect or be wit
 }
 \examples{
 \dontrun{
-topFreq(countries = "Namibia", len = 3, limit = 10)
+topFreq(countries = "Ecuador", len = 3, limit = 10)
 ## returns the top 10 most frequent toponym endings
-## of three-character length in Namibia
+## of three-character length in Ecuador
 
 topFreq(
   countries = "GB", len = 3, limit = 10,

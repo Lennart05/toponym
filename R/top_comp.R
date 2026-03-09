@@ -29,7 +29,7 @@
 #'     rat = .7,
 #'   polygon = toponym::danelaw_polygon
 #' )
-#' ## prints and saves a data frame of the top 100 four-character-long endings in the United Kingdom
+#' ## returns a data frame of the top 100 four-character-long endings in the United Kingdom
 #' ## if more than 70% of them belong to the polygon
 #' ## corresponding to the Danelaw area.
 #'
@@ -41,7 +41,7 @@
 #'   polygon = toponym::danelaw_polygon,
 #'   freq.type = "rel"
 #' )
-#' ## prints and saves a data frame of the top 100 three-character-long endings in the United Kingdom
+#' ## returns a data frame of the top 100 three-character-long endings in the United Kingdom
 #' ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
 #'
 #'
@@ -52,7 +52,7 @@
 #'   polygon = toponym::flanders_polygon
 #' )
 #'
-#' ## prints and saves a data frame of the top 50 three-character-long endings
+#' ## returns a data frame of the top 50 three-character-long endings
 #' ## in Belgium and Netherlands viewed as a unit if more than 80% of them belong to the polygon
 #' ## corresponding to Flanders.
 #'
@@ -64,7 +64,7 @@ topComp <- function(countries, len, rat, polygon, ...) {
   
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
-  if(!all(c("lons", "lats") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+  if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
   poly_owin <- poly(polygon)
 

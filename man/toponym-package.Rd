@@ -13,7 +13,7 @@ The main functions are the following:
 \item\code{\link{top}} returns selected toponyms.
 \item\code{\link{country}} helps in navigating designations of countries and regions used by the package.
 \item\code{\link{createPolygon}} lets users create a polygon by point-and-click or directly retrieve polygon data.
-\item\code{\link{mapper}} plots a data onto a map.
+\item\code{\link{mapper}} plots data onto a map.
 \item\code{\link{topComp}} compares toponym substrings in a polygon and in the remainder of a country (or countries).
 \item\code{\link{topFreq}} retrieves most frequent toponym substrings.
 \item\code{\link{topZtest}} lets users apply a Z-test on toponym distributions.

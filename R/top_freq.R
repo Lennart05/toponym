@@ -22,9 +22,9 @@
 #'
 #' @examples
 #' \dontrun{
-#' topFreq(countries = "Namibia", len = 3, limit = 10)
+#' topFreq(countries = "Ecuador", len = 3, limit = 10)
 #' ## returns the top 10 most frequent toponym endings
-#' ## of three-character length in Namibia
+#' ## of three-character length in Ecuador
 #'
 #' topFreq(
 #'   countries = "GB", len = 3, limit = 10,
@@ -49,7 +49,7 @@ topFreq <- function(countries, len, limit, ...) {
   gn <- readFiles(countries, opt$feat.class)
 
   if (!is.null(opt$polygon)) {
-  if(!all(c("lons", "lats") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `lons` and `lats`.")
+  if(!all(c("longitude", "latitude") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
     poly_owin <- poly(opt$polygon)
 
     poly_log <- inside.owin(x = gn$longitude, y = gn$latitude, w = poly_owin) # check which places are in the polygon

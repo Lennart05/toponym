@@ -3,18 +3,24 @@
 #' @details
 #' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/) and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+#' With the function \code{toponymOptions()}, users can specify whether toponym data downloaded by this function \code{getData()} will be saved in the package folder or in a temporary folder. See `help(toponymOptions)`.
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
 #' @examples
 #' \dontrun{
-#' getData(countries = c("DK", "DE"), save = FALSE)
-#' ## downloads and extracts data for DK and DE to the temporary folder
+#' getData(countries = "NL")
+#' ## downloads and extracts data for NL to the package folder (default setting)
+#' 
+#' getData(countries = c("DK", "DE"))
+#' ## downloads and extracts data for DK and DE to the package folder (default setting)
 #'
-#' getData(countries = c("DK", "DE", "PL"), save = TRUE)
-#' ## downloads and extracts data for PL but only extracts data for DK and DE
-#' ## from the zip files downloaded before to the package folder if used in the same session
+#' getData(countries = c("DK", "DE"), overwrite = TRUE)
+#' ## downloads, extracts, and overwrites data for DK and DE in the package folder (default setting)
 #' }
+#' toponymOptions(save_data = FALSE)
+#' getData(countries = "NL")
+#' ## downloads and extracts data for NL to a temporary folder (modified setting)
 #' @export
 getData <- function(countries, overwrite = FALSE) {
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
