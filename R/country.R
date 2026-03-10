@@ -26,10 +26,10 @@
 #' ## returns a vector of all ISO3 codes
 #'
 #' country(query = "Thailand")
-#' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name
+#' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name of Thailand
 #'
 #' country(query = "Thailand", regions = 1)
-#' ## returns a list with a matrix with all region designations
+#' ## returns a list with a matrix with all region designations of Thailand
 #' }
 country <- function(query = NULL, ...) {
 

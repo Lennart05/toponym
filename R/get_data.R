@@ -3,7 +3,7 @@
 #' @details
 #' The data is downloaded from the [GeoNames download page](https://download.geonames.org/export/dump/) and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-#' With the function \code{toponymOptions()}, users can specify whether toponym data downloaded by this function \code{getData()} will be saved in the package folder or in a temporary folder. See `help(toponymOptions)`.
+#' With \code{toponymOptions()}, users can specify whether toponym data downloaded by \code{getData()} will be stored in the package folder or in a temporary folder. See `help(toponymOptions)`.
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param overwrite logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.
 #' @seealso [GeoNames download page](https://download.geonames.org/export/dump/)
@@ -24,7 +24,7 @@
 #' @export
 getData <- function(countries, overwrite = FALSE) {
   toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
-  save <- toponym_options["save_data",1]
+  save <- toponym_options
   
   packdir <- system.file("extdata", package = "toponym")
   if (any(countries == "all")) {

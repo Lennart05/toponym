@@ -45,8 +45,8 @@ For further details on the point-and-click mechanism, please refer to the help p
 createPolygon("NA", region_ID = "NAM.7_1")
 
 # a plot of the region Ohangwena in Namibia appears.
-# By point-and-click a polygon can be created.
-# After completion, a data frame with the coordinates of the polygon returns.
+# by point-and-click a polygon can be created
+# upon completion, a data frame with the coordinates of the polygon returns
 
 Ohangwena_polygon <- createPolygon(
 "NA", region_ID = "NAM.7_1", retrieve = TRUE

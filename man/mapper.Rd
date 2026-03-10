@@ -15,8 +15,8 @@ mapper(mapdata, ...)
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{plot_name} character string. If specified, the plot will not be printed but saved as .png in the current working directory. The given character string defines the name of the .png file.
 \item\code{title} character string. Text for the title of the plot.
-\item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the \code{group} column.
-\item\code{show_legend} logical.
+\item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column \code{group}.
+\item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column \code{group} will be displayed, provided there is a column \code{group}. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
 \item\code{frame} data frame. Sets the frame of the map.
 \item\code{map_size} numeric. Specifies the value by which the size of the map is scaled.
 }}
@@ -34,7 +34,7 @@ The data frame must have \emph{at least} two columns called \code{latitude} & \c
 
 Data frames output by the function \code{top()} consist of, among others, a \code{latitude}, \code{longitude}, \verb{country code} and \code{group} column.
 
-If the input data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates. However, if specified, the additional parameter \code{color} will be used instead of the colum \code{color} (see above).
+If the input data frame has a column \code{color}, the function will assign every value in that column to the respective coordinates. However, if specified, the additional parameter \code{color} will be used instead of the column \code{color} (see above).
 
 If the input data frame has a column \code{group}, the function will group data and display a legend.
 
@@ -51,6 +51,11 @@ Parameter \code{map_size} accepts numeric values of greater than -1. The map's s
 mapper(top("itz$", "DE"))
 # returns a plot with all populated places
 # in Germany ending in "itz"
+
+
+ah_Egypt <- top("ah", "EG")
+
+
 }
 
 }

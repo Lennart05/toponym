@@ -9,8 +9,8 @@
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 #' \item\code{plot_name} character string. If specified, the plot will not be printed but saved as .png in the current working directory. The given character string defines the name of the .png file.
 #' \item\code{title} character string. Text for the title of the plot.
-#' \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on the `group` column.
-#' \item\code{show_legend} logical. 
+#' \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column `group`.
+#' \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column `group` will be displayed, provided there is a column `group`. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
 #' \item\code{frame} data frame. Sets the frame of the map.
 #' \item\code{map_size} numeric. Specifies the value by which the size of the map is scaled.
 #' }
@@ -21,7 +21,7 @@
 #'
 #' Data frames output by the function \code{top()} consist of, among others, a `latitude`, `longitude`, `country code` and `group` column.
 #'
-#' If the input data frame has a column `color`, the function will assign every value in that column to the respective coordinates. However, if specified, the additional parameter \code{color} will be used instead of the colum `color` (see above).
+#' If the input data frame has a column `color`, the function will assign every value in that column to the respective coordinates. However, if specified, the additional parameter \code{color} will be used instead of the column `color` (see above).
 #'
 #' If the input data frame has a column `group`, the function will group data and display a legend.
 #'
@@ -39,6 +39,11 @@
 #' mapper(top("itz$", "DE"))
 #' # returns a plot with all populated places
 #' # in Germany ending in "itz"
+#' 
+#' 
+#' ah_Egypt <- top("ah", "EG")
+#' 
+#' 
 #' }
 #' 
 #' @return A plot.
