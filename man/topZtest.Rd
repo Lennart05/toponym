@@ -33,7 +33,7 @@ Polygons passed through the \code{polygon} parameter need to intersect or be wit
 \dontrun{
 topZtest("thorpe$", "GB", toponym::danelaw_polygon)
 )
-## returns an object of class \code{htest} containing the results.
+## returns an object of class htest containing the results.
 }
 
 }

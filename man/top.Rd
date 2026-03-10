@@ -48,5 +48,11 @@ top("^Vlad", "RU", csv = "Vlad_RU")
 top(c("itz$", "ice$"), c("DE", "PL"))
 # returns a data frame with all populated places
 # in Germany and Poland ending in either "itz" or "ice"
+
+top("Maw$", "MM", column = "alternatenames")
+# returns a data frame with all populated places
+# in Myanmar listed in the "alternatenames" column
+# and ending in "Maw" (case sensitive)
+
 }
 }

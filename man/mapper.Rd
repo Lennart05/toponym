@@ -18,7 +18,7 @@ mapper(mapdata, ...)
 \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column \code{group}.
 \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column \code{group} will be displayed, provided there is a column \code{group}. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
 \item\code{frame} data frame. Sets the frame of the map.
-\item\code{map_size} numeric. Specifies the value by which the size of the map is scaled.
+\item\code{plot_size} numeric. Specifies the value by which the size of the map is scaled.
 }}
 }
 \value{
@@ -44,7 +44,7 @@ If \code{regions}  is set to a value greater than \code{0}, the data frame must 
 
 Parameter \code{frame} accepts data frames containing coordinates which define the frame of the plot. The data frame must have a column called \code{latitude} & a column called \code{longitude}. The latitudinal and longitudinal ranges define the frame of the plot.
 
-Parameter \code{map_size} accepts numeric values of greater than -1. The map's size is scaled by the given value. Thus, a value of 0 extends the size by 0\%. A value of .1 extends the size by 10\%. A value of -.1 reduces the size by 10\% and so on.
+Parameter \code{plot_size} accepts numeric values of greater than -1. The plot's size is scaled by the given value. Thus, a value of 0 extends the size by 0\%. A value of .1 extends the size by 10\%. A value of -.1 reduces the size by 10\% and so on.
 }
 \examples{
 \dontrun{
@@ -53,8 +53,14 @@ mapper(top("itz$", "DE"))
 # in Germany ending in "itz"
 
 
-ah_Egypt <- top("ah", "EG")
-
+UG_data <- top(c("et$", "wa$"), "UG")
+UG_data$color <- "blue"
+UG_data[UG_data$group == "wa", "color"] <- "grey"
+mapper(UG_data, legend_title = "two strings", title = "Some locations in grey and blue")
+# returns a plot with all populated places
+# in Uganda ending in "wa" (grey) and "et" (blue)
+# the plot is titled "Some locations in grey and blue"
+# the legend title is "two strings"
 
 }
 

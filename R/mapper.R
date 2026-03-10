@@ -12,7 +12,7 @@
 #' \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column `group`.
 #' \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column `group` will be displayed, provided there is a column `group`. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
 #' \item\code{frame} data frame. Sets the frame of the map.
-#' \item\code{map_size} numeric. Specifies the value by which the size of the map is scaled.
+#' \item\code{plot_size} numeric. Specifies the value by which the size of the map is scaled.
 #' }
 #' @details
 #' This function's purpose is to allow users to provide data frames by the function \code{top()}, edited ones as well as own data frames.
@@ -31,7 +31,7 @@
 #' 
 #' Parameter \code{frame} accepts data frames containing coordinates which define the frame of the plot. The data frame must have a column called `latitude` & a column called `longitude`. The latitudinal and longitudinal ranges define the frame of the plot.
 #' 
-#' Parameter \code{map_size} accepts numeric values of greater than -1. The map's size is scaled by the given value. Thus, a value of 0 extends the size by 0%. A value of .1 extends the size by 10%. A value of -.1 reduces the size by 10% and so on.
+#' Parameter \code{plot_size} accepts numeric values of greater than -1. The plot's size is scaled by the given value. Thus, a value of 0 extends the size by 0%. A value of .1 extends the size by 10%. A value of -.1 reduces the size by 10% and so on.
 #' 
 #' 
 #' @examples
@@ -41,8 +41,14 @@
 #' # in Germany ending in "itz"
 #' 
 #' 
-#' ah_Egypt <- top("ah", "EG")
-#' 
+#' UG_data <- top(c("et$", "wa$"), "UG")
+#' UG_data$color <- "blue"
+#' UG_data[UG_data$group == "wa", "color"] <- "grey"
+#' mapper(UG_data, legend_title = "two strings", title = "Some locations in grey and blue")
+#' # returns a plot with all populated places
+#' # in Uganda ending in "wa" (grey) and "et" (blue)
+#' # the plot is titled "Some locations in grey and blue"
+#' # the legend title is "two strings"
 #' 
 #' }
 #' 
@@ -108,11 +114,11 @@ opt <- list(...)
   if (!all(c("latitude", "longitude") %in% colnames(opt$frame))) stop("The data frame in parameter `frame` must have the following columns: `latitude` & `longitude`.")
   if (!any(is.numeric(c(opt$frame$latitude, opt$frame$longitude)))) stop("The columns `latitude` & `longitude` of the data frame in parameter `frame` must be numeric.")
   }
-  if (!is.null(opt$map_size)) {# TRUE, if map_size is specified 
-  if (!is.numeric(opt$map_size)) stop("Parameter `map_size` must be numeric.")
-  if (opt$map_size <= -1) stop("Parameter `map_size` must be greater than -1.")
-  } else opt$map_size <- .1 # if map_size is not specified, use default of .1 / 10%
-  opt$map_size <- opt$map_size / 2
+  if (!is.null(opt$plot_size)) {# TRUE, if plot_size is specified 
+  if (!is.numeric(opt$plot_size)) stop("Parameter `plot_size` must be numeric.")
+  if (opt$plot_size <= -1) stop("Parameter `plot_size` must be greater than -1.")
+  } else opt$plot_size <- .1 # if plot_size is not specified, use default of .1 / 10%
+  opt$plot_size <- opt$plot_size / 2
   # Since the range is extended by the factor on both size, the value is halved.
   # Otherwise, e.g., a factor of .1 extends the overall size of the map by 20%.
     
@@ -130,9 +136,9 @@ opt <- list(...)
     frame_lats <- mapdata$latitude
     frame_lons <- mapdata$longitude
   }
-  # get max min long and lat and extend the frame by the value of opt$map_size around the points
-  lat_range <- extendrange(r = range(frame_lats), f = opt$map_size)
-  lng_range <- extendrange(r = range(frame_lons), f = opt$map_size)
+  # get max min long and lat and extend the frame by the value of opt$plot_size around the points
+  lat_range <- extendrange(r = range(frame_lats), f = opt$plot_size)
+  lng_range <- extendrange(r = range(frame_lons), f = opt$plot_size)
 
   cc <- unique(mapdata$`country code`) # only store unique 
   

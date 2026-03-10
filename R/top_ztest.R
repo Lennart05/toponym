@@ -19,7 +19,7 @@
 #' \dontrun{
 #' topZtest("thorpe$", "GB", toponym::danelaw_polygon)
 #' )
-#' ## returns an object of class \code{htest} containing the results.
+#' ## returns an object of class htest containing the results.
 #' }
 #' 
 #' @return An object of class \code{htest} containing the results.
