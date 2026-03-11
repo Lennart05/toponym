@@ -32,7 +32,6 @@ Polygons passed through the \code{polygon} parameter need to intersect or be wit
 \examples{
 \dontrun{
 topZtest("thorpe$", "GB", toponym::danelaw_polygon)
-)
 ## returns an object of class htest containing the results.
 }
 

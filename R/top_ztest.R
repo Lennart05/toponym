@@ -18,7 +18,6 @@
 #' @examples
 #' \dontrun{
 #' topZtest("thorpe$", "GB", toponym::danelaw_polygon)
-#' )
 #' ## returns an object of class htest containing the results.
 #' }
 #' 
@@ -60,15 +59,11 @@ topZtest <- function(strings, countries, polygon, ...) {
   string_in_cc <- loc_log[1] # total number of occurrences in the country but not the polygon
   string_in_poly <- loc_log[2] # total number of occurrences in the polygon
 
-
-
-
   results <- prop.test(
     x = c(string_in_poly, string_in_cc),
     n = c(top_in_poly, top_in_cc),
     alternative = "greater"
   )
-
-
+  
   return(results)
 }
