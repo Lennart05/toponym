@@ -1,3 +1,7 @@
-# toponym 1.0.0
+toponym 2.0.0
+================
+**Initial CRAN release**
 
-* initial release.
+This is the initial release accessible on CRAN.
+
+The main difference between v1.0.0 and v2.0.0 is that v2.0.0 and future versions do not access the Global environment.
