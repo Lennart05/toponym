@@ -1,4 +1,4 @@
-#' @title Toponym Selection
+#' @title Selection of Toponyms
 #' @description
 #' This function returns coordinates of selected toponyms (strings).
 #' @param strings character string vector with regular expressions to filter data.

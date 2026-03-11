@@ -2,7 +2,7 @@
 % Please edit documentation in R/top.R
 \name{top}
 \alias{top}
-\title{Toponym Selection}
+\title{Selection of Toponyms}
 \usage{
 top(strings, countries, ...)
 }
