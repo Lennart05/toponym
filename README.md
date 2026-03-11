@@ -1,61 +1,70 @@
 toponym
 ================
-December 5, 2025
+March 11, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
 
+[![R CMD
+Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Welcome to the `toponym` GitHub page!
+Welcome to the `toponym 2.0.0` GitHub page!
 
 The `toponym` package supplies users of R with tools to visualize and
 analyze toponym (= place name) distributions. It is intended as an
 interface to the [GeoNames](https://www.geonames.org/) data. A regular
-expression filters data and a map is created displaying locations which
-comply with it. The functions make data and plots available for further
-analysis – either within R or in the working directory. Users can select
-regions within countries, provide coordinates to define regions, or
-specify a region within the package to restrict the data selection to
-that region or compare regions with the remainder of countries.
+expression filters data and in a second step a map is created displaying
+locations which comply with it. The functions make data and plots
+available for further analysis—either within R or in the working
+directory. Users can select regions within countries, provide
+coordinates to define regions, or specify a region within the package to
+restrict the data selection to that region or compare regions with the
+remainder of countries.
 
 ## Installation
 
-In order to install this package, you will need `devtools`. You can
-download and load the current development version of `toponym` from
-[GitHub](https://github.com/Lennart05/toponym) with:
+You can install the most recent [CRAN](https://cran.r-project.org/)
+release with:
 
 ``` r
+## Install CRAN version of < toponym >
+install.packages("toponym")
+```
+
+In order to install this package from
+[GitHub](https://github.com/Lennart05/toponym/tree/toponym-CRAN), you
+will need `devtools`. You can download and load the current development
+version of `toponym` with:
+
+``` r
+## Install development version of < toponym > from GitHub
 # install.packages("devtools")
 # library ("devtools")
-devtools::install_github("Lennart05/toponym")
+devtools::install_github("Lennart05/toponym", ref = "dev-CRAN")
 ```
 
 ## Create a simple map
 
-The function `top()`, meaning “toponym”, creates maps of places
-complying with a regular expression. Minimally one or more strings and
-one or more countries (in that order) are given as input. The following
-code is a simple example of this:
+The function `top()`, meaning “toponym”, outputs data complying with a
+regular expression. Minimally one or more strings and one or more
+countries (in that order) are given as input. The following code is a
+simple example of this:
 
 ``` r
 library(toponym) # load the package
-top("itz$", "DE")
-#> 
-#> Dataframe data_itz saved in global environment.
+data_itz <- top("itz$", "DE")
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+A data frame named `data_itz` is stored in the Global environment
+listing all locations which end in -itz in Germany.
 
-The plot displays all locations which end in -itz in Germany, their
-total frequency (2170), and stores the data in the global environment.
-
-For the purpose of plotting an edited data frame, we offer the
-`mapper()`function. This accepts a user-defined title, legend, colors,
-and groups. An example using the previously created data frame is the
-following, where occurrences of -witz and -itz east of a 10.5
-longitudinal line are displayed:
+For the purpose of plotting outputs of `top()` and edited data frames,
+we offer the `mapper()`function. This accepts a user-defined title,
+legend, colors, and groups. An example using the previously created data
+frame is the following, where occurrences of -witz and -itz east of a
+10.5 longitudinal line are displayed:
 
 ``` r
 itz_east <- data_itz[data_itz$longitude > 10.5,]
@@ -66,7 +75,7 @@ itz_east[witz_indices, "group"] <- "witz"   # sets group labels with "itz" to "w
 mapper(itz_east, title = "-witz and -itz in the East")
 ```
 
-<img src="man/figures/README-mapper-1.png" width="100%" />
+<img src="man/figures/README-mapper-1.png" alt="" width="100%" />
 
 ## Country designations
 
@@ -134,7 +143,7 @@ topFreq(countries = "Philippines",
         type = "$")
 #> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
-#> 1767 1258 1136  771  709  615  604  552  551  510
+#> 1767 1258 1136  770  709  615  604  552  551  510
 ```
 
 Among all toponyms in the data for the Philippines
@@ -157,7 +166,7 @@ topFreq(countries = "GB",
 )
 #> toponyms
 #> ton$ een$ ham$ ill$ ley$ End$ rpe$ eld$ ord$ rth$ 
-#> 1468  694  493  437  436  431  264  257  202  192
+#> 1467  694  493  437  436  431  264  257  202  192
 ```
 
 ## Create polygons
@@ -192,8 +201,6 @@ topComp(countries = "GB",
        rat = .8, 
        polygon = toponym::danelaw_polygon
        )
-#> 
-#> Dataframe data_top_100 saved in global environment.
 #>   toponym ratio_perc frequency
 #> 1    rpe$       90.1   264/293
 ```
@@ -209,23 +216,6 @@ at least 80% of all occurrences (in the country or countries) must be
 inside the polygon. In this case, the string -rpe occurs 293 times in
 the United Kingdom and 264 of these 293 occurrences are within the
 target polygon resulting in a ratio percentage of 90.1%.
-
-## Creating multiple maps at once
-
-``` r
-topCompOut(countries = "GB",
-           len = 3,
-           limit = 75,
-           rat = .8,
-           polygon = toponym::danelaw_polygon
-                )
-```
-
-Running this with the same settings as just used for `topComp()`
-produces a distributional map and a data frame of every string. The
-plots are saved in the working directory in a separate folder called
-“plots”. The data frames are saved in another folder called
-“dataframes”.
 
 ## Apply a Z-test
 
@@ -262,11 +252,6 @@ is returned as an object of class `htest`.
 `toponymOptions` allows users to modify settings for managing toponym
 data.
 
-For the parameter `global`: if the current setting is `TRUE`, matches
-from `top()` and strings from `topComp()` will be saved in the global
-environment; if the current setting is `FALSE`, the results will not be
-saved.
-
 For the parameter `save_data`: if the current setting is `TRUE`, toponym
 data sets will be saved in the package folder; if the current setting is
 `FALSE`, toponym data sets will be saved in a temporary folder.
@@ -277,27 +262,26 @@ example:
 
 ``` r
 toponymOptions()
-#>           value
-#> global     TRUE
-#> save_data  TRUE
+#> 
+#> Current value:
+#> [1] TRUE
 
-# toponymOptions(global = FALSE)
-# the command in the preceding line would change the parameter `global` from `TRUE` as shown in the table to `FALSE` as given in the command
+# toponymOptions(save_data = FALSE)
+# the command in the preceding line would change the parameter `save_data` from `TRUE` as shown in the output to `FALSE` as given in the command
 ```
 
 ## The functions
 
 The core functions are as follows:
 
-- `top()` returns and plots selected toponyms onto a map.
+- `top()` returns selected toponyms.
 - `country()` helps in navigating designations of countries and regions
   used by the package.
 - `createPolygon()` lets users create a polygon by point-and-click or
   directly retrieve polygon data.
-- `mapper()` plots a user-specific data frame onto a map.
+- `mapper()` plots data onto a map.
 - `topComp()` compares toponym substrings in a polygon and in the
   remainder of a country (or countries).
-- `topCompOut()` saves multiple maps and toponym data.
 - `topFreq()` retrieves most frequent toponym substrings.
 - `topZtest()` lets users apply a Z-test on toponym distributions.
 - `toponymOptions()` allows users to modify settings for managing
@@ -311,8 +295,7 @@ package.
 ## Regular expression
 
 For a concise description of which regular expressions exist and how
-they can be used, type `help("regex")` in the R console or follow [this
-guide](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html).
+they can be used, type `help("regex")` in the R console.
 
 ## Data
 
@@ -325,7 +308,6 @@ temporary folder by changing the parameter to `save_date = FALSE`. Type
 `tempdir()` to find the temporary directory of the current session.
 
 For mapping purposes as well as region designations, the
-[geodata](https://cran.r-project.org/web/packages/geodata/index.html)
-package is used. It provides spatial data for all countries and regions
-available in this package. All maps are stored in the `geodata` package
-directory.
+[geodata](https://cran.r-project.org/package=geodata) package is used.
+It provides spatial data for all countries and regions available in this
+package. All maps are stored in the `geodata` package directory.
