@@ -7,7 +7,7 @@ on:
   pull_request:
     branches: ["dev-CRAN"]
 
-name: R CMD Check
+name: R CMD Check dev-CRAN
 
 jobs:
   R-CMD-check:
