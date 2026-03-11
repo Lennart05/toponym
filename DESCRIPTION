@@ -1,12 +1,18 @@
 Package: toponym
-Title: Toponym Analysis & Visualization Tool
-Version: 1.0.0
+Title: Analyze and Visualize Toponyms
+Version: 2.0.0
 Authors@R: c(
-    person("Lennart", "Chevallier", email = "mail@lchevallier.de", role = c("aut", "cre")),
-    person("Søren", "Wichmann", email = "wichmannsoeren@gmail.com", role = "aut"))
+    person(given = "Lennart",
+           family = "Chevallier",
+           role = c("aut", "cre"),
+           email = "mail@lchevallier.de"),
+    person(given = "Søren",
+           family = "Wichmann",
+           email = "wichmannsoeren@gmail.com",
+           role = "aut"))
 Author: Lennart Chevallier [aut, cre],
         Søren Wichmann [aut]
-Description: A package to analyze and visualize toponym distributions.
+Description: A tool to analyze and visualize toponym distributions.
 Depends:
     R (>= 4.5)
 License: GPL (>= 3) + file LICENSE
@@ -16,14 +22,14 @@ RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 LazyData: true
 Imports: 
-    geodata (>= 0.6.6),
-    ggplot2 (>= 4.0.1),
+    geodata (>= 0.6-6),
+    ggplot2 (>= 4.0.2),
     grDevices (>= 4.5.1),
-    sf (>= 1.0.22),
-    spatstat.geom (>= 3.6.0),
-    spatstat.utils (>= 3.2.0),
+    sf (>= 1.1-0),
+    spatstat.geom (>= 3.7-0),
+    spatstat.utils (>= 3.2-2),
     stats (>= 4.5.1),
-    terra (>= 1.8.80),
+    terra (>= 1.9-1),
     utils (>= 4.5.1)
 URL: https://github.com/Lennart05/toponym
 BugReports: https://github.com/Lennart05/toponym/issues
