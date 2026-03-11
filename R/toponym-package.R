@@ -13,7 +13,10 @@
 #' \item\code{\link{toponymOptions}} lets users modify settings for managing toponym data.
 #' }
 #' For more detailed descriptions please read the respective documentation.
-
+#' @name toponym
+#' @aliases toponym
+#' 
+#' @keywords internal
 "_PACKAGE"
 
 ## usethis namespace: start
