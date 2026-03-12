@@ -4,3 +4,4 @@
 ^LICENSE\.md$
 ^revdep$
 ^\.github$
+^CITATION\.cff$
