@@ -1,14 +1,16 @@
 toponym
 ================
-December 5, 2025
+March 12, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
 
+[![R CMD
+Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-Welcome to the `toponym` GitHub page!
+Welcome to the `toponym 1.0.0` GitHub page!
 
 The `toponym` package supplies users of R with tools to visualize and
 analyze toponym (= place name) distributions. It is intended as an
@@ -20,10 +22,15 @@ regions within countries, provide coordinates to define regions, or
 specify a region within the package to restrict the data selection to
 that region or compare regions with the remainder of countries.
 
+This version is discontinued except for bug fixes or issues. For future
+updates with new functionalities and improvements, please go to the
+latest version
+([v2.0.0](https://github.com/Lennart05/toponym/tree/toponym-CRAN)).
+
 ## Installation
 
 In order to install this package, you will need `devtools`. You can
-download and load the current development version of `toponym` from
+download and load `toponym` from
 [GitHub](https://github.com/Lennart05/toponym) with:
 
 ``` r
@@ -46,7 +53,7 @@ top("itz$", "DE")
 #> Dataframe data_itz saved in global environment.
 ```
 
-<img src="man/figures/README-example-1.png" width="100%" />
+<img src="man/figures/README-example-1.png" alt="" width="100%" />
 
 The plot displays all locations which end in -itz in Germany, their
 total frequency (2170), and stores the data in the global environment.
@@ -66,7 +73,7 @@ itz_east[witz_indices, "group"] <- "witz"   # sets group labels with "itz" to "w
 mapper(itz_east, title = "-witz and -itz in the East")
 ```
 
-<img src="man/figures/README-mapper-1.png" width="100%" />
+<img src="man/figures/README-mapper-1.png" alt="" width="100%" />
 
 ## Country designations
 
@@ -134,7 +141,7 @@ topFreq(countries = "Philippines",
         type = "$")
 #> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
-#> 1767 1258 1136  771  709  615  604  552  551  510
+#> 1767 1258 1136  770  709  615  604  552  551  510
 ```
 
 Among all toponyms in the data for the Philippines
@@ -157,7 +164,7 @@ topFreq(countries = "GB",
 )
 #> toponyms
 #> ton$ een$ ham$ ill$ ley$ End$ rpe$ eld$ ord$ rth$ 
-#> 1468  694  493  437  436  431  264  257  202  192
+#> 1467  694  493  437  436  431  264  257  202  192
 ```
 
 ## Create polygons
@@ -311,8 +318,7 @@ package.
 ## Regular expression
 
 For a concise description of which regular expressions exist and how
-they can be used, type `help("regex")` in the R console or follow [this
-guide](https://cran.r-project.org/web/packages/stringr/vignettes/regular-expressions.html).
+they can be used, type `help("regex")` in the R console.
 
 ## Data
 
