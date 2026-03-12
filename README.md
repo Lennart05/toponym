@@ -8,7 +8,8 @@ March 12, 2026
 
 [![R CMD
 Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
-<!-- [![CRAN status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym) -->
+[![CRAN
+status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
 Welcome to the `toponym 2.0.0` GitHub page!
@@ -26,13 +27,13 @@ remainder of countries.
 
 ## Installation
 
-<!-- You can install the most recent [CRAN](https://cran.r-project.org/) release with:
-&#10;
+You can install the most recent [CRAN](https://cran.r-project.org/)
+release with:
+
 ``` r
 ## Install CRAN version of < toponym >
 install.packages("toponym")
 ```
-&#10;-->
 
 In order to install this package from
 [GitHub](https://github.com/Lennart05/toponym/tree/toponym-CRAN), you
@@ -43,7 +44,7 @@ version of `toponym` with:
 ## Install development version of < toponym > from GitHub
 # install.packages("devtools")
 # library ("devtools")
-devtools::install_github("Lennart05/toponym", ref = "dev-CRAN")
+devtools::install_github("Lennart05/toponym", ref = "toponym-CRAN")
 ```
 
 ## Create a simple map
