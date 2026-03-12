@@ -1,6 +1,6 @@
 ---
 title: "toponym"
-date: March 11, 2026
+date: March 12, 2026
 output:
   github_document
   
@@ -21,6 +21,7 @@ knitr::opts_chunk$set(
 
 <!-- badges: start -->
 [![R CMD Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
 Welcome to the `toponym 2.0.0` GitHub page!
