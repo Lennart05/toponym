@@ -25,9 +25,9 @@ coordinates to define regions, or specify a region within the package to
 restrict the data selection to that region or compare regions with the
 remainder of countries.
 
-Follow this
-[link](https://github.com/Lennart05/toponym/tree/toponym-GitHub) for
-`toponym 1.0.0`.
+If you would like to use `toponym 1.0.0`, head to
+[this](https://github.com/Lennart05/toponym/tree/toponym-GitHub) GitHub
+branch.
 
 ## Installation
 
