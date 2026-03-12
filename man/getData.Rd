@@ -30,9 +30,6 @@ getData(countries = c("DK", "DE"))
 getData(countries = c("DK", "DE"), overwrite = TRUE)
 ## downloads, extracts, and overwrites data for DK and DE in the package folder (default setting)
 }
-toponymOptions(save_data = FALSE)
-getData(countries = "NL")
-## downloads and extracts data for NL to a temporary folder (modified setting)
 }
 \seealso{
 \href{https://download.geonames.org/export/dump/}{GeoNames download page}
