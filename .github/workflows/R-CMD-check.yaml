@@ -3,11 +3,11 @@
 
 on:
   push:
-    branches: ["dev-CRAN"]
+    branches: ["toponym-CRAN"]
   pull_request:
-    branches: ["dev-CRAN"]
+    branches: ["toponym-CRAN"]
 
-name: R CMD Check dev-CRAN
+name: R CMD Check
 
 jobs:
   R-CMD-check:
