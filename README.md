@@ -1,6 +1,6 @@
 toponym
 ================
-March 11, 2026
+March 12, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -8,6 +8,8 @@ March 11, 2026
 
 [![R CMD
 Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
 Welcome to the `toponym 2.0.0` GitHub page!
