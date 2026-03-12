@@ -1,0 +1,230 @@
+# --------------------------------------------
+# CITATION file created with {cffr} R package
+# See also: https://docs.ropensci.org/cffr/
+# --------------------------------------------
+ 
+cff-version: 1.2.0
+message: 'To cite package "toponym" in publications use:'
+type: software
+license: GPL-3.0-or-later
+title: 'toponym: Analyze and Visualize Toponyms'
+version: 2.0.0
+abstract: A tool to analyze and visualize toponym distributions.
+authors:
+- family-names: Chevallier
+  given-names: Lennart
+  email: mail@lchevallier.de
+- family-names: Wichmann
+  given-names: Søren
+  email: wichmannsoeren@gmail.com
+preferred-citation:
+  type: manual
+  title: 'toponym: A Toponym Analysis & Visualization Tool'
+  authors:
+  - family-names: Chevallier
+    given-names: Lennart
+    email: mail@lchevallier.de
+  - family-names: Wichmann
+    given-names: Søren
+    email: wichmannsoeren@gmail.com
+  year: '2026'
+  url: https://github.com/Lennart05/toponym
+repository-code: https://github.com/Lennart05/toponym
+url: https://github.com/Lennart05/toponym
+contact:
+- family-names: Chevallier
+  given-names: Lennart
+  email: mail@lchevallier.de
+references:
+- type: software
+  title: 'R: A Language and Environment for Statistical Computing'
+  notes: Depends
+  url: https://www.R-project.org/
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 4.5'
+- type: software
+  title: geodata
+  abstract: 'geodata: Access Geographic Data'
+  notes: Imports
+  url: https://github.com/rspatial/geodata/issues/
+  repository: https://CRAN.R-project.org/package=geodata
+  authors:
+  - family-names: Hijmans
+    given-names: Robert J.
+    email: r.hijmans@gmail.com
+    orcid: https://orcid.org/0000-0001-5872-2872
+  year: '2026'
+  doi: 10.32614/CRAN.package.geodata
+  version: '>= 0.6-6'
+- type: software
+  title: ggplot2
+  abstract: 'ggplot2: Create Elegant Data Visualisations Using the Grammar of Graphics'
+  notes: Imports
+  url: https://ggplot2.tidyverse.org
+  repository: https://CRAN.R-project.org/package=ggplot2
+  authors:
+  - family-names: Wickham
+    given-names: Hadley
+    email: hadley@posit.co
+    orcid: https://orcid.org/0000-0003-4757-117X
+  - family-names: Chang
+    given-names: Winston
+    orcid: https://orcid.org/0000-0002-1576-2126
+  - family-names: Henry
+    given-names: Lionel
+  - family-names: Pedersen
+    given-names: Thomas Lin
+    email: thomas.pedersen@posit.co
+    orcid: https://orcid.org/0000-0002-5147-4711
+  - family-names: Takahashi
+    given-names: Kohske
+  - family-names: Wilke
+    given-names: Claus
+    orcid: https://orcid.org/0000-0002-7470-9261
+  - family-names: Woo
+    given-names: Kara
+    orcid: https://orcid.org/0000-0002-5125-4188
+  - family-names: Yutani
+    given-names: Hiroaki
+    orcid: https://orcid.org/0000-0002-3385-7233
+  - family-names: Dunnington
+    given-names: Dewey
+    orcid: https://orcid.org/0000-0002-9415-4582
+  - family-names: Brand
+    given-names: Teun
+    name-particle: van den
+    orcid: https://orcid.org/0000-0002-9335-7468
+  year: '2026'
+  doi: 10.32614/CRAN.package.ggplot2
+  version: '>= 4.0.2'
+- type: software
+  title: grDevices
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 4.5.1'
+- type: software
+  title: sf
+  abstract: 'sf: Simple Features for R'
+  notes: Imports
+  url: https://r-spatial.github.io/sf/
+  repository: https://CRAN.R-project.org/package=sf
+  authors:
+  - family-names: Pebesma
+    given-names: Edzer
+    email: edzer.pebesma@uni-muenster.de
+    orcid: https://orcid.org/0000-0001-8049-7069
+  year: '2026'
+  doi: 10.32614/CRAN.package.sf
+  version: '>= 1.1-0'
+- type: software
+  title: spatstat.geom
+  abstract: 'spatstat.geom: Geometrical Functionality of the ''spatstat'' Family'
+  notes: Imports
+  url: http://spatstat.org/
+  repository: https://CRAN.R-project.org/package=spatstat.geom
+  authors:
+  - family-names: Baddeley
+    given-names: Adrian
+    email: Adrian.Baddeley@curtin.edu.au
+    orcid: https://orcid.org/0000-0001-9499-8382
+  - family-names: Turner
+    given-names: Rolf
+    email: rolfturner@posteo.net
+    orcid: https://orcid.org/0000-0001-5521-5218
+  - family-names: Rubak
+    given-names: Ege
+    email: rubak@math.aau.dk
+    orcid: https://orcid.org/0000-0002-6675-533X
+  year: '2026'
+  doi: 10.32614/CRAN.package.spatstat.geom
+  version: '>= 3.7-0'
+- type: software
+  title: spatstat.utils
+  abstract: 'spatstat.utils: Utility Functions for ''spatstat'''
+  notes: Imports
+  url: http://spatstat.org/
+  repository: https://CRAN.R-project.org/package=spatstat.utils
+  authors:
+  - family-names: Baddeley
+    given-names: Adrian
+    email: Adrian.Baddeley@curtin.edu.au
+    orcid: https://orcid.org/0000-0001-9499-8382
+  - family-names: Turner
+    given-names: Rolf
+    email: rolfturner@posteo.net
+    orcid: https://orcid.org/0000-0001-5521-5218
+  - family-names: Rubak
+    given-names: Ege
+    email: rubak@math.aau.dk
+    orcid: https://orcid.org/0000-0002-6675-533X
+  year: '2026'
+  doi: 10.32614/CRAN.package.spatstat.utils
+  version: '>= 3.2-2'
+- type: software
+  title: stats
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 4.5.1'
+- type: software
+  title: terra
+  abstract: 'terra: Spatial Data Analysis'
+  notes: Imports
+  url: https://rspatial.org/
+  repository: https://CRAN.R-project.org/package=terra
+  authors:
+  - family-names: Hijmans
+    given-names: Robert J.
+    email: r.hijmans@gmail.com
+    orcid: https://orcid.org/0000-0001-5872-2872
+  - family-names: Brown
+    given-names: Andrew
+    orcid: https://orcid.org/0000-0002-4565-533X
+  - family-names: Barbosa
+    given-names: Márcia
+    orcid: https://orcid.org/0000-0001-8972-7713
+  year: '2026'
+  doi: 10.32614/CRAN.package.terra
+  version: '>= 1.9-1'
+- type: software
+  title: utils
+  abstract: 'R: A Language and Environment for Statistical Computing'
+  notes: Imports
+  authors:
+  - name: R Core Team
+  institution:
+    name: R Foundation for Statistical Computing
+    address: Vienna, Austria
+  year: '2026'
+  version: '>= 4.5.1'
+- type: software
+  title: knitr
+  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
+  notes: Suggests
+  url: https://yihui.org/knitr/
+  repository: https://CRAN.R-project.org/package=knitr
+  authors:
+  - family-names: Xie
+    given-names: Yihui
+    email: xie@yihui.name
+    orcid: https://orcid.org/0000-0003-0645-5666
+  year: '2026'
+  doi: 10.32614/CRAN.package.knitr
+  version: '>= 1.50'
+
