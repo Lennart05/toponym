@@ -24,9 +24,11 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
-Welcome to the `toponym 2.0.0` GitHub page!
+Welcome to the `toponym 2.0.0` Readme!
 
 The `toponym` package supplies users of R with tools to visualize and analyze toponym (= place name) distributions. It is intended as an interface to the [GeoNames](https://www.geonames.org/) data. A regular expression filters data and in a second step a map is created displaying locations which comply with it. The functions make data and plots available for further analysis---either within R or in the working directory. Users can select regions within countries, provide coordinates to define regions, or specify a region within the package to restrict the data selection to that region or compare regions with the remainder of countries.
+
+Follow this [link](https://github.com/Lennart05/toponym/tree/toponym-GitHub) for `toponym 1.0.0`.
 
 ## Installation
 

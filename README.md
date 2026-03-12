@@ -12,7 +12,7 @@ Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/b
 status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
-Welcome to the `toponym 2.0.0` GitHub page!
+Welcome to the `toponym 2.0.0` Readme!
 
 The `toponym` package supplies users of R with tools to visualize and
 analyze toponym (= place name) distributions. It is intended as an
@@ -24,6 +24,10 @@ directory. Users can select regions within countries, provide
 coordinates to define regions, or specify a region within the package to
 restrict the data selection to that region or compare regions with the
 remainder of countries.
+
+Follow this
+[link](https://github.com/Lennart05/toponym/tree/toponym-GitHub) for
+`toponym 1.0.0`.
 
 ## Installation
 
