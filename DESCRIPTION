@@ -15,7 +15,7 @@ Author: Lennart Chevallier [aut, cre],
 Description: A tool to analyze and visualize toponym distributions.
 Depends:
     R (>= 4.5)
-License: GPL (>= 3) + file LICENSE
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
