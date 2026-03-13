@@ -1,6 +1,6 @@
 toponym
 ================
-March 12, 2026
+March 13, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -18,16 +18,16 @@ The `toponym` package supplies users of R with tools to visualize and
 analyze toponym (= place name) distributions. It is intended as an
 interface to the [GeoNames](https://www.geonames.org/) data. A regular
 expression filters data and in a second step a map is created displaying
-locations which comply with it. The functions make data and plots
-available for further analysis—either within R or in the working
+all locations in the filtered data set. The functions make data and
+plots available for further analysis—either within R or in the working
 directory. Users can select regions within countries, provide
 coordinates to define regions, or specify a region within the package to
 restrict the data selection to that region or compare regions with the
 remainder of countries.
 
-If you would like to use `toponym 1.0.0`, head to
+If you would like to use `toponym 1.X.X`, head to
 [this](https://github.com/Lennart05/toponym/tree/toponym-GitHub) GitHub
-branch.
+branch and follow the instructions.
 
 ## Installation
 
@@ -41,8 +41,8 @@ install.packages("toponym")
 
 In order to install this package from
 [GitHub](https://github.com/Lennart05/toponym/tree/toponym-CRAN), you
-will need `devtools`. You can download and load the current development
-version of `toponym` with:
+will need `devtools`. You can download and install the current
+development version of `toponym` with:
 
 ``` r
 ## Install development version of < toponym > from GitHub
@@ -67,10 +67,10 @@ A data frame named `data_itz` is stored in the Global environment
 listing all locations which end in -itz in Germany.
 
 For the purpose of plotting outputs of `top()` and edited data frames,
-we offer the `mapper()`function. This accepts a user-defined title,
-legend, colors, and groups. An example using the previously created data
-frame is the following, where occurrences of -witz and -itz east of a
-10.5 longitudinal line are displayed:
+we offer the `mapper()` function. This accepts a user-defined title,
+legend, colors, groups and more. An example using the previously created
+data frame is the following, where occurrences of -witz and -itz east of
+a 10.5 longitudinal line are displayed:
 
 ``` r
 itz_east <- data_itz[data_itz$longitude > 10.5,]
@@ -308,10 +308,11 @@ they can be used, type `help("regex")` in the R console.
 The toponym data comes from [GeoNames](https://www.geonames.org/) and
 will be automatically downloaded when you call any of the core
 functions. It is recommended to save the data of the countries you
-access in the package directory. This is the default option of the
-function `toponymOptions` but it is possible to place it in the
-temporary folder by changing the parameter to `save_date = FALSE`. Type
-`tempdir()` to find the temporary directory of the current session.
+access in the package directory. This is the default option and
+controlled by the function `toponymOptions()` but it is possible to
+place data in the temporary folder by changing the parameter to
+`save_date = FALSE` in `toponymOptions()`. Type `tempdir()` to find the
+temporary directory of the current session.
 
 For mapping purposes as well as region designations, the
 [geodata](https://cran.r-project.org/package=geodata) package is used.
