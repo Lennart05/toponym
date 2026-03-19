@@ -16,7 +16,7 @@ This function downloads toponym data for the package.
 }
 \details{
 The data is downloaded from the \href{https://download.geonames.org/export/dump/}{GeoNames download page} and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
-Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
+Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}. If "all", data from all countries stored in the package folder is selected.
 With \code{toponymOptions()}, users can specify whether toponym data downloaded by \code{getData()} will be stored in the package folder or in a temporary folder. See \code{help(toponymOptions)}.
 }
 \examples{

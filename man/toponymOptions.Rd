@@ -4,26 +4,28 @@
 \alias{toponymOptions}
 \title{Manage Options of \code{toponym}}
 \usage{
-toponymOptions(save_data = NULL)
+toponymOptions(toponym_path = NULL)
 }
 \arguments{
-\item{save_data}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.}
+\item{toponym_path}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.}
 }
 \value{
-A logical value.
+A character string.
 }
 \description{
 This function allows users to modify a setting for managing toponym data.
 Users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
 }
 \details{
-Parameter \code{save_data}: if the current setting is \code{TRUE}, toponym data sets will be saved in the package folder;
+Parameter \code{toponym_path}: if the current setting is \code{TRUE}, toponym data sets will be saved in the package folder;
 if the current setting is \code{FALSE}, toponym data sets will be saved in a temporary folder.
 
 If no parameter is set, i.e. \code{toponymOptions()}, the complete data frame with current settings is printed.
 }
 \examples{
-# Show the current setting
+\dontrun{
+# Show the current path
 toponymOptions()
+}
 
 }

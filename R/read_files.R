@@ -9,15 +9,11 @@
 #' @keywords internal
 #' @return A data frame with GeoNames data.
 readFiles <- function(countries, feat.class = "P") {
+  toponym_options <- toponymOptions()
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
-  
   filename <- list()
-  for (i in 1:length(countries)) { # locates filename downloaded by getData()
-    if (file.exists(paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt"))[i]) { # if it is in the package directory
-      filename[[i]] <- paste0(system.file("extdata", package = "toponym"), "/", countries, ".txt")[i]
-    } else if (file.exists(paste0(tempdir(), "\\", countries, ".txt"))[i]) { # or if it is only temporary saved
-      filename[[i]] <- paste0(tempdir(), "\\", countries, ".txt")[i]
-    }
+  for (i in 1:length(countries)) { # store filename for data downloaded by getData()
+      filename[[i]] <- paste0(toponym_options, "/", countries, ".txt")[i]
   }
 
   L <- list()
