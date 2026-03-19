@@ -53,7 +53,11 @@ top <- function(strings, countries, ...) {
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
   try(getData(countries), silent = TRUE) # gets data
-  gn <- readFiles(countries, feat.class = opt$feat.class) # stands for GeoNames
+  
+  
+  gn <- readFiles(countries, feat.class = opt$feat.class) #gn stands for GeoNames
+  
+  
   # removes coordinates outside of the polygon
   if (!is.null(opt$polygon)) {
     if(!all(c("longitude", "latitude") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
