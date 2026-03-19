@@ -23,14 +23,14 @@ specify a region within the package to restrict the data selection to
 that region or compare regions with the remainder of countries.
 
 This version is discontinued except for bug fixes or issues. For future
-updates with new functionalities and improvements, please go to the
-latest version
-([v2.0.0](https://github.com/Lennart05/toponym/tree/toponym-CRAN)).
+updates with new functionalities, head to
+[this](https://github.com/Lennart05/toponym/tree/toponym-CRAN) GitHub
+branch and follow the instructions.
 
 ## Installation
 
 In order to install this package, you will need `devtools`. You can
-download and load `toponym` from
+download and install `toponym` from
 [GitHub](https://github.com/Lennart05/toponym) with:
 
 ``` r

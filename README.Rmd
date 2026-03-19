@@ -27,10 +27,10 @@ Welcome to the `toponym 1.0.0` GitHub page!
 
 The `toponym` package supplies users of R with tools to visualize and analyze toponym (= place name) distributions. It is intended as an interface to the [GeoNames](https://www.geonames.org/) data. A regular expression filters data and a map is created displaying locations which comply with it. The functions make data and plots available for further analysis -- either within R or in the working directory. Users can select regions within countries, provide coordinates to define regions, or specify a region within the package to restrict the data selection to that region or compare regions with the remainder of countries.
 
-This version is discontinued except for bug fixes or issues. For future updates with new functionalities and improvements, please go to the latest version ([v2.0.0](https://github.com/Lennart05/toponym/tree/toponym-CRAN)).
+This version is discontinued except for bug fixes or issues. For future updates with new functionalities, head to [this](https://github.com/Lennart05/toponym/tree/toponym-CRAN) GitHub branch and follow the instructions.
 
 ## Installation
-In order to install this package, you will need `devtools`. You can download and load `toponym` from [GitHub](https://github.com/Lennart05/toponym) with:
+In order to install this package, you will need `devtools`. You can download and install `toponym` from [GitHub](https://github.com/Lennart05/toponym) with:
 
 ``` r
 # install.packages("devtools")
