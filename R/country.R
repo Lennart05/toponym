@@ -32,7 +32,6 @@
 #' ## returns a list with a matrix with all region designations of Thailand
 #' }
 country <- function(query = NULL, ...) {
-
   opt <- list(...)
   if(is.null(opt$regions)) opt$regions <- 0
   if(!is.numeric(opt$regions)) stop("`regions` must be numeric.")
@@ -40,9 +39,10 @@ country <- function(query = NULL, ...) {
 
 
   if(!is.character(query)) stop("The query must contain a character string.")
+  if(nchar(query) == 0) stop("The query contains no valid input.")
   query <- query[!nchar(query) == 1] #removes input which is only one character long
   if(length(query) == 0) stop("The query contains no valid input.")
-
+  
   countryInfo <- toponym::countryInfo
   spec_col <- c("country table", "ISO2", "ISO3", "names")
   output <- list()
