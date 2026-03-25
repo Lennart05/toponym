@@ -5,9 +5,9 @@
 #' @param mapdata data frame. A user-specific data frame with coordinates.
 #' @param ... Additional parameters:
 #' \itemize{
+#' \item\code{print} logical. By default \code{TRUE}. If \code{FALSE}, the plot will not be printed.
 #' \item\code{color} character string vector indicating, which color is assigned to each string. It is prioritized over colors based on the column `color`.
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-#' \item\code{plot_name} character string. If specified, the plot will not be printed but saved as .png in the current working directory. The given character string defines the name of the .png file.
 #' \item\code{title} character string. Text for the title of the plot.
 #' \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column `group`.
 #' \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column `group` will be displayed, provided there is a column `group`. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
@@ -33,15 +33,17 @@
 #' 
 #' Parameter \code{plot_size} accepts numeric values of greater than -1. The plot's size is scaled by the given value. Thus, a value of 0 extends the size by 0%. A value of .1 extends the size by 10%. A value of -.1 reduces the size by 10% and so on.
 #' 
-#' 
 #' @examples
-#' \dontrun{
-#' mapper(top("itz$", "DE"))
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' \donttest{
+#' mapper(top("itz$", "DE", toponym_path = tempdir()))
 #' # returns a plot with all populated places
 #' # in Germany ending in "itz"
 #' 
 #' 
-#' UG_data <- top(c("et$", "wa$"), "UG")
+#' UG_data <- top(c("et$", "wa$"), "UG", toponym_path = tempdir())
 #' UG_data$color <- "blue"
 #' UG_data[UG_data$group == "wa", "color"] <- "grey"
 #' mapper(UG_data, legend_title = "two strings", title = "Some locations in grey and blue")
@@ -49,7 +51,6 @@
 #' # in Uganda ending in "wa" (grey) and "et" (blue)
 #' # the plot is titled "Some locations in grey and blue"
 #' # the legend title is "two strings"
-#' 
 #' }
 #' 
 #' @return A plot.
@@ -57,9 +58,8 @@
 #'
 mapper <- function(mapdata, ...){
 opt <- list(...)
-
+ if (is.null(opt$print)) opt$print <- TRUE
  if (is.null(opt$regions)) opt$regions <- 0
- if (!is.null(opt$plot_name) && !is.character(opt$plot_name)) stop("Parameter `plot_name` must be a character string.")
  if (is.null(opt$show_legend)) opt$show_legend <- TRUE
  if (!is.logical(opt$show_legend)) stop("Parameter `show_legend` must be logical.")
  if (!is.data.frame(mapdata)) stop("Parameter `mapdata` must be a data frame.")
@@ -69,7 +69,6 @@ opt <- list(...)
  if (!is.null(mapdata$group) && is.logical(mapdata$group)) stop("The column `group` cannot be logical.")
  if (!is.null(opt$legend_title) && !is.character(opt$legend_title)) stop("Parameter `legend_title` must be a character string.")
  if (!is.null(opt$title) && !is.character(opt$title)) stop("Parameter `title` must be a character string.")
- 
   mapper_group <- is.null(mapdata$group)
  if (sum(is.na(mapdata$color)) > 0){
  if ("color" %in% colnames(mapdata)) warning(paste(sum(is.na(mapdata$color))), " entries are empty in the color column.")
@@ -161,13 +160,7 @@ opt <- list(...)
   p <- map_simple(mapdata)
   
   
-  # saves or prints plot
-  if (is.character(opt$plot_name)) {
-    plot_name <- paste0(opt$plot_name, ".png", collapse = "_")
-    ggsave(plot_name, path = file.path(getwd(), "plots"))
-    message(paste("\nPlot", plot_name, "saved in `plots` folder of the working directory.\n"))
-  } else {
-    print(p)
-  }
+ if(opt$print) print(p)
+  
 }
 
