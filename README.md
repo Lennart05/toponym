@@ -53,21 +53,31 @@ devtools::install_github("Lennart05/toponym", ref = "toponym-CRAN")
 
 ## Set a path for downloaded data
 
-Most functions require external data which will be downloaded and stored for later use.
-No default path is set upon installation. The function `toponymOptions()` allows you to set a persistent path and view it. 
-You can set the path to the package directory or provide a full, alternative path. In the following example, it is set to the package directory:
+Most functions require external data which will be downloaded and stored
+for later use. Since no default path is set upon installation, users
+need to provide a path. The function `toponymOptions()` allows you to
+set a persistent path and view it. You can set the path to the package
+directory or provide a full, alternative path. In the following example,
+it is set to the package directory:
 
-```{r eval=FALSE}
+``` r
 library(toponym)          # load the package
-toponymOptions("pkgdir")  # "pkgdir" refers to directory of the toponym package
+toponymOptions("pkgdir")  # "pkgdir" is interpreted as the directory of the toponym package
 # you will be prompted to confirm your choice
 ```
+
 Once a path is set, you can check it like this:
-```{r eval=FALSE}
+
+``` r
 toponymOptions()          
 # returns current path (in this case the package directory)
 ```
-We recommend setting a persistent path for downloaded data. Users can always set the path manually when a function is used by specifying the parameter `toponym_path`. For illustration purposes, the path is manually set to the temporary directory in examples of this Readme.
+
+We recommend setting a persistent path for downloaded data. However,
+users can always set the path manually when a function is used by
+specifying the parameter `toponym_path`. For illustration purposes, the
+path is manually set to the temporary directory in examples of this
+Readme.
 
 ## Create a simple map
 
@@ -77,6 +87,7 @@ countries (in that order) are given as input. The following code is a
 simple example of this:
 
 ``` r
+library(toponym) # load the package
 data_itz <- top("itz$", "DE", toponym_path = tempdir())
 ```
 
@@ -163,7 +174,8 @@ simple example for the Philippines would be:
 topFreq(countries = "Philippines",
         len = 3,
         limit = 10,
-        type = "$")
+        type = "$",
+        toponym_path = tempdir())
 #> toponyms
 #> gan$ ang$ ong$ yan$ uan$ ion$ nan$ tan$ lan$ san$ 
 #> 1767 1258 1136  770  709  615  604  552  551  510
@@ -185,8 +197,8 @@ purposes of illustration:
 topFreq(countries = "GB",
         len = 3,
         limit = 10,
-        polygon = toponym::danelaw_polygon
-)
+        polygon = toponym::danelaw_polygon,
+        toponym_path = tempdir())
 #> toponyms
 #> ton$ een$ ham$ ill$ ley$ End$ rpe$ eld$ ord$ rth$ 
 #> 1467  694  493  437  436  431  264  257  202  192
@@ -222,8 +234,8 @@ topComp(countries = "GB",
        len = 3,
        limit = 100,
        rat = .8, 
-       polygon = toponym::danelaw_polygon
-       )
+       polygon = toponym::danelaw_polygon,
+       toponym_path = tempdir())
 #>   toponym ratio_perc frequency
 #> 1    rpe$       90.1   264/293
 ```
@@ -249,8 +261,8 @@ or countries:
 ``` r
 topZtest(strings = "aat$",
          countries = "BEL",
-         polygon = toponym::flanders_polygon
-                )
+         polygon = toponym::flanders_polygon,
+         toponym_path = tempdir())
 #> 
 #>  2-sample test for equality of proportions with continuity correction
 #> 
@@ -269,29 +281,6 @@ trailing string -aat (`strings = "aat$"`) in Flanders
 (`polygon = toponym::flanders_polygon`) with Belgium
 (`countries = "BEL"`) as a whole. The result of the two proportion test
 is returned as an object of class `htest`.
-
-## Manage Options of`toponym`
-
-`toponymOptions` allows users to modify settings for managing toponym
-data.
-
-For the parameter `save_data`: if the current setting is `TRUE`, toponym
-data sets will be saved in the package folder; if the current setting is
-`FALSE`, toponym data sets will be saved in a temporary folder.
-
-If no parameter is set, i.e. `toponymOptions()`, the complete data frame
-with current settings is printed, as illustrated in the following
-example:
-
-``` r
-toponymOptions()
-#> 
-#> Current value:
-#> [1] TRUE
-
-# toponymOptions(save_data = FALSE)
-# the command in the preceding line would change the parameter `save_data` from `TRUE` as shown in the output to `FALSE` as given in the command
-```
 
 ## The functions
 
@@ -324,12 +313,7 @@ they can be used, type `help("regex")` in the R console.
 
 The toponym data comes from [GeoNames](https://www.geonames.org/) and
 will be automatically downloaded when you call any of the core
-functions. It is recommended to save the data of the countries you
-access in the package directory. This is the default option and
-controlled by the function `toponymOptions()` but it is possible to
-place data in the temporary folder by changing the parameter to
-`save_date = FALSE` in `toponymOptions()`. Type `tempdir()` to find the
-temporary directory of the current session.
+functions.
 
 For mapping purposes as well as region designations, the
 [geodata](https://cran.r-project.org/package=geodata) package is used.

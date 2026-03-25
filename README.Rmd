@@ -1,6 +1,6 @@
 ---
 title: "toponym"
-date: March 13, 2026
+date: March 25, 2026
 output:
   github_document
   
@@ -24,7 +24,7 @@ knitr::opts_chunk$set(
 [![CRAN status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
-Welcome to the `toponym 2.0.0` Readme!
+Welcome to the `toponym 2.0.1` Readme!
 
 The `toponym` package supplies users of R with tools to visualize and analyze toponym (= place name) distributions. It is intended as an interface to the [GeoNames](https://www.geonames.org/) data. A regular expression filters data and in a second step a map is created displaying all locations in the filtered data set. The functions make data and plots available for further analysis---either within R or in the working directory. Users can select regions within countries, provide coordinates to define regions, or specify a region within the package to restrict the data selection to that region or compare regions with the remainder of countries.
 
@@ -51,12 +51,12 @@ devtools::install_github("Lennart05/toponym", ref = "toponym-CRAN")
 ## Set a path for downloaded data
 
 Most functions require external data which will be downloaded and stored for later use.
-No default path is set upon installation. The function `toponymOptions()` allows you to set a persistent path and view it. 
+Since no default path is set upon installation, users need to provide a path. The function `toponymOptions()` allows you to set a persistent path and view it. 
 You can set the path to the package directory or provide a full, alternative path. In the following example, it is set to the package directory:
 
 ```{r eval=FALSE}
 library(toponym)          # load the package
-toponymOptions("pkgdir")  # "pkgdir" refers to directory of the toponym package
+toponymOptions("pkgdir")  # "pkgdir" is interpreted as the directory of the toponym package
 # you will be prompted to confirm your choice
 ```
 Once a path is set, you can check it like this:
