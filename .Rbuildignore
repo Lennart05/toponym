@@ -5,3 +5,4 @@
 ^revdep$
 ^\.github$
 ^CITATION\.cff$
+^cran-comments\.md$
