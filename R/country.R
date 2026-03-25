@@ -21,13 +21,12 @@
 #' @export
 #'
 #' @examples
-#' \dontrun{
 #' country(query = "ISO3")
 #' ## returns a vector of all ISO3 codes
 #'
 #' country(query = "Thailand")
 #' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name of Thailand
-#'
+#' \donttest{
 #' country(query = "Thailand", regions = 1)
 #' ## returns a list with a matrix with all region designations of Thailand
 #' }
@@ -39,7 +38,8 @@ country <- function(query = NULL, ...) {
 
 
   if(!is.character(query)) stop("The query must contain a character string.")
-  if(nchar(query) == 0) stop("The query contains no valid input.")
+  
+  query <- query[nzchar(query)]      #removes input which is zero character long
   query <- query[!nchar(query) == 1] #removes input which is only one character long
   if(length(query) == 0) stop("The query contains no valid input.")
   
