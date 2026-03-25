@@ -30,11 +30,11 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Lennart Chevallier \email{mail@lchevallier.de}
+\strong{Maintainer}: Lennart Chevallier \email{mail@lchevallier.de} (\href{https://orcid.org/0009-0009-6800-1206}{ORCID}) [copyright holder]
 
 Authors:
 \itemize{
-  \item Søren Wichmann \email{wichmannsoeren@gmail.com}
+  \item Søren Wichmann \email{wichmannsoeren@gmail.com} (\href{https://orcid.org/0000-0002-3257-3087}{ORCID})
 }
 
 }

@@ -7,25 +7,40 @@
 toponymOptions(toponym_path = NULL)
 }
 \arguments{
-\item{toponym_path}{logical. Enter \code{TRUE} or \code{FALSE}. Allows the user to modify the setting for saving toponym data sets in the package folder or in a temporary folder.}
+\item{toponym_path}{character string. Path name for downloaded data. This setting is saved across sessions.}
 }
 \value{
-A character string.
+A character string indicating the current path for downloaded data.
 }
 \description{
-This function allows users to modify a setting for managing toponym data.
-Users can specify whether toponym data retrieved from \code{GeoNames} will be saved in the package folder or in a temporary folder.
+This function allows users to set the download path for the \code{toponym} package.
+Most functions require external data which will be downloaded and stored for later use. This is described in the respective functions.
+For this reason, after installation, users will be asked to specify the path for downloaded data.
+Users can set the path to the package directory with this command:
+
+\code{toponymOptions(toponym_path = "pkgdir")}
+
+A full, alternative path can also be provided.
+
+If a path is provided, users are asked to confirm their choice. This function will write the new path into \code{toponym_options.rds}in the package directory; the path is saved across sessions.
+To locate \code{toponym_options.rds}, enter:
+
+\code{system.file("extdata", package = "toponym")}
+
+To check the path that is currently set, enter:
+
+\code{toponymOptions()}
 }
 \details{
-Parameter \code{toponym_path}: if the current setting is \code{TRUE}, toponym data sets will be saved in the package folder;
-if the current setting is \code{FALSE}, toponym data sets will be saved in a temporary folder.
-
-If no parameter is set, i.e. \code{toponymOptions()}, the complete data frame with current settings is printed.
+Parameter \code{toponym_path} accepts either the character string \code{"pkgdir"} or full, alternative paths.
+\code{pkgdir} is interpreted as the extdata folder in the \code{toponym} package directory, i.e.:
+\code{system.file("extdata", package = "toponym")}
 }
 \examples{
-\dontrun{
-# Show the current path
+if(interactive()){
+#Set the path to the temporary directory
+toponymOptions(toponym_path = tempdir())
+#Show the current path
 toponymOptions()
 }
-
 }

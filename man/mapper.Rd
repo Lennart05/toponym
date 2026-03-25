@@ -11,9 +11,9 @@ mapper(mapdata, ...)
 
 \item{...}{Additional parameters:
 \itemize{
+\item\code{print} logical. By default \code{TRUE}. If \code{FALSE}, the plot will not be printed.
 \item\code{color} character string vector indicating, which color is assigned to each string. It is prioritized over colors based on the column \code{color}.
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
-\item\code{plot_name} character string. If specified, the plot will not be printed but saved as .png in the current working directory. The given character string defines the name of the .png file.
 \item\code{title} character string. Text for the title of the plot.
 \item\code{legend_title} character string. Text for the title of the legend. It is prioritized over titles based on column \code{group}.
 \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column \code{group} will be displayed, provided there is a column \code{group}. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
@@ -47,13 +47,16 @@ Parameter \code{frame} accepts data frames containing coordinates which define t
 Parameter \code{plot_size} accepts numeric values of greater than -1. The plot's size is scaled by the given value. Thus, a value of 0 extends the size by 0\%. A value of .1 extends the size by 10\%. A value of -.1 reduces the size by 10\% and so on.
 }
 \examples{
-\dontrun{
-mapper(top("itz$", "DE"))
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set each time in the following examples:
+\donttest{
+mapper(top("itz$", "DE", toponym_path = tempdir()))
 # returns a plot with all populated places
 # in Germany ending in "itz"
 
 
-UG_data <- top(c("et$", "wa$"), "UG")
+UG_data <- top(c("et$", "wa$"), "UG", toponym_path = tempdir())
 UG_data$color <- "blue"
 UG_data[UG_data$group == "wa", "color"] <- "grey"
 mapper(UG_data, legend_title = "two strings", title = "Some locations in grey and blue")
@@ -61,7 +64,6 @@ mapper(UG_data, legend_title = "two strings", title = "Some locations in grey an
 # in Uganda ending in "wa" (grey) and "et" (blue)
 # the plot is titled "Some locations in grey and blue"
 # the legend title is "two strings"
-
 }
 
 }

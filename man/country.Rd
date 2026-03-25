@@ -32,13 +32,12 @@ If you enter "country table", you receive a data frame with all three designatio
 Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
 }
 \examples{
-\dontrun{
 country(query = "ISO3")
 ## returns a vector of all ISO3 codes
 
 country(query = "Thailand")
 ## returns a list with a data frame with ISO2 code, ISO3 code and the full name of Thailand
-
+\donttest{
 country(query = "Thailand", regions = 1)
 ## returns a list with a matrix with all region designations of Thailand
 }

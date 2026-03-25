@@ -18,6 +18,7 @@ topFreq(countries, len, limit, ...)
 \item\code{type} character string. Either by default "$" (ending) or "^" (beginning).
 \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{polygon} data frame. Selects toponyms only inside the polygon.
+\item\code{toponym_path} character string. Path name for downloaded data.
 }}
 }
 \value{
@@ -28,19 +29,30 @@ This function returns the most frequent toponym substrings in countries or a pol
 }
 \details{
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
-
 Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See \code{help(toponymOptions)}.
+The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
-\dontrun{
-topFreq(countries = "Ecuador", len = 3, limit = 10)
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set each time in the following examples:
+\donttest{
+topFreq(
+  countries = "Ecuador",
+  len = 3,
+  limit = 10,
+  toponym_path = tempdir())
 ## returns the top 10 most frequent toponym endings
 ## of three-character length in Ecuador
 
 topFreq(
-  countries = "GB", len = 3, limit = 10,
-  polygon = toponym::danelaw_polygon
-)
+  countries = "GB",
+  len = 3,
+  limit = 10,
+  polygon = toponym::danelaw_polygon,
+  toponym_path = tempdir())
 ## returns the top 10 most frequent toponym endings
 ## in the polygon which is inside the United Kingdom.
 }

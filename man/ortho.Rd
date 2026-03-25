@@ -12,6 +12,7 @@ ortho(countries, ...)
 \item{...}{Additional parameter:
 \itemize{
 \item\code{column} character string. Selects the column for query.
+\item\code{toponym_path} character string. Path name for downloaded data.
 }}
 }
 \value{
@@ -25,10 +26,17 @@ Parameter \code{countries} accepts all designations found in \code{country(query
 
 The default column is \code{"alternatenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
+
+#Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See \code{help(toponymOptions)}.
+The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
-\dontrun{
-ortho(countries = "ID")
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set each time in the following examples:
+\donttest{
+ortho(countries = "ID", toponym_path = tempdir())
 # returns a table with frequencies of all symbols
 # in the "alternatenames" column for the Indonesia data set
 }

@@ -4,12 +4,14 @@
 \alias{readFiles}
 \title{Reads GeoNames data}
 \usage{
-readFiles(countries, feat.class = "P")
+readFiles(countries, feat.class = "P", toponym_path)
 }
 \arguments{
 \item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{feat.class}{character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.}
+
+\item{toponym_path}{character string. Path name for downloaded data.}
 }
 \value{
 A data frame with GeoNames data.

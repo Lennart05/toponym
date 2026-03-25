@@ -13,7 +13,7 @@ map_simple(mapdata)
 A plot.
 }
 \description{
-This function generates a map plotting all locations in a given data frame. This function uses map data from the geodata package.
+This function generates a map plotting all locations in a given data frame. This function uses map data from the \code{geodata} package.
 }
 \details{
 This is an internal function which is only used by \code{mapper()}.

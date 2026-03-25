@@ -4,12 +4,17 @@
 \alias{getData}
 \title{Downloads GeoNames data}
 \usage{
-getData(countries, overwrite = FALSE)
+getData(countries, overwrite = FALSE, toponym_path = NULL)
 }
 \arguments{
 \item{countries}{character string vector with country designations (names or ISO-codes).}
 
 \item{overwrite}{logical. If \code{TRUE}, the data sets (.txt files) in the package folder will be overwritten.}
+
+\item{toponym_path}{character string. Path name for downloaded data. If not specified, this function will call \code{toponymOptions()} and try use the persistent path.}
+}
+\value{
+Character string of the used path for downloaded data.
 }
 \description{
 This function downloads toponym data for the package.
@@ -17,18 +22,22 @@ This function downloads toponym data for the package.
 \details{
 The data is downloaded from the \href{https://download.geonames.org/export/dump/}{GeoNames download page} and thereby made accessible to \code{readFiles()}. The function allows users to update GeoNames data and to set the date of access to that database to the current date.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}. If "all", data from all countries stored in the package folder is selected.
-With \code{toponymOptions()}, users can specify whether toponym data downloaded by \code{getData()} will be stored in the package folder or in a temporary folder. See \code{help(toponymOptions)}.
+Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See \code{help(toponymOptions)}.
 }
 \examples{
-\dontrun{
-getData(countries = "NL")
-## downloads and extracts data for NL to the package folder (default setting)
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set each time in the following examples:
+\donttest{
+getData(countries = "NL", toponym_path = tempdir())
+## downloads and extracts data for NL to the temporary directory
 
-getData(countries = c("DK", "DE"))
-## downloads and extracts data for DK and DE to the package folder (default setting)
+getData(countries = c("DK", "DE"), toponym_path = tempdir())
+## downloads and extracts data for DK and DE to the temporary directory
 
-getData(countries = c("DK", "DE"), overwrite = TRUE)
-## downloads, extracts, and overwrites data for DK and DE in the package folder (default setting)
+getData(countries = c("DK", "DE"), overwrite = TRUE, toponym_path = tempdir())
+## downloads, extracts, and overwrites data for DK and DE in the temporary directory
 }
 }
 \seealso{

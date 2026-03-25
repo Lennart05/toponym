@@ -21,6 +21,7 @@ topComp(countries, len, rat, polygon, ...)
 \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 \item\code{limit} numeric. The number of the most frequent toponym substrings which will be tested.
+\item\code{toponym_path} character string. Path name for downloaded data.
 }}
 }
 \value{
@@ -33,14 +34,21 @@ This function retrieves the most frequent toponym substrings in a given polygon 
 This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those that match the ratio criterion.
 Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See \code{help(toponymOptions)}.
+The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
-\dontrun{
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set each time in the following examples:
+\donttest{
 topComp("GB",
   limit = 100,
-   len = 4,
-    rat = .7,
-  polygon = toponym::danelaw_polygon
+  len = 4,
+  rat = .7,
+  polygon = toponym::danelaw_polygon,
+  toponym_path = tempdir()
 )
 ## returns a data frame of the top 100 four-character-long endings in the United Kingdom
 ## if more than 70\% of them belong to the polygon
@@ -52,7 +60,8 @@ topComp("GB",
   len = 3,
   rat = 1,
   polygon = toponym::danelaw_polygon,
-  freq.type = "rel"
+  freq.type = "rel",
+  toponym_path = tempdir()
 )
 ## returns a data frame of the top 100 three-character-long endings in the United Kingdom
 ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
@@ -62,14 +71,12 @@ topComp(c("BE", "NL"),
   limit = 50,
   len = 3,
   rat = .8,
-  polygon = toponym::flanders_polygon
+  polygon = toponym::flanders_polygon,
+  toponym_path = tempdir()
 )
 
 ## returns a data frame of the top 50 three-character-long endings
 ## in Belgium and Netherlands viewed as a unit if more than 80\% of them belong to the polygon
 ## corresponding to Flanders.
-
-.
 }
-
 }

@@ -28,7 +28,7 @@ Parameter \code{countries} accepts all designations found in \code{country(query
 
 \code{region_ID} and \code{region_name} accepts region designations for the selected countries, which can be retrieved by \code{country()}.
 The function prioritizes any \code{region_ID} and ignores \code{region_name} if users provide both.
-The matrix from \code{country()} listing all region designations may be incomplete as the \code{geodata} mapa data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
+The matrix from \code{country()} listing all region designations may be incomplete as the \code{geodata} map data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
 
 In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 
@@ -41,9 +41,10 @@ This function uses the function \code{spatstatLocator} provided by the \code{spa
 For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 }
 \examples{
-\dontrun{
-createPolygon("NA", region_ID = "NAM.7_1")
-
+\donttest{
+if(interactive()){
+#createPolygon("NA", region_ID = "NAM.7_1")
+#
 # a plot of the region Ohangwena in Namibia appears.
 # by point-and-click a polygon can be created
 # upon completion, a data frame with the coordinates of the polygon returns
@@ -54,5 +55,6 @@ Ohangwena_polygon <- createPolygon(
 # no plot appears
 # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 # and can be used by other functions
+}
 }
 }
