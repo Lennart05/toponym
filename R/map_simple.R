@@ -1,6 +1,6 @@
 #' @title Plots toponyms onto a map
 #' @description
-#' This function generates a map plotting all locations in a given data frame. This function uses map data from the geodata package.
+#' This function generates a map plotting all locations in a given data frame. This function uses map data from the \code{geodata} package.
 #' @details
 #' This is an internal function which is only used by \code{mapper()}.
 #' @param mapdata list. A list passed down by \code{mapper()}. It contains at least longitudinal and latitudinal data.
