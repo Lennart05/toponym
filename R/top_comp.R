@@ -5,7 +5,10 @@
 #' This function sorts the toponym substrings in the given countries by frequency. It then tests which ones lie in the given polygon and prints out a data frame with those that match the ratio criterion.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
-#'
+#' Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See `help(toponymOptions)`.
+#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
+#' 
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param len numeric. The length of the substring within toponyms.
 #' @param rat numeric. The cut-off ratio (a number between 0.0 and 1 for \code{freq.type = "abs"}) of how many occurrences of a toponym string need to be in the polygon relative to the rest of the country (or countries).
@@ -17,17 +20,22 @@
 #' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{freq.type} character string. If "abs" (the default), ratios of absolute frequencies inside the polygon and in the countries as a whole are computed. If "rel", ratios of relative frequencies inside the polygon and outside the polygon will be computed.
 #' \item\code{limit} numeric. The number of the most frequent toponym substrings which will be tested.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @return A data frame printed out and saved in the global environment. It shows toponym substrings surpassing the ratio, the ratio and the frequency.
 #' @export
 #'
 #' @examples
-#' \dontrun{
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' \donttest{
 #' topComp("GB",
 #'   limit = 100,
-#'    len = 4,
-#'     rat = .7,
-#'   polygon = toponym::danelaw_polygon
+#'   len = 4,
+#'   rat = .7,
+#'   polygon = toponym::danelaw_polygon,
+#'   toponym_path = tempdir()
 #' )
 #' ## returns a data frame of the top 100 four-character-long endings in the United Kingdom
 #' ## if more than 70% of them belong to the polygon
@@ -39,7 +47,8 @@
 #'   len = 3,
 #'   rat = 1,
 #'   polygon = toponym::danelaw_polygon,
-#'   freq.type = "rel"
+#'   freq.type = "rel",
+#'   toponym_path = tempdir()
 #' )
 #' ## returns a data frame of the top 100 three-character-long endings in the United Kingdom
 #' ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
@@ -49,19 +58,15 @@
 #'   limit = 50,
 #'   len = 3,
 #'   rat = .8,
-#'   polygon = toponym::flanders_polygon
+#'   polygon = toponym::flanders_polygon,
+#'   toponym_path = tempdir()
 #' )
-#'
+#' 
 #' ## returns a data frame of the top 50 three-character-long endings
 #' ## in Belgium and Netherlands viewed as a unit if more than 80% of them belong to the polygon
 #' ## corresponding to Flanders.
-#'
-#' .
 #' }
-#'
 topComp <- function(countries, len, rat, polygon, ...) {
-  toponym_options <- readRDS(paste0(system.file("extdata", package = "toponym"), "/toponym_options.rds"))
-  
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   
   if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
@@ -73,15 +78,15 @@ topComp <- function(countries, len, rat, polygon, ...) {
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
   if(is.null(opt$freq.type)) opt$freq.type <- "abs"
-
-  getData(countries) # gets data
-  gn <- readFiles(countries, opt$feat.class)
+  
+  path <- getData(countries, toponym_path = opt$toponym_path) # gets data
+  gn <- readFiles(countries, opt$feat.class, toponym_path = path)
   if (is.null(opt$limit)) {
     message("Parameter `limit` was not specified. All toponyms will be tested. This may take a while.")
-    toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type)
+    toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type, toponym_path = path)
 
   } else{
-    toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type)
+    toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type, toponym_path = path)
   }
   toponyms_o <- toponyms_o[!is.na(toponyms_o)]
   toponyms_o <- names(toponyms_o)
