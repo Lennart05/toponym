@@ -1,24 +1,25 @@
+.top_env <- new.env(parent = emptyenv())
 #' @title Reads GeoNames data
 #' @description
-#' This function reads toponym data for the package.
+#' This function reads toponym data for the package.  
 #' @details
 #' This function accesses the data saved by \code{getData()}, reads it as data frame and stores it in the package environment. [Here](http://download.geonames.org/export/dump/readme.txt) is further information on the used column names.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param feat.class character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' @param toponym_path character string. Path name for downloaded data.
 #' @keywords internal
 #' @return A data frame with GeoNames data.
-readFiles <- function(countries, feat.class = "P") {
-  toponym_options <- toponymOptions()
+readFiles <- function(countries, feat.class = "P", toponym_path) {
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
   filename <- list()
   for (i in 1:length(countries)) { # store filename for data downloaded by getData()
-      filename[[i]] <- paste0(toponym_options, "/", countries, ".txt")[i]
+      filename[[i]] <- paste0(toponym_path, "/", countries, ".txt")[i]
   }
 
   L <- list()
   for (i in 1:length(countries)) {
-    if (tolower(countries[i]) %in% ls(.top_env) == FALSE) {
+    if (tolower(countries[i]) %in% ls(.top_env) == FALSE) { # if not in .top_env, read data
       geonames_content <- utils::read.table(
         file = filename[[i]], # reads country data of parameter "countries"
         head = FALSE, sep = "\t", quote = "", na.strings = "",
@@ -38,7 +39,7 @@ readFiles <- function(countries, feat.class = "P") {
 
 
       L[[i]] <- assign(tolower(countries[i]), geonames_content, envir = .top_env) # saves in pkg env for later use
-    } else {
+    } else { #else, retrieve data from .top_env
       L[[i]] <- .top_env[[tolower(countries[i])]]
     }
   }
