@@ -6,5 +6,5 @@
 #' @keywords internal
 #'
 .onLoad <- function(libname, pkgname) {
-  .top_env <<- new.env(parent = emptyenv())
+  options(timeout = max(6000, getOption("timeout")))
 }
