@@ -5,6 +5,7 @@
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{column} character string. Selects the column for query.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @details
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
@@ -12,13 +13,20 @@
 #' The default column is \code{"alternatenames"}. Other columns of possible interest are \code{"name"} and \code{"asciiname"}.
 #' It outputs an ordered frequency table of all symbols used in a given column of the GeoNames data for one or more countries specified.
 #'
+#'#Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See `help(toponymOptions)`.
+#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
+#' 
 #'
 #' @return A table with frequencies of all symbols.
 #' @export
 #'
 #' @examples
-#' \dontrun{
-#' ortho(countries = "ID")
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' \donttest{
+#' ortho(countries = "ID", toponym_path = tempdir())
 #' # returns a table with frequencies of all symbols
 #' # in the "alternatenames" column for the Indonesia data set
 #' }
@@ -33,10 +41,10 @@ ortho <- function(countries, ...) {
   countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
 
   # download data if not already on the computer
-  getData(countries)
+  path <- getData(countries, toponym_path = opt$toponym_path)
 
   # read relevant country files, gn stands for GeoNames
-  gn <- readFiles(countries, feat.class = c("P", "S", "H", "T", "A", "L", "R", "V", "U"))
+  gn <- readFiles(countries, feat.class = c("P", "S", "H", "T", "A", "L", "R", "V", "U"), toponym_path = path)
 
   # identify and extract target column
   w_col <- which(names(gn) == opt$column)
