@@ -20,7 +20,7 @@
 "_PACKAGE"
 
 ## usethis namespace: start
-#' @importFrom utils write.table download.file unzip read.table tail
+#' @importFrom utils write.table download.file unzip read.table tail menu
 #' @importFrom geodata world gadm
 #' @importFrom terra crds plot
 #' @importFrom graphics segments
