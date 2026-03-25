@@ -1,6 +1,6 @@
 toponym
 ================
-March 13, 2026
+March 25, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -12,7 +12,7 @@ Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/b
 status](https://www.r-pkg.org/badges/version/toponym)](https://CRAN.R-project.org/package=toponym)
 <!-- badges: end -->
 
-Welcome to the `toponym 2.0.0` Readme!
+Welcome to the `toponym 2.0.1` Readme!
 
 The `toponym` package supplies users of R with tools to visualize and
 analyze toponym (= place name) distributions. It is intended as an
@@ -51,6 +51,24 @@ development version of `toponym` with:
 devtools::install_github("Lennart05/toponym", ref = "toponym-CRAN")
 ```
 
+## Set a path for downloaded data
+
+Most functions require external data which will be downloaded and stored for later use.
+No default path is set upon installation. The function `toponymOptions()` allows you to set a persistent path and view it. 
+You can set the path to the package directory or provide a full, alternative path. In the following example, it is set to the package directory:
+
+```{r eval=FALSE}
+library(toponym)          # load the package
+toponymOptions("pkgdir")  # "pkgdir" refers to directory of the toponym package
+# you will be prompted to confirm your choice
+```
+Once a path is set, you can check it like this:
+```{r eval=FALSE}
+toponymOptions()          
+# returns current path (in this case the package directory)
+```
+We recommend setting a persistent path for downloaded data. Users can always set the path manually when a function is used by specifying the parameter `toponym_path`. For illustration purposes, the path is manually set to the temporary directory in examples of this Readme.
+
 ## Create a simple map
 
 The function `top()`, meaning “toponym”, outputs data complying with a
@@ -59,8 +77,7 @@ countries (in that order) are given as input. The following code is a
 simple example of this:
 
 ``` r
-library(toponym) # load the package
-data_itz <- top("itz$", "DE")
+data_itz <- top("itz$", "DE", toponym_path = tempdir())
 ```
 
 A data frame named `data_itz` is stored in the Global environment
