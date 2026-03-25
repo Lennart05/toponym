@@ -8,33 +8,51 @@ message: 'To cite package "toponym" in publications use:'
 type: software
 license: GPL-3.0-or-later
 title: 'toponym: Analyze and Visualize Toponyms'
-version: 2.0.0
-abstract: A tool to analyze and visualize toponym distributions.
+version: 2.0.1
+abstract: A tool to analyze and visualize toponym distributions. This package is intended
+  as an interface to the GeoNames data. A regular expression filters data and in a
+  second step a map is created displaying all locations in the filtered data set.
+  The functions make data and plots available for further analysis—either within R
+  or in a chosen directory. Users can select regions within countries, provide coordinates
+  to define regions, or specify a region within the package to restrict the data selection
+  to that region or compare regions with the remainder of countries. This package
+  relies on the R packages `geodata` for map data and `ggplot2` for plotting purposes.
+  For more details see Wichmann & Chevallier (2025) <https://doi.org/10.5195/names.2025.2616>.
 authors:
 - family-names: Chevallier
   given-names: Lennart
   email: mail@lchevallier.de
+  orcid: https://orcid.org/0009-0009-6800-1206
 - family-names: Wichmann
   given-names: Søren
   email: wichmannsoeren@gmail.com
+  orcid: https://orcid.org/0000-0002-3257-3087
+date-released: 2026-03-25
 preferred-citation:
-  type: manual
-  title: 'toponym: A Toponym Analysis & Visualization Tool'
+  type: article
+  title: 'Mapping place names'
   authors:
-  - family-names: Chevallier
-    given-names: Lennart
-    email: mail@lchevallier.de
-  - family-names: Wichmann
-    given-names: Søren
-    email: wichmannsoeren@gmail.com
-  year: '2026'
-  url: https://github.com/Lennart05/toponym
+    - family-names: "Wichmann"
+      given-names: "Søren"
+      email: "wichmannsoeren@gmail.com"
+      orcid: "https://orcid.org/0000-0002-3257-3087"
+    - family-names: "Chevallier"
+      given-names: "Lennart"
+      email: "mail@lchevallier.de"
+      orcid: "https://orcid.org/0009-0009-6800-1206"
+  doi: "10.5195/names.2025.2616"
+  url: "https://doi.org/10.5195/names.2025.2616"
+  year: 2025
+  volume: 73
+  issue: 3
+  journal: "Names"
 repository-code: https://github.com/Lennart05/toponym
 url: https://github.com/Lennart05/toponym
 contact:
 - family-names: Chevallier
   given-names: Lennart
   email: mail@lchevallier.de
+  orcid: https://orcid.org/0009-0009-6800-1206
 references:
 - type: software
   title: 'R: A Language and Environment for Statistical Computing'
@@ -213,18 +231,4 @@ references:
     address: Vienna, Austria
   year: '2026'
   version: '>= 4.5.1'
-- type: software
-  title: knitr
-  abstract: 'knitr: A General-Purpose Package for Dynamic Report Generation in R'
-  notes: Suggests
-  url: https://yihui.org/knitr/
-  repository: https://CRAN.R-project.org/package=knitr
-  authors:
-  - family-names: Xie
-    given-names: Yihui
-    email: xie@yihui.name
-    orcid: https://orcid.org/0000-0003-0645-5666
-  year: '2026'
-  doi: 10.32614/CRAN.package.knitr
-  version: '>= 1.50'
 
