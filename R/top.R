@@ -5,57 +5,57 @@
 #' @param countries character string vector with country designations (names or ISO-codes).
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{csv} character string. If specified, matches will be saved as .csv in the current working directory. The given character string defines the name of the .csv file.
-#' \item\code{tsv} character string. If specified, matches will be saved as .tsv in the current working directory. The given character string defines the name of the .tsv file.
 #' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
 #' \item\code{polygon} data frame. Selects toponyms only inside the polygon.
 #' \item\code{column} character string vector. Selects the column(s) for query.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @details
 #' This function selects locations which match the regular expression from \code{strings}.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+#' Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See `help(toponymOptions)`.
 #' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #' 
 #' @examples
-#' \dontrun{
-#' top("itz$", "DE")
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' \donttest{
+#' top("itz$", "DE", toponym_path = tempdir())
 #' # returns a data frame with all populated places
 #' # in Germany ending in "itz"
 #'
 #'
-#' top("^Vlad", "RU", csv = "Vlad_RU")
+#' top("^Vlad", "RU", toponym_path = tempdir())
 #' # returns a data frame with all populated places
 #' # in Russia starting with "Vlad" (case sensitive)
-#' # and saves this data frame as .csv named "Vlad_RU.csv" in the working directory.
 #'
 #'
-#' top(c("itz$", "ice$"), c("DE", "PL"))
+#' top(c("itz$", "ice$"), c("DE", "PL"), toponym_path = tempdir())
 #' # returns a data frame with all populated places
 #' # in Germany and Poland ending in either "itz" or "ice"
 #' 
-#' top("Maw$", "MM", column = "alternatenames")
+#' top("Maw$", "MM", column = "alternatenames", toponym_path = tempdir())
 #' # returns a data frame with all populated places
 #' # in Myanmar listed in the "alternatenames" column
 #' # and ending in "Maw" (case sensitive)
-#' 
 #' }
 #' @return A data frame of selected toponym(s).
 #' @export
 top <- function(strings, countries, ...) {
   ##### store additional parameters and set defaults
   opt <- list(...)
-  if (!is.null(opt$csv) && !is.character(opt$csv[1])) stop("File name must be a character string. Only the first element will be considered.")
-  if (!is.null(opt$tsv) && !is.character(opt$tsv[1])) stop("File name must be a character string. Only the first element will be considered.")
   if (is.null(opt$feat.class)) opt$feat.class <- "P"
   if (!is.character(opt$feat.class)) stop("Parameter `feat.class` must contain character string.")
   if (is.null(opt$column)) opt$column <- "name"
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
-  try(getData(countries), silent = TRUE) # gets data
+  path <- getData(countries, toponym_path = opt$toponym_path) # gets data
   
   
-  gn <- readFiles(countries, feat.class = opt$feat.class) #gn stands for GeoNames
+  gn <- readFiles(countries, feat.class = opt$feat.class, toponym_path = path) #gn stands for GeoNames
   
   
   # removes coordinates outside of the polygon
@@ -113,23 +113,6 @@ top <- function(strings, countries, ...) {
 
   gn["group"] <- m_strings # adds matches to "group" column
   output <- gn[w_strings, ]
-
-
-  # saves data as csv or tsv
-  if (any(!is.null(c(opt$csv, opt$tsv)))) {
-      file_dir <- file.path(getwd(), "toponym_selection")
-      if (!dir.exists(file_dir)) dir.create(file_dir)
-    if (!is.null(opt$csv)) {
-      csv_name <- paste(file.path(file_dir, opt$csv), ".csv", sep = "")
-      utils::write.table(output, file = csv_name, quote=FALSE, sep=';', row.names = FALSE)
-      message(paste("\nData", csv_name, "saved as csv in `toponym_selection` folder of the working directory.\n"))
-    }
-    if (!is.null(opt$tsv)) {
-      tsv_name <- paste(file.path(file_dir, opt$tsv), ".tsv", sep = "")
-      utils::write.table(output, file = tsv_name, quote=FALSE, sep='\t', row.names = FALSE)
-      message(paste("\nData", tsv_name, "saved as tsv in `toponym_selection` folder of the working directory.\n"))
-    }
-  }
 
   return(output)
 }
