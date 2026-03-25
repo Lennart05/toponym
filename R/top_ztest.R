@@ -6,6 +6,9 @@
 #' This function lets users apply a Z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
+#' Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See `help(toponymOptions)`.
+#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #'
 #' @param strings character string with a regular expression to be tested.
 #' @param countries character string vector with country designations (names or ISO-codes).
@@ -13,14 +16,20 @@
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{feat.class} character string vector. Selects data only of those feature classes (check \url{http://download.geonames.org/export/dump/readme.txt} for the list of all feature classes). By default, it is \code{P}.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @export
 #' @examples
-#' \dontrun{
-#' topZtest("thorpe$", "GB", toponym::danelaw_polygon)
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set in the following example:
+#'\donttest{
+#' topZtest("thorpe$",
+#'          "GB",
+#'          toponym::danelaw_polygon,
+#'          toponym_path = tempdir())
 #' ## returns an object of class htest containing the results.
 #' }
-#' 
 #' @return An object of class \code{htest} containing the results.
 topZtest <- function(strings, countries, polygon, ...) {
 
@@ -34,8 +43,8 @@ topZtest <- function(strings, countries, polygon, ...) {
   opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
 
-  getData(countries) # gets data
-  gn <- readFiles(countries, opt$feat.class) # stands for GeoNames
+  path <- getData(countries, toponym_path = opt$toponym_path) # gets data
+  gn <- readFiles(countries, opt$feat.class, toponym_path = path) # stands for GeoNames
 
 
   poly_owin <- poly(polygon)
