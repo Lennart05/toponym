@@ -7,7 +7,7 @@ This is the initial release accessible on CRAN.
 * More detailed description in DESCRIPTION, see help(toponym)
 
 * no default location set for downloaded data. Now users either
-    * specify a persistent path in `toponymOptions()`; or
+	* specify a persistent path in `toponymOptions()`; or
 	* specify a path using parameter `toponym_path`
 	  whenever they use a function requiring downloaded data
 * mapper(): argument `plot_name` removed
