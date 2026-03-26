@@ -4,7 +4,7 @@ Version: 2.0.1
 Authors@R: c(
     person(given = "Lennart",
            family = "Chevallier",
-           role = c("aut", "cre", "cph"),
+           role = c("aut", "cre"),
            email = "mail@lchevallier.de",
            comment = c(ORCID = "0009-0009-6800-1206")),
     person(given = "Søren",
@@ -22,14 +22,14 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.3
 LazyData: true
 Imports: 
-    geodata (>= 0.6-6),
-    ggplot2 (>= 4.0.2),
-    grDevices (>= 4.5.1),
-    sf (>= 1.1-0),
-    spatstat.geom (>= 3.7-0),
-    spatstat.utils (>= 3.2-2),
-    stats (>= 4.5.1),
-    terra (>= 1.9-1),
-    utils (>= 4.5.1)
+    geodata,
+    ggplot2,
+    grDevices,
+    sf,
+    spatstat.geom,
+    spatstat.utils,
+    stats,
+    terra,
+    utils
 URL: https://github.com/Lennart05/toponym
 BugReports: https://github.com/Lennart05/toponym/issues
