@@ -34,7 +34,7 @@
 #' # in Russia starting with "Vlad" (case sensitive)
 #'
 #' itz_ice_data <- top(c("itz$", "ice$"), c("DE", "PL"), toponym_path = tempdir())
-#' )
+#' 
 #' # returns a data frame with all populated places
 #' # in Germany and Poland ending in either "itz" or "ice"
 #' 
