@@ -28,11 +28,13 @@
 #' @return A character string indicating the current path for downloaded data.
 #' 
 #' @examples
+#' \dontrun{
 #' if(interactive()){
 #' #Set the path to the temporary directory
 #' toponymOptions(toponym_path = tempdir())
 #' #Show the current path
 #' toponymOptions()
+#' }
 #' }
 #' @export
 toponymOptions <- function(toponym_path = NULL) {
