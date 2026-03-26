@@ -30,19 +30,20 @@
 #' @examples 
 #' \donttest{
 #' if(interactive()){
-#' #createPolygon("NA", region_ID = "NAM.7_1")
-#' #
+#' createPolygon("NA", region_ID = "NAM.7_1")
+#' 
 #' # a plot of the region Ohangwena in Namibia appears.
 #' # by point-and-click a polygon can be created
 #' # upon completion, a data frame with the coordinates of the polygon returns
-#'
+#' }
+#' 
 #' Ohangwena_polygon <- createPolygon(
 #' "NA", region_ID = "NAM.7_1", retrieve = TRUE
 #' )
 #' # no plot appears
 #' # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 #' # and can be used by other functions
-#' }
+#' 
 #' }
 #' @return A data frame with the coordinates of the polygon.
 createPolygon <- function(countries, ...) {

@@ -43,11 +43,12 @@ For further details on the point-and-click mechanism, please refer to the help p
 \examples{
 \donttest{
 if(interactive()){
-#createPolygon("NA", region_ID = "NAM.7_1")
-#
+createPolygon("NA", region_ID = "NAM.7_1")
+
 # a plot of the region Ohangwena in Namibia appears.
 # by point-and-click a polygon can be created
 # upon completion, a data frame with the coordinates of the polygon returns
+}
 
 Ohangwena_polygon <- createPolygon(
 "NA", region_ID = "NAM.7_1", retrieve = TRUE
@@ -55,6 +56,6 @@ Ohangwena_polygon <- createPolygon(
 # no plot appears
 # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 # and can be used by other functions
-}
+
 }
 }

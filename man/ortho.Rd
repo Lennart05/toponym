@@ -36,8 +36,8 @@ The data used is downloaded by \code{getData()} and is accessible on the \href{h
 ## Users can always set the path manually when a function is used
 ## For illustration purposes, the path is manually set each time in the following examples:
 \donttest{
-ortho(countries = "ID", toponym_path = tempdir())
+ortho(countries = "MC", toponym_path = tempdir())
 # returns a table with frequencies of all symbols
-# in the "alternatenames" column for the Indonesia data set
+# in the "alternatenames" column for the Monaco data set
 }
 }

@@ -10,7 +10,7 @@
 #' A full, alternative path can also be provided.
 #' 
 #' 
-#' If a path is provided, users are asked to confirm their choice. This function will write the new path into `toponym_options.rds`in the package directory; the path is saved across sessions. 
+#' If a path is provided, users are prompted to confirm their choice. This function will write the new path into `toponym_options.rds`in the package directory; the path is saved across sessions. 
 #' To locate `toponym_options.rds`, enter:
 #' 
 #' \code{system.file("extdata", package = "toponym")}
@@ -30,7 +30,9 @@
 #' @examples
 #' \dontrun{
 #' if(interactive()){
-#' #Set the path to the temporary directory
+#' # Set the path to the temporary directory
+#' # Users are prompted to confirm their choice.
+#' # Upon confirmation, toponym_options.rds will be edited in the package directory
 #' toponymOptions(toponym_path = tempdir())
 #' #Show the current path
 #' toponymOptions()
