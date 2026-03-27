@@ -30,7 +30,7 @@ Useful links:
 
 }
 \author{
-\strong{Maintainer}: Lennart Chevallier \email{mail@lchevallier.de} (\href{https://orcid.org/0009-0009-6800-1206}{ORCID}) [copyright holder]
+\strong{Maintainer}: Lennart Chevallier \email{mail@lchevallier.de} (\href{https://orcid.org/0009-0009-6800-1206}{ORCID})
 
 Authors:
 \itemize{
