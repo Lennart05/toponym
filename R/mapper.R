@@ -16,7 +16,7 @@
 #' @details
 #' This function's purpose is to allow users to provide data frames by the function \code{top()}, edited ones as well as own data frames.
 #'
-#' The data frame must have \emph{at least} two columns called `latitude` & `longtitude`.
+#' The data frame must have \emph{at least} two columns called `latitude` & `longitude`.
 #'
 #' Data frames output by the function \code{top()} consist of, among others, a `latitude`, `longitude`, `country code` and `group` column.
 #'

@@ -29,7 +29,7 @@ This function plots a user-specific data frame onto a map.
 \details{
 This function's purpose is to allow users to provide data frames by the function \code{top()}, edited ones as well as own data frames.
 
-The data frame must have \emph{at least} two columns called \code{latitude} & \code{longtitude}.
+The data frame must have \emph{at least} two columns called \code{latitude} & \code{longitude}.
 
 Data frames output by the function \code{top()} consist of, among others, a \code{latitude}, \code{longitude}, \verb{country code} and \code{group} column.
 
