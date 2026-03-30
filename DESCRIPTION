@@ -2,13 +2,20 @@ Package: toponym
 Title: Toponym Analysis & Visualization Tool
 Version: 1.0.0
 Authors@R: c(
-    person("Lennart", "Chevallier", email = "mail@lchevallier.de", role = c("aut", "cre")),
-    person("Søren", "Wichmann", email = "wichmannsoeren@gmail.com", role = "aut"))
-Author: Lennart Chevallier [aut, cre],
-        Søren Wichmann [aut]
-Description: A package to analyze and visualize toponym distributions.
+    person(given = "Lennart",
+           family = "Chevallier",
+           role = c("aut", "cre"),
+           email = "mail@lchevallier.de",
+           comment = c(ORCID = "0009-0009-6800-1206")),
+    person(given = "Søren",
+           family = "Wichmann",
+           role = "aut",
+           email = "wichmannsoeren@gmail.com",
+           comment = c(ORCID = "0000-0002-3257-3087")))
+Description: A tool to analyze and visualize toponym distributions. This package is intended as an interface to the GeoNames data. A regular expression filters data and in a second step a map is created displaying all locations in the filtered data set. The functions make data and plots available for further analysis—either within R or in a chosen directory. Users can select regions within countries, provide coordinates to define regions, or specify a region within the package to restrict the data selection to that region or compare regions with the remainder of countries. This package relies on the R packages `geodata` for map data and `ggplot2` for plotting purposes. For more details see Wichmann & Chevallier (2025) 
+  <doi:10.5195/names.2025.2616>.
 Depends:
-    R (>= 4.5)
+    R (>= 4.1)
 License: GPL (>= 3) + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
@@ -16,15 +23,15 @@ RoxygenNote: 7.3.3
 VignetteBuilder: knitr
 LazyData: true
 Imports: 
-    geodata (>= 0.6.6),
-    ggplot2 (>= 4.0.1),
-    grDevices (>= 4.5.1),
-    sf (>= 1.0.22),
-    spatstat.geom (>= 3.6.0),
-    spatstat.utils (>= 3.2.0),
-    stats (>= 4.5.1),
-    terra (>= 1.8.80),
-    utils (>= 4.5.1)
+    geodata,
+    ggplot2,
+    grDevices,
+    sf,
+    spatstat.geom,
+    spatstat.utils,
+    stats,
+    terra,
+    utils
 URL: https://github.com/Lennart05/toponym
 BugReports: https://github.com/Lennart05/toponym/issues
 Suggests: 
