@@ -1,13 +1,10 @@
 toponym
 ================
-March 12, 2026
+March 30, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
 <!-- badges: start -->
-
-[![R CMD
-Check](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/Lennart05/toponym/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 Welcome to the `toponym 1.0.0` GitHub page!
