@@ -15,7 +15,7 @@ Authors@R: c(
 Description: A tool to analyze and visualize toponym distributions. This package is intended as an interface to the GeoNames data. A regular expression filters data and in a second step a map is created displaying all locations in the filtered data set. The functions make data and plots available for further analysis—either within R or in a chosen directory. Users can select regions within countries, provide coordinates to define regions, or specify a region within the package to restrict the data selection to that region or compare regions with the remainder of countries. This package relies on the R packages `geodata` for map data and `ggplot2` for plotting purposes. For more details see Wichmann & Chevallier (2025) 
   <doi:10.5195/names.2025.2616>.
 Depends:
-    R (>= 3.2.0)
+    R (>= 4.1)
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
