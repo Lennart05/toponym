@@ -5,7 +5,6 @@
 #' @param mapdata data frame. A user-specific data frame with coordinates.
 #' @param ... Additional parameters:
 #' \itemize{
-#' \item\code{print} logical. By default \code{TRUE}. If \code{FALSE}, the plot will not be printed.
 #' \item\code{color} character string vector indicating, which color is assigned to each string. It is prioritized over colors based on the column `color`.
 #' \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 #' \item\code{title} character string. Text for the title of the plot.
@@ -58,7 +57,6 @@
 #'
 mapper <- function(mapdata, ...){
 opt <- list(...)
- if (is.null(opt$print)) opt$print <- TRUE
  if (is.null(opt$regions)) opt$regions <- 0
  if (is.null(opt$show_legend)) opt$show_legend <- TRUE
  if (!is.logical(opt$show_legend)) stop("Parameter `show_legend` must be logical.")
@@ -159,8 +157,6 @@ opt <- list(...)
   
   p <- map_simple(mapdata)
   
-  
- if(opt$print) print(p)
-  
+  return(p)
 }
 
