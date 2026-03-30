@@ -11,7 +11,6 @@ mapper(mapdata, ...)
 
 \item{...}{Additional parameters:
 \itemize{
-\item\code{print} logical. By default \code{TRUE}. If \code{FALSE}, the plot will not be printed.
 \item\code{color} character string vector indicating, which color is assigned to each string. It is prioritized over colors based on the column \code{color}.
 \item\code{regions} numeric. Specifies the level of administrative borders. By default \code{0} for displaying only country borders.
 \item\code{title} character string. Text for the title of the plot.
