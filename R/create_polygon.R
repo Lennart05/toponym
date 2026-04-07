@@ -55,15 +55,13 @@
 createPolygon <- function(countries, ...) {
   if(missing(countries)) stop("Parameter 'countries' must be defined.")
 
-  toponym_path <- checkPath(toponym_path = opt$toponym_path)
-
   ##### store additional parameters and set defaults
   opt <- list(...)
   if(is.null(opt$regions)) opt$regions <- 0
   if(is.null(opt$retrieve)) opt$retrieve <- FALSE
   if(!is.numeric(opt$regions)) stop("Parameter `regions` must be numeric.")
   if(!is.logical(opt$retrieve)) stop("Parameter `retrieve` must be logical.")
-
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
   if (any(countries == "world")) {
     countries <- "world"
     map <- world(path = toponym_path) # world map

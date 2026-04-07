@@ -13,7 +13,6 @@ This is the initial release accessible on CRAN.
 * mapper(): argument `plot_name` removed
 * top(): arguments `csv`and `tsv` removed
 * Added timeout for potential problems downloading toponym and map data
-* getData() returns the used path for downloaded data
 
 # toponym 2.0.0
 ================

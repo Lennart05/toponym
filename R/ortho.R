@@ -38,12 +38,13 @@ ortho <- function(countries, ...) {
   if(is.null(opt$column)) opt$column <- "alternatenames"
   if(length(opt$column)>1) stop("This function only permits one column request at a time.")
   if(!is.character(opt$column)) stop("The selected column must be a character string.")
-
+  
+  path <- checkPath(toponym_path = opt$toponym_path)
   # convert input into ISO2 codes and remove incorrect country names
-  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
 
   # download data if not already on the computer
-  path <- getData(countries, toponym_path = opt$toponym_path)
+  getData(countries, toponym_path = opt$toponym_path)
 
   # read relevant country files, gn stands for GeoNames
   gn <- readFiles(countries, feat.class = c("P", "S", "H", "T", "A", "L", "R", "V", "U"), toponym_path = path)

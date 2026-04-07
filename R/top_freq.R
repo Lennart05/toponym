@@ -49,18 +49,18 @@
 #' ## in the polygon which is inside the United Kingdom.
 #' }
 topFreq <- function(countries, len, limit, ...) {
-
-  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  opt <- list(...)
+  path <- checkPath(toponym_path = opt$toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
 
   if(missing(len)) stop("Parameter 'len' must be defined.")
   if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")
 
   ##### store additional parameters and set defaults
-  opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
 
-  path <- getData(countries, toponym_path = opt$toponym_path)
+  getData(countries, toponym_path = path)
   gn <- readFiles(countries, opt$feat.class, toponym_path = path)
 
   if (!is.null(opt$polygon)) {

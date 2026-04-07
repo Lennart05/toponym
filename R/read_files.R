@@ -10,8 +10,9 @@
 #' @param toponym_path character string. Path name for downloaded data.
 #' @keywords internal
 #' @return A data frame with GeoNames data.
-readFiles <- function(countries, feat.class = "P", toponym_path) {
-  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+readFiles <- function(countries, feat.class = "P", toponym_path = NULL) {
+  toponym_path <- checkPath(toponym_path = toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = toponym_path), function(x) x[, 1]))
   filename <- list()
   for (i in 1:length(countries)) { # store filename for data downloaded by getData()
       filename[[i]] <- paste0(toponym_path, "/", countries, ".txt")[i]

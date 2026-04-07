@@ -32,21 +32,18 @@
 #' 
 #' \donttest{
 #' vlad_data <- top("^Vlad", "RU", toponym_path = tempdir())
-#' 
 #' # returns a data frame with all populated places
 #' # in Russia starting with "Vlad" (case sensitive)
 #' }
 #'
 #' \donttest{
 #' itz_ice_data <- top(c("itz$", "ice$"), c("DE", "PL"), toponym_path = tempdir())
-#' 
 #' # returns a data frame with all populated places
 #' # in Germany and Poland ending in either "itz" or "ice"
 #' }
 #' 
 #' \donttest{
 #' maw_data <- top("Maw$", "MM", column = "alternatenames", toponym_path = tempdir())
-#' 
 #' # returns a data frame with all populated places
 #' # in Myanmar listed in the "alternatenames" column
 #' # and ending in "Maw" (case sensitive)
@@ -61,7 +58,8 @@ top <- function(strings, countries, ...) {
   if (is.null(opt$column)) opt$column <- "name"
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
-  path <- getData(countries, toponym_path = opt$toponym_path) # gets data
+  path <- checkPath(toponym_path = opt$toponym_path)
+  getData(countries, toponym_path = path) # gets data
   
   
   gn <- readFiles(countries, feat.class = opt$feat.class, toponym_path = path) #gn stands for GeoNames

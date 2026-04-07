@@ -8,7 +8,7 @@
 #' @return A plot.
 map_simple <- function(mapdata) {
 
-  toponym_path <- mapdat$toponym_path
+  toponym_path <- mapdata$toponym_path
   md <- as.data.frame(cbind(as.numeric(mapdata$longitude),
                             as.numeric(mapdata$latitude))) # creates df
   colnames(md) <- c("longitude", "latitude")

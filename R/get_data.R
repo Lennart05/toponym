@@ -29,11 +29,11 @@
 #' getData(countries = c("DK", "DE"), overwrite = TRUE, toponym_path = tempdir())
 #' ## downloads, extracts, and overwrites data for DK and DE in the temporary directory
 #' }
-#' @return Character string of the used path for downloaded data.
+#' @return No return value.
 #' @export
 getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
   toponym_path <- checkPath(toponym_path = toponym_path)
-	countries <- unlist(lapply(country(query = countries), function(x) x[, 1])) # convert if necessary designations to ISO2
+	countries <- unlist(lapply(country(query = countries, toponym_path = toponym_path), function(x) x[, 1])) # convert if necessary designations to ISO2
 
   file_txt <- paste0(countries, ".txt")
   file_txt_dir <- paste0(toponym_path, "/", file_txt)
@@ -58,8 +58,4 @@ getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
           }else message(paste(file_txt[i], "overwritten in:", toponym_path))
         }
   }
-  
-  return(invisible(toponym_path))
-  
-  
 }

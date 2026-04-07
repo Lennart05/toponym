@@ -4,7 +4,7 @@
 \alias{readFiles}
 \title{Reads GeoNames data}
 \usage{
-readFiles(countries, feat.class = "P", toponym_path)
+readFiles(countries, feat.class = "P", toponym_path = NULL)
 }
 \arguments{
 \item{countries}{character string vector with country designations (names or ISO-codes).}

@@ -65,25 +65,25 @@
 #'   polygon = toponym::flanders_polygon,
 #'   toponym_path = tempdir()
 #' )
-#' 
 #' ## returns a data frame of the top 50 three-character-long endings
 #' ## in Belgium and Netherlands viewed as a unit if more than 80% of them belong to the polygon
 #' ## corresponding to Flanders.
 #' }
 topComp <- function(countries, len, rat, polygon, ...) {
-  countries <- unlist(lapply(country(query = countries), function(x) x[, 1]))
+  opt <- list(...)
+  path <- checkPath(toponym_path = opt$toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
   
   if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
   poly_owin <- poly(polygon)
 
    ##### store additional parameters and set defaults
-  opt <- list(...)
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
   if(is.null(opt$freq.type)) opt$freq.type <- "abs"
   
-  path <- getData(countries, toponym_path = opt$toponym_path) # gets data
+  getData(countries, toponym_path = opt$toponym_path) # gets data
   gn <- readFiles(countries, opt$feat.class, toponym_path = path)
   if (is.null(opt$limit)) {
     message("Parameter `limit` was not specified. All toponyms will be tested. This may take a while.")

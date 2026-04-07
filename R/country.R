@@ -20,7 +20,6 @@
 #' Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
 #' If \code{regions} is set to value higher than \code{0}, map data by the \code{geodata} is required to be downloaded.
 #' With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See `help(toponymOptions)`.
-#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #' @return Returns country designations selected from a data frame. If regions is set to \code{1}, returns region designations in a matrix selected from the \code{geodata} map data.
 #' @export
 #'
@@ -46,7 +45,7 @@ country <- function(query = NULL, ...) {
   if(!is.numeric(opt$regions)) stop("`regions` must be numeric.")
   if(opt$regions > 1) stop("`regions` values higher than 1 cannot be satisfied.")
 
-  toponym_path <- checkPath(toponym_path = opt$toponym_path)
+  if(opt$regions > 0) toponym_path <- checkPath(toponym_path = opt$toponym_path)
   if(!is.character(query)) stop("The query must contain a character string.")
   
   query <- query[nzchar(query)]      #removes input which is zero character long

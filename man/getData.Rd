@@ -14,7 +14,7 @@ getData(countries, overwrite = FALSE, toponym_path = NULL)
 \item{toponym_path}{character string. Path name for downloaded data. If not specified, this function will call \code{toponymOptions()} and try use the persistent path.}
 }
 \value{
-Character string of the used path for downloaded data.
+No return value.
 }
 \description{
 This function downloads toponym data for the package.
