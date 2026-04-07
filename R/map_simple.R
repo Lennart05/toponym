@@ -3,22 +3,22 @@
 #' This function generates a map plotting all locations in a given data frame. This function uses map data from the \code{geodata} package.
 #' @details
 #' This is an internal function which is only used by \code{mapper()}.
-#' @param mapdata list. A list passed down by \code{mapper()}. It contains at least longitudinal and latitudinal data.
+#' @param mapdata list. A list passed down by \code{mapper()}. It contains at least longitudinal and latitudinal data and the path for downloaded data.
 #' @keywords internal
 #' @return A plot.
 map_simple <- function(mapdata) {
 
+  toponym_path <- mapdat$toponym_path
   md <- as.data.frame(cbind(as.numeric(mapdata$longitude),
                             as.numeric(mapdata$latitude))) # creates df
   colnames(md) <- c("longitude", "latitude")
   
   
   # download map data
-  map_path <- paste0(system.file(package = "geodata"), "/extdata")
   if (mapdata$regions == 0) {
-    map <- world(path = map_path) # gets world map from pkg "geodata"
+    map <- world(path = toponym_path) # gets world map from pkg "geodata"
   } else {
-    map <- gadm(country = mapdata$cc, level = mapdata$regions, path = map_path) # gets map of specified countries with domestic borders from pkg "geodata"
+    map <- gadm(country = mapdata$cc, level = mapdata$regions, path = toponym_path) # gets map of specified countries with domestic borders from pkg "geodata"
     # if(!missing(region_name)){map <- map[map$NAME_1 %in% region_name,]}
     if(is.null(map)) stop(paste("Map data could not be retrieved.", if(mapdata$regions >= 1) "`regions` parameter may be set too high"))
   }

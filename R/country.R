@@ -6,6 +6,7 @@
 #' @param ... Additional parameter:
 #' \itemize{
 #' \item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @details
 #' If you enter an individual country designation, you receive the three different designations (IS02, ISO3, name).
@@ -17,6 +18,9 @@
 #' If you enter "country table", you receive a data frame with all three designations for every country.
 #'
 #' Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
+#' If \code{regions} is set to value higher than \code{0}, map data by the \code{geodata} is required to be downloaded.
+#' With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See `help(toponymOptions)`.
+#' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #' @return Returns country designations selected from a data frame. If regions is set to \code{1}, returns region designations in a matrix selected from the \code{geodata} map data.
 #' @export
 #'
@@ -26,8 +30,12 @@
 #'
 #' country(query = "Thailand")
 #' ## returns a list with a data frame with ISO2 code, ISO3 code and the full name of Thailand
+#' 
+#' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
+#' ## Users can always set the path manually when a function is used
+#' ## For illustration purposes, the path is manually set in the following example:
 #' \donttest{
-#' country(query = "Thailand", regions = 1)
+#' country(query = "Thailand", regions = 1, toponym_path = tempdir())
 #' ## returns a list with a matrix with all region designations of Thailand
 #' }
 country <- function(query = NULL, ...) {
@@ -36,7 +44,7 @@ country <- function(query = NULL, ...) {
   if(!is.numeric(opt$regions)) stop("`regions` must be numeric.")
   if(opt$regions > 1) stop("`regions` values higher than 1 cannot be satisfied.")
 
-
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
   if(!is.character(query)) stop("The query must contain a character string.")
   
   query <- query[nzchar(query)]      #removes input which is zero character long
@@ -71,12 +79,11 @@ country <- function(query = NULL, ...) {
     } # check for NAs
   } else if(opt$regions == 1) { # if regions is 1
     if(any(query %in% spec_col)) stop("If parameter 'regions' is set to 1, the query must contain a country designation.")
-    map_path <- paste0(system.file(package = "geodata"), "/extdata")
 
     error <- paste0("The query '", query[i], "' is an invalid country designation")
 
     output[[i]] <- tryCatch(expr = {
-     gadm(country = query[i], path = map_path)
+     gadm(country = query[i], path = toponym_path)
     },
     error = function(e){
       warning(error)

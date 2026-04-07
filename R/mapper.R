@@ -12,6 +12,7 @@
 #' \item\code{show_legend} logical. If \code{TRUE}, a legend with all unique strings in  the column `group` will be displayed, provided there is a column `group`. If \code{FALSE}, no legend will be displayed. By default, \code{TRUE}.
 #' \item\code{frame} data frame. Sets the frame of the map.
 #' \item\code{plot_size} numeric. Specifies the value by which the size of the map is scaled.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @details
 #' This function's purpose is to allow users to provide data frames by the function \code{top()}, edited ones as well as own data frames.
@@ -32,12 +33,17 @@
 #' 
 #' Parameter \code{plot_size} accepts numeric values of greater than -1. The plot's size is scaled by the given value. Thus, a value of 0 extends the size by 0%. A value of .1 extends the size by 10%. A value of -.1 reduces the size by 10% and so on.
 #' 
+#' Parameter \code{toponym_path} accepts `"pkgdir"` for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See `help(toponymOptions)`.
+#' 
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
 #' ## For illustration purposes, the path is manually set each time in the following examples:
 #' \donttest{
-#' mapper(top("itz$", "DE", toponym_path = tempdir()))
+#' mapper(
+#' top("itz$", "DE", toponym_path = tempdir()),
+#' toponym_path = tempdir())
 #' # returns a plot with all populated places
 #' # in Germany ending in "itz"
 #' 
@@ -45,13 +51,15 @@
 #' UG_data <- top(c("et$", "wa$"), "UG", toponym_path = tempdir())
 #' UG_data$color <- "blue"
 #' UG_data[UG_data$group == "wa", "color"] <- "grey"
-#' mapper(UG_data, legend_title = "two strings", title = "Some locations in grey and blue")
+#' mapper(UG_data,
+#'       legend_title = "two strings",
+#'       title = "Some locations in grey and blue",
+#'       toponym_path = tempdir())
 #' # returns a plot with all populated places
 #' # in Uganda ending in "wa" (grey) and "et" (blue)
 #' # the plot is titled "Some locations in grey and blue"
 #' # the legend title is "two strings"
 #' }
-#' 
 #' @return A plot.
 #' @export
 #'
@@ -78,6 +86,7 @@ opt <- list(...)
  if (!identical(G, C)) stop("The columns `group` and `color` contain a mismatch.")
  }
   
+ toponym_path <- checkPath(toponym_path = opt$toponym_path)
   
   mapper_color <- is.null(mapdata$color) # checks if mapper data contains color specification. TRUE if there is no color in map data
   if(all(!is.null(opt$color), mapper_color, is.null(mapdata$group))) { # if the `color` parameter is specified AND if there is neither a color nor a group column in mapdata
@@ -152,7 +161,8 @@ opt <- list(...)
                   show_legend = opt$show_legend,
                   mapper_group = mapper_group,
                   mapper_color = mapper_color,
-                  regions = opt$regions
+                  regions = opt$regions,
+                  toponym_path = toponym_path
                   )
   
   p <- map_simple(mapdata)

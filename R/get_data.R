@@ -26,15 +26,7 @@
 #' @return Character string of the used path for downloaded data.
 #' @export
 getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
-  #toponym is NULL, read .Rds for path
-  if(is.null(toponym_path)){
-  toponym_path <- toponymOptions()
-  }else{
-  #use pkg dir if requested
-  if(toponym_path == "pkgdir") toponym_path <- system.file("extdata", package = "toponym")
-  #check if path is a valid dir
-  if(!dir.exists(toponym_path)) stop("\nNo valid path for downloaded data specified.\nWrite toponymOptions(toponym_path = \"pkgdir\") to set the path to the package directory or provide a full, alternative path.")
-  }
+  toponym_path <- checkPath(toponym_path = toponym_path)
   
 	countries <- unlist(lapply(country(query = countries), function(x) x[, 1])) # convert if necessary designations to ISO2
 
@@ -44,8 +36,10 @@ getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
   file_zip_dir <- paste0(toponym_path, "/", file_zip)
   
   url <- paste0("https://download.geonames.org/export/dump/", countries, ".zip?raw=TRUE") # download address on GeoNames
-
-
+  
+  old_timeout <- getOption("timeout") # store timeout setting for download
+  on.exit(options(timeout = old_timeout)) # restore timeout setting on exit
+  options(timeout = max(6000, getOption("timeout"))) # set timeout to 6000 if it is lower
   for (i in 1:length(countries)) {
      #package directory
         if (any(!file.exists(file_txt_dir[i]), overwrite)) {#download if file is missing or overwrite = TRUE

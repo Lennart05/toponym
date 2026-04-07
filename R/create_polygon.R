@@ -8,6 +8,7 @@
 #' \item\code{region_ID} character string vector with region IDs.
 #' \item\code{region_name} character string vector with region names.
 #' \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
+#' \item\code{toponym_path} character string. Path name for downloaded data.
 #' }
 #' @export
 #' @details
@@ -16,6 +17,9 @@
 #' \code{region_ID} and \code{region_name} accepts region designations for the selected countries, which can be retrieved by \code{country()}.
 #' The function prioritizes any \code{region_ID} and ignores \code{region_name} if users provide both.
 #' The matrix from \code{country()} listing all region designations may be incomplete as the \code{geodata} map data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
+#'
+#' Parameter \code{toponym_path} accepts `"pkgdir"` for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See `help(toponymOptions)`.
 #'
 #' In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 #'
@@ -28,18 +32,16 @@
 #' For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 #'
 #' @examples 
-#' \donttest{
 #' if(interactive()){
-#' createPolygon("NA", region_ID = "NAM.7_1")
+#' createPolygon("NA", region_ID = "NAM.7_1", toponym_path = tempdir())
 #' 
 #' # a plot of the region Ohangwena in Namibia appears.
 #' # by point-and-click a polygon can be created
 #' # upon completion, a data frame with the coordinates of the polygon returns
 #' }
-#' 
+#' \donttest{
 #' Ohangwena_polygon <- createPolygon(
-#' "NA", region_ID = "NAM.7_1", retrieve = TRUE
-#' )
+#' "NA", region_ID = "NAM.7_1", retrieve = TRUE, toponym_path = tempdir())
 #' # no plot appears
 #' # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 #' # and can be used by other functions
@@ -49,7 +51,7 @@
 createPolygon <- function(countries, ...) {
   if(missing(countries)) stop("Parameter 'countries' must be defined.")
 
-  map_path <- paste0(system.file(package = "geodata"), "/extdata")
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
 
   ##### store additional parameters and set defaults
   opt <- list(...)
@@ -60,9 +62,9 @@ createPolygon <- function(countries, ...) {
 
   if (any(countries == "world")) {
     countries <- "world"
-    map <- world(path = map_path) # world map
+    map <- world(path = toponym_path) # world map
   } else if (all(is.null(opt$region_ID), is.null(opt$region_name))) { # if no region provided
-    map <- gadm(country = countries, level = opt$regions, path = map_path) # country map
+    map <- gadm(country = countries, level = opt$regions, path = toponym_path) # country map
 
 
 
@@ -70,7 +72,7 @@ createPolygon <- function(countries, ...) {
   } else if(!all(is.null(opt$region_ID), is.null(opt$region_name))) { # if region designation is provided
     if (opt$regions == 0) opt$regions <- 1 # admin level = regions needs to be at least 1 if specific regions are to be displayed
 
-    map <- gadm(country = countries, level = opt$regions, path = map_path)  ## country map first
+    map <- gadm(country = countries, level = opt$regions, path = toponym_path)  ## country map first
     if(is.null(map)) stop(paste("Map data could not be retrieved.", if(opt$regions >= 1) "Parameter 'regions' parameter may be set too high"))
 
     if(!is.null(opt$region_ID)){ # FIRST region ID
