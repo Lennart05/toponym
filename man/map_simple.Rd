@@ -7,7 +7,7 @@
 map_simple(mapdata)
 }
 \arguments{
-\item{mapdata}{list. A list passed down by \code{mapper()}. It contains at least longitudinal and latitudinal data.}
+\item{mapdata}{list. A list passed down by \code{mapper()}. It contains at least longitudinal and latitudinal data and the path for downloaded data.}
 }
 \value{
 A plot.

@@ -12,6 +12,7 @@ country(query = NULL, ...)
 \item{...}{Additional parameter:
 \itemize{
 \item\code{regions} numeric. If \code{1}, outputs the region designations of the respective countries. By default, it is \code{0}.
+\item\code{toponym_path} character string. Path name for downloaded data.
 }}
 }
 \value{
@@ -30,6 +31,9 @@ If you enter "names", you receive a vector of all country names.
 If you enter "country table", you receive a data frame with all three designations for every country.
 
 Region designations are retrieved from the \code{geodata} package map data. The list of region designations may be incomplete. For mapping purposes, \code{geodata} is used throughout this package.
+If \code{regions} is set to value higher than \code{0}, map data by the \code{geodata} is required to be downloaded.
+With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See \code{help(toponymOptions)}.
+The data used is downloaded by \code{getData()} and is accessible on the \href{https://download.geonames.org/export/dump/}{GeoNames download server}.
 }
 \examples{
 country(query = "ISO3")
@@ -37,8 +41,12 @@ country(query = "ISO3")
 
 country(query = "Thailand")
 ## returns a list with a data frame with ISO2 code, ISO3 code and the full name of Thailand
+
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes, the path is manually set in the following example:
 \donttest{
-country(query = "Thailand", regions = 1)
+country(query = "Thailand", regions = 1, toponym_path = tempdir())
 ## returns a list with a matrix with all region designations of Thailand
 }
 }

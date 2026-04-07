@@ -15,6 +15,7 @@ createPolygon(countries, ...)
 \item\code{region_ID} character string vector with region IDs.
 \item\code{region_name} character string vector with region names.
 \item\code{retrieve} logical. If \code{TRUE}, the coordinates of the region or country are returned. No map will be drawn.
+\item\code{toponym_path} character string. Path name for downloaded data.
 }}
 }
 \value{
@@ -30,6 +31,9 @@ Parameter \code{countries} accepts all designations found in \code{country(query
 The function prioritizes any \code{region_ID} and ignores \code{region_name} if users provide both.
 The matrix from \code{country()} listing all region designations may be incomplete as the \code{geodata} map data is incomplete in this regard. For mapping purposes, \code{geodata} is used throughout this package.
 
+Parameter \code{toponym_path} accepts \code{"pkgdir"} for the package directory or a full, alternative path.
+With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See \code{help(toponymOptions)}.
+
 In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop.
 
 In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot.
@@ -41,18 +45,16 @@ This function uses the function \code{spatstatLocator} provided by the \code{spa
 For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 }
 \examples{
-\donttest{
 if(interactive()){
-createPolygon("NA", region_ID = "NAM.7_1")
+createPolygon("NA", region_ID = "NAM.7_1", toponym_path = tempdir())
 
 # a plot of the region Ohangwena in Namibia appears.
 # by point-and-click a polygon can be created
 # upon completion, a data frame with the coordinates of the polygon returns
 }
-
+\donttest{
 Ohangwena_polygon <- createPolygon(
-"NA", region_ID = "NAM.7_1", retrieve = TRUE
-)
+"NA", region_ID = "NAM.7_1", retrieve = TRUE, toponym_path = tempdir())
 # no plot appears
 # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 # and can be used by other functions

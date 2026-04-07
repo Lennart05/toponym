@@ -13,7 +13,7 @@ toponymOptions(toponym_path = NULL)
 A character string indicating the current path for downloaded data.
 }
 \description{
-This function allows users to set the download path for the \code{toponym} package.
+This function allows users to set the download path for the \code{toponym} package. Downloaded data includes toponym data and map data.
 Most functions require external data which will be downloaded and stored for later use. This is described in the respective functions.
 For this reason, after installation, users will be asked to specify the path for downloaded data.
 Users can set the path to the package directory with this command:
@@ -33,11 +33,10 @@ To check the path that is currently set, enter:
 }
 \details{
 Parameter \code{toponym_path} accepts either the character string \code{"pkgdir"} or full, alternative paths.
-\code{pkgdir} is interpreted as the extdata folder in the \code{toponym} package directory, i.e.:
+\code{"pkgdir"} is interpreted as the extdata folder in the \code{toponym} package directory, i.e.:
 \code{system.file("extdata", package = "toponym")}
 }
 \examples{
-\dontrun{
 if(interactive()){
 # Set the path to the temporary directory
 # Users are prompted to confirm their choice.
@@ -45,6 +44,5 @@ if(interactive()){
 toponymOptions(toponym_path = tempdir())
 #Show the current path
 toponymOptions()
-}
 }
 }
