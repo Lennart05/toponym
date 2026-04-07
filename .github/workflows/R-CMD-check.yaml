@@ -35,9 +35,6 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
-        with:
-          upload-snapshots: true
-          args: 'c("--no-manual", "--as-cran")'
 
       - uses: r-lib/actions/setup-pandoc@v2
 
@@ -53,3 +50,6 @@ jobs:
           needs: check
 
       - uses: r-lib/actions/check-r-package@v2
+          with:
+          upload-snapshots: true
+          args: 'c("--no-manual", "--as-cran")'
