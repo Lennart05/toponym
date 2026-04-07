@@ -1,6 +1,6 @@
 toponym
 ================
-March 30, 2026
+April 7, 2026
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
 
@@ -150,7 +150,7 @@ If `regions` is set to `1`, the function returns all region
 designations:
 
 ``` r
-country("Mali", regions = 1)
+country("Mali", regions = 1, toponym_path = tempdir())
 #> [[1]]
 #>       name        ID       
 #>  [1,] "Bamako"    "MLI.1_1"
@@ -164,6 +164,10 @@ country("Mali", regions = 1)
 #>  [9,] "Timbuktu"  "MLI.9_1"
 # returns all region names and IDs of Mali available in the data
 ```
+
+Map data needs to be downloaded in order to retrieve region
+designations. Thus, a path needs to be provided if parameter `regions`
+is set to a value higher than 0.
 
 ## Frequent toponym substrings
 
@@ -211,7 +215,7 @@ frame. The `createPolygon()` function helps users to define their own
 polygon by point-and-click or to retrieve map data.
 
 ``` r
-argentina_polygon <- createPolygon(countries = "AR", regions = 1)
+argentina_polygon <- createPolygon(countries = "AR", regions = 1, toponym_path = tempdir())
 ```
 
 In this example, a map of Argentina `AR` with highest-level

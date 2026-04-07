@@ -1,6 +1,6 @@
 ---
 title: "toponym"
-date: March 30, 2026
+date: April 7, 2026
 output:
   github_document
   
@@ -108,10 +108,11 @@ country(query = "ARG")
 If `regions` is set to `1`, the function returns all region designations:
 
 ```{r}
-country("Mali", regions = 1)
+country("Mali", regions = 1, toponym_path = tempdir())
 # returns all region names and IDs of Mali available in the data
 ```
 
+Map data needs to be downloaded in order to retrieve region designations. Thus, a path needs to be provided if parameter `regions` is set to a value higher than 0.
 
 
 ## Frequent toponym substrings
@@ -139,7 +140,7 @@ topFreq(countries = "GB",
 
 Coordinates which delimit a polygon are input in the form of a data frame. The `createPolygon()` function helps users to define their own polygon by point-and-click or to retrieve map data.
 ```{r eval=FALSE}
-argentina_polygon <- createPolygon(countries = "AR", regions = 1)
+argentina_polygon <- createPolygon(countries = "AR", regions = 1, toponym_path = tempdir())
 ```
 In this example, a map of Argentina `AR` with highest-level administrative borders `regions = 1` will appear as a plot. Now users can click to set points which define a polygon. The last point should not repeat the first point. In RGui, users exit the point selection by middle-clicking or right-clicking and then pressing stop. In RStudio, users exit the point selection by pressing ESC or Finish in the top right corner of the plot. Once finished, a data frame with longitudinal and latitudinal coordinates called `argentina_polygon` is created. 
 
