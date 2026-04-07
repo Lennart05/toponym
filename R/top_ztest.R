@@ -36,16 +36,16 @@
 topZtest <- function(strings, countries, polygon, ...) {
   opt <- list(...)
   if(length(strings)>1) stop("This function only permits one string at a time.")
-  path <- checkPath(toponym_path = opt$toponym_path)
-  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = toponym_path), function(x) x[, 1]))
   
   if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
 
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
 
-  getData(countries, toponym_path = path) # gets data
-  gn <- readFiles(countries, opt$feat.class, toponym_path = path) # stands for GeoNames
+  getData(countries, toponym_path = toponym_path) # gets data
+  gn <- readFiles(countries, opt$feat.class, toponym_path = toponym_path) # stands for GeoNames
 
 
   poly_owin <- poly(polygon)

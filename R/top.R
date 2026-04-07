@@ -58,11 +58,11 @@ top <- function(strings, countries, ...) {
   if (is.null(opt$column)) opt$column <- "name"
   if (!is.character(opt$column)) stop("Parameter `column` must be a character string vector.")
   if (!any(c("name", "asciiname", "alternatenames") %in% opt$column)) stop("Parameter `column` only accepts `name`, `asciiname` or `alternatenames`")
-  path <- checkPath(toponym_path = opt$toponym_path)
-  getData(countries, toponym_path = path) # gets data
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
+  getData(countries, toponym_path = toponym_path) # gets data
   
   
-  gn <- readFiles(countries, feat.class = opt$feat.class, toponym_path = path) #gn stands for GeoNames
+  gn <- readFiles(countries, feat.class = opt$feat.class, toponym_path = toponym_path) #gn stands for GeoNames
   
   
   # removes coordinates outside of the polygon

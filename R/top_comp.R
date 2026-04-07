@@ -71,8 +71,8 @@
 #' }
 topComp <- function(countries, len, rat, polygon, ...) {
   opt <- list(...)
-  path <- checkPath(toponym_path = opt$toponym_path)
-  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = toponym_path), function(x) x[, 1]))
   
   if(!all(c("longitude", "latitude") %in% colnames(polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
 
@@ -84,13 +84,13 @@ topComp <- function(countries, len, rat, polygon, ...) {
   if(is.null(opt$freq.type)) opt$freq.type <- "abs"
   
   getData(countries, toponym_path = opt$toponym_path) # gets data
-  gn <- readFiles(countries, opt$feat.class, toponym_path = path)
+  gn <- readFiles(countries, opt$feat.class, toponym_path = toponym_path)
   if (is.null(opt$limit)) {
     message("Parameter `limit` was not specified. All toponyms will be tested. This may take a while.")
-    toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type, toponym_path = path)
+    toponyms_o <- topFreq(countries = countries, len = len, limit = "fnc", feat.class = opt$feat.class, type = opt$type, toponym_path = toponym_path)
 
   } else{
-    toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type, toponym_path = path)
+    toponyms_o <- topFreq(countries = countries, len = len, limit = opt$limit, feat.class = opt$feat.class, type = opt$type, toponym_path = toponym_path)
   }
   toponyms_o <- toponyms_o[!is.na(toponyms_o)]
   toponyms_o <- names(toponyms_o)

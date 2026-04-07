@@ -50,8 +50,8 @@
 #' }
 topFreq <- function(countries, len, limit, ...) {
   opt <- list(...)
-  path <- checkPath(toponym_path = opt$toponym_path)
-  countries <- unlist(lapply(country(query = countries, toponym_path = path), function(x) x[, 1]))
+  toponym_path <- checkPath(toponym_path = opt$toponym_path)
+  countries <- unlist(lapply(country(query = countries, toponym_path = toponym_path), function(x) x[, 1]))
 
   if(missing(len)) stop("Parameter 'len' must be defined.")
   if(missing(limit) && limit != "fnc") stop("Parameter 'limit' must be defined.")
@@ -60,8 +60,8 @@ topFreq <- function(countries, len, limit, ...) {
   if(is.null(opt$feat.class)) opt$feat.class <- "P"
   if(is.null(opt$type)) opt$type <- "$"
 
-  getData(countries, toponym_path = path)
-  gn <- readFiles(countries, opt$feat.class, toponym_path = path)
+  getData(countries, toponym_path = toponym_path)
+  gn <- readFiles(countries, opt$feat.class, toponym_path = toponym_path)
 
   if (!is.null(opt$polygon)) {
   if(!all(c("longitude", "latitude") %in% colnames(opt$polygon))) stop("Parameter `polygon` must consist of two columns named `longitude` and `latitude`.")
