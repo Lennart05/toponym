@@ -6,8 +6,8 @@
 #' This function lets users apply a Z-test (two proportion test), comparing the frequency of a given string in a polygon to the frequency in the rest of the country.
 #' Parameter \code{countries} accepts all designations found in \code{country(query = "country table")}.
 #' Polygons passed through the \code{polygon} parameter need to intersect or be within a country specified by the \code{countries} parameter.
-#' Parameter \code{toponym_path} accepts "pkgdir" for the package directory or a full, alternative path.
-#' With \code{toponymOptions()}, users can specify the path for toponym data downloaded by \code{getData()} across sessions. See `help(toponymOptions)`.
+#' Parameter \code{toponym_path} accepts `"pkgdir"` for the package directory or a full, alternative path.
+#' With \code{toponymOptions()}, users can specify the path for toponym and map data downloaded by this package across sessions. See `help(toponymOptions)`.
 #' The data used is downloaded by \code{getData()} and is accessible on the [GeoNames download server](https://download.geonames.org/export/dump/).
 #'
 #' @param strings character string with a regular expression to be tested.
