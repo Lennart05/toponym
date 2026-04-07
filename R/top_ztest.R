@@ -22,8 +22,10 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes, the path is manually set in the following example:
-#'\donttest{
+#' ## For illustration purposes,
+#' ## 1. the path is manually set each time
+#' ## 2. and wrapped in donttest because data will be downloaded in the following example:
+#' \donttest{
 #' topZtest("thorpe$",
 #'          "GB",
 #'          toponym::danelaw_polygon,

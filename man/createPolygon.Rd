@@ -45,19 +45,23 @@ This function uses the function \code{spatstatLocator} provided by the \code{spa
 For further details on the point-and-click mechanism, please refer to the help page for \code{spatstatLocator}.
 }
 \examples{
-if(interactive()){
+## We recommend setting a persistent path for downloaded data by using toponymOptions()
+## Users can always set the path manually when a function is used
+## For illustration purposes,
+## 1. the path is manually set each time
+## 2. and wrapped in donttest because data will be downloaded in the following examples:
+\donttest{
 createPolygon("NA", region_ID = "NAM.7_1", toponym_path = tempdir())
-
 # a plot of the region Ohangwena in Namibia appears.
 # by point-and-click a polygon can be created
 # upon completion, a data frame with the coordinates of the polygon returns
 }
+
 \donttest{
 Ohangwena_polygon <- createPolygon(
 "NA", region_ID = "NAM.7_1", retrieve = TRUE, toponym_path = tempdir())
 # no plot appears
 # the coordinates of the whole region are stored in the object named `Ohangwena_polygon`
 # and can be used by other functions
-
 }
 }

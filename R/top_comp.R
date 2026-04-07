@@ -28,7 +28,9 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' ## For illustration purposes,
+#' ## 1. the path is manually set each time
+#' ## 2. and wrapped in donttest because data will be downloaded in the following examples:
 #' \donttest{
 #' topComp("GB",
 #'   limit = 100,
@@ -40,8 +42,9 @@
 #' ## returns a data frame of the top 100 four-character-long endings in the United Kingdom
 #' ## if more than 70% of them belong to the polygon
 #' ## corresponding to the Danelaw area.
+#' }
 #'
-#'
+#' \donttest{
 #' topComp("GB",
 #'   limit = 100,
 #'   len = 3,
@@ -52,8 +55,9 @@
 #' )
 #' ## returns a data frame of the top 100 three-character-long endings in the United Kingdom
 #' ## if they have greater relative frequencies within Danelaw than outside of Danelaw.
-#'
-#'
+#' }
+#' 
+#' \donttest{
 #' topComp(c("BE", "NL"),
 #'   limit = 50,
 #'   len = 3,

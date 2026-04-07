@@ -21,23 +21,30 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes, the path is manually set each time in the following examples:
-#' 
+#' ## For illustration purposes,
+#' ## 1. the path is manually set each time
+#' ## 2. and wrapped in donttest because data will be downloaded in the following examples:
 #' \donttest{
 #' itz_data <- top("itz$", "DE", toponym_path = tempdir())
 #' # returns a data frame with all populated places
 #' # in Germany ending in "itz"
+#' }
 #' 
+#' \donttest{
 #' vlad_data <- top("^Vlad", "RU", toponym_path = tempdir())
 #' 
 #' # returns a data frame with all populated places
 #' # in Russia starting with "Vlad" (case sensitive)
+#' }
 #'
+#' \donttest{
 #' itz_ice_data <- top(c("itz$", "ice$"), c("DE", "PL"), toponym_path = tempdir())
 #' 
 #' # returns a data frame with all populated places
 #' # in Germany and Poland ending in either "itz" or "ice"
+#' }
 #' 
+#' \donttest{
 #' maw_data <- top("Maw$", "MM", column = "alternatenames", toponym_path = tempdir())
 #' 
 #' # returns a data frame with all populated places

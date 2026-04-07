@@ -52,15 +52,17 @@ With \code{toponymOptions()}, users can specify the path for toponym and map dat
 \examples{
 ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 ## Users can always set the path manually when a function is used
-## For illustration purposes, the path is manually set each time in the following examples:
+## For illustration purposes,
+## 1. the path is manually set each time
+## 2. and wrapped in donttest because data will be downloaded in the following examples:
 \donttest{
 mapper(
 top("itz$", "DE", toponym_path = tempdir()),
 toponym_path = tempdir())
 # returns a plot with all populated places
 # in Germany ending in "itz"
-
-
+}
+\donttest{
 UG_data <- top(c("et$", "wa$"), "UG", toponym_path = tempdir())
 UG_data$color <- "blue"
 UG_data[UG_data$group == "wa", "color"] <- "grey"

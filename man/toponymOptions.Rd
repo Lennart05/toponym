@@ -42,7 +42,7 @@ if(interactive()){
 # Users are prompted to confirm their choice.
 # Upon confirmation, toponym_options.rds will be edited in the package directory
 toponymOptions(toponym_path = tempdir())
-#Show the current path
+# Show the current path
 toponymOptions()
 }
 }

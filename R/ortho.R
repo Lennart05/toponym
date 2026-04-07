@@ -24,7 +24,9 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' ## For illustration purposes,
+#' ## 1. the path is manually set each time
+#' ## 2. and wrapped in donttest because data will be downloaded in the following example:
 #' \donttest{
 #' ortho(countries = "MC", toponym_path = tempdir())
 #' # returns a table with frequencies of all symbols

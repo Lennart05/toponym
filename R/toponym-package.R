@@ -10,7 +10,7 @@
 #' \item\code{\link{topComp}} compares toponym substrings in a polygon and in the remainder of a country (or countries).
 #' \item\code{\link{topFreq}} retrieves most frequent toponym substrings.
 #' \item\code{\link{topZtest}} lets users apply a Z-test on toponym distributions.
-#' \item\code{\link{toponymOptions}} lets users modify settings for managing toponym data.
+#' \item\code{\link{toponymOptions}} lets users modify settings for managing data.
 #' }
 #' For more detailed descriptions please read the respective documentation.
 #' @name toponym

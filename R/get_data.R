@@ -12,14 +12,20 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes, the path is manually set each time in the following examples:
+#' ## For illustration purposes,
+#' ## 1. the path is manually set each time
+#' ## 2. and wrapped in donttest because data will be downloaded in the following examples:
 #' \donttest{
 #' getData(countries = "NL", toponym_path = tempdir())
 #' ## downloads and extracts data for NL to the temporary directory
+#' }
 #' 
+#' \donttest{
 #' getData(countries = c("DK", "DE"), toponym_path = tempdir())
 #' ## downloads and extracts data for DK and DE to the temporary directory
+#' }
 #'
+#' \donttest{
 #' getData(countries = c("DK", "DE"), overwrite = TRUE, toponym_path = tempdir())
 #' ## downloads, extracts, and overwrites data for DK and DE in the temporary directory
 #' }
@@ -40,6 +46,7 @@ getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
   old_timeout <- getOption("timeout") # store timeout setting for download
   on.exit(options(timeout = old_timeout)) # restore timeout setting on exit
   options(timeout = max(6000, getOption("timeout"))) # set timeout to 6000 if it is lower
+  
   for (i in 1:length(countries)) {
      #package directory
         if (any(!file.exists(file_txt_dir[i]), overwrite)) {#download if file is missing or overwrite = TRUE
