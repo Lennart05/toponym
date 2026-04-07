@@ -34,10 +34,11 @@
 #' @examples
 #' ## We recommend setting a persistent path for downloaded data by using toponymOptions()
 #' ## Users can always set the path manually when a function is used
-#' ## For illustration purposes,
+#' ## For illustration purposes in the following examples,
 #' ## 1. the path is manually set each time
-#' ## 2. and wrapped in donttest because data will be downloaded in the following examples:
-#' \donttest{
+#' ## 2. and wrapped in donttest because data will be downloaded
+#' ## 3. or if(interactive) because it is interactive:
+#' if(interactive){
 #' createPolygon("NA", region_ID = "NAM.7_1", toponym_path = tempdir())
 #' # a plot of the region Ohangwena in Namibia appears.
 #' # by point-and-click a polygon can be created
