@@ -5,7 +5,7 @@
 #' @param toponym_path character string. Path name for downloaded data. If not specified, this function will call `toponymOptions()` and try use the persistent path.
 #' @return Character string of the used path for downloaded data.
 #' @keywords internal
-checkPath <- function(toponym_path) {
+checkPath <- function(toponym_path = NULL) {
   #toponym is NULL, read .Rds for path
   if(is.null(toponym_path)){
     toponym_path <- toponymOptions()

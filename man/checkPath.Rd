@@ -4,7 +4,7 @@
 \alias{checkPath}
 \title{Check path for downloaded data}
 \usage{
-checkPath(toponym_path)
+checkPath(toponym_path = NULL)
 }
 \arguments{
 \item{toponym_path}{character string. Path name for downloaded data. If not specified, this function will call \code{toponymOptions()} and try use the persistent path.}

@@ -33,7 +33,6 @@
 #' @export
 getData <- function(countries, overwrite = FALSE, toponym_path = NULL) {
   toponym_path <- checkPath(toponym_path = toponym_path)
-  
 	countries <- unlist(lapply(country(query = countries), function(x) x[, 1])) # convert if necessary designations to ISO2
 
   file_txt <- paste0(countries, ".txt")
