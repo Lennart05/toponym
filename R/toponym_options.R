@@ -1,28 +1,26 @@
 #' @title Manage Options of \code{toponym}
 #' @description 
 #' This function allows users to set the download path for the `toponym` package. Downloaded data includes toponym data and map data.
+#' @details
 #' Most functions require external data which will be downloaded and stored for later use. This is described in the respective functions.
 #' For this reason, after installation, users will be asked to specify the path for downloaded data. 
-#' Users can set the path to the package directory with this command:
+#' Parameter `toponym_path` accepts either the character string `"pkgdir"` or a full, alternative path.
+#' `"pkgdir"` is interpreted as the extdata folder in the `toponym` package directory, i.e.:
+#' \code{system.file("extdata", package = "toponym")}
+#' 
+#' Thus, users can set the path to the package directory with this command:
 #' 
 #' \code{toponymOptions(toponym_path = "pkgdir")}
 #' 
-#' A full, alternative path can also be provided.
+#' If a path is provided, users are prompted to confirm their choice. This function will write the new path into `toponym_options.rds` in the package directory; the path is saved across sessions. 
 #' 
-#' 
-#' If a path is provided, users are prompted to confirm their choice. This function will write the new path into `toponym_options.rds`in the package directory; the path is saved across sessions. 
 #' To locate `toponym_options.rds`, enter:
 #' 
 #' \code{system.file("extdata", package = "toponym")}
-#'
-#'
+#' 
 #' To check the path that is currently set, enter:
 #' 
 #' `toponymOptions()`
-#' @details
-#' Parameter `toponym_path` accepts either the character string `"pkgdir"` or full, alternative paths.
-#' `"pkgdir"` is interpreted as the extdata folder in the `toponym` package directory, i.e.:
-#' \code{system.file("extdata", package = "toponym")}
 #' @param toponym_path character string. Path name for downloaded data. This setting is saved across sessions.
 #' 
 #' @return A character string indicating the current path for downloaded data.
