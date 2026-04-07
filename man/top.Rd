@@ -47,21 +47,18 @@ itz_data <- top("itz$", "DE", toponym_path = tempdir())
 
 \donttest{
 vlad_data <- top("^Vlad", "RU", toponym_path = tempdir())
-
 # returns a data frame with all populated places
 # in Russia starting with "Vlad" (case sensitive)
 }
 
 \donttest{
 itz_ice_data <- top(c("itz$", "ice$"), c("DE", "PL"), toponym_path = tempdir())
-
 # returns a data frame with all populated places
 # in Germany and Poland ending in either "itz" or "ice"
 }
 
 \donttest{
 maw_data <- top("Maw$", "MM", column = "alternatenames", toponym_path = tempdir())
-
 # returns a data frame with all populated places
 # in Myanmar listed in the "alternatenames" column
 # and ending in "Maw" (case sensitive)

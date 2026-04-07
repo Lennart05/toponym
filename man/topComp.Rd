@@ -78,7 +78,6 @@ topComp(c("BE", "NL"),
   polygon = toponym::flanders_polygon,
   toponym_path = tempdir()
 )
-
 ## returns a data frame of the top 50 three-character-long endings
 ## in Belgium and Netherlands viewed as a unit if more than 80\% of them belong to the polygon
 ## corresponding to Flanders.
