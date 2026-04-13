@@ -11,7 +11,7 @@ This is the initial release accessible on CRAN.
 	* specify a path using parameter `toponym_path`
 	  whenever they use a function requiring downloaded data
 * mapper(): argument `plot_name` removed
-* top(): arguments `csv`and `tsv` removed
+* top(): arguments `csv` and `tsv` removed
 * Added timeout for potential problems downloading toponym and map data
 
 # toponym 2.0.0
